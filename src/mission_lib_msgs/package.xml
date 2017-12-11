@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name> mission_lib_msgs </name>
+
+  <version> 0.0.1 </version>
+
+  <description> Message definitions for mission sdk library </description>
+
+  <maintainer email="moonmous@gmail.com">sooyoung.moon</maintainer>
+  <author email="moonmous@gmail.com">sooyoung.moon</author>
+
+  <license>TODO</license>
+
+  <!-- 빌드 시스템 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- 빌드할 때 의존하는 패키지 목록 -->
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <depend> std_msgs </depend>
+  <depend> geometry_msgs </depend>
+  <depend> sensor_msgs </depend>
+  <depend> geographic_msgs </depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+ 
+</package>
