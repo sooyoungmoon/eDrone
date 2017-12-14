@@ -35,7 +35,7 @@
 
  <node name="mission_lib_control" pkg="mission_lib" type="mission_lib_control" output="screen">  </node> 
 
- <!-- <node name="mission_lib_agrc" pkg="mission_lib" type="mission_lib_agrc" output="screen">  </node>  -->
+ <node name="mission_lib_agrc" pkg="mission_lib" type="mission_lib_agrc" output="screen">  </node> 
 
 
 </launch>

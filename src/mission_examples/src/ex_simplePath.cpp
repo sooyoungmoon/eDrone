@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
 		
 	// subscriber 선언
-	ros::Subscriber cur_target_sub= nh.subscribe("mission_lib_msgs/current_target", 10, cur_target_cb); // 
+	ros::Subscriber cur_target_sub= nh.subscribe("mission_lib/current_target", 10, cur_target_cb); // 
 	
 	ros::Rate rate(20.0);
 

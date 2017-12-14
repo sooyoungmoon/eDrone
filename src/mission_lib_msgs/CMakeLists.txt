@@ -45,6 +45,7 @@ Goto.srv
 Geofence.srv
 NoflyZone.srv
 CheckNFZone.srv
+Survey.srv
 )
 
 # 메시지 생성을 위한 매크로 함수

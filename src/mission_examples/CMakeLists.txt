@@ -52,18 +52,8 @@ add_executable(ex_simpleNoflyZone src/ex_simpleNoflyZone.cpp)
 target_link_libraries(ex_simpleNoflyZone ${catkin_LIBRARIES} )
 add_dependencies(ex_simpleNoflyZone mission_examples_generate_messages_cpp)
 
-
-#add_executable(ex_wpGeofence src/ex_wpGeofence.cpp)
-#target_link_libraries(ex_wpGeofence mission_lib_common ${catkin_LIBRARIES} )
-#add_dependencies(ex_wpGeofence mission_examples_generate_messages_cpp)
-
-#add_executable(ex_wpNoflyZone src/ex_wpNoflyZone.cpp)
-#target_link_libraries(ex_wpNoflyZone mission_lib_common ${catkin_LIBRARIES} )
-#add_dependencies(ex_wpNoflyZone mission_examples_generate_messages_cpp)
-
-
-
-
-
+add_executable(ex_simpleSurvey src/ex_simpleSurvey.cpp)
+target_link_libraries(ex_simpleSurvey ${catkin_LIBRARIES} )
+add_dependencies(ex_simpleSurvey mission_examples_generate_messages_cpp)
 
 
