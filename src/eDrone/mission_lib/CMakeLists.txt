@@ -39,7 +39,7 @@ catkin_package(
 
 INCLUDE_DIRS include
 LIBRARIES mission_lib
-CATKIN_DEPENDS sensor_msgs geographic_msgs std_msgs libmavconn message_runtime mavros_msgs
+CATKIN_DEPENDS sensor_msgs geographic_msgs std_msgs libmavconn message_runtime mavros_msgs mission_lib_msgs
 DEPENDS GeographicLib
 
 )

@@ -19,8 +19,7 @@
   <build_depend> mavlink </build_depend>
   <build_export_depend>mavlink</build_export_depend>
   <build_depend>geographiclib</build_depend>
-
-
+ 
 
   <!-- packages -->
   <depend>libmavconn</depend>
@@ -38,7 +37,7 @@
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>std_srvs</depend> 
-
+  <depend> mission_lib_msgs </depend>
 
  
 </package>

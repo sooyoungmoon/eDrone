@@ -87,15 +87,15 @@ mission_lib_msgs::Target cur_target; // 현재 목적지 정보 (publisher: miss
 
 mission_lib_msgs::Target next_target; // 다음  목적지 정보 (goto 서비스 요청에 사용)
 int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
-bool survey_completed = false;
 
-//// 서비스 요청 메시지 선언
+
+//// 서비스 요청 메시지 선언 (mavros)
 mavros_msgs::CommandBool arming_cmd;
 mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
-
+mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
 mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지i
 
-mission_lib_msgs::ModeChange modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
+
 //// 서비스 요청 메시지 선언 (mission_lib_msgs)
 mission_lib_msgs::Goto goto_cmd; // goto 요청 메시지
 
@@ -233,10 +233,45 @@ bool srv_arming_cb(mission_lib_msgs::Arming::Request &req, mission_lib_msgs::Arm
 
 }
 
+bool srv_modeChange_cb(mission_lib_msgs::ModeChange::Request &req, mission_lib_msgs::ModeChange::Response &res)
+{
+	
+	std::cout << "srv_modeChange_cb(): change the mode to " << req.mode << endl; 
+
+	modeChange_cmd.request.base_mode = 0;
+        
+	modeChange_cmd.request.custom_mode.assign(req.mode);
+
+       if (modeChange_client.call(modeChange_cmd)==true)
+	{
+		std::cout << " modeChange cmd was sent!\n " << endl;
+	}
+
+	
+
+
+	return true;
+}
+
+bool srv_rtl_cb(mission_lib_msgs::RTL::Request &req, mission_lib_msgs::RTL::Response &res)
+{
+	std::cout << "srv_rtl_cb():return to home"  << endl; 
+
+	modeChange_cmd.request.base_mode = 0;
+        
+	modeChange_cmd.request.custom_mode.assign("AUTO.RTL");
+
+       if (modeChange_client.call(modeChange_cmd)==true)
+	{
+		std::cout << " modeChange cmd was sent!\n " << endl;
+	}
+
+	return true;
+}
+
 
 bool srv_survey_cb(mission_lib_msgs::Survey::Request &req, mission_lib_msgs::Survey::Response &res)
 {
-	survey_srv_called = false;
 
 	std::cout << "srv_survey_cb(): survey a target area"  << endl; 
 	
@@ -413,8 +448,7 @@ int main(int argc, char** argv)
 	arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 	goto_client = nh.serviceClient<mission_lib_msgs::Goto>("srv_goto");
-	modeChange_client = nh.serviceClient<mission_lib_msgs::ModeChange>("srv_modeChange");
-
+		
 	while ( ros::ok() ) // 탐색 서비스 요청 메시지 처리
 	{
 
@@ -452,17 +486,7 @@ int main(int argc, char** argv)
 
 					ROS_INFO("next_target %d: (%lf, %lf)", next_target.target_seq_no, next_target.x_lat, next_target.y_long);
 				}
-				else 
-				{
-					survey_completed = true;
-
-					modeChange_cmd.request.value = true;
-					modeChange_cmd.request.mode.assign("AUTO.RTL"); 
- 
-					survey_srv_called = false;
-					
-					//break;
-				}
+				else break;
 			}
 			
 		}		
