@@ -73,6 +73,8 @@ int main(int argc, char** argv)
 	ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 	ros::ServiceClient geofence_client = nh.serviceClient<eDrone_msgs::Geofence>("srv_geofence");	
 
+	sleep(20);
+
 	int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 
 	// 초기 부분 경로 설정 (사각형 경로)

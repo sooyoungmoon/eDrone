@@ -1,4 +1,0 @@
-bool value
----
-bool value
-mavros_msgs/Waypoint[] waypoints

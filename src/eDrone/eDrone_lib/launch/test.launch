@@ -33,7 +33,7 @@
  <node name="eDrone_control_node" pkg="eDrone_lib" type="eDrone_control_node" output="screen">  
  </node>  
 
- <node name="eDrone_utility_node" pkg="eDrone_lib" type="eDrone_util_node" output="screen">  </node> 
+ <node name="eDrone_utility_node" pkg="eDrone_lib" type="eDrone_utility_node" output="screen">  </node> 
 
  <node name="eDrone_application_node" pkg="eDrone_lib" type="eDrone_application_node" output="screen">  </node> 
 

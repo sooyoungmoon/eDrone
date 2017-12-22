@@ -54,7 +54,7 @@ int main(int argc, char** argv)
   goto_cmd.request.value = true;
   modeChange_cmd.request.value = true;
   
- 
+  sleep(20);
   //// Arming
   
 

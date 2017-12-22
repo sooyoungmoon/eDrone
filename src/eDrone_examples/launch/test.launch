@@ -27,16 +27,17 @@
      <param name="mocap/use_pose" value="false"/>
 </node>
 
- <node name="mission_lib_common" pkg="mission_lib" type="mission_lib_common" output="screen"> 
+ <node name="eDrone_monitor_node" pkg="eDrone_lib" type="eDrone_monitor_node" output="screen"> 
  </node>  
 
- <node name="mission_lib_mission" pkg="mission_lib" type="mission_lib_mission" output="screen">  
+ <node name="eDrone_control_node" pkg="eDrone_lib" type="eDrone_control_node" output="screen">  
  </node>  
 
- <node name="mission_lib_control" pkg="mission_lib" type="mission_lib_control" output="screen">  </node> 
+ <node name="eDrone_utility_node" pkg="eDrone_lib" type="eDrone_utility_node" output="screen">  </node> 
 
- <node name="mission_lib_agrc" pkg="mission_lib" type="mission_lib_agrc" output="screen">  </node> 
+ <node name="eDrone_application_node" pkg="eDrone_lib" type="eDrone_application_node" output="screen">  </node> 
 
+ <node name="ex_simpleTakeOff" pkg="eDrone_examples" type="ex_simpleTakeoff" output="screen">  </node> 
 
 </launch>
  

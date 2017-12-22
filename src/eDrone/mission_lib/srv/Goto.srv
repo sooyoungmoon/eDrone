@@ -1,8 +1,0 @@
-bool value
-bool is_global
-uint32 target_seq_no
-float32 x_lat
-float32 y_long
-float32 z_alt
----
-bool value
