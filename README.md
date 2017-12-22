@@ -47,6 +47,8 @@ You also need to install the following SW (on the same PC or on a remote one) fo
 #### Installing
 
 
+please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-manual/content/" for details!
+
 1) If you have installed ROS, there should be a workspace directory (ex. catkin_ws)
 
    Change the current directory to the ROS workspace directory in terminal window
