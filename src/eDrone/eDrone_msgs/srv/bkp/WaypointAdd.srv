@@ -1,0 +1,15 @@
+bool value
+uint8 frame
+uint16 command
+bool is_current
+bool autocontinue
+bool is_global
+float32 param1
+float32 param2
+float32 param3
+float32 param4
+float64 x_lat
+float64 y_long
+float64 z_alt
+---
+bool value

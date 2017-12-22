@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name> eDrone_lib </name>
+
+  <version> 0.0.1 </version>
+
+  <description> Mission Library for Drone Service Developers </description>
+
+  <maintainer email="moonmous@gmail.com">sooyoung.moon</maintainer>
+  
+  <license>TODO</license>
+  <url type="repository">todo</url>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- system dependencies -->
+  <build_depend> mavlink </build_depend>
+  <build_export_depend>mavlink</build_export_depend>
+  <build_depend>geographiclib</build_depend>
+ 
+
+  <!-- packages -->
+  <depend>libmavconn</depend>
+  <depend>pluginlib</depend>
+  <depend>roscpp</depend>  
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <!-- message packages -->
+  <depend>diagnostic_msgs</depend>
+  <depend>geographic_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>mavros_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend> eDrone_msgs </depend>
+
+ 
+</package>
