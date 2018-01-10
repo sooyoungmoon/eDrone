@@ -62,7 +62,11 @@ sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌�
 
 
 
+//// 서비스 요청 메시지 선언 (mavros)
 
+mavros_msgs::CommandBool arm_cmd; // 시동 명령에 사용될 서비스 선언 
+mavros_msgs::CommandTOL takeoff_cmd; // 이륙 명령에 사용될 서비스 선언 
+mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선언 
 
 // publisher 선언
 
@@ -76,12 +80,17 @@ ros::Subscriber pos_sub_global;
 ros::Subscriber home_sub;
 
 // 서비스 서버 선언
-
+ros::ServiceServer arming_srv_server;
+ros::ServiceServer takeoff_srv_server;
+ros::ServiceServer landing_srv_server;
 ros::ServiceServer chkState_srv_server;
 ros::ServiceServer chkPosition_srv_server;
 ros::ServiceServer chkHome_srv_server;
 
-
+//서비스 클라이언트 선언
+ros::ServiceClient arming_client; // 서비스 클라이언트 선언
+ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
+ros::ServiceClient landing_client; // 서비스 클라이언트 선언
 
 
 // home position
@@ -189,14 +198,103 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 	HOME_LON = home.longitude;		
 	HOME_ALT = home.altitude;
 	
-	//printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
+	printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
 }
 
 // callback 함수 (서비스 제공) 정의
 
+bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Response &res )
+{
+
+	ROS_INFO("ARMing request received\n");
+	arm_cmd.request.value = true; // 서비스 요청 메시지 필드 설정
+
+	//// Arming
+
+  	while (ros::ok() ) // 서비스 요청 메시지 전달
+  	{
+  	      printf("send Arming command ...\n");
+
+		if (!arming_client.call(arm_cmd))
+        	 {
+	 	  ros::spinOnce();
+ //   	  	 rate.sleep();
+        	}
+        	else break;
+
+  	} 
+	 
+	ROS_INFO("ARMing command was sent\n");
+
+}
 
 
+bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Response &res)
+{
 
+	ROS_INFO("Takeoff request received\n");
+	// 서비스 요청 메시지 필드 선언
+	 takeoff_cmd.request.altitude = 15;
+
+  	takeoff_cmd.request.latitude = HOME_LAT; // 자동으로 home position 값을 얻어 와서 설정되도록 변경 필요
+
+  	takeoff_cmd.request.longitude = HOME_LON;
+  
+ 	 takeoff_cmd.request.yaw = 0;
+
+  	takeoff_cmd.request.min_pitch = 0;
+
+	// 서비스 요청 메시지 전달 
+  
+	while (ros::ok() )
+  	{
+ 		printf("send Takeoff command ...\n");
+ 	
+		if (!takeoff_client.call(takeoff_cmd))
+		{
+		  ros::spinOnce();
+                //  rate.sleep();
+		}
+		else break;
+  	}
+
+ 	 ROS_INFO("Takeoff command was sent\n");
+}
+
+bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Response &res)
+{
+	
+	ROS_INFO("Landing request received\n");
+	//// 서비스 요청 메시지 필드 설정 
+
+	landing_cmd.request.altitude = 10;
+
+  	landing_cmd.request.latitude = HOME_LAT;
+
+  	landing_cmd.request.longitude = HOME_LON;
+
+  	landing_cmd.request.min_pitch = 0;
+
+  	landing_cmd.request.yaw = 0;
+
+	//// 서비스 요청 메시지 전달 
+
+	//// Landing
+
+ 	 while (ros::ok() )
+  	{
+		printf("send Landing command ...\n");
+
+		if (!landing_client.call(landing_cmd))
+		{
+	 	 ros::spinOnce();
+	 	 // rate.sleep();
+		}
+		else break;
+  	
+ 	} 
+ 	ROS_INFO("Landing command was sent\n");
+}
 
 bool srv_chkState_cb(eDrone_msgs::CheckState::Request &req, eDrone_msgs::CheckState::Response &res)
 {
@@ -267,12 +365,18 @@ int main(int argc, char** argv)
 	//// 서비스 서버 선언
 	
 	
-	
+	arming_srv_server = nh.advertiseService("srv_arming", srv_arming_cb);
+	takeoff_srv_server = nh.advertiseService("srv_takeoff", srv_takeoff_cb);
+	landing_srv_server = nh.advertiseService("srv_landing", srv_landing_cb);
 	chkState_srv_server = nh.advertiseService("srv_chkState", srv_chkState_cb);
 	chkPosition_srv_server = nh.advertiseService("srv_chkPosition", srv_chkPosition_cb);
 	chkHome_srv_server = nh.advertiseService("srv_chkHome", srv_chkHome_cb);
 
-	
+	//// 서비스 클라이언트 선언
+
+        arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming"); // service client 선언
+	takeoff_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/takeoff"); // 서비스 클라이언트 선언
+	landing_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/land"); // 서비스 클라이언트 선언
 	
 	while ( ros::ok() )
 	{

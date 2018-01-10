@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
 	ros::ServiceClient survey_client =nh.serviceClient<eDrone_msgs::Survey>("srv_survey");
 
-	sleep(20);
+
 	
 
 	//// Arming

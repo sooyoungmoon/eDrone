@@ -22,10 +22,6 @@
 #include "Vehicle.h"
 #include "GeoInfo.h"
 #include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일
-
-#include <eDrone_msgs/Takeoff.h> // 이륙 서비스 헤더 파일
-
-#include <eDrone_msgs/Landing.h> // 착륙 서비스 헤더 파일
 #include <eDrone_msgs/Goto.h> // 무인기 위치 이동 서비스 헤더 파일 포함
 #include <eDrone_msgs/ModeChange.h> // 비행 모드 변경 서비스 헤더 파일
 #include <eDrone_msgs/RTL.h> // RTL
@@ -103,12 +99,7 @@ eDrone_msgs::Target cur_target; // 현재 목적지 정보 (publisher: eDrone_co
 
 
 //// 서비스 요청 메시지 선언 (mavros)
-
-//// 서비스 요청 메시지 선언 (mavros)
-
-mavros_msgs::CommandBool arming_cmd; // 시동 명령에 사용될 서비스 선언 
-mavros_msgs::CommandTOL takeoff_cmd; // 이륙 명령에 사용될 서비스 선언 
-mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선언 
+mavros_msgs::CommandBool arming_cmd;
 mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
 mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
 mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지
@@ -128,9 +119,7 @@ ros::Subscriber pos_sub_global;
 ros::Subscriber home_sub; 
 
 // 서비스 서버 선언
-ros::ServiceServer arming_srv_server;
-ros::ServiceServer takeoff_srv_server;
-ros::ServiceServer landing_srv_server;
+
 ros::ServiceServer modeChange_srv_server;
 ros::ServiceServer rtl_srv_server;
 ros::ServiceServer goto_srv_server;
@@ -141,12 +130,8 @@ ros::ServiceServer checkNFZone_srv_server;
 
 //서비스 클라이언트 선언
 ros::ServiceClient arming_client; // 서비스 클라이언트 선언
-
-ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
-ros::ServiceClient landing_client; // 서비스 클라이언트 선언
-
-ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
-ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트 
+ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트 
+ros::ServiceClient rtl_client; // 모드 변경 서비스 클라이언트 
 
 
 // home position
@@ -380,7 +365,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 	HOME_ALT = home_position.geo.altitude;
 
 	
-	printf("home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON, HOME_ALT);	
+//	printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
 }
 
 
@@ -409,79 +394,6 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
 	 
 	ROS_INFO("ARMing command was sent\n");
 
-}
-
-
-
-
-bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Response &res)
-{
-
-	double offset = 25;
-
-	ROS_INFO("Takeoff request received\n");
-	// 서비스 요청 메시지 필드 선언
-	takeoff_cmd.request.altitude = HOME_ALT  + req.altitude - offset;
-
-	ROS_INFO(" HOME_ALT: %lf, req.altitude: %lf", HOME_ALT, req.altitude);
-  	takeoff_cmd.request.latitude = HOME_LAT; // 자동으로 home position 값을 얻어 와서 설정되도록 변경 필요
-
-  	takeoff_cmd.request.longitude = HOME_LON;
-  
- 	 takeoff_cmd.request.yaw = 0;
-
-  	takeoff_cmd.request.min_pitch = 0;
-
-	// 서비스 요청 메시지 전달 
-  
-	while (ros::ok() )
-  	{
- 		printf("send Takeoff command ...\n");
- 	
-		if (!takeoff_client.call(takeoff_cmd))
-		{
-		  ros::spinOnce();
-                //  rate.sleep();
-		}
-		else break;
-  	}
-
- 	 ROS_INFO("Takeoff command was sent\n");
-}
-
-bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Response &res)
-{
-	
-	ROS_INFO("Landing request received\n");
-	//// 서비스 요청 메시지 필드 설정 
-
-	landing_cmd.request.altitude = 10;
-
-  	landing_cmd.request.latitude = HOME_LAT;
-
-  	landing_cmd.request.longitude = HOME_LON;
-
-  	landing_cmd.request.min_pitch = 0;
-
-  	landing_cmd.request.yaw = 0;
-
-	//// 서비스 요청 메시지 전달 
-
-	//// Landing
-
- 	 while (ros::ok() )
-  	{
-		printf("send Landing command ...\n");
-
-		if (!landing_client.call(landing_cmd))
-		{
-	 	 ros::spinOnce();
-	 	 // rate.sleep();
-		}
-		else break;
-  	
- 	} 
- 	ROS_INFO("Landing command was sent\n");
 }
 
 bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req, eDrone_msgs::ModeChange::Response &res)
@@ -707,10 +619,7 @@ int main(int argc, char** argv)
 	home_sub = nh.subscribe<mavros_msgs::HomePosition> ("mavros/home_position/home", 10, homePosition_cb);
 
 	//// 서비스 서버 선언
-
-	arming_srv_server = nh.advertiseService("srv_arming", srv_arming_cb);
-	takeoff_srv_server = nh.advertiseService("srv_takeoff", srv_takeoff_cb);
-	landing_srv_server = nh.advertiseService("srv_landing", srv_landing_cb);	
+	
 	modeChange_srv_server = nh.advertiseService("srv_modeChange", srv_modeChange_cb);
 	rtl_srv_server = nh.advertiseService("srv_rtl", srv_rtl_cb);
 	goto_srv_server = nh.advertiseService("srv_goto", srv_goto_cb); 
@@ -721,13 +630,7 @@ int main(int argc, char** argv)
 
 	//// 서비스 클라이언트 선언
 
-	//// 서비스 클라이언트 선언
-
-        arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming"); // service client 선언
-	takeoff_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/takeoff"); // 서비스 클라이언트 선언
-	landing_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/land"); // 서비스 클라이언트 선언
-
-	
+	arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 
 	modeChange_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");

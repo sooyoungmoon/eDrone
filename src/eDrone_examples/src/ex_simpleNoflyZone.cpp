@@ -79,7 +79,7 @@ int main(int argc, char** argv)
   missionAddItem_cmd.request.altitude = 10;
   missionUpload_cmd.request.value = true;
   */
-  sleep(20);
+ 
   //// Arming
   
 

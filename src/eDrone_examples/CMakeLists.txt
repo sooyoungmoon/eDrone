@@ -20,7 +20,7 @@ include_directories(
 
 add_executable(ex_simpleTakeoff src/ex_simpleTakeoff.cpp)
 target_link_libraries(ex_simpleTakeoff  ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleTakeoff eDrone_examples_generate_messages_cpp)
+#add_dependencies(ex_simpleTakeoff eDrone_msgs_generate_messages_cpp)
 
 add_executable(ex_simpleCheck src/ex_simpleCheck.cpp)
 target_link_libraries(ex_simpleCheck  ${catkin_LIBRARIES} )

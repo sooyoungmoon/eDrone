@@ -55,8 +55,6 @@ int main(int argc, char** argv)
 
   landing_cmd.request.value = true; 
  
-  sleep(20);
-  
   //// Arming
   
 
