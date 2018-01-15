@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
+
 
   <name>eDrone_examples</name>
 
@@ -13,13 +14,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <buildtool_depend>roscpp</buildtool_depend>
-  <buildtool_depend>rospy</buildtool_depend>
-  <buildtool_depend>std_msgs</buildtool_depend>
-  <buildtool_depend>eDrone_lib</buildtool_depend>
-
-  <run_depend>roscpp</run_depend> 
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>eDrone_lib</run_depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>eDrone_msgs</depend> 
 </package>

@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-
+	CATKIN_DEPENDS roscpp rospy std_msgs eDrone_msgs 
 )
 
 include_directories(
@@ -19,41 +19,79 @@ include_directories(
 #link_directories(~/catkin_ws/devel/lib)
 
 add_executable(ex_simpleTakeoff src/ex_simpleTakeoff.cpp)
+add_dependencies (
+ ex_simpleTakeoff
+
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+
+)
 target_link_libraries(ex_simpleTakeoff  ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleTakeoff eDrone_msgs_generate_messages_cpp)
+
+
+
 
 add_executable(ex_simpleCheck src/ex_simpleCheck.cpp)
-target_link_libraries(ex_simpleCheck  ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleCheck eDrone_examples_generate_messages_cpp)
+add_dependencies(
+ex_simpleCheck 
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
 
+)
+target_link_libraries(ex_simpleCheck  ${catkin_LIBRARIES} )
 
 add_executable(ex_simpleMission src/ex_simpleMission.cpp)
+add_dependencies(
+ex_simpleMission 
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+)
 target_link_libraries(ex_simpleMission ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleMission eDrone_examples_generate_messages_cpp)
 
 
 add_executable(ex_simpleGoto src/ex_simpleGoto.cpp)
+add_dependencies(ex_simpleGoto
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
 target_link_libraries(ex_simpleGoto ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleGoto eDrone_examples_generate_messages_cpp)
 
 add_executable(ex_simpleModeChange src/ex_simpleModeChange.cpp)
+add_dependencies(ex_simpleModeChange
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
 target_link_libraries(ex_simpleModeChange ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleModeChange eDrone_examples_generate_messages_cpp)
 
 add_executable(ex_simplePath src/ex_simplePath.cpp)
+add_dependencies(ex_simplePath
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
+
 target_link_libraries(ex_simplePath ${catkin_LIBRARIES} )
-#add_dependencies(ex_simplePath eDrone_examples_generate_messages_cpp)
 
 add_executable(ex_simpleGeofence src/ex_simpleGeofence.cpp)
+add_dependencies(ex_simpleGeofence
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
 target_link_libraries(ex_simpleGeofence ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleGeofence eDrone_examples_generate_messages_cpp)
 
 add_executable(ex_simpleNoflyZone src/ex_simpleNoflyZone.cpp)
+add_dependencies(ex_simpleNoflyZone
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
 target_link_libraries(ex_simpleNoflyZone ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleNoflyZone eDrone_examples_generate_messages_cpp)
 
 add_executable(ex_simpleSurvey src/ex_simpleSurvey.cpp)
+
+add_dependencies(ex_simpleSurvey
+
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
 target_link_libraries(ex_simpleSurvey ${catkin_LIBRARIES} )
-#add_dependencies(ex_simpleSurvey eDrone_examples_generate_messages_cpp)
 
 
