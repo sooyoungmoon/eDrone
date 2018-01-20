@@ -122,7 +122,6 @@ int main(int argc, char** argv)
 	//// Arming
 
 	printf("Send arming command ... \n");
-	arming_cmd.request.value = true;
 	arming_client.call(arming_cmd);
 	ROS_INFO("Arming command was sent\n");
 
@@ -131,7 +130,6 @@ int main(int argc, char** argv)
 	//// Takeoff
 
 	printf("Send takeoff command ... \n");
-	takeoff_cmd.request.value = true;
 	takeoff_client.call(takeoff_cmd);
 	ROS_INFO("Takeoff command was sent\n");
 
@@ -141,7 +139,6 @@ int main(int argc, char** argv)
 	//// Geofence
 
 	printf("send Geofence command ... \n");
-	geofence_cmd.request.value = true;
 	geofence_cmd.request.radius = 50;
 	geofence_cmd.request.action = 1; // 0: Warning, 1: RTL, 2: Loiter, 3: Landing
 	geofence_client.call(geofence_cmd);
@@ -157,7 +154,6 @@ int main(int argc, char** argv)
 	printf("let's start a mission! \n");
 
 
-	goto_cmd.request.value = true;
 	goto_cmd.request.is_global = false;
 	goto_cmd.request.x_lat = 0;
 	goto_cmd.request.y_long = 100;
@@ -185,7 +181,6 @@ int main(int argc, char** argv)
 
 				next_target = path[cur_target_seq_no];
 
-				goto_cmd.request.value = true;
 
 				goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정
 				

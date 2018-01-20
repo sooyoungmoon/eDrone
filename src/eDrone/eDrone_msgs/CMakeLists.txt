@@ -30,6 +30,7 @@ add_service_files (
 DIRECTORY srv
 FILES 
 Arming.srv 
+Disarming.srv
 Takeoff.srv 
 Landing.srv 
 CheckState.srv 
@@ -46,6 +47,9 @@ Geofence.srv
 NoflyZone.srv
 CheckNFZone.srv
 Survey.srv
+SprayStart.srv
+SprayStop.srv
+
 )
 
 # 메시지 생성을 위한 매크로 함수

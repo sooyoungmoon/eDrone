@@ -197,7 +197,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
 
 	if (current_state.mode.compare("AUTO.RTL") ==0)
 	{
-		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
+//		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
 	}
 /*
 	if (cState.connected)
@@ -698,7 +698,7 @@ int main(int argc, char** argv)
 	// publisher 초기화
 	pos_pub_local = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_position/local", 10);
         pos_pub_global = nh.advertise<mavros_msgs::GlobalPositionTarget>("mavros/setpoint_raw/global", 10);
-	cur_target_pub = nh.advertise<eDrone_msgs::Target>("eDrone_lib/current_target", 10);
+	cur_target_pub = nh.advertise<eDrone_msgs::Target>("eDrone_msgs/current_target", 10);
 
 	// subscriber 초기화
 	state_sub = nh.subscribe<mavros_msgs::State> ("mavros/state", 10, state_cb);

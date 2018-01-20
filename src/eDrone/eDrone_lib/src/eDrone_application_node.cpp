@@ -147,7 +147,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
 
 	if (current_state.mode.compare("AUTO.RTL") ==0)
 	{
-		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
+//		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
 	}
 /*
 	if (cState.connected)

@@ -79,11 +79,6 @@ int main(int argc, char** argv)
   ros::Rate rate(20.0);
 
   // service 요청 메시지 필드 설정
-  arming_cmd.request.value = true;
-
-  takeoff_cmd.request.value = true;
-
-  landing_cmd.request.value = true; 
  
  
   //// Arming

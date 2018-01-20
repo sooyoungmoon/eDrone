@@ -104,7 +104,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
 
 	if (cState.flight_mode.compare("AUTO.RTL") ==0)
 	{
-		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
+//		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
 	}
 /*
 	if (cState.connected)
@@ -200,7 +200,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 
 bool srv_chkState_cb(eDrone_msgs::CheckState::Request &req, eDrone_msgs::CheckState::Response &res)
 {
-	
+	ROS_INFO ("srv_chkState_cb() was called\n");	
 	VehicleState cState = vehicle->getState();
 
 	res.armed = cState.armed;
@@ -268,9 +268,9 @@ int main(int argc, char** argv)
 	
 	
 	
-	chkState_srv_server = nh.advertiseService("srv_chkState", srv_chkState_cb);
-	chkPosition_srv_server = nh.advertiseService("srv_chkPosition", srv_chkPosition_cb);
-	chkHome_srv_server = nh.advertiseService("srv_chkHome", srv_chkHome_cb);
+	chkState_srv_server = nh.advertiseService("srv_checkState", srv_chkState_cb);
+	chkPosition_srv_server = nh.advertiseService("srv_checkPosition", srv_chkPosition_cb);
+	chkHome_srv_server = nh.advertiseService("srv_checkHome", srv_chkHome_cb);
 
 	
 	

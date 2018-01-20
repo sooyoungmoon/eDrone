@@ -43,17 +43,12 @@ int main(int argc, char** argv)
   ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
 
   
-  ros::ServiceClient chkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_chkState");
+  ros::ServiceClient chkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");
 
-  ros::ServiceClient chkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_chkPosition");
+  ros::ServiceClient chkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition");
   ros::Rate rate(20.0);
 
   // service 요청 메시지 필드 설정
-  arming_cmd.request.value = true;
-
-  takeoff_cmd.request.value = true;
-
-  landing_cmd.request.value = true; 
  
   //// Arming
   
@@ -112,7 +107,6 @@ int main(int argc, char** argv)
 
   printf("send chkState command...\n");
 
-  chkState_cmd.request.value = true;
 
   if (chkState_client.call(chkState_cmd))
   {

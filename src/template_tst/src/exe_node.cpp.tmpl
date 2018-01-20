@@ -1,0 +1,41 @@
+
+/* include 문 */ 
+#include <ros/ros.h>
+#include <eDrone_msgs/$(SERVICE_FILE_NAME).h>
+
+/* 서비스 파일 선언부 */
+
+eDrone_msgs::$(SERVICE_FILE_NAME) $(SERVICE_FILE_NAME)_cmd;
+
+/* main 함수*/
+
+int main(int argc, char** argv)
+{
+   printf("==$(ROS_NODE_NAME)==\n");
+   /* ros::init() 함수 호출 */ 
+   ros::init(argc, argv, "$(ROS_NODE_NAME)");
+
+  /*   ros::NodeHandle 객체 선언*/
+   ros::NodeHandle nh;
+
+ /* 파라미터 설정 */
+  $(PARAMETER_TYPE) $(PARAMETER_VARIABLE) = $(PARAMETER_VALUE); 
+ nh.setParam("$(PARAMETER_NAME)", altitude);
+  
+  /* service client 선언 */ 
+  ros::ServiceClient $(SERVICE_CLIENT_NAME) =nh.serviceClient<eDrone_msgs::$(SERVICE_FILE_NAME)>("$(SERVICE_NAME)");  
+
+
+  /* service 요청 메시지 필드 설정 */
+
+  $(SERVICE_FILE_NAME)_cmd.$(PARAMETER_NAME) = $(PARAMETER_VALUE)
+  
+  /* 서비스 호출 */
+
+  // $(SERVICE_FILE_NAME)
+  if ($(SERVICE_CLIENT_NAME).call($(SERVICE_FILE_NAME)_cmd))
+	ROS_INFO("$(SERVICE_FILE_NAME) command was sent\n");
+
+  return 0;
+}
+
