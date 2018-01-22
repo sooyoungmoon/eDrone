@@ -1,10 +1,10 @@
 
 /* include 문 */ 
 #include <ros/ros.h>
+#include <iostream>
 #include <eDrone_msgs/Arming.h>
 #include <eDrone_msgs/Takeoff.h>
 #include <eDrone_msgs/Landing.h>
-
 #include "params.h"
 
 
@@ -14,7 +14,7 @@ eDrone_msgs::Arming arming_cmd;
 eDrone_msgs::Takeoff takeoff_cmd;
 eDrone_msgs::Landing landing_cmd;
 
-
+using namespace std;
 
 /* main 함수*/
 
@@ -30,30 +30,26 @@ int main(int argc, char** argv)
  /* 파라미터 설정 */
   double altitude = ALTITUDE; // header 파일에서 디폴트 값을 읽어 와서 변수에 저장 
     
-
   //$(PARAMETER_TYPE) $(PARAMETER_VARIABLE) = $(PARAMETER_NAME); 
   nh.setParam("ALTITUDE", altitude);
-  
+
   /* service client 선언 */ 
   ros::ServiceClient arming_client  =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");  
   ros::ServiceClient takeoff_client  =nh.serviceClient<eDrone_msgs::Takeoff>("srv_takeoff");  
-  ros::ServiceClient landing_client  =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");  
-
-  /* service 요청 메시지 필드 설정 */
-
-  //$(SERVICE_FILE_NAME)_cmd.$(PARAMETER_NAME) = $(PARAMETER_VALUE)
+  ros::ServiceClient landing_client  =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");      
   
-  takeoff_cmd.request.altitude = altitude;
 
   sleep(30);
 
-  /* 서비스 호출 */
+  /* 서비스 호출 */ 
 
   // $(SERVICE_FILE_NAME)
   if (arming_client.call(arming_cmd))
 	ROS_INFO("arming command was sent\n");
 
-
+  // takeoff service
+  nh.getParam("ALTITUDE", altitude );
+  takeoff_cmd.request.altitude = altitude;
   if (takeoff_client.call(takeoff_cmd))
 	ROS_INFO("takeoff command was sent\n");
 

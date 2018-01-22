@@ -102,22 +102,13 @@ int main(int argc, char** argv)
 
   
   ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");  
-
   ros::ServiceClient checkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition"); 
-
- 
   ros::ServiceClient arming_client =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");  
- 
   ros::ServiceClient takeoff_client = nh.serviceClient<eDrone_msgs::Takeoff>("srv_takeoff");  
-
   ros::ServiceClient goto_client =nh.serviceClient<eDrone_msgs::Goto>("srv_goto");  
-  
   ros::ServiceClient sprayStart_client = nh.serviceClient<eDrone_msgs::SprayStart>("srv_sprayStart");  
-
   ros::ServiceClient sprayStop_client  = nh.serviceClient<eDrone_msgs::SprayStop>("srv_sprayStop"); 
-
   ros::ServiceClient rtl_client  = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
- 
   ros::ServiceClient disarming_client  = nh.serviceClient<eDrone_msgs::Disarming>("srv_disarming"); 
 
   /* service 요청 메시지 필드 설정 */
@@ -325,11 +316,11 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	//// SprayStart
 	
 	
-	printf("Send SprayStart command ...\n");
-	if (sprayStart_client.call(sprayStart_cmd))
-	{
-		ROS_INFO("SprayStart service was requested\n");
-	}
+	//printf("Send SprayStart command ...\n");
+	//if (sprayStart_client.call(sprayStart_cmd))
+	//{
+	//	ROS_INFO("SprayStart service was requested\n");
+	//}
 
 	//// Goto requests (path planning) 	
 	// 주기적으로 자율 비행 경로에 새로운 목적지 (경유지) 정보 추가
@@ -344,7 +335,20 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 			{
 
 				ROS_INFO("we reached at the current target. Go to the next target\n");
+					
 
+				if (cur_target_seq_no == 0)
+				{
+					
+					//// SprayStart
+	
+	
+					printf("Send SprayStart command ...\n");
+					if (sprayStart_client.call(sprayStart_cmd))
+					{
+						ROS_INFO("SprayStart service was requested\n");
+					}
+				}
 				//int next_target_seq_no = cur_target.target_seq_no +1;
 				
 				cur_target_seq_no = cur_target.target_seq_no+1;
@@ -389,7 +393,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 		ROS_INFO("SprayStop service was requested");
 	}
 
-	
+	sleep(10);
 	// RTL
 
 	
