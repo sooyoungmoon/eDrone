@@ -14,6 +14,7 @@
 #include <eDrone_msgs/Takeoff.h>
 #include <eDrone_msgs/Landing.h>
 #include <eDrone_msgs/Goto.h>
+#include <eDrone_msgs/RTL.h>
 
 eDrone_msgs::CheckState checkState_cmd;
 eDrone_msgs::CheckPosition checkPosition_cmd;
@@ -21,17 +22,36 @@ eDrone_msgs::Arming arming_cmd;
 eDrone_msgs::Takeoff takeoff_cmd;
 eDrone_msgs::Landing landing_cmd;
 eDrone_msgs::Goto goto_cmd;
+eDrone_msgs::RTL rtl_cmd;
 
 using namespace std;
 
+
+eDrone_msgs::Target cur_target; //
+
+
+// 콜백 함수 
+void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
+{
+        cur_target = *msg;
+
+        // 현재 목적지 도달 여부 확인
+        printf("cur_target_cb(): \n");
+        printf("current target: %d \n", cur_target.target_seq_no);
+
+        if (cur_target.reached == true)
+        {
+                printf("we reached at the current target\n");
+        }
+}
+
 int main(int argc, char** argv)
 {
-  printf("==ex_simpleGoto==\n");
+  printf("==ex_goto==\n");
   
-  ros::init(argc, argv, "ex_simpleGoto");
+  ros::init(argc, argv, "ex_goto");
   ros::NodeHandle nh;
 
-  
   // service client
 
   ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");  
@@ -45,6 +65,7 @@ int main(int argc, char** argv)
 
   ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 
+  ros::ServiceClient rtl_client = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
 
   ros::Rate rate(20.0);
 
@@ -112,14 +133,9 @@ int main(int argc, char** argv)
 
 
 	
-  
-
-
-
+ sleep(10); 
  
   //// Arming
-  
-
 
   {
 	printf("Send arming command ... \n");
@@ -132,9 +148,6 @@ int main(int argc, char** argv)
   }
    
   ROS_INFO("Arming command was sent\n");
-
-
- 
 
  {
 	printf("send takeoff command ... \n");
@@ -152,24 +165,17 @@ int main(int argc, char** argv)
 
   sleep(10);
   
-
-
-
-  
-  
-
-
   {
 	printf("send goto command ...\n");
 
 
 	goto_cmd.request.is_global = false;
 
-	goto_cmd.request.x_lat = 0;
+	goto_cmd.request.x_lat = 50;
 
-	goto_cmd.request.y_long = 100;
+	goto_cmd.request.y_long = 50;
 
-	goto_cmd.request.z_alt = 50;        
+	goto_cmd.request.z_alt = 20;        
 
 	goto_client.call(goto_cmd);
   } 
@@ -179,6 +185,15 @@ int main(int argc, char** argv)
   
   while (ros::ok())
   {
+	if (cur_target.reached == true)
+	{
+		// 복귀 서비스 호출
+		ROS_INFO ("Return-to-launch\n");
+		rtl_client.call(rtl_cmd);
+
+	}
+
+
   	ros::spinOnce();
   	rate.sleep(); 
   }

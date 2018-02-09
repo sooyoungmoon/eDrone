@@ -26,9 +26,9 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-  printf("==ex_simpleGoto==\n");
+  printf("==ex_goto_global==\n");
   
-  ros::init(argc, argv, "ex_simpleGoto");
+  ros::init(argc, argv, "ex_goto_global");
   ros::NodeHandle nh;
 
   
@@ -163,11 +163,11 @@ int main(int argc, char** argv)
 	printf("send goto command ...\n");
 
 
-	goto_cmd.request.is_global = false;
+	goto_cmd.request.is_global = true;
 
-	goto_cmd.request.x_lat = 0;
+	goto_cmd.request.x_lat = 36.3847732;
 
-	goto_cmd.request.y_long = 100;
+	goto_cmd.request.y_long = 127.3661727;
 
 	goto_cmd.request.z_alt = 50;        
 

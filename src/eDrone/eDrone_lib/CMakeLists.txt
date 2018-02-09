@@ -37,7 +37,7 @@ find_package(GeographicLib)
 
 catkin_package(
 
-INCLUDE_DIRS inc
+INCLUDE_DIRS include
 LIBRARIES eDrone_lib
 CATKIN_DEPENDS sensor_msgs geographic_msgs std_msgs libmavconn message_runtime mavros_msgs eDrone_msgs
 DEPENDS GeographicLib
@@ -49,7 +49,7 @@ DEPENDS GeographicLib
 ###########
 
 include_directories(
-	inc
+	include
 	${catkin_INCLUDE_DIRS}
 	${mavlink_INCLUDE_DIRS}
 	${GeographicLib_INCLUDE_DIRS}	
@@ -121,11 +121,27 @@ ${catkin_LIBRARIES}
 
 ## Mark executables and/or libraries for installation
 
+
+install(TARGETS eDrone_application_node
+#install(TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION}
+)
+
+
 ## Mark cpp header files for installation
 install(DIRECTORY include/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h"
 )
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
+
 
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
@@ -133,6 +149,8 @@ install(DIRECTORY include/
 install(DIRECTORY launch/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
+
+
 
 
 #############

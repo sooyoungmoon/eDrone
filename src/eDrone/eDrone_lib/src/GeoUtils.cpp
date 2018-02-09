@@ -4,8 +4,8 @@
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Vehicle.h"
-#include "GeoUtils.h"
+#include <eDrone_lib/Vehicle.h>
+#include <eDrone_lib/GeoUtils.h>
 
 using namespace std;
 using namespace Mission_API;
@@ -34,7 +34,8 @@ Point convertGeoToPoint(double coord_lat, double coord_long, double coord_alt, d
     point.x = k * cos_lat * sin(lon_rad - ref_lon_rad) * CONSTANTS_RADIUS_OF_EARTH;
     point.y = k * (ref_cos_lat * sin_lat - ref_sin_lat * cos_lat * cos_d_lon) * CONSTANTS_RADIUS_OF_EARTH;
 
-    point.z = (coord_alt - home_alt);
+    point.z = coord_alt;
+    // point.z = (coord_alt - home_alt);
 
     return point;
 }
@@ -77,7 +78,7 @@ GeoPoint convertPointToGeo(double x, double y, double z, double home_lat, double
     cout << fixed;
 
 	
-    cout << "(" << latitude << ", " << longitude << ", " << altitude << ") " << endl;
+    //cout << "(" << latitude << ", " << longitude << ", " << altitude << ") " << endl;
 
     geoPoint.latitude  = latitude;
     geoPoint.longitude = longitude;

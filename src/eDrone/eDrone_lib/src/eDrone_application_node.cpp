@@ -19,8 +19,9 @@
 #include <mavros_msgs/StreamRate.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/GlobalPositionTarget.h>
-#include "Vehicle.h"
-#include "GeoInfo.h"
+#include <eDrone_lib/Vehicle.h>
+#include <eDrone_lib/GeoInfo.h>
+#include <eDrone_lib/GeoUtils.h>
 #include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일
 #include <eDrone_msgs/Goto.h> // 무인기 위치 이동 서비스 헤더 파일 포함
 #include <eDrone_msgs/ModeChange.h> // 비행 모드 변경 서비스 헤더 파일
@@ -30,7 +31,6 @@
 #include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
 #include <eDrone_msgs/CheckNFZone.h> // CheckNFZone 서비스 헤더 파일 (noflyZone 확인)
 #include <eDrone_msgs/Survey.h> // Survey 서비스 헤더 파일
-#include "GeoUtils.h"
 
 
 

@@ -9,89 +9,110 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-	CATKIN_DEPENDS roscpp rospy std_msgs eDrone_msgs 
+	
+	CATKIN_DEPENDS roscpp rospy std_msgs 
+	eDrone_msgs 
 )
 
 include_directories(
+	inc
 	${catkin_INCLUDE_DIRS}
 )
 
 #link_directories(~/catkin_ws/devel/lib)
 
-add_executable(ex_simpleTakeoff src/ex_simpleTakeoff.cpp)
+add_executable(ex_takeoff src/ex_takeoff.cpp)
 add_dependencies (
- ex_simpleTakeoff
+ ex_takeoff
 
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
 
 )
-target_link_libraries(ex_simpleTakeoff  ${catkin_LIBRARIES} )
+target_link_libraries(ex_takeoff  ${catkin_LIBRARIES} )
 
 
 
 
-add_executable(ex_simpleCheck src/ex_simpleCheck.cpp)
+add_executable(ex_check src/ex_check.cpp)
 add_dependencies(
-ex_simpleCheck 
+ex_check 
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
 
 )
-target_link_libraries(ex_simpleCheck  ${catkin_LIBRARIES} )
+target_link_libraries(ex_check  ${catkin_LIBRARIES} )
 
-add_executable(ex_simpleMission src/ex_simpleMission.cpp)
+add_executable(ex_mission src/ex_mission.cpp)
 add_dependencies(
-ex_simpleMission 
+ex_mission 
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
 )
-target_link_libraries(ex_simpleMission ${catkin_LIBRARIES} )
+target_link_libraries(ex_mission ${catkin_LIBRARIES} )
 
 
-add_executable(ex_simpleGoto src/ex_simpleGoto.cpp)
-add_dependencies(ex_simpleGoto
+add_executable(ex_goto src/ex_goto.cpp)
+add_dependencies(ex_goto
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
-target_link_libraries(ex_simpleGoto ${catkin_LIBRARIES} )
+target_link_libraries(ex_goto ${catkin_LIBRARIES} )
 
-add_executable(ex_simpleModeChange src/ex_simpleModeChange.cpp)
-add_dependencies(ex_simpleModeChange
+add_executable(ex_goto_global src/ex_goto_global.cpp)
+add_dependencies(ex_goto_global
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
-target_link_libraries(ex_simpleModeChange ${catkin_LIBRARIES} )
+target_link_libraries(ex_goto_global ${catkin_LIBRARIES} )
 
-add_executable(ex_simplePath src/ex_simplePath.cpp)
-add_dependencies(ex_simplePath
+
+
+add_executable(ex_modeChange src/ex_modeChange.cpp)
+add_dependencies(ex_modeChange
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
+target_link_libraries(ex_modeChange ${catkin_LIBRARIES} )
+
+add_executable(ex_goto_path src/ex_goto_path.cpp)
+add_dependencies(ex_goto_path
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
 
-target_link_libraries(ex_simplePath ${catkin_LIBRARIES} )
+target_link_libraries(ex_goto_path ${catkin_LIBRARIES} )
 
-add_executable(ex_simpleGeofence src/ex_simpleGeofence.cpp)
-add_dependencies(ex_simpleGeofence
+add_executable(ex_geofence src/ex_geofence.cpp)
+add_dependencies(ex_geofence
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
-target_link_libraries(ex_simpleGeofence ${catkin_LIBRARIES} )
+target_link_libraries(ex_geofence ${catkin_LIBRARIES} )
 
-add_executable(ex_simpleNoflyZone src/ex_simpleNoflyZone.cpp)
-add_dependencies(ex_simpleNoflyZone
+add_executable(ex_noflyZone src/ex_noflyZone.cpp)
+add_dependencies(ex_noflyZone
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
-target_link_libraries(ex_simpleNoflyZone ${catkin_LIBRARIES} )
+target_link_libraries(ex_noflyZone ${catkin_LIBRARIES} )
 
-add_executable(ex_simpleSurvey src/ex_simpleSurvey.cpp)
+add_executable(ex_survey src/ex_survey.cpp)
 
-add_dependencies(ex_simpleSurvey
+add_dependencies(ex_survey
 
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
-target_link_libraries(ex_simpleSurvey ${catkin_LIBRARIES} )
+target_link_libraries(ex_survey ${catkin_LIBRARIES} )
 
+
+add_executable(ex_spraying_mission src/ex_spraying_mission.cpp)
+
+add_dependencies(ex_spraying_mission
+
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
+target_link_libraries(ex_spraying_mission ${catkin_LIBRARIES} )
 

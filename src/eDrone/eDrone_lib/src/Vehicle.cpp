@@ -4,7 +4,7 @@
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Vehicle.h"
+#include <eDrone_lib/Vehicle.h>
 
 using namespace Mission_API;
 using namespace mavros_msgs;

@@ -3,8 +3,8 @@
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Vehicle.h"
-#include "GeoInfo.h"
+#include <eDrone_lib/Vehicle.h>
+#include <eDrone_lib/GeoInfo.h>
 
 using namespace std;
 using namespace Mission_API;

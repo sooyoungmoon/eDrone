@@ -3,7 +3,7 @@
 <!-- connection setup -->
 
 <arg name="fcu_url" default="udp://:14540@129.254.189.194:14557" />
-<arg name="gcs_url" default="udp://@129.254.189.194:14550" />
+<arg name="gcs_url" default="" />
 <!-- <arg name="gcs_url" default="udp://@129.254.189.194:14550" /> -->
 <arg name="tgt_system" default="1" />
 <arg name="tgt_component" default="1" />
@@ -37,7 +37,7 @@
 
  <node name="eDrone_application_node" pkg="eDrone_lib" type="eDrone_application_node" output="screen">  </node> 
 
- <node name="ex_simpleTakeOff" pkg="eDrone_examples" type="ex_simpleTakeoff" output="screen">  </node> 
+ <node name="ex_goto" pkg="eDrone_examples" type="ex_goto" output="screen">  </node> 
 
 </launch>
  

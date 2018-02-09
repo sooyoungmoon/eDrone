@@ -19,8 +19,9 @@
 #include <mavros_msgs/StreamRate.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/GlobalPositionTarget.h>
-#include "Vehicle.h"
-#include "GeoInfo.h"
+#include <eDrone_lib/Vehicle.h>
+#include <eDrone_lib/GeoInfo.h>
+#include <eDrone_lib/GeoUtils.h>
 #include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일
 
 #include <eDrone_msgs/Takeoff.h> // 이륙 서비스 헤더 파일
@@ -33,7 +34,6 @@
 #include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
 #include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
 #include <eDrone_msgs/CheckNFZone.h> // CheckNFZone 서비스 헤더 파일 (noflyZone 확인)
-#include "GeoUtils.h"
 
 
 
@@ -164,12 +164,25 @@ void ref_system_conversion_test()
 
 	printf("GeoPoint => Point\n");
 	
-//	Point point = convertGeoToPoint(HOME_LAT, HOME_LON, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+	Point point = convertGeoToPoint(HOME_LAT, HOME_LON, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 
-	Point point = convertGeoToPoint(36.3847751, 127.3689272, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+	//Point point = convertGeoToPoint(36.3847751, 127.3689272, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 	cout << "(" << HOME_LAT  << ", " << HOME_LON << ", " << HOME_ALT << ") =  " << endl;
 
 	cout << "(" << point.x << ", " << point.y << ", " << point.z << ") " << endl;
+
+
+	printf("GeoPoint => Point\n");
+
+	
+
+	point = convertGeoToPoint(36.3847732, 127.3661727, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+
+	cout << "(" << 36.3847732  << ", " << 127.3661727 << ", " << HOME_ALT << ") =  " << endl;
+
+	cout << "(" << point.x << ", " << point.y << ", " << point.z << ") " << endl;
+
+
 
 	printf("Point => GeoPoint\n");
 
@@ -553,17 +566,30 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		target_pos_global.altitude = req.z_alt;
 		*/
 		
-		Point point = convertGeoToPoint(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+		Point point = convertGeoToPoint(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
 
-		
+		//Point point = convertGeoToPoint(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+
+		cout << "convertGeoToPoint() was called " << endl;		
+
+		target_position.is_global = false; 	
+		req.is_global = false;
 		target_position.pos_local.x = point.x;
 		target_position.pos_local.y = point.y;
 		target_position.pos_local.z = point.z;
 
-		target_pos_local.pose.position = point;
+		//target_position.pos_local.z = HOME_ALT;
+
+
+		target_pos_local.pose.position.x = point.x;
+		target_pos_local.pose.position.y = point.y;
+
+		//target_pos_local.pose.position.z = HOME_ALT;
+		target_pos_local.pose.position.z = point.z;
 
 		printf("target position: (%f, %f, %f)\n", point.x, point.y, point.z);
-	 
+		sleep(10); 
+		target_position.geofence_breach = false;
 	}
 	else // 지역 좌표인 경우
 	{
@@ -733,8 +759,10 @@ int main(int argc, char** argv)
 	modeChange_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 	target_position.reached = false; // 목적지 도착 여부를 false로 초기화
 	
+
 	while ( ros::ok() )
 	{
+        	// ref_system_conversion_test();
 /*
 		if (current_state.mode.compare("AUTO.RTL") == 0) // RTL 모드일 경우 바로 종료
 		{

@@ -23,8 +23,8 @@
 #include <mavros_msgs/WaypointPull.h>
 #include <mavros_msgs/WaypointList.h>
 #include <mavros_msgs/GlobalPositionTarget.h>
-#include "Vehicle.h"
-#include "GeoInfo.h"
+#include <eDrone_lib/Vehicle.h>
+#include <eDrone_lib/GeoInfo.h>
 #include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일 포함                                                 
 #include <eDrone_msgs/Takeoff.h> // 이륙 서비스 
 #include <eDrone_msgs/Landing.h> // 착륙 서비스 	"
