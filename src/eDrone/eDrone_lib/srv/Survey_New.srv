@@ -1,0 +1,4 @@
+mavros_msgs/Waypoint[] waypoints
+---
+bool value
+

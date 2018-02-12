@@ -59,29 +59,12 @@ add_dependencies(ex_goto
  )
 target_link_libraries(ex_goto ${catkin_LIBRARIES} )
 
-add_executable(ex_goto_global src/ex_goto_global.cpp)
-add_dependencies(ex_goto_global
- ${${PROJECT_NAME}_EXPORTED_TARGETS}
- ${catkin_EXPORTED_TARGETS}
- )
-target_link_libraries(ex_goto_global ${catkin_LIBRARIES} )
-
-
-
 add_executable(ex_modeChange src/ex_modeChange.cpp)
 add_dependencies(ex_modeChange
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
  ${catkin_EXPORTED_TARGETS}
  )
 target_link_libraries(ex_modeChange ${catkin_LIBRARIES} )
-
-add_executable(ex_goto_path src/ex_goto_path.cpp)
-add_dependencies(ex_goto_path
- ${${PROJECT_NAME}_EXPORTED_TARGETS}
- ${catkin_EXPORTED_TARGETS}
- )
-
-target_link_libraries(ex_goto_path ${catkin_LIBRARIES} )
 
 add_executable(ex_geofence src/ex_geofence.cpp)
 add_dependencies(ex_geofence

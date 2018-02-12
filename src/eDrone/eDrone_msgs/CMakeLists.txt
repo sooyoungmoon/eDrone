@@ -47,6 +47,7 @@ Geofence.srv
 NoflyZone.srv
 CheckNFZone.srv
 Survey.srv
+Survey_New.srv
 SprayStart.srv
 SprayStop.srv
 

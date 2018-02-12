@@ -33,7 +33,6 @@
 #include <eDrone_msgs/Survey.h> // Survey 서비스 헤더 파일
 #include <eDrone_msgs/Survey_New.h> // Survey 서비스 (다각형 영역) 헤더 파일 
 
-#include <eDrone_lib/params.h> // 파라미터 목록
 
 
 
@@ -349,11 +348,11 @@ bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Respo
 		
 	if (next_target.is_global == true) // 절대 고도일 경우 높이 지정
 	{
-		next_target.z_alt = HOME_ALT + ALTITUDE;
+		next_target.z_alt = HOME_ALT + 10;
 	}
 	else // 상대 고도일 경우 높이 지정
 	{
-		next_target.z_alt = ALTITUDE;
+		next_target.z_alt = 10;
 	}
 
 
@@ -363,13 +362,13 @@ bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Respo
 	// 경로 좌표 계산 & 경로 변수 값  설정
 
 			
-	for (col = 0; col <= num_cols; col++)
+	for (col = 0; col < num_cols; col++)
 	{
 
 		x_lat = min_x_lat + col * row_col_width; 
 
 
-		for (row = 0; row <= num_rows; row++)
+		for (row = 0; row < num_rows; row++)
 		{
 			if (col %2 ==0)
 			{
@@ -389,11 +388,11 @@ bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Respo
 			
 			if (target.is_global == true) // 절대 고도일 경우 높이 지정
 			{
-				target.z_alt = HOME_ALT + ALTITUDE;
+				target.z_alt = HOME_ALT + 10;
 			}
 			else // 상대 고도일 경우 높이 지정
 			{
-				target.z_alt = ALTITUDE;
+				target.z_alt = 10;
 			}
 			
 			target.reached = false;
@@ -507,11 +506,7 @@ int main(int argc, char** argv)
 
 					ROS_INFO("next_target %d: (%lf, %lf)", next_target.target_seq_no, next_target.x_lat, next_target.y_long);
 				}
-				else 
-				{
-					rtl_client.call(rtl_cmd);
-					break;
-				}
+				else break;
 			}
 			
 		}		

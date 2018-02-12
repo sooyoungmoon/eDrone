@@ -199,21 +199,10 @@ void ref_system_conversion_test()
 
 
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
-
-	
-
-
 	
 	current_state = *msg;
-
-		
-
-	if (current_state.mode.compare("AUTO.RTL") ==0)
-	{
-//		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
-	}
 /*
-	if (cState.connected)
+	if (current_state.connected)
 	{
  	  printf("A UAV is connected\n");
 	}
@@ -224,7 +213,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
   	  printf("A UAV is not connected\n");
 	}
 
-	if (cState.armed)
+	if (current_state.armed)
 	{
 	  printf("A UAV is armed\n");
 	} 
@@ -233,8 +222,14 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
   	  printf("A UAV is not armed\n");
 	}
 	
-	cout << "flight mode:" <<  cState.flight_mode << endl;
-*/
+	cout << "flight mode:" <<  current_state.mode << endl;
+
+			
+
+	if (current_state.mode.compare("AUTO.RTL") ==0)
+	{
+//		ROS_INFO("state_cb(): FLIGHT MODE = RTL");
+	}*/
 }
 
 
@@ -391,9 +386,15 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 	HOME_LAT = home_position.geo.latitude;
 	HOME_LON = home_position.geo.longitude;		
 	HOME_ALT = home_position.geo.altitude;
-
 	
-	printf("home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON, HOME_ALT);	
+	static int print_count =0;	
+	
+	if (print_count < 10)
+	{
+		printf("control_node: home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON, HOME_ALT);	
+		print_count++;
+	}
+
 }
 
 
@@ -758,7 +759,8 @@ int main(int argc, char** argv)
 
 	modeChange_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 	target_position.reached = false; // 목적지 도착 여부를 false로 초기화
-	
+
+//        ROS_INFO("control_node: home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON, HOME_ALT); 	
 
 	while ( ros::ok() )
 	{
