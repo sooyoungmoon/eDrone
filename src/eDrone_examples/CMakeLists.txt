@@ -89,6 +89,15 @@ add_dependencies(ex_survey
  )
 target_link_libraries(ex_survey ${catkin_LIBRARIES} )
 
+add_executable(ex_survey_new src/ex_survey_new.cpp)
+
+add_dependencies(ex_survey_new
+  {${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries (ex_survey_new ${catkin_LIBRARIES} )
+
 
 add_executable(ex_spraying_mission src/ex_spraying_mission.cpp)
 
@@ -98,4 +107,17 @@ add_dependencies(ex_spraying_mission
  ${catkin_EXPORTED_TARGETS}
  )
 target_link_libraries(ex_spraying_mission ${catkin_LIBRARIES} )
+
+
+add_executable(ex_lib src/ex_lib.cpp)
+
+add_dependencies(ex_lib
+
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
+target_link_libraries(ex_lib ${catkin_LIBRARIES} )
+
+
+
 
