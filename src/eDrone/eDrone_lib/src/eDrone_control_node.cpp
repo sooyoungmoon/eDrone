@@ -164,9 +164,9 @@ void ref_system_conversion_test()
 
 	printf("GeoPoint => Point\n");
 	
-	Point point = convertGeoToPoint(HOME_LAT, HOME_LON, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+	Point point = convertGeoToENU(HOME_LAT, HOME_LON, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 
-	//Point point = convertGeoToPoint(36.3847751, 127.3689272, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+	//Point point = convertGeoToENU(36.3847751, 127.3689272, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 	cout << "(" << HOME_LAT  << ", " << HOME_LON << ", " << HOME_ALT << ") =  " << endl;
 
 	cout << "(" << point.x << ", " << point.y << ", " << point.z << ") " << endl;
@@ -176,7 +176,7 @@ void ref_system_conversion_test()
 
 	
 
-	point = convertGeoToPoint(36.3847732, 127.3661727, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+	point = convertGeoToENU(36.3847732, 127.3661727, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 
 	cout << "(" << 36.3847732  << ", " << 127.3661727 << ", " << HOME_ALT << ") =  " << endl;
 
@@ -186,7 +186,7 @@ void ref_system_conversion_test()
 
 	printf("Point => GeoPoint\n");
 
-	GeoPoint geoPoint = convertPointToGeo( 0.0, 0.0, 0.0, HOME_LAT, HOME_LON, HOME_ALT);
+	GeoPoint geoPoint = convertENUToGeo( 0.0, 0.0, 0.0, HOME_LAT, HOME_LON, HOME_ALT);
 
 	
 	cout << "(0, 0, 0) =  " << endl;
@@ -567,11 +567,11 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		target_pos_global.altitude = req.z_alt;
 		*/
 		
-		Point point = convertGeoToPoint(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
+		Point point = convertGeoToENU(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
 
-		//Point point = convertGeoToPoint(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+		//Point point = convertGeoToENU(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
 
-		cout << "convertGeoToPoint() was called " << endl;		
+		cout << "convertGeoToENU() was called " << endl;		
 
 		target_position.is_global = false; 	
 		req.is_global = false;

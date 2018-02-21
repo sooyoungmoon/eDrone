@@ -37,6 +37,8 @@
 #include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
 #include <eDrone_msgs/CheckNFZone.h> // NoflyZone 확인 서비스 헤더 파일
 
+#include <eDrone_lib/GeoUtils.h> // 좌표 변환 라이브러리 헤더 파일 
+
 
 
 
@@ -47,9 +49,8 @@ using namespace geographic_msgs;
 using namespace geometry_msgs;
 
 //// 메시지 변수 선언
-GeoPoint home_position;
-
-
+//GeoPoint home_position;
+mavros_msgs::HomePosition home_position; // Home 위치 획득에 필요한 메시지 변수
 
 // (웨이포인트 요청 메시지 수신(응용프로그램)  및 송신 (mavros) 목적
 vector<mavros_msgs::Waypoint> waypoints; // 웨이포인트 정보
@@ -72,6 +73,7 @@ eDrone_msgs::CheckNFZone checkNFZone_cmd; // noflyZone 확인 서비스 요청 �
 // subscriber 선언
 
 ros::Subscriber wpList_sub;
+ros::Subscriber home_sub;
 
 // 서비스 서버 선언
 ros::ServiceServer missionAddItem_srv_server;
@@ -91,6 +93,24 @@ ros::ServiceClient checkHome_client; // home 위치 확인 서비스 클라이�
 ros::ServiceClient checkNFZone_client; // noflyZone 확인 서비스 클라이언트
 
 
+// Home 위치 변수
+float HOME_LAT;
+float HOME_LON;
+float HOME_ALT;
+
+void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
+{
+        home_position = *msg;
+
+//      printf("home position: (%f, %f, %f) \n", home_position.position.x, home_position.position.y, home_position.position.z);
+
+        HOME_LAT = home_position.geo.latitude;
+        HOME_LON = home_position.geo.longitude;
+        HOME_ALT = home_position.geo.altitude;
+
+
+        ROS_INFO( "eDrone_utility_node: home position: (%lf, %lf, %lf) \n", HOME_LAT,  HOME_LON, HOME_ALT); 
+}
 
 void print_waypoints (vector<mavros_msgs::Waypoint> waypoints) // 웨이포인트 정보
 {
@@ -178,64 +198,39 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 	{
 		case MAV_CMD_NAV_TAKEOFF:
 
-		waypoint.x_lat = home_position.latitude;
-		waypoint.y_long = home_position.longitude;
-
-		break;
-
+		//waypoint.x_lat = home_position.latitude;
+		//waypoint.y_long = home_position.longitude;
+		waypoint.x_lat = HOME_LAT;
+		waypoint.y_long = HOME_LON;
+		break;		
 
 		case MAV_CMD_NAV_WAYPOINT:
-		
-
 		waypoint.frame = req.frame;
 		waypoint.command = req.command;
 
 		if (req.is_global) // 전역 좌표인 경우
 		{
-
-			// (2017.11.23) geofence 기능 추가 - 
-		/*
-			distance_home = distance(HOME_LAT, HOME_LON, waypoint.x_lat, waypoint.y_long, 'm');
-
-			cout << "(" << waypoint.x_lat <<", " << waypoint.y_long << ")" << endl;
-			cout <<"- home distance = " << distance_home << endl;
-			
-		//	distance_home = pow (waypoint.x_lat, 2.0) + pow (waypoint.y_long, 2.0);
-
-		//	distance_home = sqrt(distance_home);
-	
-
-		*/
-			// (2017.11.27) noflyZone 기능 추가 - 
-		
-		/*
-			if (nofly_zone.isSet == true)
-			{
-				if ( (waypoint.x_lat >= nofly_zone.min_x_lat) && (waypoint.x_lat <= nofly_zone.max_x_lat) )
-				{
-					if ( (waypoint.y_long >= nofly_zone.min_y_long) && (waypoint.y_long <= nofly_zone.max_y_long) )
-					{
-						cout << "(" << waypoint.x_lat <<", " << waypoint.y_long << ")" << endl;
-						noflyZone_violation = true;
-					}
-				}
-		
-			}
-
-		*/
+			;
 		}
-		else
+		else // 지역 좌표인 경우 
 		{
-	
+			;
 			// (x, y, z) -> (lat, long, alt) 변환 필요
+
+			GeoPoint geoPoint = convertENUToGeo( waypoint.x_lat, waypoint.y_long, waypoint.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+
+			waypoint.x_lat = geoPoint.latitude;
+			waypoint.y_long = geoPoint.longitude;
+			waypoint.z_alt = geoPoint.altitude;
+
 		}
 	
 		break;
 		
 		case MAV_CMD_NAV_LAND:
 
-			waypoint.x_lat = home_position.latitude;
-			waypoint.y_long = home_position.longitude;
+			waypoint.x_lat = HOME_LAT;
+			waypoint.y_long = HOME_LON;
 		break;		
 
 
@@ -328,6 +323,9 @@ int main(int argc, char** argv)
 
 	// subscriber 초기화
 	wpList_sub = nh.subscribe<mavros_msgs::WaypointList> ("mavros/mission/waypoints", 10, wpList_cb);
+	home_sub = nh.subscribe<mavros_msgs::HomePosition> ("mavros/home_position/home", 10, homePosition_cb);
+
+
 
 	//// 서비스 서버 선언
 	
@@ -353,7 +351,7 @@ int main(int argc, char** argv)
 
 			ros::spinOnce();
       		  	rate.sleep();
-
+			/*
 			checkHome_cmd.request.value = true;
 			
 			if (checkHome_client.call (checkHome_cmd) == true)
@@ -365,7 +363,7 @@ int main(int argc, char** argv)
 				home_position.altitude = checkHome_cmd.response.altitude;
 				
 			}
-	
+			*/
 	}	
 	return 0;
 }

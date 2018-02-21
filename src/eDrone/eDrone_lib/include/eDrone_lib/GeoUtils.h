@@ -16,7 +16,7 @@
 
 #define PI 3.14159265358979323846
 
-//// 위도/경도/고도 <=> NED 좌표 변환 코드 (QGC 코드 수정 )
+//// 위도/경도/고도 <=> ENU 좌표 변환 코드 (QGC 코드 수정 )
 
 // These defines are private
 #define M_DEG_TO_RAD (M_PI / 180.0)
@@ -38,9 +38,9 @@ using namespace std;
 
 static const float epsilon = std::numeric_limits<double>::epsilon();
 
-Point convertGeoToPoint(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt);
+Point convertGeoToENU(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt);
 
-GeoPoint convertPointToGeo(double x, double y, double z, double home_lat, double home_long, double home_altitude);
+GeoPoint convertENUToGeo(double x, double y, double z, double home_lat, double home_long, double home_altitude);
 
 
 //// 좌표 변환 코드

@@ -412,7 +412,7 @@ bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Respo
 }
 
 
-bool srv_new_survey_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Survey_New::Response &res)
+bool srv_survey_new_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Survey_New::Response &res)
 {
 	
 	std::cout << "srv_survey_new_cb(): survey a target area"  << endl; 
@@ -424,7 +424,6 @@ bool srv_new_survey_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Surve
 	/* 초기 경로 생성 */
 
 	/* 영역 밖 웨이포인트 제거 */
-
 	
 
 	return true;
@@ -458,6 +457,8 @@ int main(int argc, char** argv)
 	//// 서비스 서버 선언
 
 	survey_srv_server = nh.advertiseService("srv_survey", srv_survey_cb);
+
+	survey_new_srv_server = nh.advertiseService("srv_survey_new", srv_survey_new_cb);
 
 //	int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
 

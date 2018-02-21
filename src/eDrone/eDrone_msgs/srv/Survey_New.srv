@@ -1,4 +1,8 @@
-mavros_msgs/Waypoint[] waypoints
+mavros_msgs/Waypoint[] boundary_points
+float64 path_width
 ---
+mavros_msgs/Waypoint[] waypoints
 bool value
+
+
 

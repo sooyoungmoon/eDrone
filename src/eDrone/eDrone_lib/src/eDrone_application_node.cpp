@@ -32,6 +32,11 @@
 #include <eDrone_msgs/CheckNFZone.h> // CheckNFZone 서비스 헤더 파일 (noflyZone 확인)
 #include <eDrone_msgs/Survey.h> // Survey 서비스 헤더 파일
 #include <eDrone_msgs/Survey_New.h> // Survey 서비스 (다각형 영역) 헤더 파일 
+#include <eDrone_msgs/MissionAddItem.h> // 미션 아이템 추가 서비스 호출 
+#include <eDrone_msgs/MissionUpload.h> // 미션 업로드 서비스 호출
+#include <eDrone_msgs/MissionDownload.h> // 미션 다운로드 서비스 호출
+#include <eDrone_msgs/MissionClear.h> // 미션 제거 서비스 호출
+
 
 #include <eDrone_lib/params.h> // 파라미터 목록
 
@@ -59,7 +64,21 @@ typedef struct _str_target_position
 
 //// 경로 변수
 
-std::vector<eDrone_msgs::Target> path; // 무인기 자율 비행 경로 
+//std::vector<eDrone_msgs::Target> path; // 무인기 자율 비행 경로 
+
+
+vector<mavros_msgs::Waypoint> boundary_points; // 영역 경계점 목록 
+vector<mavros_msgs::Waypoint> flightPath; // 무인기 비행 경로
+
+double path_width; // 비행 경로 너비
+
+
+double min_x_lat; // survey 범위 - 최소 x (또는 위도) 값
+double max_x_lat; // 	"	- 최대 x (또는 위도) 값
+
+double min_y_long; // 	"	- 최소 y (또는 경도) 값
+
+double max_y_long; // 	"	- 최대 y (또는 경도) 값
 
 
 //// Survey 서비스 피요청 여부
@@ -98,7 +117,14 @@ mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메
 
 
 //// 서비스 요청 메시지 선언 (eDrone_msgs)
-eDrone_msgs::Goto goto_cmd; // goto 요청 메시지
+//eDrone_msgs::Goto goto_cmd; // goto 요청 메시지
+eDrone_msgs::MissionAddItem missionAddItem_cmd;
+eDrone_msgs::MissionUpload missionUpload_cmd;
+eDrone_msgs::MissionDownload missionDownload_cmd;
+eDrone_msgs::MissionClear missionClear_cmd;
+
+vector<mavros_msgs::Waypoint> waypoints;
+
 
 
 // publisher 선언
@@ -119,7 +145,6 @@ ros::Subscriber cur_target_sub; // 현재 목적지 정보 구독
 // 서비스 서버 선언
 
 ros::ServiceServer survey_srv_server;
-
 ros::ServiceServer survey_new_srv_server;
 
 
@@ -127,22 +152,26 @@ ros::ServiceServer survey_new_srv_server;
 ros::ServiceClient arming_client; // 서비스 클라이언트 선언
 ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트 
 ros::ServiceClient rtl_client; // 모드 변경 서비스 클라이언트 
-ros::ServiceClient goto_client; // goto 서비스 클라이언트 
+//ros::ServiceClient goto_client; // goto 서비스 클라이언트 
+ros::ServiceClient missionAddItem_client; // 미션 아이템 추가 클라이언트
+ros::ServiceClient missionUpload_client; // 미션 업로드  클라이언트
+ros::ServiceClient missionDownload_client; // 미션 다운로드  클라이언트
+ros::ServiceClient missionClear_client; // 미션 제거  클라이언트
+
 
 // home position
-
 
  float HOME_LAT ;
  float HOME_LON;
  float HOME_ALT;
 
+/*
 void cur_target_cb (const eDrone_msgs::Target::ConstPtr& msg)
 {
 	cur_target = *msg;
-
 		
 }
-
+*/
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
 	
 	current_state = *msg;
@@ -273,10 +302,10 @@ bool srv_rtl_cb(eDrone_msgs::RTL::Request &req, eDrone_msgs::RTL::Response &res)
 	return true;
 }
 
-
+/*
 bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Response &res)
 {
-
+	
 	std::cout << "srv_survey_cb(): survey a target area"  << endl; 
 	
 	survey_srv_called = true;
@@ -411,31 +440,165 @@ bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Respo
 	return true;
 
 }
+*/
 
-
-bool srv_new_survey_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Survey_New::Response &res)
+bool srv_survey_new_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Survey_New::Response &res)
 {
 	
+	survey_srv_called = true;
+	boundary_points = req.boundary_points;
+	path_width = req.path_width;
+
 	std::cout << "srv_survey_new_cb(): survey a target area"  << endl; 
+	return true;
+}
+
+
+// 비행경로 생성 함수
+// generateFlightPath
+
+vector<mavros_msgs::Waypoint> generateFlightPath (vector<mavros_msgs::Waypoint> boundary_points)
+{
+	vector<mavros_msgs::Waypoint> flightPath;
+
+	// 비행 경로 계산  
+	/* 다각형 구성  - x(또는 위도) & y (또는 경도) 범위 */
 	
-	/* 다각형 구성  */
+	cout << " generateFlightpath() was called" << endl;
+
+	for (int i = 0; i < boundary_points.size(); i++)
+	{
+
+		cout << " boundary points["<< i << "]: " << endl;
+
+		cout << " x_lat: " << boundary_points[i].x_lat << endl;
+		cout << " y_long: " << boundary_points[i].y_long << endl << endl;
+
+		if (i==0)
+		{
+			min_x_lat = boundary_points[i].x_lat;
+			max_x_lat = boundary_points[i].x_lat;
+			min_y_long = boundary_points[i].y_long;
+			max_y_long = boundary_points[i].y_long;
+		}
+
+		else 
+		{
+			if (boundary_points[i].x_lat < min_x_lat)
+			{
+				min_x_lat = boundary_points[i].x_lat;
+			}
+			if (boundary_points[i].x_lat > max_x_lat)
+			{
+				max_x_lat = boundary_points[i].x_lat;
+			}
+			if (boundary_points[i].y_long < min_y_long)
+			{
+				min_y_long = boundary_points[i].y_long;
+			}
+			if (boundary_points[i].y_long > max_y_long)
+			{
+				max_y_long = boundary_points[i].y_long;
+			}
+		}
+
+	}
 
 	/* 가상 영역(사각형)  생성 */
 
+	cout << "min_x_lat: " << min_x_lat << endl;
+	cout << "max_x_lat: " << max_x_lat << endl;
+	cout << "min_y_long: " << min_y_long << endl;
+	cout << "max_y_long: " << max_y_long << endl;
+
+
 	/* 초기 경로 생성 */
+
+	double x_lat = min_x_lat;
+	double y_long = min_y_long;
+
+	int path_count = 0; // 초기 경로를 구성하는 직선 구간 번호
+
+	while (x_lat < max_x_lat + path_width) // min_x에서 max_x까지 진행 
+	{
+
+		mavros_msgs::Waypoint waypoint;
+
+		if (path_count %2 ==0) // 짝수 번째는 북쪽 방향, 홀수 번째는 남쪽 방향 
+		{
+			y_long = min_y_long;
+
+			while (y_long < max_y_long + path_width)
+			{
+				waypoint.x_lat = x_lat;
+				waypoint.y_long = y_long;
+
+				y_long += path_width;
+	
+				flightPath.push_back (waypoint);
+				/*
+				cout << "waypoint[" << flightPath.size()  << "]: " << endl;
+				cout << " path_count: " << path_count << endl;	
+				cout << " x_lat: " << waypoint.x_lat << endl;
+				cout << " y_long: " << waypoint.y_long << endl << endl;
+				*/
+			}  
+		}
+
+		else  // if (path_count %2 ==1)
+		{
+			y_long = max_y_long;
+
+			while (y_long > min_y_long- path_width )
+			{
+				
+				waypoint.x_lat = x_lat;
+				waypoint.y_long = y_long;
+
+				y_long -= path_width;
+				flightPath.push_back(waypoint);
+				/*
+				cout << "waypoint[" << flightPath.size()  << "]: " << endl;
+				cout << " path_count: " << path_count << endl;	
+				cout << " x_lat: " << waypoint.x_lat << endl;
+				cout << " y_long: " << waypoint.y_long << endl << endl;
+				*/
+			}
+				
+		}
+
+		x_lat += path_width;
+		path_count++;
+
+	}// 비행 경로 구성
+
+	/* 비행경로 화면 출력  */
+
+	cout << "initial flight path: " <<endl;
+	
+	for (int i = 0; i < flightPath.size(); i++)
+	{
+		
+		mavros_msgs::Waypoint wp = flightPath[i];
+
+		cout << "waypoint[" << i << "]: " ;
+
+		cout << " x_lat: " << wp.x_lat  ;
+		cout << ", y_long: " << wp.y_long << endl << endl;
+	}
+
+
 
 	/* 영역 밖 웨이포인트 제거 */
 
-	
-
-	return true;
+	return flightPath;
 }
 
 
 int main(int argc, char** argv)
 
 {
-
+	cout << "eDrone_application_node" << endl;
 	ros::init(argc, argv, "eDrone_application_node");
 
  	ros::NodeHandle nh; 
@@ -453,13 +616,14 @@ int main(int argc, char** argv)
 	pos_sub_global = nh.subscribe<sensor_msgs::NavSatFix> ("mavros/global_position/global",10,  pos_cb_global); 
 	home_sub = nh.subscribe<mavros_msgs::HomePosition> ("mavros/home_position/home", 10, homePosition_cb);
 	
-	cur_target_sub = nh.subscribe<eDrone_msgs::Target> ("eDrone_msgs/current_target", 10, cur_target_cb);
+	//cur_target_sub = nh.subscribe<eDrone_msgs::Target> ("eDrone_msgs/current_target", 10, cur_target_cb);
 
 
 	//// 서비스 서버 선언
 
-	survey_srv_server = nh.advertiseService("srv_survey", srv_survey_cb);
-
+	//survey_srv_server = nh.advertiseService("srv_survey", srv_survey_cb);
+	
+	survey_new_srv_server = nh.advertiseService("srv_survey_new", srv_survey_new_cb);
 //	int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
 
 	//modeChange_srv_server = nh.advertiseService("srv_modeChange", srv_modeChange_cb);
@@ -468,52 +632,39 @@ int main(int argc, char** argv)
 
 	arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
-	goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
-		
+	//goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
+	
+			
 	while ( ros::ok() ) // 탐색 서비스 요청 메시지 처리
 	{
 
 		if (survey_srv_called == true)
 		{
-			// 현재 목적지로 이동하기 위해 goto 서비스 호출
-		
-			goto_cmd.request.value = true;
 			
-			goto_cmd.request.target_seq_no = next_target.target_seq_no;
-
-			goto_cmd.request.is_global = next_target.is_global;
-
-			goto_cmd.request.x_lat = next_target.x_lat;
-	
-			goto_cmd.request.y_long = next_target.y_long;
-
-			goto_cmd.request.z_alt = next_target.z_alt;
-
-			goto_client.call(goto_cmd);
+			cout << "eDrone_application_node: main(): surveying mission is ongoing" << endl;
+			// 비행 경로 생성			
+			flightPath = generateFlightPath (boundary_points);
 
 
-			// 현재 목적지에 도착했으면 다음 목적지 정보를 갱신 => 
-
-			if (cur_target.reached == true)
+			// FC 미션 제거
+			ROS_INFO ("Send missionClear command...\n");
+			
+			if (missionClear_client.call (missionClear_cmd ) )
 			{
-
-				cout << "eDrone_application_node: cur_target.reached == true" << endl;
-				if (cur_target.target_seq_no < path.size()-1 )
-				{
-				//	cur_target_seq_no = cur_target.target_seq_no +1;
-					cur_target_seq_no++;
-
-					next_target = path[cur_target_seq_no];
-
-					ROS_INFO("next_target %d: (%lf, %lf)", next_target.target_seq_no, next_target.x_lat, next_target.y_long);
-				}
-				else 
-				{
-					rtl_client.call(rtl_cmd);
-					break;
-				}
+				cout << ("missionClear command was sent... \n");
 			}
+
+ 
+			// 미션 목록 구성
+
 			
+
+			// 미션 업로드 
+
+
+			survey_srv_called = false;
+			
+	
 		}		
 
 
