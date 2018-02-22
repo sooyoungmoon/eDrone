@@ -204,7 +204,7 @@ int main(int argc, char** argv)
 
 	survey_new_cmd.request.boundary_points = boundnary_points;
 	survey_new_cmd.request.path_width = 10;
-
+	survey_new_cmd.request.altitude = ALTITUDE;
 	survey_new_client.call(survey_new_cmd);
 
 	

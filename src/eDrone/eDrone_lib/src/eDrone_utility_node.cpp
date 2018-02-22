@@ -100,6 +100,8 @@ float HOME_ALT;
 
 void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 {
+	static int print_cnt = 0;
+
         home_position = *msg;
 
 //      printf("home position: (%f, %f, %f) \n", home_position.position.x, home_position.position.y, home_position.position.z);
@@ -108,8 +110,11 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
         HOME_LON = home_position.geo.longitude;
         HOME_ALT = home_position.geo.altitude;
 
-
-        ROS_INFO( "eDrone_utility_node: home position: (%lf, %lf, %lf) \n", HOME_LAT,  HOME_LON, HOME_ALT); 
+	if (print_cnt < 10)
+	{
+        	ROS_INFO( "eDrone_utility_node: home position: (%lf, %lf, %lf) \n", HOME_LAT,  HOME_LON, HOME_ALT); 
+		print_cnt++;
+	}
 }
 
 void print_waypoints (vector<mavros_msgs::Waypoint> waypoints) // 웨이포인트 정보
@@ -202,11 +207,13 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 		//waypoint.y_long = home_position.longitude;
 		waypoint.x_lat = HOME_LAT;
 		waypoint.y_long = HOME_LON;
+		waypoint.z_alt = req.z_alt;
 		break;		
 
 		case MAV_CMD_NAV_WAYPOINT:
 		waypoint.frame = req.frame;
 		waypoint.command = req.command;
+		waypoint.z_alt = req.z_alt;
 
 		if (req.is_global) // 전역 좌표인 경우
 		{
@@ -221,7 +228,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 			waypoint.x_lat = geoPoint.latitude;
 			waypoint.y_long = geoPoint.longitude;
-			waypoint.z_alt = geoPoint.altitude;
+			//waypoint.z_alt = geoPoint.altitude;
 
 		}
 	
@@ -272,7 +279,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 bool srv_missionUpload_cb(eDrone_msgs::MissionUpload::Request &req, eDrone_msgs::MissionUpload::Response &res)
 {
-	ROS_INFO("MissionAddItem request received\n");
+	ROS_INFO("MissionUpload request received\n");
 
 	// 웨이포인트 업로드 메시지 설정 
 	waypointPush_cmd.request.start_index = 0;

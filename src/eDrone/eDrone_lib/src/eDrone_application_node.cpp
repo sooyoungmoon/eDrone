@@ -165,6 +165,9 @@ ros::ServiceClient missionClear_client; // 미션 제거  클라이언트
  float HOME_LON;
  float HOME_ALT;
 
+
+ double survey_altitude = 10;
+
 /*
 void cur_target_cb (const eDrone_msgs::Target::ConstPtr& msg)
 {
@@ -448,6 +451,7 @@ bool srv_survey_new_cb(eDrone_msgs::Survey_New::Request &req, eDrone_msgs::Surve
 	survey_srv_called = true;
 	boundary_points = req.boundary_points;
 	path_width = req.path_width;
+	survey_altitude = req.altitude;
 
 	std::cout << "srv_survey_new_cb(): survey a target area"  << endl; 
 	return true;
@@ -532,7 +536,7 @@ vector<mavros_msgs::Waypoint> generateFlightPath (vector<mavros_msgs::Waypoint> 
 			{
 				waypoint.x_lat = x_lat;
 				waypoint.y_long = y_long;
-
+				waypoint.z_alt = survey_altitude;
 				y_long += path_width;
 	
 				flightPath.push_back (waypoint);
@@ -584,7 +588,7 @@ vector<mavros_msgs::Waypoint> generateFlightPath (vector<mavros_msgs::Waypoint> 
 		cout << "waypoint[" << i << "]: " ;
 
 		cout << " x_lat: " << wp.x_lat  ;
-		cout << ", y_long: " << wp.y_long << endl << endl;
+		cout << ", y_long: " << wp.y_long << endl;
 	}
 
 
@@ -632,6 +636,17 @@ int main(int argc, char** argv)
 
 	arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
+
+	
+ 	missionAddItem_client =nh.serviceClient<eDrone_msgs::MissionAddItem>("srv_missionAddItem");
+	missionUpload_client =nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");
+	missionDownload_client =nh.serviceClient<eDrone_msgs::MissionDownload>("srv_missionDownload");
+	missionClear_client =nh.serviceClient<eDrone_msgs::MissionClear>("srv_missionClear");
+
+
+
+
+
 	//goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 	
 			
@@ -655,12 +670,113 @@ int main(int argc, char** argv)
 			}
 
  
-			// 미션 목록 구성
-
+			// 미션 목록 구성 (missionAddItem 서비스 호출)
+					
+			ROS_INFO ("Send missionAddItem command...\n");
 			
+			 // takeoff
+			missionAddItem_cmd.request.frame = 3;
+		        missionAddItem_cmd.request.command = MAV_CMD_NAV_TAKEOFF;
+		        missionAddItem_cmd.request.is_current = 1;
+		        missionAddItem_cmd.request.autocontinue = 1;
+		        missionAddItem_cmd.request.param1 = 0;
+		        missionAddItem_cmd.request.param2 = 0;
+		        missionAddItem_cmd.request.param3 = 0;
+        		missionAddItem_cmd.request.z_alt = survey_altitude;
+						
+		        if (missionAddItem_client.call(missionAddItem_cmd)!= true)
+			{
+				ROS_ERROR ("missionAddItem service failed: " ); 
+			}
 
+			 // navigation
+
+			for (int i = 0; i < flightPath.size(); i++)
+			{
+			        missionAddItem_cmd.request.frame = 3;
+			        missionAddItem_cmd.request.command = MAV_CMD_NAV_WAYPOINT;
+
+			        missionAddItem_cmd.request.is_current = 0;
+
+			        missionAddItem_cmd.request.autocontinue = 1;
+			        missionAddItem_cmd.request.param1 = 0;
+			        missionAddItem_cmd.request.param2 = 0;
+			        missionAddItem_cmd.request.param3 = 0;
+
+			        missionAddItem_cmd.request.is_global = false;
+
+			        missionAddItem_cmd.request.x_lat = flightPath[i].x_lat;
+			        missionAddItem_cmd.request.y_long = flightPath[i].y_long;
+			        missionAddItem_cmd.request.z_alt = survey_altitude;
+			
+				if (missionAddItem_client.call(missionAddItem_cmd)!=true)
+				{
+					ROS_ERROR("missionAddItem service failed " );
+				}
+			}
+
+
+			 // return			
+			        missionAddItem_cmd.request.frame = 3;
+			        missionAddItem_cmd.request.command = MAV_CMD_NAV_WAYPOINT;
+
+			        missionAddItem_cmd.request.is_current = 0;
+			        missionAddItem_cmd.request.autocontinue = 1;
+			        missionAddItem_cmd.request.param1 = 0;
+			        missionAddItem_cmd.request.param2 = 0;
+			        missionAddItem_cmd.request.param3 = 0;
+
+			        missionAddItem_cmd.request.is_global = true;
+
+			        missionAddItem_cmd.request.x_lat = HOME_LAT ;
+			        missionAddItem_cmd.request.y_long = HOME_LON;
+			        missionAddItem_cmd.request.z_alt = survey_altitude;
+			
+				if (missionAddItem_client.call(missionAddItem_cmd)!=true)
+				{
+					ROS_ERROR("missionAddItem service failed " );
+				}
+/*			
+			missionAddItem_cmd.request.frame = 3;
+			missionAddItem_cmd.request.command = MAV_CMD_NAV_RETURN_TO_LAUNCH;
+		        missionAddItem_client.call(missionAddItem_cmd);
+			
+			if (missionAddItem_client.call(missionAddItem_cmd)!=true)
+			{
+				ROS_ERROR("missionAddItem service failed " );
+			}
+		*/	
+
+
+			/* 착륙 */
+
+			// mission item - wp (Land)
+		 	
+
+		     	missionAddItem_cmd.request.frame = 3;
+		        missionAddItem_cmd.request.command = MAV_CMD_NAV_LAND;
+	
+			missionAddItem_cmd.request.is_current = 0;
+			missionAddItem_cmd.request.autocontinue = 1;
+				
+			if (missionAddItem_client.call(missionAddItem_cmd)!=true)
+			{
+				ROS_ERROR("missionAddItem service failed " );
+			}
+ 	
+
+	
 			// 미션 업로드 
+			ROS_INFO("Send missionUpload command ... \n");
 
+        		if (!missionUpload_client.call(missionUpload_cmd))
+			{
+				ROS_INFO("missionUpload command was sent\n");
+			}
+			else
+			{
+				ROS_ERROR ("missionUpload service failed ");
+			}
 
 			survey_srv_called = false;
 			

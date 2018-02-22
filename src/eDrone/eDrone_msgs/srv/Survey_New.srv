@@ -1,5 +1,6 @@
 mavros_msgs/Waypoint[] boundary_points
 float64 path_width
+float64 altitude
 ---
 mavros_msgs/Waypoint[] waypoints
 bool value
