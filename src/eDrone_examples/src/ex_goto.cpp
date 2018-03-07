@@ -54,7 +54,7 @@ int main(int argc, char** argv)
 {
 	ROS_INFO("==ex_goto_path==\n");
 
-	ros::init(argc, argv, "ex_goto_path");
+	ros::init(argc, argv, "ex_goto");
 	ros::NodeHandle nh;
 
 		

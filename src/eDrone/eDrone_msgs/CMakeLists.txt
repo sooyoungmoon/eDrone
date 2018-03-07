@@ -12,7 +12,6 @@ find_package(catkin REQUIRED COMPONENTS
 	sensor_msgs
 	geographic_msgs	
 	mavros_msgs	
-
 )
 
 
@@ -45,16 +44,19 @@ MissionClear.srv
 Goto.srv
 Geofence.srv
 NoflyZone.srv
+NoflyZoneSet.srv
+NoflyZoneReset.srv
+NoflyZoneCheck.srv
 CheckNFZone.srv
 Survey.srv
 Survey_New.srv
 SprayStart.srv
 SprayStop.srv
-
 )
 
 # 메시지 생성을 위한 매크로 함수
-generate_messages(DEPENDENCIES std_msgs mavros_msgs geometry_msgs geographic_msgs)
+generate_messages(DEPENDENCIES std_msgs geometry_msgs geographic_msgs mavros_msgs)
+
 
 
 # 캐킨 빌드에서 cmake 파일과 config 파일 생성에 사용되는 명령어 (매크로 함수)
@@ -80,7 +82,7 @@ add_library (
 add_dependencies(
 	hello
 	${${PROJECT_NAME}_EXPORTED_TARGETS}
-	${catkin_EXPORTED_TARGETS}
+	#${catkin_EXPORTED_TARGETS}
 )
 
 target_link_libraries (hello ${catkin_LIBRARIES} )

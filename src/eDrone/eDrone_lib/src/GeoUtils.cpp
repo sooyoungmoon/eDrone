@@ -18,6 +18,48 @@
 using namespace std;
 using namespace Mission_API;
 
+
+//** 다각형 영역 내부 점 판단
+bool isInside(Point point, const vector<Point> polygon_area)
+{
+	bool result = false;
+
+	int crosses = 0; // point에서 오른쪽 방향 반직선과 polygon_area 간 교점 개수
+	
+	for (int i = 0; i < polygon_area.size(); i++)
+	{
+		int j = (i+1)%polygon_area.size();
+		
+		// point가 i번째 점과 j번째 점의 y좌표 사이에 위치하는지 확인
+
+		if ( (polygon_area[i].y > point.y) != (polygon_area[j].y >point.y) )
+		{
+			// atX는 점 point를 지나는 반직선과 선분 (p[i], p[j]) 사이의 교점의 x 좌표
+
+			double atX = (polygon_area[i].y-point.y)*(polygon_area[j].x - polygon_area[i].x)/(polygon_area[j].y-polygon_area[i].y) + polygon_area[i].x;
+			
+			if (point.x < atX)
+			{
+				crosses++;
+			}
+		}
+
+	}
+	
+	if ( (crosses%2) > 0)
+	{
+		result = true;
+	}
+	else
+		result = false;
+	// ...
+
+	return result;
+
+}
+
+
+
 //** GeoPoint (위도/경도/고도) <=> ENU 좌표 변환 코드 (QGC에서 발췌)
 
 Point convertGeoToENU(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt) {

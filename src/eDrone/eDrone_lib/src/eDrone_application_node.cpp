@@ -37,10 +37,7 @@
 #include <eDrone_msgs/MissionDownload.h> // 미션 다운로드 서비스 호출
 #include <eDrone_msgs/MissionClear.h> // 미션 제거 서비스 호출
 
-
 #include <eDrone_lib/params.h> // 파라미터 목록
-
-
 
 using namespace std;
 using namespace Mission_API; 
@@ -69,6 +66,10 @@ typedef struct _str_target_position
 
 vector<mavros_msgs::Waypoint> boundary_points; // 영역 경계점 목록 
 vector<mavros_msgs::Waypoint> flightPath; // 무인기 비행 경로
+vector<mavros_msgs::Waypoint> waypoints_outside; // 영역 밖 웨이포인트 목록 (초기 비행 경로)
+
+vector<Point> polygon_area;
+Point point;
 
 double path_width; // 비행 경로 너비
 
@@ -594,6 +595,41 @@ vector<mavros_msgs::Waypoint> generateFlightPath (vector<mavros_msgs::Waypoint> 
 
 
 	/* 영역 밖 웨이포인트 제거 */
+	
+
+	// polygon 구성 (ENU 좌표)
+
+	//vector<Point> polygon_area;
+
+	Point point;
+	
+	for (int i =0; i < boundary_points.size(); i++)
+	{
+		Point point;
+
+		point.x= boundary_points[i].x_lat;
+		point.y = boundary_points[i].y_long;
+		polygon_area.push_back(point);
+	}
+
+	//Vector<Point> waypoints_outside; // 영역 밖 웨이포인트 목록 
+
+	for (int i = 0; i < flightPath.size(); i++)
+	{
+		Point point;
+
+		point.x = flightPath[i].x_lat;
+		point.y = flightPath[i].y_long;
+
+		if ( isInside (point, polygon_area) != true)
+		{
+			waypoints_outside.push_back(flightPath[i]);	
+		}
+
+	} 
+
+
+		// 영역 밖 웨이포인트 목록 구성 
 
 	return flightPath;
 }
@@ -693,6 +729,26 @@ int main(int argc, char** argv)
 
 			for (int i = 0; i < flightPath.size(); i++)
 			{
+				//std::vector<mavros_msgs::Waypoint>::iterator it  = std::find(waypoints_outside.begin(), waypoints_outside.end(), flightPath[i]);
+				// 영역 밖 웨이포인트의 경우 제외 
+				
+				Point point;
+
+				point.x = flightPath[i].x_lat;
+				point.y = flightPath[i].y_long;
+
+				if ( isInside (point, polygon_area) != true)
+				{
+					waypoints_outside.push_back(flightPath[i]);
+					continue;	
+				
+				}
+			/*
+				if (it != waypoints_outside.end())
+				{
+					continue;
+				}
+			*/
 			        missionAddItem_cmd.request.frame = 3;
 			        missionAddItem_cmd.request.command = MAV_CMD_NAV_WAYPOINT;
 
