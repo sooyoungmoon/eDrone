@@ -23,20 +23,9 @@
  <!-- <depend>eDrone_lib</depend>   -->
 
 
-  <export>	
+  <export>
 
 	<newfield> this is a new field </newfield> 
-	<topics>
-
-		<topic> </topic>
-		<topic> </topic>
-	</topics>
-
-	<services> 
-		<service> </service>
-		<service> </service>
-	</services>
-
 
   </export>
 

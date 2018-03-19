@@ -52,9 +52,6 @@ typedef struct _str_target_position
 
 	bool reached; // 목적지 도달 여부 (true: 목적지 도착, false: 목적지로 이동 중)
 	bool geofence_breach; // geofence 영역 위반 여부 (true: geofence 영역 밖, false: 영역 내) 
-
-	bool noflyZone_violation; // 비행 금지 구역 위반 여부 (true: 비행 금지 구역 내, false: 비행 금지 구역 외)
-
 } Target_Position;
 
 
@@ -116,9 +113,6 @@ mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선
 mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
 mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
 mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지
-
-eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // 비행 금지 구역 확인에 사용될 요청 메시지 
-
 // publisher 선언
 
 //ros::Publisher state_pub;
@@ -158,8 +152,6 @@ ros::ServiceClient landing_client; // 서비스 클라이언트 선언
 
 ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
 ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트 
-
-ros::ServiceClient noflyZoneCheck_client;
 
 
 // home position
@@ -557,47 +549,15 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
         autonomous_flight = true;
 
 	target_position.geofence_breach = false;
-	target_position.noflyZone_violation = false; 
 
-	
+	ROS_INFO("srv_goto_cb()");
 	printf(": target_seq_no: %d\n", target_position.target_seq_no);
 
 
-	ROS_INFO("eDrone_control_node: Goto request received\n");
-	
-	
+	ROS_INFO("Goto request received\n");
 	
 	if (req.is_global) // 전역 좌표인 경우
 	{
-
-		/* 비행 금지 구역 check */
-
-		noflyZoneCheck_cmd.request.ref_system = "WGS84";
-
-		noflyZoneCheck_cmd.request.arg1 = req.x_lat;
-		noflyZoneCheck_cmd.request.arg2 = req.y_long;
-		
-		ROS_INFO("eDrone_control_node: trying to call NoflyZoneCheck service... ");
-	
-		if (noflyZoneCheck_client.call (noflyZoneCheck_cmd)==true)
-		{
-			if (noflyZoneCheck_cmd.response.violation == true)
-			{
-				target_position.noflyZone_violation = true; // 비행 금지 구역 위반 
-				ROS_INFO ("eDrone_control_node: goto service rejected: noflyZone violation!");
-				res.value = false;
-				return true;
-			}
-			else
-			{
-				target_position.noflyZone_violation = false; 
-				res.value = true;
-			}
-	
-		}
-
-		/* 비행 금지 구역 check 완료 */
-
 		/*
 		target_position.pos_global.latitude = req.x_lat;
 		target_position.pos_global.longitude = req.y_long;
@@ -622,58 +582,27 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 
 		//target_position.pos_local.z = HOME_ALT;
 
+
 		target_pos_local.pose.position.x = point.x;
 		target_pos_local.pose.position.y = point.y;
 
 		//target_pos_local.pose.position.z = HOME_ALT;
 		target_pos_local.pose.position.z = point.z;
 
-		printf("target position (ENU): (%f, %f, %f)\n", point.x, point.y, point.z);
+		printf("target position: (%f, %f, %f)\n", point.x, point.y, point.z);
 		sleep(10); 
 		target_position.geofence_breach = false;
 	}
 	else // 지역 좌표인 경우
 	{
-		/* 비행 금지 구역 check */ 
-
-		GeoPoint geoPoint = convertENUToGeo(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
-		cout <<"converENUToGeo() was called" << endl;
-
-		noflyZoneCheck_cmd.request.ref_system = "WGS84";
-
-		noflyZoneCheck_cmd.request.arg1 = geoPoint.latitude;
-                noflyZoneCheck_cmd.request.arg2 = geoPoint.longitude;
-
-                ROS_INFO("eDrone_control_node: trying to call NoflyZoneCheck service... ");
-
-                if (noflyZoneCheck_client.call (noflyZoneCheck_cmd)==true)
-                {
-                        if (noflyZoneCheck_cmd.response.violation == true)
-                        {
-                                target_position.noflyZone_violation = true; // 비행 금지 구역 위반 
-                                ROS_INFO ("eDrone_control_node: goto service rejected: noflyZone violation!");
-                                res.value = false;
-				return true;
-                        }
-                        else
-                        {
-                                target_position.noflyZone_violation = false;
-                                res.value = true;
-                        }
-
-                }
-	
-
-		 
-
-
+		//
 		
 		target_pos_local.pose.position.x = req.x_lat;
 
 		target_pos_local.pose.position.y = req.y_long;
 		target_pos_local.pose.position.z = req.z_alt;
 
-		printf("target position (ENU): (%f, %f, %f)\n", target_pos_local.pose.position.x, target_pos_local.pose.position.y, target_pos_local.pose.position.z);
+		printf("target position: (%f, %f, %f)\n", target_pos_local.pose.position.x, target_pos_local.pose.position.y, target_pos_local.pose.position.z);
 		
 
 		distance_home = pow(req.x_lat, 2.0) + pow(req.y_long, 2.0);
@@ -702,6 +631,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 			res.value = true;
 		}
 	}
+	res.value = true;
 	return true;
 }
 
@@ -737,7 +667,7 @@ bool srv_geofence_cb(eDrone_msgs::Geofence::Request &req, eDrone_msgs::Geofence:
 	res.value = true;
 	return true;
 }
-/*
+
 bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::NoflyZoneSet::Response &res)
 {
   
@@ -789,7 +719,7 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 		if ((req.arg2 < nofly_zone.pt1_arg2) != (req.arg2 < nofly_zone.pt2_arg2) )
 		{
 		
-			ROS_INFO ("eDrone_control_node: NoflyZone violation!");
+			ROS_INFO ("NoflyZone violation!");
 			res.violation = true;
 		}
   	}
@@ -797,7 +727,7 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
   
   res.value = true;
   return true;
-}*/
+}
 /*
 bool srv_noflyZone_cb(eDrone_msgs::NoflyZone::Request &req, eDrone_msgs::NoflyZone::Response &res)
 {
@@ -855,7 +785,8 @@ int main(int argc, char** argv)
  	ros::NodeHandle nh; 
 	
 	ros::Rate rate (20.0); 
-
+	
+	
 	// publisher 초기화
 	pos_pub_local = nh.advertise<geometry_msgs::PoseStamped>("mavros/setpoint_position/local", 10);
         pos_pub_global = nh.advertise<mavros_msgs::GlobalPositionTarget>("mavros/setpoint_raw/global", 10);
@@ -879,20 +810,21 @@ int main(int argc, char** argv)
 //	noflyzone_srv_server = nh.advertiseService("srv_noflyZone", srv_noflyZone_cb);	
 	//checkNFZone_srv_server = nh.advertiseService("srv_checkNFZone", srv_checkNFZone_cb);
 	
-	// noflyZoneSet_srv_server = nh.advertiseService("srv_noflyZoneSet", srv_noflyZoneSet_cb);
+	noflyZoneSet_srv_server = nh.advertiseService("srv_noflyZoneSet", srv_noflyZoneSet_cb);
 
-	// noflyZoneCheck_srv_server = nh.advertiseService("srv_noflyZoneCheck", srv_noflyZoneCheck_cb);
+noflyZoneCheck_srv_server = nh.advertiseService("srv_noflyZoneCheck", srv_noflyZoneCheck_cb);
 
-	// noflyZoneReset_srv_server = nh.advertiseService("srv_noflyZoneReset", srv_noflyZoneReset_cb);
+noflyZoneReset_srv_server = nh.advertiseService("srv_noflyZoneReset", srv_noflyZoneReset_cb);
 
 
+	//// 서비스 클라이언트 선언
 
 	//// 서비스 클라이언트 선언
 
         arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming"); // service client 선언
 	takeoff_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/takeoff"); // 서비스 클라이언트 선언
 	landing_client = nh.serviceClient<mavros_msgs::CommandTOL> ("mavros/cmd/land"); // 서비스 클라이언트 선언
-	noflyZoneCheck_client = nh.serviceClient<eDrone_msgs::NoflyZoneCheck> ("srv_noflyZoneCheck" );
+
 	
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 
@@ -916,16 +848,8 @@ int main(int argc, char** argv)
 
 		// 2) 위치 이동을 위한 setpoint_position/local 또는 setpoint_raw/global 토픽 출판
 
-		if (autonomous_flight == true)
-		//if (autonomous_flight == true && target_position.geofence_breach == false)
+		if (autonomous_flight == true && target_position.geofence_breach == false)
 		{
-
-			if (target_position.geofence_breach || target_position.noflyZone_violation) // geofence 또는 비행 금지 구역 위반 시 목표 지점으로 이동하지 않고 대기 
-			{
-				ros::spinOnce();
-	      		  	rate.sleep();
-				continue;
-			}
 
 			cur_target.target_seq_no = target_position.target_seq_no;
 		

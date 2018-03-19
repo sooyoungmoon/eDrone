@@ -18,7 +18,7 @@
 #include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/Target.h>
 #include <eDrone_msgs/Survey.h>
-#include <params.h>
+#include <eDrone_examples/params.h>
 
 using namespace std;
 eDrone_msgs::CheckState checkState_cmd;
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
 	//// Takeoff
 
 	ROS_INFO("Send takeoff command ... \n");
-	takeoff_cmd.request.altitude = ALTITUDE;
+	takeoff_cmd.request.altitude = TAKEOFF_1_ALTITUDE;
 	takeoff_client.call(takeoff_cmd);
 	ROS_INFO("Takeoff command was sent\n");
 

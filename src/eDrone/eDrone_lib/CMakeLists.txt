@@ -37,7 +37,7 @@ find_package(GeographicLib)
 
 catkin_package(
 
-INCLUDE_DIRS include
+INCLUDE_DIRS inc
 LIBRARIES eDrone_lib
 CATKIN_DEPENDS sensor_msgs geographic_msgs std_msgs libmavconn message_runtime mavros_msgs eDrone_msgs
 DEPENDS GeographicLib
@@ -49,7 +49,7 @@ DEPENDS GeographicLib
 ###########
 
 include_directories(
-	include
+	inc
 	${catkin_INCLUDE_DIRS}
 	${mavlink_INCLUDE_DIRS}
 	${GeographicLib_INCLUDE_DIRS}	

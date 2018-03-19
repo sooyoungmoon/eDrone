@@ -34,8 +34,13 @@
 #include <eDrone_msgs/CheckHome.h>  // 홈 위치 확인 서비스 헤더 파일 포함
 
 #include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
-#include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
-#include <eDrone_msgs/CheckNFZone.h> // NoflyZone 확인 서비스 헤더 파일
+//#include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
+//#include <eDrone_msgs/CheckNFZone.h> // NoflyZone 확인 서비스 헤더 파일
+
+
+#include <eDrone_msgs/NoflyZoneSet.h> // 비행 금지 구역 설정
+#include <eDrone_msgs/NoflyZoneReset.h> // 비행 금지 구역 해제
+#include <eDrone_msgs/NoflyZoneCheck.h> // 비행 금지 구역 확인
 
 #include <eDrone_lib/GeoUtils.h> // 좌표 변환 라이브러리 헤더 파일 
 
@@ -47,6 +52,12 @@ using namespace std;
 using namespace mavros_msgs;
 using namespace geographic_msgs;
 using namespace geometry_msgs;
+
+
+// node handle 포인터 변수
+
+ros::NodeHandle* nh_ptr; 
+
 
 //// 메시지 변수 선언
 //GeoPoint home_position;
@@ -65,7 +76,7 @@ mavros_msgs::WaypointClear waypointClear_cmd; // 미션 제거 요청 메시지
 mavros_msgs::SetMode modeChange_cmd;  
 
 eDrone_msgs::CheckHome checkHome_cmd; // home 위치 확인 서비스 요청 메시지
-eDrone_msgs::CheckNFZone checkNFZone_cmd; // noflyZone 확인 서비스 요청 메시지	
+//eDrone_msgs::CheckNFZone checkNFZone_cmd; // noflyZone 확인 서비스 요청 메시지	
 // publisher 선언
 
 
@@ -90,8 +101,8 @@ ros::ServiceClient waypointClear_client; //
 ros::ServiceClient commandLong_client; // "
 ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트
 ros::ServiceClient checkHome_client; // home 위치 확인 서비스 클라이언트 
-ros::ServiceClient checkNFZone_client; // noflyZone 확인 서비스 클라이언트
-
+//ros::ServiceClient checkNFZone_client; // noflyZone 확인 서비스 클라이언트
+ros::ServiceClient noflyZone_client; // 비행금지구역 확인 서비스 클라이언트
 
 // Home 위치 변수
 float HOME_LAT;
@@ -144,7 +155,7 @@ void wpList_cb(const mavros_msgs::WaypointList::ConstPtr& msg)
 
 bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msgs::MissionAddItem::Response &res)
 {
-	ROS_INFO("MissionAddItem request received\n");
+	ROS_INFO("eDrone_utility_node: MissionAddItem request received\n");
 
 	// 웨이포인트 추가 
 	
@@ -165,7 +176,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 	double distance_home;
 
-
+/*
 	bool noflyZone_violation = false;
 
 	checkNFZone_cmd.request.value = true;
@@ -195,7 +206,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 	}
 
-	
+*/	
 
 	
 
@@ -258,18 +269,47 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 		
 	}else
 		*/
-	 if (noflyZone_violation == true)
-	{
-		ROS_INFO("WaypointAdd service rejected: new WP is inside the nofly-Zone\n");
-		res.value = false;
-	}
-	else
-	{
-		waypoints.push_back(waypoint);
+
+        /* 비행 금지 구역 check */
+
+	bool noflyZone_violation = false;
+
+	eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // noflyZone 확인 서비스 요청 메시지	
+
+	ros::ServiceClient noflyZoneCheck_client = nh_ptr->serviceClient<eDrone_msgs::NoflyZoneCheck>("srv_noflyZoneCheck" );; // noflyZone 확인 서비스 클라이언트 
+
+
+	noflyZoneCheck_cmd.request.ref_system = "WGS84";
+
+	noflyZoneCheck_cmd.request.arg1 = waypoint.x_lat;
+	noflyZoneCheck_cmd.request.arg2 = waypoint.y_long;	
+
+	ROS_INFO("eDrone_utility_node: trying to call NoflyZoneCheck service... ");
 	
-		ROS_INFO("WaypointAdd service accepted: new WP was added to the wp list.\n");
+		if (noflyZoneCheck_client.call (noflyZoneCheck_cmd)==true)
+		{
+			if (noflyZoneCheck_cmd.response.violation == true)
+			{
+				noflyZone_violation = true; // 비행 금지 구역 위반 
+				ROS_INFO ("eDrone_utility_node: missionAddItem service rejected: noflyZone violation!");
+				res.value = false;
+				return true;
+			}
+			else
+			{
+				noflyZone_violation = false; 
+				res.value = true;
+			}
 	
-		res.value = true;
+		}
+	
+	
+
+	 if (noflyZone_violation != true )
+	{	
+		waypoints.push_back(waypoint);	
+		ROS_INFO("eDrone_utility_node: missionAddItem service accepted: new WP was added to the wp list.\n");
+
 	}
 
 	
@@ -323,6 +363,8 @@ int main(int argc, char** argv)
 
 	ros::init(argc, argv, "eDrone_msgs");
  	ros::NodeHandle nh; 
+
+	nh_ptr = &nh;
 	
 	ros::Rate rate (20.0); 
 	
@@ -350,8 +392,8 @@ int main(int argc, char** argv)
 	waypointClear_client = nh.serviceClient<mavros_msgs::WaypointClear> ("mavros/mission/clear"); //
 	modeChange_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 	
-	checkHome_client = nh.serviceClient<eDrone_msgs::CheckHome> ("srv_chkHome"); 
-	checkNFZone_client = nh.serviceClient<eDrone_msgs::CheckNFZone> ("srv_checkNFZone");
+//	checkHome_client = nh.serviceClient<eDrone_msgs::CheckHome> ("srv_chkHome"); 
+//	checkNFZone_client = nh.serviceClient<eDrone_msgs::CheckNFZone> ("srv_checkNFZone");
 
 	while ( ros::ok() )
 	{

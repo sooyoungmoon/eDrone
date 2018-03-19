@@ -28,8 +28,9 @@
 #include <eDrone_msgs/RTL.h> // RTL
 #include <eDrone_msgs/Target.h> // 현재 목적지 topic 메시지가 선언된 헤더 파일 포함
 #include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
-#include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
-#include <eDrone_msgs/CheckNFZone.h> // CheckNFZone 서비스 헤더 파일 (noflyZone 확인)
+#include <eDrone_msgs/NoflyZoneSet.h> // NoflyZone 서비스 헤더 파일 
+#include <eDrone_msgs/NoflyZoneCheck.h>
+#include <eDrone_msgs/NoflyZoneReset.h>
 #include <eDrone_msgs/Survey.h> // Survey 서비스 헤더 파일
 #include <eDrone_msgs/Survey_New.h> // Survey 서비스 (다각형 영역) 헤더 파일 
 #include <eDrone_msgs/MissionAddItem.h> // 미션 아이템 추가 서비스 호출 
@@ -57,9 +58,23 @@ typedef struct _str_target_position
 } Target_Position;
 
 
+//(2018.02.26) 
+
+typedef struct c_str_nofly_Zone
+{
+        string ref_system; // 비행금지구역 저장 좌표계 (현재는 WGS84로 저장)
+        bool isSet; // 비행 금지 구역 설정 여부 (true: 설정, false: 미 설정)
+        double pt1_arg1;
+        double pt1_arg2;
+        double pt1_arg3;
+        double pt2_arg1;
+        double pt2_arg2;
+        double pt2_arg3;
+
+} Nofly_Zone;
 
 
-//// 경로 변수
+//// 주요 변수
 
 //std::vector<eDrone_msgs::Target> path; // 무인기 자율 비행 경로 
 
@@ -67,6 +82,7 @@ typedef struct _str_target_position
 vector<mavros_msgs::Waypoint> boundary_points; // 영역 경계점 목록 
 vector<mavros_msgs::Waypoint> flightPath; // 무인기 비행 경로
 vector<mavros_msgs::Waypoint> waypoints_outside; // 영역 밖 웨이포인트 목록 (초기 비행 경로)
+Nofly_Zone nofly_zone; // 비행 금지 구역 변수 
 
 vector<Point> polygon_area;
 Point point;
@@ -86,7 +102,7 @@ double max_y_long; // 	"	- 최대 y (또는 경도) 값
 bool survey_srv_called = false;
 
 
-//// 메시지 변수 선언
+//// topic 메시지 변수 선언
 
 // (무인기 상태 정보 수신 목적)
 mavros_msgs::State current_state; // 무인기 상태 정보
@@ -110,22 +126,21 @@ eDrone_msgs::Target next_target; // 다음  목적지 정보 (goto 서비스 요
 int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
 
 
-//// 서비스 요청 메시지 선언 (mavros)
+//// 서비스 요청 메시지 선언 
+// (mavros)
 mavros_msgs::CommandBool arming_cmd;
 mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
 mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
 mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지i
 
 
-//// 서비스 요청 메시지 선언 (eDrone_msgs)
+// (eDrone_msgs)
 //eDrone_msgs::Goto goto_cmd; // goto 요청 메시지
 eDrone_msgs::MissionAddItem missionAddItem_cmd;
 eDrone_msgs::MissionUpload missionUpload_cmd;
 eDrone_msgs::MissionDownload missionDownload_cmd;
 eDrone_msgs::MissionClear missionClear_cmd;
-
 vector<mavros_msgs::Waypoint> waypoints;
-
 
 
 // publisher 선언
@@ -145,11 +160,18 @@ ros::Subscriber cur_target_sub; // 현재 목적지 정보 구독
 
 // 서비스 서버 선언
 
+/*
+ros::ServiceServer noflyZoneSet_srv_server;
+ros::ServiceServer noflyZoneCheck_srv_server;
+ros::ServiceServer noflyZoneReset_srv_server;
 ros::ServiceServer survey_srv_server;
 ros::ServiceServer survey_new_srv_server;
+*/
+
 
 
 //서비스 클라이언트 선언
+/*
 ros::ServiceClient arming_client; // 서비스 클라이언트 선언
 ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트 
 ros::ServiceClient rtl_client; // 모드 변경 서비스 클라이언트 
@@ -158,7 +180,7 @@ ros::ServiceClient missionAddItem_client; // 미션 아이템 추가 클라이�
 ros::ServiceClient missionUpload_client; // 미션 업로드  클라이언트
 ros::ServiceClient missionDownload_client; // 미션 다운로드  클라이언트
 ros::ServiceClient missionClear_client; // 미션 제거  클라이언트
-
+*/
 
 // home position
 
@@ -176,6 +198,11 @@ void cur_target_cb (const eDrone_msgs::Target::ConstPtr& msg)
 		
 }
 */
+
+//// callback 함수 
+
+
+// topic 구독 
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
 	
 	current_state = *msg;
@@ -243,68 +270,73 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 }
 
 
-// callback 함수 (서비스 제공) 정의
+// 서비스 요청 응답 
 
-bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Response &res )
+bool srv_noflyZoneSet_cb (eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::NoflyZoneSet::Response &res )
 {
+	 // reference system: WGS84 지원
 
-	ROS_INFO("ARMing request received\n");
-	arming_cmd.request.value = true; // 서비스 요청 메시지 필드 설정
+	  ROS_INFO ("eDrone_application_node: NoflyZoneSet service was called");
 
-	//// Arming
+	  if ( req.ref_system.compare("WGS84") ==0)
+	  {
+		nofly_zone.pt1_arg1 = req.pt1_arg1;
+		nofly_zone.pt1_arg2 = req.pt1_arg2;
+		nofly_zone.pt1_arg3 = req.pt1_arg3;
+		nofly_zone.pt2_arg1 = req.pt2_arg1;
+		nofly_zone.pt2_arg2 = req.pt2_arg2;
+		nofly_zone.pt2_arg3 = req.pt2_arg3;
+	  }
+	  nofly_zone.isSet = true;
+	  res.value = true;
 
-  	while (ros::ok() ) // 서비스 요청 메시지 전달
-  	{
-  	      printf("send Arming command ...\n");
+	  return true;
 
-		if (!arming_client.call(arming_cmd))
-        	 {
-	 	  ros::spinOnce();
- //   	  	 rate.sleep();
-        	}
-        	else break;
+	
+}
 
-  	} 
-	 
-	ROS_INFO("ARMing command was sent\n");
+
+bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msgs::NoflyZoneCheck::Response &res)
+{
+	res.value= false;
+	ROS_INFO ("eDrone_application_node: NoflyZoneCheck service was called");
+
+	// 요청 메시지 포함된 좌표가  
+
+	  if ( (nofly_zone.isSet == true) &&  ( req.ref_system.compare("WGS84") ==0) )
+	  {
+			ROS_INFO ("Fist condition");
+
+		if ( (req.arg1 < nofly_zone.pt1_arg1 ) !=  (req.arg1 < nofly_zone.pt2_arg1 ) )
+		{
+
+			ROS_INFO ("Second condition");
+
+			if ((req.arg2 < nofly_zone.pt1_arg2) != (req.arg2 < nofly_zone.pt2_arg2) )
+			{
+
+				ROS_INFO ("eDrone_control_node: NoflyZone violation!");
+				res.violation = true;
+			}
+		}
+	  }
+
+	  res.value = true;
+	  return true;
 
 }
 
-bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req, eDrone_msgs::ModeChange::Response &res)
+
+bool srv_noflyZoneReset_cb(eDrone_msgs::NoflyZoneReset::Request &req, eDrone_msgs::NoflyZoneReset::Response &res) 
 {
 	
-	std::cout << "srv_modeChange_cb(): change the mode to " << req.mode << endl; 
+	ROS_INFO ("eDrone_application_node: NoflyZoneReset service was called");
+	nofly_zone.isSet = false;
 
-	modeChange_cmd.request.base_mode = 0;
-        
-	modeChange_cmd.request.custom_mode.assign(req.mode);
-
-       if (modeChange_client.call(modeChange_cmd)==true)
-	{
-		std::cout << " modeChange cmd was sent!\n " << endl;
-	}
-
-	
-
-
+	res.value = true;
 	return true;
 }
 
-bool srv_rtl_cb(eDrone_msgs::RTL::Request &req, eDrone_msgs::RTL::Response &res)
-{
-	std::cout << "srv_rtl_cb():return to home"  << endl; 
-
-	modeChange_cmd.request.base_mode = 0;
-        
-	modeChange_cmd.request.custom_mode.assign("AUTO.RTL");
-
-       if (modeChange_client.call(modeChange_cmd)==true)
-	{
-		std::cout << " modeChange cmd was sent!\n " << endl;
-	}
-
-	return true;
-}
 
 /*
 bool srv_survey_cb(eDrone_msgs::Survey::Request &req, eDrone_msgs::Survey::Response &res)
@@ -659,25 +691,38 @@ int main(int argc, char** argv)
 	//cur_target_sub = nh.subscribe<eDrone_msgs::Target> ("eDrone_msgs/current_target", 10, cur_target_cb);
 
 
-	//// 서비스 서버 선언
-
-	//survey_srv_server = nh.advertiseService("srv_survey", srv_survey_cb);
+	//// 서비스 서버 선언 & 초기화
 	
-	survey_new_srv_server = nh.advertiseService("srv_survey_new", srv_survey_new_cb);
+	ros::ServiceServer noflyZoneSet_srv_server = nh.advertiseService("srv_noflyZoneSet", srv_noflyZoneSet_cb);
+
+	ros::ServiceServer noflyZoneCheck_srv_server = nh.advertiseService("srv_noflyZoneCheck", srv_noflyZoneCheck_cb);
+
+	ros::ServiceServer noflyZoneReset_srv_server = nh.advertiseService("srv_noflyZoneReset", srv_noflyZoneReset_cb);
+
+	ros::ServiceServer survey_new_srv_server = nh.advertiseService("srv_survey_new", srv_survey_new_cb);
+
+
+	
 //	int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
 
 	//modeChange_srv_server = nh.advertiseService("srv_modeChange", srv_modeChange_cb);
 
 	//// 서비스 클라이언트 선언
+	ros::ServiceClient arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
+ // 서비스 클라이언트 선언
+	ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트 
+	ros::ServiceClient rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 
-	arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming");	
-	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
+ // 모드 변경 서비스 클라이언트 
+	//ros::ServiceClient goto_client; // goto 서비스 클라이언트 
 
 	
- 	missionAddItem_client =nh.serviceClient<eDrone_msgs::MissionAddItem>("srv_missionAddItem");
-	missionUpload_client =nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");
-	missionDownload_client =nh.serviceClient<eDrone_msgs::MissionDownload>("srv_missionDownload");
-	missionClear_client =nh.serviceClient<eDrone_msgs::MissionClear>("srv_missionClear");
+ 	ros::ServiceClient missionAddItem_client =nh.serviceClient<eDrone_msgs::MissionAddItem>("srv_missionAddItem"); // 미션 아이템 추가 클라이언트
+
+	ros::ServiceClient missionUpload_client =nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");// 미션 아이템  클라이언트
+
+	ros::ServiceClient missionDownload_client =nh.serviceClient<eDrone_msgs::MissionDownload>("srv_missionDownload"); // 미션목록 다운로드
+	ros::ServiceClient missionClear_client =nh.serviceClient<eDrone_msgs::MissionClear>("srv_missionClear"); // 미션 제거 
 
 
 

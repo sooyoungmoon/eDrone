@@ -10,7 +10,7 @@
 #include <eDrone_msgs/Arming.h>
 #include <eDrone_msgs/Takeoff.h>
 #include <eDrone_msgs/Landing.h>
-#include <params.h>
+#include <eDrone_examples/params.h>
 
 using namespace std;
 
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 {
   printf("==ex_takeoff==\n");
 
-  double altitude = ALTITUDE;
+  double altitude = TAKEOFF_1_ALTITUDE;
 
   /*
   if (argc <2)

@@ -20,32 +20,21 @@
 #include <eDrone_msgs/Arming.h>
 #include <eDrone_msgs/Takeoff.h>
 #include <eDrone_msgs/Landing.h>
+#include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/MissionAddItem.h>
 #include <eDrone_msgs/MissionUpload.h>
-#include <eDrone_msgs/MissionDownload.h>
+//#include <eDrone_msgs/MissionDownload.h>
+#include <eDrone_msgs/MissionClear.h>
 #include <eDrone_msgs/Geofence.h>
 #include <eDrone_msgs/NoflyZoneSet.h>
 #include <eDrone_msgs/NoflyZoneReset.h>
 #include <eDrone_msgs/NoflyZoneCheck.h>
+#include <eDrone_examples/params.h>
 
 using namespace std;
 using namespace eDrone_msgs;
 
 
-// 서비스 요청 메시지
-
-eDrone_msgs::CheckState checkState_cmd;
-eDrone_msgs::CheckPosition checkPosition_cmd;
-eDrone_msgs::Arming arming_cmd;
-eDrone_msgs::Takeoff takeoff_cmd;
-eDrone_msgs::Landing landing_cmd;
-eDrone_msgs::MissionAddItem missionAddItem_cmd;
-eDrone_msgs::MissionUpload missionUpload_cmd;
-eDrone_msgs::MissionDownload missionDownload_cmd;
-eDrone_msgs::Geofence geofence_cmd;
-eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd;
-eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd;
-eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 
 
 int main(int argc, char** argv)
@@ -55,7 +44,23 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "ex_noflyZone");
   ros::NodeHandle nh;
 
-   
+
+ 
+  // service messages
+
+ eDrone_msgs::CheckState checkState_cmd;
+eDrone_msgs::CheckPosition checkPosition_cmd;
+eDrone_msgs::Arming arming_cmd;
+eDrone_msgs::Takeoff takeoff_cmd;
+eDrone_msgs::Landing landing_cmd;
+eDrone_msgs::Goto goto_cmd;
+eDrone_msgs::Geofence geofence_cmd;
+eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd;
+eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd;
+eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
+
+ 
+  
   // service client
 
   ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");  
@@ -66,14 +71,10 @@ int main(int argc, char** argv)
 
   ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
 
-  ros::ServiceClient missionAddItem_client =nh.serviceClient<eDrone_msgs::MissionAddItem>("srv_missionAddItem");
 
-  ros::ServiceClient geofence_client = nh.serviceClient<eDrone_msgs::Geofence>("srv_geofence");
+  ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 
-  ros::ServiceClient missionUpload_client =nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");
 
-  ros::ServiceClient missionDownload_client =nh.serviceClient<eDrone_msgs::MissionDownload>("srv_missionDownload");
- 
   ros::ServiceClient noflyZoneSet_client = nh.serviceClient<eDrone_msgs::NoflyZoneSet>("srv_noflyZoneSet");
 
   ros::ServiceClient noflyZoneReset_client = nh.serviceClient<eDrone_msgs::NoflyZoneReset>("srv_noflyZoneReset");
@@ -143,15 +144,234 @@ int main(int argc, char** argv)
   //// Arming
 
 	ROS_INFO("Send arming command ... \n");
-	arming_client.call(arming_cmd);
-	ROS_INFO("Arming command was sent\n");
+	if (arming_client.call(arming_cmd))
+	{
+		ROS_INFO ("Arming service was requested " );
+	}
 
   int loopCnt = 0;
 
 
+  //// Takeoff
+
+	ROS_INFO("Send takeoff command ... \n");
+	
+	if (takeoff_client.call(takeoff_cmd ) )
+	{
+		ROS_INFO ("Takeoff service was requested" );
+	}
+
+
   // noflyZoneSet 서비스 호출
 
-  
+	noflyZoneSet_cmd.request.ref_system = "WGS84";
+
+	noflyZoneSet_cmd.request.pt1_arg1 = NOFLY_ZONE_LAT_MIN;
+	noflyZoneSet_cmd.request.pt1_arg2 = NOFLY_ZONE_LON_MIN;
+	noflyZoneSet_cmd.request.pt2_arg1 = NOFLY_ZONE_LAT_MAX;
+	noflyZoneSet_cmd.request.pt2_arg2 = NOFLY_ZONE_LON_MAX;
+
+		
+
+	ROS_INFO("ex_noflyZone: Send noflyZoneSet command ... \n");
+
+	if (noflyZoneSet_client.call(noflyZoneSet_cmd)== true )
+	{
+		ROS_INFO ("ex_noflyZone: NoflyZoneSet service was requested " );
+	}
+ 
+	if (noflyZoneSet_cmd.response.value == true)
+	{
+		
+		ROS_INFO ("ex_noflyZone: NoflyZone was set " );
+	}
+
+  // noflyZoneCheck 서비스 호출
+
+	
+	noflyZoneCheck_cmd.request.ref_system = "WGS84";
+
+	noflyZoneCheck_cmd.request.arg1= 47.3984000;
+	noflyZoneCheck_cmd.request.arg2 = 8.5470000;
+
+	if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) != true )
+	{
+		ROS_INFO ("ex_noflyZone: NoflyZoneCheck service call failed!! " );
+	}
+ 
+	if (noflyZoneCheck_cmd.response.value == true)
+	{
+		
+		if (noflyZoneCheck_cmd.response.violation == true)
+		{
+			ROS_INFO ("ex_noflyZone: NoflyZone violation! ");
+		}
+	/*	else
+		{
+			;	
+		}
+	*/
+	}
+
+
+
+	// case 1) 비행 금지 구역 내부 - missionAddItem 서비스 호출 
+	ROS_INFO("\n<<Case#1: Calling MissionAddItem service (target within a noflyZone>>\n");
+	// missionAddItem 호출 
+
+	eDrone_msgs::MissionAddItem missionAddItem_cmd ;
+	eDrone_msgs::MissionUpload missionUpload_cmd;
+	eDrone_msgs::MissionClear missionClear_cmd;
+	
+	ros::ServiceClient missionAddItem_client = nh.serviceClient<eDrone_msgs::MissionAddItem>("srv_missionAddItem");
+	ros::ServiceClient missionUpload_client = nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");
+	ros::ServiceClient missionClear_client =nh.serviceClient<eDrone_msgs::MissionClear>("srv_missionClear");
+	
+	missionAddItem_cmd.request.frame = 3;
+        missionAddItem_cmd.request.command = MAV_CMD_NAV_WAYPOINT;
+	missionAddItem_cmd.request.is_current = 0;
+	missionAddItem_cmd.request.autocontinue = 1;
+	missionAddItem_cmd.request.param1 = 0;
+	missionAddItem_cmd.request.param2 = 0;
+	missionAddItem_cmd.request.param3 = 0;
+	missionAddItem_cmd.request.is_global = true; 
+	
+	missionAddItem_cmd.request.x_lat = 47.3984000;
+	missionAddItem_cmd.request.y_long = 8.5470000;
+	missionAddItem_cmd.request.z_alt = 50;	
+
+	if (missionAddItem_client.call(missionAddItem_cmd))
+	{
+		if (missionAddItem_cmd.response.value == true )
+		{	
+			ROS_INFO("ex_noflyZone: missionAddItem command success!");
+
+		//// MissionUpload
+
+		 
+		  printf("Send missionUpload command ... \n");
+		 
+
+		  if (!missionUpload_client.call(missionUpload_cmd))
+		  {
+			ROS_INFO("missionUpload command was sent\n");
+		  }
+		}
+		else
+		{
+			ROS_INFO("ex_noflyZone: missionAddItem command fail!");
+
+		}
+	}
+	// case 2) 비행 금지 구역 내부 - goto 서비스 호출 
+	ROS_INFO("\n<<Case#2: Calling Goto service (target within a noflyZone>>\n");
+	
+	goto_cmd.request.is_global = true;
+	goto_cmd.request.x_lat = 47.3984413;
+	goto_cmd.request.y_long = 8.5471572;
+	goto_cmd.request.z_alt = 50;
+	
+	/*
+	goto_cmd.request.is_global = false;
+	goto_cmd.request.x_lat = 117;
+	goto_cmd.request.y_long = 65;
+	goto_cmd.request.z_alt = 50;
+	*/
+
+	if (goto_client.call(goto_cmd))
+	{
+		if (goto_cmd.response.value == true)
+			ROS_INFO("ex_noflyZone: goto command success!");
+
+		else
+		{
+			ROS_INFO("ex_noflyZone: goto command failed! ");
+		}
+	}
+	
+
+  	// noflyZoneReset 서비스 호출
+
+	{
+		if (noflyZoneReset_client.call (noflyZoneReset_cmd) == true)
+		{
+			if (noflyZoneReset_cmd.response.value == true)
+			{
+				ROS_INFO("noflyZone was removed");
+			}
+		}	
+
+	}
+
+	// case 3) 비행 금지 구역 외부 - missionAddItem 서비스 호출 
+	ROS_INFO("\n<<Case#3: Calling MissionAddItem service (target outside of a noflyZone>>\n");
+	// missionAddItem 호출 
+
+	
+	missionAddItem_cmd.request.frame = 3;
+        missionAddItem_cmd.request.command = MAV_CMD_NAV_WAYPOINT;
+	missionAddItem_cmd.request.is_current = 0;
+	missionAddItem_cmd.request.autocontinue = 1;
+	missionAddItem_cmd.request.param1 = 0;
+	missionAddItem_cmd.request.param2 = 0;
+	missionAddItem_cmd.request.param3 = 0;
+	missionAddItem_cmd.request.is_global = true; 
+	
+	missionAddItem_cmd.request.x_lat = 47.3984000;
+	missionAddItem_cmd.request.y_long = 8.5470000;
+	missionAddItem_cmd.request.z_alt = 50;	
+
+	
+	if (missionAddItem_client.call(missionAddItem_cmd))
+	{
+		if (missionAddItem_cmd.response.value == true )
+		{	
+			ROS_INFO("ex_noflyZone: missionAddItem command success!");			
+		//// MissionUpload
+
+		 
+		  printf("Send missionUpload command ... \n");
+		 
+
+		  if (!missionUpload_client.call(missionUpload_cmd))
+		  {
+			ROS_INFO("missionUpload command was sent\n");
+		  }
+		}
+		else
+		{
+			ROS_INFO("ex_noflyZone: missionAddItem command fail!");
+
+		}
+	}
+	// case 4) 비행 금지 구역 외부 - goto 서비스 호출 
+	
+	ROS_INFO("\n<<Case#4: Calling Goto service (target outside of a noflyZone>>\n");
+
+	goto_cmd.request.is_global = true;
+	goto_cmd.request.x_lat = 47.3984413;
+	goto_cmd.request.y_long = 8.5471572;
+	goto_cmd.request.z_alt = 50;
+	
+	/*
+	goto_cmd.request.is_global = false;
+	goto_cmd.request.x_lat = 117;
+	goto_cmd.request.y_long = 65;
+	goto_cmd.request.z_alt = 50;
+	*/
+
+	if (goto_client.call(goto_cmd))
+	{
+		if (goto_cmd.response.value == true)
+			ROS_INFO("ex_noflyZone: goto command success!");
+
+		else
+		{
+			ROS_INFO("ex_noflyZone: goto command failed! ");
+		}
+	}
+
+
 
 
   /* 

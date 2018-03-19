@@ -16,7 +16,7 @@
 #include <eDrone_msgs/RTL.h>
 #include <eDrone_msgs/Disarming.h>
 #include <eDrone_msgs/Landing.h>
-#include <params.h>
+#include <eDrone_examples/params.h>
 
 using namespace std;
 
@@ -82,7 +82,7 @@ int main(int argc, char** argv)
  /* 파라미터 설정 */
  // $(PARAMETER_TYPE) $(PARAMETER_VARIABLE) = $(PARAMETER_NAME);
 
- double altitude = ALTITUDE;
+ double altitude = TAKEOFF_1_ALTITUDE;
   
  nh.setParam("ALTITUDE", altitude);
   
@@ -129,7 +129,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = STARTING_POS_X_LAT;
         next_target.y_long = STARTING_POS_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 
@@ -138,7 +138,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = WP_1_X_LAT;     
         next_target.y_long = WP_1_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 
@@ -148,7 +148,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = WP_2_X_LAT;     
         next_target.y_long = WP_2_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 
@@ -158,7 +158,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = WP_3_X_LAT;     
         next_target.y_long = WP_3_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 
@@ -169,7 +169,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = WP_4_X_LAT;     
         next_target.y_long = WP_4_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 
@@ -179,7 +179,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	next_target.is_global = false;
 	next_target.x_lat = WP_5_X_LAT;     
         next_target.y_long = WP_5_Y_LON;
-	next_target.z_alt = ALTITUDE;
+	next_target.z_alt = altitude;
 	next_target.reached = false;
 	path.push_back(next_target);
 	cur_target_seq_no = 0; // 0번 index의 요소를 현재 target으로 지정
@@ -306,7 +306,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 	goto_cmd.request.is_global = false;
 	goto_cmd.request.x_lat = STARTING_POS_X_LAT;
 	goto_cmd.request.y_long =STARTING_POS_Y_LON;
-	goto_cmd.request.z_alt = ALTITUDE;
+	goto_cmd.request.z_alt = altitude;
 	
 	if (goto_client.call(goto_cmd))
 	{

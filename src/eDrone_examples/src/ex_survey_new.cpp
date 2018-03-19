@@ -19,7 +19,7 @@
 #include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/Target.h>
 #include <eDrone_msgs/Survey_New.h>
-#include <params.h>
+#include <eDrone_examples/params.h>
 
 using namespace std;
 
@@ -150,7 +150,7 @@ int main(int argc, char** argv)
 	//// Takeoff
 
 	ROS_INFO("Send takeoff command ... \n");
-	takeoff_cmd.request.altitude = ALTITUDE;
+	takeoff_cmd.request.altitude = TAKEOFF_1_ALTITUDE;
 	takeoff_client.call(takeoff_cmd);
 	ROS_INFO("Takeoff command was sent\n");
 
@@ -204,7 +204,7 @@ int main(int argc, char** argv)
 
 	survey_new_cmd.request.boundary_points = boundnary_points;
 	survey_new_cmd.request.path_width = 10;
-	survey_new_cmd.request.altitude = ALTITUDE;
+	survey_new_cmd.request.altitude = TAKEOFF_1_ALTITUDE;
 	survey_new_client.call(survey_new_cmd);
 
 	
