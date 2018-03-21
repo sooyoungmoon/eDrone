@@ -360,7 +360,7 @@ int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
 				
 				next_target = path[cur_target_seq_no];
 
-				goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정
+				//goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정
 				goto_cmd.request.is_global = next_target.is_global;
 				goto_cmd.request.x_lat = next_target.x_lat;
 				goto_cmd.request.y_long = next_target.y_long;

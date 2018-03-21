@@ -78,7 +78,7 @@ typedef struct c_str_nofly_Zone
 
 //// 목적지 변수
 
-Target_Position target_position;
+Target_Position target_position = { .target_seq_no = -1 }; // 현재 목적지 정보 (published topic)
 int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
 bool autonomous_flight = false; // 자율 비행 여부  (goto service가 호출되면 true로 변경됨)
 
@@ -553,17 +553,19 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 	cur_target.reached = false;
 
 	target_position.is_global = req.is_global;
-        target_position.target_seq_no = req.target_seq_no; 
+	target_position.target_seq_no++;
+	cur_target.target_seq_no = target_position.target_seq_no;
+        //target_position.target_seq_no = req.target_seq_no; 
         autonomous_flight = true;
 
 	target_position.geofence_breach = false;
 	target_position.noflyZone_violation = false; 
 
-	
-	printf(": target_seq_no: %d\n", target_position.target_seq_no);
-
-
 	ROS_INFO("eDrone_control_node: Goto request received\n");
+	printf("eDrone_control_node: target_seq_no: %d\n", target_position.target_seq_no);
+
+
+	
 	
 	
 	

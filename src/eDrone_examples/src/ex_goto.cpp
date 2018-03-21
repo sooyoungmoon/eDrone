@@ -23,7 +23,7 @@
 #include <eDrone_msgs/RTL.h>
 #include <eDrone_msgs/Target.h>
 
-// 파라미터 선언 header
+// 파라미터 초기값 선언 header
 #include <eDrone_examples/params.h>
 
 using namespace std;
@@ -70,12 +70,7 @@ int main(int argc, char** argv)
 
 	/* 주요 변수 선언 */
 
-	// main argument 값 저장을 위한 변수 선언 (서비스 파라미터 설정)
 
-	double altitude = 0;
-
-	vector <double> x_vector; // x 좌표 벡터 
-	vector <double> y_vector; // y 좌표 벡터
 
 	if (argc < 2)
 	{
@@ -89,29 +84,6 @@ int main(int argc, char** argv)
 		ROS_INFO("main arg[%d]: %s", arg_index, argv[arg_index] );
 	}
 
-	altitude = atof (argv[1]); 
-	
-	ROS_INFO("Altitude: %lf", altitude);
-
-	for (int arg_index = 2; arg_index < argc; arg_index+=2)
-	{
-		double x = atof (argv[arg_index]) ;
-		double y = atof (argv[arg_index+1]);
-
-		x_vector.push_back(x);
-		y_vector.push_back(y);
-/*
-		ROS_INFO("(X, Y): (%lf, %lf) ", x_vector[arg_index], y_vector[arg_index]);
-		cout << "(X, Y): " << x_vector[arg_index] << ", " << y_vector[arg_index] << endl;
-		ROS_INFO("(X, Y): (%s, %s) ", argv[arg_index], argv[arg_index+1]);
-*/
-	}
-
-	for (int vector_index = 0; vector_index < x_vector.size(); vector_index++)
-	{
-		ROS_INFO("(X, Y): (%lf, %lf) ", x_vector[vector_index], y_vector[vector_index]);
-		
-	}
 
 	// 토픽 메시지 변수 선언  
 	eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
@@ -152,58 +124,7 @@ int main(int argc, char** argv)
 	std::vector<eDrone_msgs::Target> path; 
 
 
-	// 서비스 요청
-
-	  
-
-	    // path 설정
-	
-		int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
-		
-		for (int vector_index = 0 ; vector_index < x_vector.size(); vector_index++)
-		{
-			next_target.target_seq_no = vector_index;
-			next_target.is_global = false;
-			next_target.x_lat = x_vector[vector_index];
-			next_target.y_long = y_vector[vector_index];
-			next_target.z_alt = altitude;
-			next_target.reached = false;
-			path.push_back(next_target);
-		}
-
-		/*
-
-
-		// target#1	
-		next_target.target_seq_no = 0;
-		next_target.is_global = false;
-		next_target.x_lat = GOTO_1_X_LAT;  
-		next_target.y_long = GOTO_1_Y_LONG;
-		next_target.z_alt = altitude;
-		next_target.reached = false;
-		path.push_back(next_target);
-
-		// target#2	
-		next_target.target_seq_no = 1;
-		next_target.is_global = false;
-		next_target.x_lat = GOTO_2_X_LAT;    
-		next_target.y_long = GOTO_2_Y_LONG;
-		next_target.z_alt = altitude;
-		next_target.reached = false;
-		path.push_back(next_target);
-
-		// target#3 	
-		next_target.target_seq_no = 2;
-		next_target.is_global = false;
-		next_target.x_lat = GOTO_3_X_LAT;                                                                           
-		next_target.y_long = GOTO_3_Y_LONG;
-		next_target.z_alt = altitude;
-		next_target.reached = false;
-		path.push_back(next_target);
-		*/
-
-
-	  sleep(10);	
+        sleep(10);	
 
 	    // 연결 상태 확인
 
@@ -262,7 +183,7 @@ int main(int argc, char** argv)
 			
 			ROS_INFO("UAV position was checked!");
 		
-		 sleep(10); 
+		  
 		// Arming
 
 		ROS_INFO("Send arming command ... \n"); 
@@ -275,41 +196,89 @@ int main(int argc, char** argv)
 
 
 		// Takeoff
-
-		ROS_INFO("Send takeoff command ... \n");
-		takeoff_cmd.request.altitude = TAKEOFF_1_ALTITUDE; // 서비스 파라미터 설정
-		takeoff_client.call(takeoff_cmd); // 서비스 호출
-
-		if (takeoff_cmd.response.value == true) // 서비스 호출 결과 확인 
 		{
-			ROS_INFO("Takeoff command was sent\n");
-		}
+			double altitude = 0;
+			altitude = atof (argv[1]); 
+			ROS_INFO("Altitude: %lf", altitude);
 
+			ROS_INFO("Send takeoff command ... \n");
+			takeoff_cmd.request.altitude = altitude; // 서비스 파라미터 설정
+			takeoff_client.call(takeoff_cmd); // 서비스 호출
+
+			if (takeoff_cmd.response.value == true) // 서비스 호출 결과 확인 
+			{
+				ROS_INFO("Takeoff command was sent\n");
+			}
+		}
 		sleep(10);
 
 
 	    // 경로 비행 (임무 수행)
 
-	//// Goto
-
-
-	ROS_INFO("Send goto command ...\n");
-	ROS_INFO("let's start a mission! \n");
-
-
-	goto_cmd.request.is_global = false;
-	goto_cmd.request.x_lat = x_vector[0];
-	goto_cmd.request.y_long = y_vector[0];
-	goto_cmd.request.z_alt = altitude;
+	    // path 설정
 	
-	goto_client.call(goto_cmd);
-	ROS_INFO("Goto command was sent\n");
-	    while(ros::ok() )
+			vector <double> x_vector; // x 좌표 (동쪽) 벡터 
+			vector <double> y_vector; // y 좌표 (북쪽) 벡터
+			vector <double> z_vector; // z 좌표 (고도) 벡터	
+			for (int arg_index = 2; arg_index < argc; arg_index+=3)
+			{
+				double x = atof (argv[arg_index]) ;
+				double y = atof (argv[arg_index+1]);
+				double z = atof (argv[arg_index+2]);
+
+				x_vector.push_back(x);
+				y_vector.push_back(y);
+				z_vector.push_back(z);
+			}
+
+			/* test용 코드 
+			for (int vector_index = 0; vector_index < x_vector.size(); vector_index++)
+			{
+				ROS_INFO("(X, Y): (%lf, %lf) ", x_vector[vector_index], y_vector[vector_index]);
+			}*/
+
+			int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
+			
+			for (int vector_index = 0 ; vector_index < x_vector.size(); vector_index++)
+			{
+				next_target.target_seq_no = vector_index;
+				next_target.is_global = GOTO_IS_GLOBAL;
+				next_target.x_lat = x_vector[vector_index];
+				next_target.y_long = y_vector[vector_index];
+				next_target.z_alt = z_vector[vector_index];
+				next_target.reached = false;
+				path.push_back(next_target);
+			}
+
+			//// Goto
+
+
+			ROS_INFO("Send goto command ...\n");
+			ROS_INFO("let's start a mission! \n");
+
+			cur_target_seq_no = 0;
+			goto_cmd.request.is_global = GOTO_IS_GLOBAL;
+			goto_cmd.request.x_lat = x_vector[0];
+			goto_cmd.request.y_long = y_vector[0];
+			goto_cmd.request.z_alt = z_vector[0];
+			
+			goto_client.call(goto_cmd);
+			ROS_INFO("Goto command was sent\n");
+		   
+	//int prev_target_seq_no = -1; // 이전에 도착한 목적지 번호 (cur_target.target_seq_no)
+
+	 while(ros::ok() )
 	    {
 		
-		if (cur_target.reached== true) // 현재 목적지에 도착한 경우
+			
+
+		if (cur_target.reached== true && cur_target.target_seq_no >= cur_target_seq_no) // 현재 목적지에 도착한 경우
 		{
-			if (cur_target.target_seq_no < path.size()-1) // 경로 벡터에서 다음 목적지 정보 획득, goto 서비스 요청 
+
+
+			if (cur_target_seq_no < path.size()-1) // 경로 벡터에서 다음 목적지 정보 획득, goto 서비스 요청 
+
+			//if (cur_target.target_seq_no < path.size()-1) // 경로 벡터에서 다음 목적지 정보 획득, goto 서비스 요청 
 			{
 
 				ROS_INFO("we reached at the current target. Go to the next target\n");
@@ -318,9 +287,13 @@ int main(int argc, char** argv)
 				
 				cur_target_seq_no = cur_target.target_seq_no+1;
 
+				ROS_INFO("ex_goto: next target: %d", cur_target_seq_no);
+		//		sleep(10);
+				//cur_target_seq_no = (cur_target.target_seq_no-1)+1;
+
 				next_target = path[cur_target_seq_no];
 
-				goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정				
+			//	goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정				
 				goto_cmd.request.is_global = next_target.is_global;
 				goto_cmd.request.x_lat = next_target.x_lat;				
 				goto_cmd.request.y_long = next_target.y_long;				

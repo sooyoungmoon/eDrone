@@ -182,7 +182,7 @@ int main(int argc, char** argv)
 				next_target = path[cur_target_seq_no];
 
 
-				goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정
+				//goto_cmd.request.target_seq_no = cur_target_seq_no; // target seq no 설정
 				
 				goto_cmd.request.is_global = next_target.is_global;
 
