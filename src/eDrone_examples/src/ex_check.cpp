@@ -208,7 +208,7 @@ int main(int argc, char** argv)
   
   printf("\nsend checkPosition command...\n");
 
-  checkPosition_cmd.request.value = true;
+ 
 
   if (checkPosition_client.call(checkPosition_cmd))
   {

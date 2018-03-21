@@ -8,6 +8,10 @@
 <arg name="tgt_system" default="1" />
 <arg name="tgt_component" default="1" />
 
+
+<arg name="my_args" default="" />
+
+
 <!-- nodes list -->
 
 <node name="mavros" pkg="mavros" type="mavros_node" output="screen">
@@ -37,7 +41,7 @@
 
  <node name="eDrone_application_node" pkg="eDrone_lib" type="eDrone_application_node" output="screen">  </node> 
 
- <node name="ex_takeoff" pkg="eDrone_examples" type="ex_takeoff" output="screen">  </node> 
+ <node name="ex_takeoff" pkg="eDrone_examples" type="ex_takeoff" args="$(arg my_args)" output="screen">  </node> 
 
 </launch>
  

@@ -43,11 +43,9 @@ MissionDownload.srv
 MissionClear.srv
 Goto.srv
 Geofence.srv
-NoflyZone.srv
 NoflyZoneSet.srv
 NoflyZoneReset.srv
 NoflyZoneCheck.srv
-CheckNFZone.srv
 Survey.srv
 Survey_New.srv
 SprayStart.srv

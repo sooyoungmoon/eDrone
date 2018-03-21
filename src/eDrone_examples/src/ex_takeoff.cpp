@@ -39,6 +39,13 @@ int main(int argc, char** argv)
   */
   ros::init(argc, argv, "ex_takeoff");
   ros::NodeHandle nh;
+
+  ROS_INFO("Number of arguments: %d", argc);
+
+  for (int i = 0; i < argc; i++)
+  {
+	ROS_INFO ("%s", argv[i]);
+  }
   
   // service client
   ros::ServiceClient checkState_client = nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");

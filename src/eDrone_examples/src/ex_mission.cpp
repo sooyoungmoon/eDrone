@@ -161,7 +161,7 @@ int main(int argc, char** argv)
 
   printf("Send missionDownload command ... \n");
   
-  missionDownload_cmd.request.value = true;
+
 
   if (missionDownload_client.call (missionDownload_cmd))
   { 
@@ -176,7 +176,7 @@ int main(int argc, char** argv)
    printf("Send missionClear command ... \n");
 
    {
-	missionClear_cmd.request.value = true;
+	
 	if (missionClear_client.call(missionClear_cmd))
 	{
 		printf("missionClear command was sent\n");
