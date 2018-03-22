@@ -175,6 +175,14 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 
 	ROS_INFO("ex_noflyZone: Send noflyZoneSet command ... \n");
 
+	cout << " << 비행 금지 구역 설정>> " << endl; 
+
+	cout << " 위도: " << NOFLY_ZONE_LAT_MIN << "~ " << NOFLY_ZONE_LAT_MAX << endl;
+	
+	cout << " 경도: " << NOFLY_ZONE_LON_MIN << "~ " << NOFLY_ZONE_LON_MAX << endl;
+
+	
+
 	if (noflyZoneSet_client.call(noflyZoneSet_cmd)== true )
 	{
 		ROS_INFO ("ex_noflyZone: NoflyZoneSet service was requested " );
@@ -186,9 +194,11 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 		ROS_INFO ("ex_noflyZone: NoflyZone was set " );
 	}
 
+
   // noflyZoneCheck 서비스 호출
 
-	
+	cout << "\n\n << 비행 금지 구역 확인>> " << endl; 
+
 	noflyZoneCheck_cmd.request.ref_system = "WGS84";
 
 	noflyZoneCheck_cmd.request.arg1= 47.3984000;
@@ -202,21 +212,24 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	if (noflyZoneCheck_cmd.response.value == true)
 	{
 		
+		cout << "\n 위도: " << noflyZoneCheck_cmd.request.arg1 << endl;	
+		cout << " 경도: " << noflyZoneCheck_cmd.request.arg2 << endl;
+	
 		if (noflyZoneCheck_cmd.response.violation == true)
 		{
-			ROS_INFO ("ex_noflyZone: NoflyZone violation! ");
+			cout << "\n 비행 금지 구역 내에 속함 " << endl;
 		}
-	/*	else
+		else
 		{
-			;	
+			cout << "\n 비행 금지 구역 외부 " << endl ;
 		}
-	*/
 	}
 
 
 
 	// case 1) 비행 금지 구역 내부 - missionAddItem 서비스 호출 
-	ROS_INFO("\n<<Case#1: Calling MissionAddItem service (target within a noflyZone>>\n");
+	cout << "\n Case#1: MissionAddItem service 호출 (비행 금지 구역 내)>>\n" << endl;
+
 	// missionAddItem 호출 
 
 	eDrone_msgs::MissionAddItem missionAddItem_cmd ;
@@ -240,6 +253,9 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	missionAddItem_cmd.request.y_long = 8.5470000;
 	missionAddItem_cmd.request.z_alt = 50;	
 
+
+	cout << "\n 미션 아이템 추가 명령: ( " << missionAddItem_cmd.request.x_lat << ", " << missionAddItem_cmd.request.y_long << ", " << missionAddItem_cmd.request.z_alt << ")" << endl;
+
 	if (missionAddItem_client.call(missionAddItem_cmd))
 	{
 		if (missionAddItem_cmd.response.value == true )
@@ -247,7 +263,6 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 			ROS_INFO("ex_noflyZone: missionAddItem command success!");
 
 		//// MissionUpload
-
 		 
 		  printf("Send missionUpload command ... \n");
 		 
@@ -264,7 +279,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 		}
 	}
 	// case 2) 비행 금지 구역 내부 - goto 서비스 호출 
-	ROS_INFO("\n<<Case#2: Calling Goto service (target within a noflyZone>>\n");
+	cout << "\n Case#2: Goto service 호출 (비행금지구역 내)>>\n" << endl;
 	
 	goto_cmd.request.is_global = true;
 	goto_cmd.request.x_lat = 47.3984413;
@@ -277,6 +292,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	goto_cmd.request.y_long = 65;
 	goto_cmd.request.z_alt = 50;
 	*/
+	cout << "\n 위치 이동 명령: ( " << goto_cmd.request.x_lat << ", " << goto_cmd.request.y_long<< ", " << goto_cmd.request.z_alt << ")" << endl;
 
 	if (goto_client.call(goto_cmd))
 	{
@@ -304,7 +320,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	}
 
 	// case 3) 비행 금지 구역 외부 - missionAddItem 서비스 호출 
-	ROS_INFO("\n<<Case#3: Calling MissionAddItem service (target outside of a noflyZone>>\n");
+	cout << "\n<<Case#3: MissionAddItem service 호출 (비행금지구역 외부)>>\n" << endl;
 	// missionAddItem 호출 
 
 	
@@ -321,7 +337,8 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	missionAddItem_cmd.request.y_long = 8.5470000;
 	missionAddItem_cmd.request.z_alt = 50;	
 
-	
+	cout << "\n 미션 아이템 추가: ( " << missionAddItem_cmd.request.x_lat << ", " << missionAddItem_cmd.request.y_long<< ", " << missionAddItem_cmd.request.z_alt << ")" << endl;
+
 	if (missionAddItem_client.call(missionAddItem_cmd))
 	{
 		if (missionAddItem_cmd.response.value == true )
@@ -346,7 +363,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	}
 	// case 4) 비행 금지 구역 외부 - goto 서비스 호출 
 	
-	ROS_INFO("\n<<Case#4: Calling Goto service (target outside of a noflyZone>>\n");
+	cout<< "\n<<Case#4: Calling Goto service (target outside of a noflyZone>>\n" << endl;
 
 	goto_cmd.request.is_global = true;
 	goto_cmd.request.x_lat = 47.3984413;
@@ -359,6 +376,8 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	goto_cmd.request.y_long = 65;
 	goto_cmd.request.z_alt = 50;
 	*/
+	cout << "\n 위치 이동 명령: ( " << goto_cmd.request.x_lat << ", " << goto_cmd.request.y_long<< ", " << goto_cmd.request.z_alt << ")" << endl;
+
 
 	if (goto_client.call(goto_cmd))
 	{

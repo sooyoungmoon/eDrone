@@ -35,13 +35,13 @@ GeoInfo& GeoInfo::getInstance()
 
 void GeoInfo::add()
 {
-	printf("cnt is %d \n", cnt);
+	//printf("cnt is %d \n", cnt);
 	cnt++;
 }
 
 void GeoInfo::sub()
 {
-	printf("cnt is %d \n", cnt);
+	//printf("cnt is %d \n", cnt);
 	cnt--;
 }
 

@@ -43,6 +43,9 @@ MissionDownload.srv
 MissionClear.srv
 Goto.srv
 Geofence.srv
+GeofenceSet.srv
+GeofenceCheck.srv
+GeofenceReset.srv
 NoflyZoneSet.srv
 NoflyZoneReset.srv
 NoflyZoneCheck.srv

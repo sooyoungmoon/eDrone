@@ -27,7 +27,13 @@
 #include <eDrone_msgs/ModeChange.h> // 비행 모드 변경 서비스 헤더 파일
 #include <eDrone_msgs/RTL.h> // RTL
 #include <eDrone_msgs/Target.h> // 현재 목적지 topic 메시지가 선언된 헤더 파일 포함
-#include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
+
+#include <eDrone_msgs/GeofenceSet.h> // GeofenceSet 서비스 헤더 파일
+#include <eDrone_msgs/GeofenceCheck.h> // GeofenceCheck 서비스 헤더 파일
+#include <eDrone_msgs/GeofenceReset.h> // GeofenceReset 서비스 헤더 파일
+
+
+//#include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
 #include <eDrone_msgs/NoflyZoneSet.h> // NoflyZone 서비스 헤더 파일 
 #include <eDrone_msgs/NoflyZoneCheck.h>
 #include <eDrone_msgs/NoflyZoneReset.h>
@@ -57,6 +63,18 @@ typedef struct _str_target_position
 	bool geofence_breach; // geofence 영역 위반 여부 (true: geofence 영역 밖, false: 영역 내) 
 } Target_Position;
 
+// (2018.03.22)
+
+typedef struct c_str_geofence
+{
+	bool isSet; // geofence 설정 여부
+	double radius; 
+
+} Geofence_Info;
+
+double geofence_radius;
+
+
 
 //(2018.02.26) 
 
@@ -82,7 +100,10 @@ typedef struct c_str_nofly_Zone
 vector<mavros_msgs::Waypoint> boundary_points; // 영역 경계점 목록 
 vector<mavros_msgs::Waypoint> flightPath; // 무인기 비행 경로
 vector<mavros_msgs::Waypoint> waypoints_outside; // 영역 밖 웨이포인트 목록 (초기 비행 경로)
+
+Geofence_Info geofence_info; // 가상 울타리 정보 
 Nofly_Zone nofly_zone; // 비행 금지 구역 변수 
+
 
 vector<Point> polygon_area;
 Point point;
@@ -272,6 +293,23 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 
 // 서비스 요청 응답 
 
+bool srv_geofenceSet_cb (eDrone_msgs::GeofenceSet::Request & req, eDrone_msgs::GeofenceSet::Response & res)
+{
+  ROS_INFO ("eDrone_application_node: GeofenceSet servive was called " ) ;
+/*
+  if ( )
+  {
+	
+  }
+*/
+  res.value = true;
+  return true;
+}
+
+
+
+
+
 bool srv_noflyZoneSet_cb (eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::NoflyZoneSet::Response &res )
 {
 	 // reference system: WGS84 지원
@@ -305,12 +343,12 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 
 	  if ( (nofly_zone.isSet == true) &&  ( req.ref_system.compare("WGS84") ==0) )
 	  {
-			ROS_INFO ("Fist condition");
+//			ROS_INFO ("Fist condition");
 
 		if ( (req.arg1 < nofly_zone.pt1_arg1 ) !=  (req.arg1 < nofly_zone.pt2_arg1 ) )
 		{
 
-			ROS_INFO ("Second condition");
+//			ROS_INFO ("Second condition");
 
 			if ((req.arg2 < nofly_zone.pt1_arg2) != (req.arg2 < nofly_zone.pt2_arg2) )
 			{

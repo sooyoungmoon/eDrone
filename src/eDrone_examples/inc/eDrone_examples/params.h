@@ -2,7 +2,7 @@
 
 
 
-// 파라미터 디폴트 값 
+// 파라미터 초기값 
 const double GOTO_IS_GLOBAL = false;
 
 const double NOFLY_ZONE_LAT_MIN = 47.3982540;

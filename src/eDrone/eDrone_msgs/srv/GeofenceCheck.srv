@@ -1,0 +1,8 @@
+string ref_system
+float64 arg1
+float64 arg2
+float64 arg3
+---
+bool value
+bool violation
+float32 radius
