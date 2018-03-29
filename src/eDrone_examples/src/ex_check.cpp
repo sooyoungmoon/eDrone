@@ -218,8 +218,7 @@ int main(int argc, char** argv)
 
 	cout <<"local frame: (" << checkPosition_cmd.response.x << ", " << checkPosition_cmd.response.y << ", " << checkPosition_cmd.response.z << ") " << endl; 
   }
-  GeoInfo::add();
-  GeoInfo::sub();
+  
   
   ros::spinOnce();
   rate.sleep(); 

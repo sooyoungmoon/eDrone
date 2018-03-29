@@ -21,13 +21,13 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 
-find_library (
-eDroneLIB
-NAMES libeDrone_lib.so
+#find_library (
+#eDroneLIB
+#NAMES libeDrone_lib.so
 #HINTS ~/devel/.private/eDrone_lib/lib
-HINTS ~
-REQUIRED 
-)
+#HINTS ~
+#REQUIRED 
+#)
 
 
 catkin_package(
