@@ -133,14 +133,14 @@ add_dependencies(ex_spraying_mission
 target_link_libraries(ex_spraying_mission ${catkin_LIBRARIES} )
 
 
-add_executable(ex_lib src/ex_lib.cpp)
+#add_executable(ex_lib src/ex_lib.cpp)
 
-add_dependencies(ex_lib
+#add_dependencies(ex_lib
 
- ${${PROJECT_NAME}_EXPORTED_TARGETS}
- ${catkin_EXPORTED_TARGETS}
- )
-target_link_libraries(ex_lib ${catkin_LIBRARIES} )
+ #${${PROJECT_NAME}_EXPORTED_TARGETS}
+ #${catkin_EXPORTED_TARGETS}
+ #)
+#target_link_libraries(ex_lib ${catkin_LIBRARIES} )
 
 
 

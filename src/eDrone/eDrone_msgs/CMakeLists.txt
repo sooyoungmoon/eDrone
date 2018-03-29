@@ -63,7 +63,7 @@ generate_messages(DEPENDENCIES std_msgs geometry_msgs geographic_msgs mavros_msg
 # 캐킨 빌드에서 cmake 파일과 config 파일 생성에 사용되는 명령어 (매크로 함수)
 catkin_package(
 INCLUDE_DIRS inc
-LIBRARIES hello
+#LIBRARIES hello
 CATKIN_DEPENDS geometry_msgs sensor_msgs geographic_msgs message_runtime std_msgs
 )
 
