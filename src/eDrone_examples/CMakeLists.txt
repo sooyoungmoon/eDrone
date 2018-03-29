@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
 	rospy
 	std_msgs
 	eDrone_msgs
-	#eDrone_lib
+	eDrone_lib
 )
 
 

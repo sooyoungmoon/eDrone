@@ -20,7 +20,7 @@
   <depend>rospy</depend>
   <depend>std_msgs</depend>
   <depend>eDrone_msgs</depend>
- <!-- <depend>eDrone_lib</depend>   -->
+  <depend>eDrone_lib</depend>
 
 
   <export>	

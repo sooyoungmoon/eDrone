@@ -16,11 +16,10 @@
 #include <eDrone_msgs/CheckState.h>
 #include <eDrone_msgs/CheckPosition.h>
 #include <eDrone_msgs/CheckState.h>
-#include <eDrone_lib/GeoUtils.h>
-#include <eDrone_lib/GeoInfo.h>
+//#include <eDrone_lib/GeoUtils.h>
+//#include <eDrone_lib/GeoInfo.h>
 
 using namespace std;
-using namespace Mission_API;
 eDrone_msgs::Arming arming_cmd;
 eDrone_msgs::Takeoff takeoff_cmd;
 eDrone_msgs::Landing landing_cmd;
