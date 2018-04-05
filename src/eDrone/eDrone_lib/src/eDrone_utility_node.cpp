@@ -33,7 +33,9 @@
 #include <eDrone_msgs/MissionClear.h> // 미션 제거 서비스 헤더 파일 포함
 #include <eDrone_msgs/CheckHome.h>  // 홈 위치 확인 서비스 헤더 파일 포함
 
-#include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
+#include <eDrone_msgs/GeofenceSet.h> // 가상 울타리 설정 
+#include <eDrone_msgs/GeofenceReset.h> // 가상 울타리 해제 
+#include <eDrone_msgs/GeofenceCheck.h> // 가상 울타리 확인
 //#include <eDrone_msgs/NoflyZone.h> // Noflyzone 서비스 헤더 파일
 //#include <eDrone_msgs/CheckNFZone.h> // NoflyZone 확인 서비스 헤더 파일
 
@@ -298,17 +300,52 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 			else
 			{
 				noflyZone_violation = false; 
-				res.value = true;
+				//res.value = true;
 			}
 	
 		}
 	
-	
+	/* Geofence check */
 
-	 if (noflyZone_violation != true )
+	bool geofence_violation = false;
+	
+	eDrone_msgs::GeofenceCheck geofenceCheck_cmd;
+	ros::ServiceClient geofenceCheck_client = nh_ptr-> serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck"); // geofence 확인 서비스 클라이언트
+
+	geofenceCheck_cmd.request.ref_system = "WGS84";
+	geofenceCheck_cmd.request.arg1= waypoint.x_lat;
+        geofenceCheck_cmd.request.arg2= waypoint.y_long;
+		
+	ROS_INFO("eDrone_utility_node: trying to call GeofenceCheck service");
+
+	if (geofenceCheck_client.call (geofenceCheck_cmd) == true)
+	{
+
+		if (geofenceCheck_cmd.response.value == true )
+		{
+			if (geofenceCheck_cmd.response.violation == true)
+			{
+				geofence_violation = true;				
+				ROS_INFO("eDrone_utility_node: missionAddItem service rejected: geofence violation!\n");
+				res.value = false;
+				return true;
+
+			}
+			else
+			{
+				geofence_violation = false; 
+				
+			}
+		
+		}
+		
+	}
+
+	 if (noflyZone_violation != true && geofence_violation!=true)
 	{	
 		waypoints.push_back(waypoint);	
 		ROS_INFO("eDrone_utility_node: missionAddItem service accepted: new WP was added to the wp list.\n");
+		res.value = true;
 
 	}
 

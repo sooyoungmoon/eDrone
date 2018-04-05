@@ -293,14 +293,13 @@ ROS_INFO("UAV position was checked!");
 
 
 	// Case#1) Geofence 영역 외부 지점에 대해 missionAddItem 서비스 호출
-/*
+
 	cout <<"\nCase#1: MissionAddItem 서비스 요청 (Geofence 외부) " << endl;	
 	eDrone_msgs::MissionAddItem missionAddItem_cmd;
 	eDrone_msgs::MissionUpload missionUpload_cmd;
 	eDrone_msgs::MissionClear missionClear_cmd;
 	
 	ros::ServiceClient missionAddItem_client = nh.serviceClient<eDrone_msgs::MissionAddItem > ("srv_missionAddItem" );
-
 	ros::ServiceClient missionUpload_client = nh.serviceClient<eDrone_msgs::MissionUpload>("srv_missionUpload");
 	ros::ServiceClient missionClear_client =nh.serviceClient<eDrone_msgs::MissionClear>("srv_missionClear");
 	
@@ -313,13 +312,18 @@ ROS_INFO("UAV position was checked!");
 	missionAddItem_cmd.request.param2 = 0;
 	missionAddItem_cmd.request.param3 = 0;
 	missionAddItem_cmd.request.is_global = true; 
-	
+
+	missionAddItem_cmd.request.x_lat = latitude;
+	missionAddItem_cmd.request.y_long = longitude;
+	missionAddItem_cmd.request.z_alt = altitude;
+
+	/*
 	missionAddItem_cmd.request.x_lat = 47.3983993;
 	missionAddItem_cmd.request.y_long = 8.5469999;
 	missionAddItem_cmd.request.z_alt = 50;	
+	*/
 
-
-	cout << "\n 미션 아이템 추가 명령: ( " << missionAddItem_cmd.request.x_lat << ", " << missionAddItem_cmd.request.y_long << ", " << missionAddItem_cmd.request.z_alt << ")" << endl;
+	cout << "\n 미션 아이템 추가 명령: 위치 이동 대상 ( " << missionAddItem_cmd.request.x_lat << ", " << missionAddItem_cmd.request.y_long << ", " << missionAddItem_cmd.request.z_alt << ")" << endl;
 
 	if (missionAddItem_client.call(missionAddItem_cmd))
 	{
@@ -349,9 +353,9 @@ ROS_INFO("UAV position was checked!");
 	cout <<"\nCase#2: Goto 서비스 요청 (Geofence 외부) " << endl;	
 	
 	goto_cmd.request.is_global = true;
-	goto_cmd.request.x_lat = 47.3983993;
-	goto_cmd.request.y_long = 8.5469999;	
-	goto_cmd.request.z_alt = 50;
+	goto_cmd.request.x_lat = latitude;
+	goto_cmd.request.y_long = longitude;	
+	goto_cmd.request.z_alt = altitude;
 
 	if (goto_client.call (goto_cmd) == true)
 	{
@@ -367,7 +371,7 @@ ROS_INFO("UAV position was checked!");
 			
 	}
 
-
+/* 
 	// GeofenceReset 서비스 호출 
 /*
 	cout <<"\nGeofenceReset 서비스 요청 " << endl;	
