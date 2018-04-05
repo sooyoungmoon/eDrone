@@ -707,13 +707,44 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
                         else
                         {
                                 target_position.noflyZone_violation = false;
-                                res.value = true;
+                                //res.value = true;
                         }
 
                 }
 	
+		/* Geofence check */				
 
-		 
+		geofenceCheck_cmd.request.ref_system = "WGS84";
+		geofenceCheck_cmd.request.arg1= geoPoint.latitude;
+        	geofenceCheck_cmd.request.arg2= geoPoint.longitude;		
+		
+		ROS_INFO("eDrone_utility_node: trying to call GeofenceCheck service");
+
+	if (geofenceCheck_client.call (geofenceCheck_cmd) == true)
+	{
+
+		if (geofenceCheck_cmd.response.value == true )
+		{
+			if (geofenceCheck_cmd.response.violation == true)
+			{			
+				target_position.geofence_violation = true;				
+				ROS_INFO("eDrone_control_node: Goto service rejected: geofence violation!\n");
+				res.value = false;
+				return true;
+			}
+			else
+			{
+				target_position.geofence_violation = false; 				
+			}		
+		}		
+	}
+
+		/* Geofence check 완료 */	
+		
+		if ( target_position.noflyZone_violation = false && target_position.geofence_violation == false)
+		{
+			res.value = true;
+		}
 
 
 		

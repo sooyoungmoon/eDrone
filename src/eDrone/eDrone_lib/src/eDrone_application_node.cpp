@@ -363,7 +363,7 @@ bool srv_geofenceCheck_cb (eDrone_msgs::GeofenceCheck::Request & req, eDrone_msg
 	ROS_INFO ("ex_application_node: the distance from HOME is %lf", distance);
 
 
-	if (distance >= geofence_info.radius)
+	if (geofence_info.isSet == true && distance >= geofence_info.radius)
 	{
 		res.violation = true;
 	}
