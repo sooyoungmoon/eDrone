@@ -43,7 +43,7 @@
 #include <eDrone_msgs/MissionUpload.h> // 미션 업로드 서비스 호출
 #include <eDrone_msgs/MissionDownload.h> // 미션 다운로드 서비스 호출
 #include <eDrone_msgs/MissionClear.h> // 미션 제거 서비스 호출
-
+#include <eDrone_lib/GeoUtils.h> // 좌표변환함수 선언 헤더파일 
 #include <eDrone_lib/params.h> // 파라미터 목록
 
 using namespace std;
@@ -72,7 +72,7 @@ typedef struct c_str_geofence
 
 } Geofence_Info;
 
-double geofence_radius;
+// double geofence_radius;
 
 
 
@@ -93,6 +93,15 @@ typedef struct c_str_nofly_Zone
 
 
 //// 주요 변수
+
+
+// survey 관련
+
+// noflyZone 관련
+
+// geofence 관련
+
+
 
 //std::vector<eDrone_msgs::Target> path; // 무인기 자율 비행 경로 
 
@@ -296,6 +305,19 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 bool srv_geofenceSet_cb (eDrone_msgs::GeofenceSet::Request & req, eDrone_msgs::GeofenceSet::Response & res)
 {
   ROS_INFO ("eDrone_application_node: GeofenceSet servive was called " ) ;
+
+  if (req.radius <= 0)
+  { 	
+	res.value = false;
+	return true;
+  }
+
+
+  geofence_info.isSet = true;
+  geofence_info.radius = req.radius;
+
+   
+
 /*
   if ( )
   {
@@ -306,7 +328,54 @@ bool srv_geofenceSet_cb (eDrone_msgs::GeofenceSet::Request & req, eDrone_msgs::G
   return true;
 }
 
+bool srv_geofenceReset_cb ( eDrone_msgs::GeofenceReset::Request & req, eDrone_msgs::GeofenceReset::Response & res)
+{
+ ROS_INFO ("eDrone_application_node: GeofenceReset servive was called " ) ;
+ geofence_info.isSet = false;
+ res.value = true;
+ return true; 
+}
 
+bool srv_geofenceCheck_cb (eDrone_msgs::GeofenceCheck::Request & req, eDrone_msgs::GeofenceCheck::Response & res )
+{
+
+ // 
+
+ // HOME 으로부터의 거리 계산
+
+
+  ROS_INFO ("ex_application_node: GeofenceCheck service was called: ");
+
+  res.violation = false;
+
+   if ( req.ref_system.compare("WGS84") ==0)
+  {
+
+  // WGS84 좌표를 ENU 좌표로 변환
+
+	Point point = convertGeoToENU(req.arg1, req.arg2, req.arg3, HOME_LAT, HOME_LON, HOME_ALT);
+
+
+	double distance = pow ( point.x, (double) 2.0) + pow ( point.y , (double) 2.0 ); 
+
+	distance = sqrt (distance);
+
+	ROS_INFO ("ex_application_node: the distance from HOME is %lf", distance);
+
+
+	if (distance >= geofence_info.radius)
+	{
+		res.violation = true;
+	}
+
+	// 해당 거리가 Home으로부터 가상 울타리까지의 거리보다 멀 경우, 응답 메시지 내 violation 필드를 false로 설정
+
+  }
+
+
+ res.value = true;
+ return true;
+}
 
 
 
@@ -740,6 +809,9 @@ int main(int argc, char** argv)
 	ros::ServiceServer survey_new_srv_server = nh.advertiseService("srv_survey_new", srv_survey_new_cb);
 
 
+	ros::ServiceServer geofenceSet_srv_server = nh.advertiseService("srv_geofenceSet", srv_geofenceSet_cb);
+	ros::ServiceServer geofenceReset_srv_server = nh.advertiseService("srv_geofenceReset", srv_geofenceReset_cb);
+	ros::ServiceServer geofenceCheck_srv_server = nh.advertiseService("srv_geofenceCheck", srv_geofenceCheck_cb);
 	
 //	int cur_target_seq_no = -1; // survey 기능 수행 시 목적지 순번 (0, 1, 2, ...)
 

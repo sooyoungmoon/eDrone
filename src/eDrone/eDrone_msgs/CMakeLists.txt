@@ -42,7 +42,6 @@ MissionUpload.srv
 MissionDownload.srv
 MissionClear.srv
 Goto.srv
-Geofence.srv
 GeofenceSet.srv
 GeofenceCheck.srv
 GeofenceReset.srv

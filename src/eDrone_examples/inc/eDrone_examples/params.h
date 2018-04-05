@@ -1,8 +1,13 @@
 
-
-
+#ifndef ROS_TYPES
+#define ROS_TYPES
+#include <iostream>
 
 // 파라미터 초기값 
+
+const std::string GEOFENCECHECK_REF_SYSTEM = "WGS84";
+
+
 const double GOTO_IS_GLOBAL = false;
 
 const double NOFLY_ZONE_LAT_MIN = 47.3982540;
@@ -41,5 +46,5 @@ const double WP_4_Y_LON = 20;
 
 const double WP_5_X_LAT = 120;
 const double WP_5_Y_LON = 120;
-
+#endif
 

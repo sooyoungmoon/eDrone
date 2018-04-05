@@ -428,7 +428,9 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
   	} 
 	 
 	ROS_INFO("ARMing command was sent\n");
+
 	
+	return true;
 }
 
 
