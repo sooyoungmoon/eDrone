@@ -25,7 +25,7 @@
 #include <eDrone_msgs/MissionUpload.h>
 //#include <eDrone_msgs/MissionDownload.h>
 #include <eDrone_msgs/MissionClear.h>
-#include <eDrone_msgs/Geofence.h>
+//#include <eDrone_msgs/Geofence.h>
 #include <eDrone_msgs/NoflyZoneSet.h>
 #include <eDrone_msgs/NoflyZoneReset.h>
 #include <eDrone_msgs/NoflyZoneCheck.h>
@@ -54,7 +54,7 @@ eDrone_msgs::Arming arming_cmd;
 eDrone_msgs::Takeoff takeoff_cmd;
 eDrone_msgs::Landing landing_cmd;
 eDrone_msgs::Goto goto_cmd;
-eDrone_msgs::Geofence geofence_cmd;
+//eDrone_msgs::Geofence geofence_cmd;
 eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd;
 eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd;
 eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;

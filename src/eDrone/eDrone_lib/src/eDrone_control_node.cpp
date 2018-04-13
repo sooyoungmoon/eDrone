@@ -31,7 +31,6 @@
 #include <eDrone_msgs/ModeChange.h> // 비행 모드 변경 서비스 헤더 파일
 #include <eDrone_msgs/RTL.h> // RTL
 #include <eDrone_msgs/Target.h> // 현재 목적지 topic 메시지가 선언된 헤더 파일 포함
-#include <eDrone_msgs/Geofence.h> // Geofence 서비스 헤더 파일
 
 #include <eDrone_msgs/GeofenceSet.h> // GeofenceSet 서비스 헤더 파일
 #include <eDrone_msgs/GeofenceCheck.h> // GeofenceCheck 서비스 헤더 파일
@@ -784,7 +783,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 	}
 	return true;
 }
-
+/*
 bool srv_geofence_cb(eDrone_msgs::Geofence::Request &req, eDrone_msgs::Geofence::Response &res)
 {
 	Geofence_Radius = req.radius;
@@ -816,7 +815,7 @@ bool srv_geofence_cb(eDrone_msgs::Geofence::Request &req, eDrone_msgs::Geofence:
 
 	res.value = true;
 	return true;
-}
+}*/
 /*
 bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::NoflyZoneSet::Response &res)
 {
@@ -955,7 +954,7 @@ int main(int argc, char** argv)
 	modeChange_srv_server = nh.advertiseService("srv_modeChange", srv_modeChange_cb);
 	rtl_srv_server = nh.advertiseService("srv_rtl", srv_rtl_cb);
 	goto_srv_server = nh.advertiseService("srv_goto", srv_goto_cb); 
-	geofence_srv_server = nh.advertiseService("srv_geofence", srv_geofence_cb);		
+	//geofence_srv_server = nh.advertiseService("srv_geofence", srv_geofence_cb);		
 //	noflyzone_srv_server = nh.advertiseService("srv_noflyZone", srv_noflyZone_cb);	
 	//checkNFZone_srv_server = nh.advertiseService("srv_checkNFZone", srv_checkNFZone_cb);
 	
