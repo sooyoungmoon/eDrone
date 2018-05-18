@@ -8,7 +8,7 @@
 const std::string GEOFENCECHECK_REF_SYSTEM = "WGS84";
 
 
-const double GOTO_IS_GLOBAL = false;
+const double IS_GLOBAL = false;
 
 const double NOFLY_ZONE_LAT_MIN = 47.3982540;
 const double NOFLY_ZONE_LAT_MAX = 47.3986305;

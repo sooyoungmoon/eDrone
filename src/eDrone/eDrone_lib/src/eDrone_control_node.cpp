@@ -424,7 +424,7 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
 
   	while (ros::ok() ) // 서비스 요청 메시지 전달
   	{
-  	      printf("send Arming command ...\n");
+  	      printf("eDrone_control_node: send Arming command ...\n");
 
 		if (!arming_client.call(arming_cmd))
         	 {
@@ -447,11 +447,12 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
 bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Response &res)
 {
 
-	double offset = 25;
+	//double offset = 25;
 
 	ROS_INFO("Takeoff request received\n");
 	// 서비스 요청 메시지 필드 선언
-	takeoff_cmd.request.altitude = HOME_ALT  + req.altitude - offset;
+	takeoff_cmd.request.altitude = HOME_ALT + req.altitude;
+	//takeoff_cmd.request.altitude = HOME_ALT  + req.altitude - offset;
 
 	ROS_INFO(" HOME_ALT: %lf, req.altitude: %lf", HOME_ALT, req.altitude);
   	takeoff_cmd.request.latitude = HOME_LAT; // 자동으로 home position 값을 얻어 와서 설정되도록 변경 필요

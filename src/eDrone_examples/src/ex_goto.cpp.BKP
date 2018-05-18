@@ -217,40 +217,39 @@ int main(int argc, char** argv)
 
 	    // path 설정
 	
-			vector <double> x_vector; // x 좌표 (동쪽) 벡터 
-			vector <double> y_vector; // y 좌표 (북쪽) 벡터
-			vector <double> z_vector; // z 좌표 (고도) 벡터	
+			vector <double> x_lat_vector; // x 좌표 (동쪽) 벡터 
+			vector <double> y_long_vector; // y 좌표 (북쪽) 벡터
+			vector <double> z_alt_vector; // z 좌표 (고도) 벡터	
 			for (int arg_index = 2; arg_index < argc; arg_index+=3)
 			{
 				double x = atof (argv[arg_index]) ;
 				double y = atof (argv[arg_index+1]);
 				double z = atof (argv[arg_index+2]);
 
-				x_vector.push_back(x);
-				y_vector.push_back(y);
-				z_vector.push_back(z);
+				x_lat_vector.push_back(x);
+				y_long_vector.push_back(y);
+				z_alt_vector.push_back(z);
 			}
 
 			/* test용 코드 
-			for (int vector_index = 0; vector_index < x_vector.size(); vector_index++)
+			for (int vector_index = 0; vector_index < x_lat_vector.size(); vector_index++)
 			{
-				ROS_INFO("(X, Y): (%lf, %lf) ", x_vector[vector_index], y_vector[vector_index]);
+				ROS_INFO("(X, Y): (%lf, %lf) ", x_lat_vector[vector_index], y_long_vector[vector_index]);
 			}*/
+
 			int cur_target_seq_no = -1; // 현재 target 순번 (0, 1, 2, ...)
-/*
 			
-			
-			for (int vector_index = 0 ; vector_index < x_vector.size(); vector_index++)
+			for (int vector_index = 0 ; vector_index < x_lat_vector.size(); vector_index++)
 			{
 				next_target.target_seq_no = vector_index;
 				next_target.is_global = IS_GLOBAL;
-				next_target.x_lat = x_vector[vector_index];
-				next_target.y_long = y_vector[vector_index];
-				next_target.z_alt = z_vector[vector_index];
+				next_target.x_lat = x_lat_vector[vector_index];
+				next_target.y_long = y_long_vector[vector_index];
+				next_target.z_alt = z_alt_vector[vector_index];
 				next_target.reached = false;
 				path.push_back(next_target);
 			}
-*/
+
 			//// Goto
 
 
@@ -259,58 +258,15 @@ int main(int argc, char** argv)
 
 			cur_target_seq_no = 0;
 			goto_cmd.request.is_global = IS_GLOBAL;
-			goto_cmd.request.x_lat = x_vector[0];
-			goto_cmd.request.y_long = y_vector[0];
-			goto_cmd.request.z_alt = z_vector[0];
+			goto_cmd.request.x_lat = x_lat_vector[0];
+			goto_cmd.request.y_long = y_long_vector[0];
+			goto_cmd.request.z_alt = z_alt_vector[0];
 			
 			goto_client.call(goto_cmd);
 			ROS_INFO("Goto command was sent\n");
 		   
 	//int prev_target_seq_no = -1; // 이전에 도착한 목적지 번호 (cur_target.target_seq_no)
 
-	// (2018.05.04) 
-
-	// Goto 호출문 (#2)
-	
-	
-	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
-	{
-			
-		ros::spinOnce();
-		rate.sleep();
-	}
-	cur_target_seq_no = cur_target.target_seq_no +1; 
-	
-	goto_cmd.request.is_global = IS_GLOBAL;
-	goto_cmd.request.x_lat = x_vector[1];
-	goto_cmd.request.y_long = y_vector[1];
-	goto_cmd.request.z_alt = z_vector[1];
-
-	goto_client.call(goto_cmd);
-	ROS_INFO("Goto command was sent\n");
-
-
-	// Goto 호출문 (#3)
-	
-	
-	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
-	{			
-		ros::spinOnce();
-		rate.sleep();
-	}
-	cur_target_seq_no = cur_target.target_seq_no +1; 
-	
-	goto_cmd.request.is_global = IS_GLOBAL;
-	goto_cmd.request.x_lat = x_vector[2];
-	goto_cmd.request.y_long = y_vector[2];
-	goto_cmd.request.z_alt = z_vector[2];
-
-	goto_client.call(goto_cmd);
-	ROS_INFO("Goto command was sent\n");
-
-	
-
-/*
 	 while(ros::ok() )
 	    {
 		
@@ -355,22 +311,14 @@ int main(int argc, char** argv)
 		// 경유지 추가 (필요 시)			 
 
 	    }
-*/	 		
-	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
-	{			
-		ros::spinOnce();
-		rate.sleep();
-	}
- 	
-	rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
-	
-	if (rtl_cmd.response.value == true)
-	{
+	 		
+ 	   rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
+	   if (rtl_cmd.response.value == true)
+	   {
 		ROS_INFO("RTL command was sent\n");
-        }
+	   }
 
 	return 0; 
 }
-
 
 
