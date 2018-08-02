@@ -189,7 +189,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 	HOME_LON = home.longitude;		
 	HOME_ALT = home.altitude;
 	
-	printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
+	//printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
 }
 
 // callback 함수 (서비스 제공) 정의

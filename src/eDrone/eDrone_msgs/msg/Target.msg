@@ -1,4 +1,4 @@
-# The current taret of a UAV
+# The current target of a UAV
 uint16 target_seq_no 
 bool is_global
 float64 x_lat

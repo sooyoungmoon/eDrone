@@ -114,7 +114,7 @@ int main(int argc, char** argv)
 
   while (ros::ok()&& loopCnt <1 )
  {
-	printf("ex_check: Send arming command ... \n");
+	printf("Send arming command ... \n");
 	
 	if (!arming_client.call(arming_cmd))
 	{

@@ -108,6 +108,18 @@ ${catkin_LIBRARIES}
  ${GeographicLib_LIBRARIES}
 )
 
+# (2018.07.16) 신규 노드 추가 (safety_node: Geofence, NoflyZone API 구현) 
+add_executable (safety_node
+src/safety_node.cpp
+src/GeoUtils.cpp
+)
+
+target_link_libraries (safety_node
+ eDrone_lib
+ ${catkin_LIBRARIES}
+ ${GeographicLib_LIBRARIES}
+)
+
 #add_dependencies(eDrone_application_node eDrone_lib_generate_messages_cpp)
 
 
@@ -122,34 +134,24 @@ ${catkin_LIBRARIES}
 ## Mark executables and/or libraries for installation
 
 
-install(TARGETS eDrone_application_node
-#install(TARGETS ${PROJECT_NAME}
+install(TARGETS eDrone_monitor_node eDrone_utility_node eDrone_application_node eDrone_control_node safety_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 
-## Mark cpp header files for installation
-install(DIRECTORY include/
+# installing header files
+install(DIRECTORY inc/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-)
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
   PATTERN ".svn" EXCLUDE
 )
 
-
-
-## Mark other files for installation (e.g. launch and bag files, etc.)
-
-install(DIRECTORY launch/
+# installing roslaunch files or other resources
+install (DIRECTORY launch/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  PATTERN ".svn" EXCLUDE
 )
-
 
 
 

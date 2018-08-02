@@ -24,7 +24,7 @@
 #include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/RTL.h>
 #include <eDrone_msgs/Target.h>
-#include <eDrone_msgs/Phase.h>
+
 // 파라미터 초기값 선언 header
 #include <eDrone_examples/params.h>
 
@@ -36,7 +36,6 @@ ros::NodeHandle* nh_ptr; // node handle pointer (서버/클라이언트 또는 �
 
 eDrone_msgs::Target* cur_target_ptr; // cur_target 변수 접근을 위한 포인터 변수 
 
-eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
 
 /* 콜백 함수 정의 */
 
@@ -55,19 +54,6 @@ void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 		ROS_INFO("we reached at the current target\n");
 	} 
 }
-void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
-{
-	*cur_phase_ptr = *msg;
-
-	// 현재 목적지 도달 여부 확인
-	ROS_INFO("cur_phase_cb(): \n");
-	ROS_INFO("current phase: %s \n", cur_phase_ptr->phase.c_str());
-	
- 
-}
-
-
-
 
 // 서비스 콜백 함수 (내용 없음) 
 
@@ -102,10 +88,8 @@ int main(int argc, char** argv)
 
 	// 토픽 메시지 변수 선언  
 	eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
-	eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
 	cur_target_ptr = &cur_target; // cur_target 변수 주소 저장 
 	eDrone_msgs::Target next_target; // 다음 목적지 
-	cur_phase_ptr = &cur_phase;
 
 	// 서비스 메시지 변수 선언 
 	eDrone_msgs::CheckState checkState_cmd;
@@ -123,9 +107,7 @@ int main(int argc, char** argv)
 
 	// 토픽 subscriber 선언 & 초기화 
 
-	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); 
- 	ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb); // 
-
+	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); // 
 
 	// 서비스 서버 선언 & 초기화 (내용 없음)
 
@@ -229,7 +211,7 @@ int main(int argc, char** argv)
 				ROS_INFO("Takeoff command was sent\n");
 			}
 		}
-//		sleep(10);
+		sleep(10);
 
 
 	    // 경로 비행 (임무 수행)
@@ -271,12 +253,6 @@ int main(int argc, char** argv)
 
 			//// Goto
 
-			
-			while (cur_phase.phase.compare ("READY")!=0)
-			{
-				ros::spinOnce();
-				rate.sleep();
-			}
 
 			ROS_INFO("Send goto command ...\n");
 			ROS_INFO("let's start a mission! \n");

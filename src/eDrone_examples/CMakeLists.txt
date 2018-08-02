@@ -83,6 +83,14 @@ add_dependencies(ex_goto
  )
 target_link_libraries(ex_goto ${catkin_LIBRARIES} )
 
+add_executable(ex_goto_global src/ex_goto_global.cpp)
+add_dependencies(ex_goto_global
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+ )
+target_link_libraries(ex_goto_global ${catkin_LIBRARIES} )
+
+
 add_executable(ex_modeChange src/ex_modeChange.cpp)
 add_dependencies(ex_modeChange
  ${${PROJECT_NAME}_EXPORTED_TARGETS}
@@ -133,6 +141,16 @@ add_dependencies(ex_spraying_mission
 target_link_libraries(ex_spraying_mission ${catkin_LIBRARIES} )
 
 
+add_executable(ex_camera src/ex_camera.cpp)
+
+add_dependencies(ex_camera
+ ${${PROJECT_NAME}_EXPORTED_TARGETS}
+ ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries(ex_camera ${catkin_LIBRARIES})
+
+
 #add_executable(ex_lib src/ex_lib.cpp)
 
 #add_dependencies(ex_lib
@@ -142,6 +160,23 @@ target_link_libraries(ex_spraying_mission ${catkin_LIBRARIES} )
  #)
 #target_link_libraries(ex_lib ${catkin_LIBRARIES} )
 
+## install
+ install (TARGETS ex_takeoff ex_check ex_goto ex_mission ex_survey ex_noflyZone 
+ RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
+
+# installing header files
+ install(DIRECTORY inc/${PROJECT_NAME}/
+ DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+ PATTERN ".svn" EXCLUDE
+)
+
+
+# installing roslaunch files or other resources
+install (DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+  PATTERN ".svn" EXCLUDE
+)
 
 

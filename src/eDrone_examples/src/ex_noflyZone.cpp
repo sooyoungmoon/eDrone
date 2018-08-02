@@ -2,7 +2,7 @@
 
 // 2018.03.07
 // Sooyoung Moon
-// example appication for testing nofly service
+// example appication for testing noflyZone service
 
 #include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
@@ -36,49 +36,37 @@ using namespace eDrone_msgs;
 
 
 
-
 int main(int argc, char** argv)
 {
   printf("==ex_noflyZone==\n");
   
   ros::init(argc, argv, "ex_noflyZone");
   ros::NodeHandle nh;
-
-
  
   // service messages
 
- eDrone_msgs::CheckState checkState_cmd;
-eDrone_msgs::CheckPosition checkPosition_cmd;
-eDrone_msgs::Arming arming_cmd;
-eDrone_msgs::Takeoff takeoff_cmd;
-eDrone_msgs::Landing landing_cmd;
-eDrone_msgs::Goto goto_cmd;
-//eDrone_msgs::Geofence geofence_cmd;
-eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd;
-eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd;
-eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
+  eDrone_msgs::CheckState checkState_cmd;
+  eDrone_msgs::CheckPosition checkPosition_cmd;
+  eDrone_msgs::Arming arming_cmd;
+  eDrone_msgs::Takeoff takeoff_cmd;
+  eDrone_msgs::Landing landing_cmd;
+  eDrone_msgs::Goto goto_cmd;
+//  eDrone_msgs::Geofence geofence_cmd;
+  eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd;
+  eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd;
+  eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 
- 
   
   // service client
 
   ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");  
   ros::ServiceClient checkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition"); 
   ros::ServiceClient arming_client =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");
-
   ros::ServiceClient takeoff_client =nh.serviceClient<eDrone_msgs::Takeoff>("srv_takeoff");
-
   ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
-
-
   ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
-
-
   ros::ServiceClient noflyZoneSet_client = nh.serviceClient<eDrone_msgs::NoflyZoneSet>("srv_noflyZoneSet");
-
   ros::ServiceClient noflyZoneReset_client = nh.serviceClient<eDrone_msgs::NoflyZoneReset>("srv_noflyZoneReset");
-
   ros::ServiceClient noflyZoneCheck_client = nh.serviceClient<eDrone_msgs::NoflyZoneCheck>("srv_noflyZoneCheck");
 
 
@@ -155,6 +143,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
   //// Takeoff
 
 	ROS_INFO("Send takeoff command ... \n");
+	takeoff_cmd.request.altitude = 5;
 	
 	if (takeoff_client.call(takeoff_cmd ) )
 	{
@@ -201,6 +190,72 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 
 	noflyZoneCheck_cmd.request.ref_system = "WGS84";
 
+
+	// CASE#1: Src 가 비행 금지 구역 내부인 경우
+	noflyZoneCheck_cmd.request.src_arg1 = 47.3984000;
+	noflyZoneCheck_cmd.request.src_arg2 = 8.5470000;
+
+	noflyZoneCheck_cmd.request.dst_arg1 = 48.0000000;
+	noflyZoneCheck_cmd.request.dst_arg2 = 8.5570000;
+	
+
+
+	if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) == true)
+	{
+		if (noflyZoneCheck_cmd.response.result.compare ("SRC_IN_NF_ZONE" ) ==0)
+		{
+			ROS_INFO("CASE#1: noflyZoneCheck result: SRC_IN_NF_ZONE");
+		}
+	}
+
+
+	// CASE#2: Dst 가 	"
+	noflyZoneCheck_cmd.request.src_arg1 = 47.3000000;
+	noflyZoneCheck_cmd.request.src_arg2 = 8.5400000;
+
+	noflyZoneCheck_cmd.request.dst_arg1 = 47.3984000;
+	noflyZoneCheck_cmd.request.dst_arg2 = 8.5470000;
+
+	if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) == true)
+	{
+		if (noflyZoneCheck_cmd.response.result.compare ("DST_IN_NF_ZONE" ) ==0)
+		{
+			ROS_INFO("CASE#2: noflyZoneCheck result: DST_IN_NF_ZONE");
+		}
+	}
+
+
+	// CASE#3: Src-Dst 간 직선 경로가 비행 금지 구역과 겹치는 경우
+
+
+	double lat1= NOFLY_ZONE_LAT_MAX +0.0005;
+	double lat2= (NOFLY_ZONE_LAT_MAX + NOFLY_ZONE_LAT_MIN)/2;
+	double lat3= NOFLY_ZONE_LAT_MIN - 0.0005;
+
+	double lon1= NOFLY_ZONE_LON_MIN-0.0001;
+	double lon2= (NOFLY_ZONE_LON_MIN + NOFLY_ZONE_LON_MAX)/2;
+	double lon3= NOFLY_ZONE_LON_MAX+0.0001;
+
+
+	noflyZoneCheck_cmd.request.src_arg1 = lat1;
+	noflyZoneCheck_cmd.request.src_arg2 = lon2+0.0001;
+	
+	noflyZoneCheck_cmd.request.dst_arg1 = lat3;
+	noflyZoneCheck_cmd.request.dst_arg2 = lon2-0.0001;
+
+	
+
+
+	if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) == true)
+	{
+		if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) ==0)
+		{
+			ROS_INFO("CASE#3: noflyZoneCheck result: PATH_OVERLAP_NF_ZONE");
+		}
+	}
+	/*
+	noflyZoneCheck_cmd.request.ref_system = "WGS84";
+
 	noflyZoneCheck_cmd.request.arg1= 47.3984000;
 	noflyZoneCheck_cmd.request.arg2 = 8.5470000;
 
@@ -223,9 +278,11 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 		{
 			cout << "\n 비행 금지 구역 외부 " << endl ;
 		}
-	}
+	}*/
 
+	
 
+        return 0; 
 
 	// case 1) 비행 금지 구역 내부 - missionAddItem 서비스 호출 
 	cout << "\n Case#1: MissionAddItem service 호출 (비행 금지 구역 내)>>\n" << endl;
@@ -282,8 +339,8 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 	cout << "\n Case#2: Goto service 호출 (비행금지구역 내)>>\n" << endl;
 	
 	goto_cmd.request.is_global = true;
-	goto_cmd.request.x_lat = 47.3984413;
-	goto_cmd.request.y_long = 8.5471572;
+	goto_cmd.request.x_lat = 47.3984000;
+	goto_cmd.request.y_long = 8.5470000;
 	goto_cmd.request.z_alt = 50;
 	
 	/*
@@ -318,6 +375,7 @@ eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd;
 		}	
 
 	}
+	return 0;
 
 	// case 3) 비행 금지 구역 외부 - missionAddItem 서비스 호출 
 	cout << "\n<<Case#3: MissionAddItem service 호출 (비행금지구역 외부)>>\n" << endl;

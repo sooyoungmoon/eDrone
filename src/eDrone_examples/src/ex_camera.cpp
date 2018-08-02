@@ -1,6 +1,7 @@
-
-/* 2018.07.06 */
-
+// 2018.06.28
+// Sooyoung Moon
+// ex_camera.cpp
+// 목적: 무인기 탑재 카메라에 사진촬영 명령 전달 예제 
 
 /* include */
 
@@ -24,7 +25,9 @@
 #include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/RTL.h>
 #include <eDrone_msgs/Target.h>
-#include <eDrone_msgs/Phase.h>
+
+#include <mavros_msgs/CommandTriggerControl.h>
+
 // 파라미터 초기값 선언 header
 #include <eDrone_examples/params.h>
 
@@ -36,7 +39,7 @@ ros::NodeHandle* nh_ptr; // node handle pointer (서버/클라이언트 또는 �
 
 eDrone_msgs::Target* cur_target_ptr; // cur_target 변수 접근을 위한 포인터 변수 
 
-eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
+
 
 /* 콜백 함수 정의 */
 
@@ -55,19 +58,6 @@ void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 		ROS_INFO("we reached at the current target\n");
 	} 
 }
-void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
-{
-	*cur_phase_ptr = *msg;
-
-	// 현재 목적지 도달 여부 확인
-	ROS_INFO("cur_phase_cb(): \n");
-	ROS_INFO("current phase: %s \n", cur_phase_ptr->phase.c_str());
-	
- 
-}
-
-
-
 
 // 서비스 콜백 함수 (내용 없음) 
 
@@ -76,9 +66,9 @@ void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
 
 int main(int argc, char** argv)
 {
-	ROS_INFO("==ex_goto==\n");
+	ROS_INFO("==ex_camera==\n");
 
-	ros::init(argc, argv, "ex_goto"); 
+	ros::init(argc, argv, "ex_camera"); 
 	ros::NodeHandle nh;
 	nh_ptr = &nh; // node handle 주소 저장 
 
@@ -89,7 +79,7 @@ int main(int argc, char** argv)
 
 	if (argc < 2)
 	{
-		ROS_ERROR("ex_goto: the number of arguments should be at least 2!!" );
+		ROS_ERROR("ex_camera: the number of arguments should be at least 2!!" );
 		return -1;
 	}
 
@@ -102,10 +92,8 @@ int main(int argc, char** argv)
 
 	// 토픽 메시지 변수 선언  
 	eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
-	eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
 	cur_target_ptr = &cur_target; // cur_target 변수 주소 저장 
 	eDrone_msgs::Target next_target; // 다음 목적지 
-	cur_phase_ptr = &cur_phase;
 
 	// 서비스 메시지 변수 선언 
 	eDrone_msgs::CheckState checkState_cmd;
@@ -116,6 +104,8 @@ int main(int argc, char** argv)
 	eDrone_msgs::Goto goto_cmd;
 	eDrone_msgs::RTL rtl_cmd;
 
+	mavros_msgs::CommandTriggerControl cameraTrigger_cmd; // 카메라 트리거 서비스 
+
 	// 토픽 publisher 초기화 (내용 없음)
 
 	// rate 설정 
@@ -123,9 +113,7 @@ int main(int argc, char** argv)
 
 	// 토픽 subscriber 선언 & 초기화 
 
-	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); 
- 	ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb); // 
-
+	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); // 
 
 	// 서비스 서버 선언 & 초기화 (내용 없음)
 
@@ -138,6 +126,8 @@ int main(int argc, char** argv)
 	ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
 	ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 	ros::ServiceClient rtl_client = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
+
+	ros::ServiceClient cameraTrigger_client = nh.serviceClient<mavros_msgs::CommandTriggerControl>("mavros/cmd/trigger_control"); 
 	
 	// 무인기 자율 비행 경로 
 	std::vector<eDrone_msgs::Target> path; 
@@ -229,7 +219,7 @@ int main(int argc, char** argv)
 				ROS_INFO("Takeoff command was sent\n");
 			}
 		}
-//		sleep(10);
+		sleep(10);
 
 
 	    // 경로 비행 (임무 수행)
@@ -271,12 +261,6 @@ int main(int argc, char** argv)
 
 			//// Goto
 
-			
-			while (cur_phase.phase.compare ("READY")!=0)
-			{
-				ros::spinOnce();
-				rate.sleep();
-			}
 
 			ROS_INFO("Send goto command ...\n");
 			ROS_INFO("let's start a mission! \n");
@@ -290,6 +274,7 @@ int main(int argc, char** argv)
 			goto_client.call(goto_cmd);
 			ROS_INFO("Goto command was sent\n");
 		   
+
 	//int prev_target_seq_no = -1; // 이전에 도착한 목적지 번호 (cur_target.target_seq_no)
 
 	// (2018.05.04) 
@@ -299,10 +284,29 @@ int main(int argc, char** argv)
 	
 	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
 	{
-			
 		ros::spinOnce();
 		rate.sleep();
 	}
+/*
+	ROS_INFO("Send CommandTriggerControl command ... \n");
+	ROS_INFO("Take a shot! \n");
+	
+
+	cameraTrigger_cmd.request.trigger_enable = true;	
+	cameraTrigger_cmd.request.cycle_time = 0;
+	cameraTrigger_client.call(cameraTrigger_cmd);
+		
+	if (cameraTrigger_cmd.response.success==true)
+	{
+		ROS_INFO ("ex_camera: CameraTriggerControl service success!!");
+	}
+	else
+	{
+		ROS_ERROR("ex_camera: CameraTriggerControl service fail!!" );
+	}
+
+	sleep(5);
+*/
 	cur_target_seq_no = cur_target.target_seq_no +1; 
 	
 	goto_cmd.request.is_global = IS_GLOBAL;

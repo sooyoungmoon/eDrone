@@ -22,17 +22,15 @@ eDrone_msgs::Landing landing_cmd;
 
 int main(int argc, char** argv)
 {
-  printf("==ex_takeoff==\n");
+  printf("==ex_takeoff==\n");  
 
-  
   
   if (argc <2)
   {
    ROS_ERROR("usage: ex_takeoff <altitude> " );
    return -1; 
   }
-
- 
+  
   
   ros::init(argc, argv, "ex_takeoff");
   ros::NodeHandle nh;
@@ -119,9 +117,9 @@ int main(int argc, char** argv)
 
   //// Takeoff
 
-  // service 요청 메시지 필드 설정
-
   double altitude = atof (argv[1]);
+
+  // service 요청 메시지 필드 설정
   takeoff_cmd.request.altitude = altitude;  
   
   if (takeoff_client.call(takeoff_cmd))
@@ -131,10 +129,14 @@ int main(int argc, char** argv)
   sleep(10);
 
   //// Landing
-  
-  if (landing_client.call(landing_cmd))
-	ROS_INFO("Landing command was sent\n");  
+ 
+  while ( landing_cmd.response.value != true)
+  {
+	landing_client.call(landing_cmd);
 
+  }
+	ROS_INFO("Landing command was sent\n");
+ 
   return 0;
 }
 

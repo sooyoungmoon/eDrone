@@ -21,6 +21,7 @@ add_message_files(
 DIRECTORY msg
 FILES 
 Target.msg
+Phase.msg
 ) 
 
 # service 선언
@@ -95,7 +96,7 @@ include_directories(
 #)
 
 install (
-DIRECTORY include
+DIRECTORY inc
 DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
