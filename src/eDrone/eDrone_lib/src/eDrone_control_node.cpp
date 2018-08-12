@@ -63,6 +63,7 @@ typedef struct _str_target_position
 {
 	int target_seq_no; // 목적지 순번 (1, 2, 3, ...)
 	bool is_global; // 좌표 유형 (true: global coord, false: local coord)
+	string ref_system; // 좌표 유형 - is_global 변수 대체  
 	
 	Point pos_local; // (x, y, z)
 	GeoPoint pos_global; // (lat, long, alt)
@@ -71,6 +72,12 @@ typedef struct _str_target_position
 	bool geofence_violation; // geofence 영역 위반 여부 (true: geofence 영역 밖, false: 영역 내) 
 
 	bool noflyZone_violation; // 비행 금지 구역 위반 여부 (true: 비행 금지 구역 내, false: 비행 금지 구역 외)
+	
+	string noflyZone_status; // 비행 금지 구역과 Src, Dst 간 위치 관계
+				// 1) SRC_IN_NF_ZONE
+				// 2) DST_IN_NF_ZONE
+				// 3) PATH_OVERLAP_NF_ZONE
+
 
 } Target_Position;
 
@@ -92,14 +99,13 @@ typedef struct c_str_nofly_Zone
 } Nofly_Zone;
 
 
-
 //// 목적지 변수
 
 Target_Position target_position = { .target_seq_no = -1 }; // 현재 목적지 정보 (published topic)
 int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
 bool autonomous_flight = false; // 자율 비행 여부  (goto service가 호출되면 true로 변경됨)
 
-float Geofence_Radius = 400;
+float Geofence_Radius = 1000;
 enum Geofence_Policy {Warning, RTL, Loiter, Landing};
 enum Geofence_Policy geofence_policy = RTL;
 
@@ -108,22 +114,33 @@ enum Geofence_Policy geofence_policy = RTL;
 
 //// 메시지 변수 선언
 
-// (무인기 상태 정보 수신 목적)
+// (Subscribed topic data)
+  // (무인기 상태 정보 수신 목적)
 mavros_msgs::State current_state; // 무인기 상태 정보
 
-// (무인기 위치 확인 목적)
+  // (무인기 위치 확인 목적)
 geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
 sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
 
-
-// (홈 위치 획득 목적)
+  // (홈 위치 획득 목적)
 mavros_msgs::HomePosition home_position; // home position
 
-// (무인기 위치 이동 목적)
+
+// (Published topic data)
+  // (무인기 위치 이동 목적)
 geometry_msgs::PoseStamped target_pos_local; // 목적지 위치 정보 (지역 좌표)
 mavros_msgs::GlobalPositionTarget target_pos_global; // 목적지 위치 정보 (전역 좌표)
+
+  // (현재 목적지 정보를 응용 프로그램에 전달)
 eDrone_msgs::Target cur_target; // 현재 목적지 정보 (publisher: eDrone_control_node, subscriber: 응용 프로그램)
+
+  // (현재 임무 정보를 응용 프로그램에 전달)
 eDrone_msgs::Phase cur_phase; // 현재 임무수행단계 
+
+// Path 정보 
+std::vector<Target_Position> path; // 무인기 자율 비행 경로 
+
+
 
 //// 서비스 요청 메시지 선언 (mavros)
 
@@ -164,23 +181,16 @@ ros::ServiceServer noflyZoneSet_srv_server;
 ros::ServiceServer noflyZoneReset_srv_server;
 ros::ServiceServer noflyZoneCheck_srv_server;
 
-
 ros::ServiceServer checkNFZone_srv_server;
-
 
 //서비스 클라이언트 선언
 ros::ServiceClient arming_client; // 서비스 클라이언트 선언
-
 ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
 ros::ServiceClient landing_client; // 서비스 클라이언트 선언
-
 ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
 ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트 
-
 ros::ServiceClient geofenceCheck_client;
-
 ros::ServiceClient noflyZoneCheck_client;
-
 
 // home position
 
@@ -190,19 +200,240 @@ ros::ServiceClient noflyZoneCheck_client;
 
 
 // (2018.07.03) 서비스 수행 단계
-// 최초 phase = IDLE
-// (시동 직후) phase = ARMED
+// 최초 phase = UNARMED
+// (시동 직후) ARMED
 // (이륙 중) TAKEOFF 
 // (이륙 직후) READY
 // (GOTO 수행 중) GOTO
 // ...
 
-string phase = "IDLE"; 
+string phase = "UNARMED"; 
 
 // (2018.07.03) 이륙 목적
 
 double takeoff_altitude = 0; 
 
+
+
+// src-dst 사이의 비행금지구역 우회 경로 계산 함수  
+std::vector<Target_Position> getAltPath(Target_Position src, Target_Position dst)
+{
+	cout << " eDrone_control_node: getAltPath()" << endl;
+	cout << "src: (" << src.pos_global.longitude << " , " << src.pos_global.latitude << ") " <<endl;
+  	cout << "dst: (" << dst.pos_global.longitude << " , " << dst.pos_global.latitude << ") " <<endl;
+	
+	std::vector<Target_Position> path;
+	noflyZoneCheck_cmd.request.ref_system = "WGS84";
+
+	// 비행금지구역의 경계에 해당하는 꼭지점 (4개) 구하기 
+
+	GeoPoint rect[4];
+	noflyZoneCheck_cmd.request.src_arg1 = src.pos_global.latitude;
+	noflyZoneCheck_cmd.request.src_arg2 = src.pos_global.longitude;;
+	noflyZoneCheck_cmd.request.dst_arg1 = dst.pos_global.latitude;
+	noflyZoneCheck_cmd.request.dst_arg2 = dst.pos_global.longitude;
+
+	/* 비행금지구역 정보 획득 */
+
+	if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) == true)
+	{
+		// 비행금지구역 꼭지점 정보 구하기
+		rect[0].latitude = noflyZoneCheck_cmd.response.pt1_arg1-0.001;
+		rect[0].longitude = noflyZoneCheck_cmd.response.pt1_arg2-0.001;
+
+		rect[1].latitude = noflyZoneCheck_cmd.response.pt1_arg1-0.001;
+		rect[1].longitude = noflyZoneCheck_cmd.response.pt2_arg2+0.001;
+		
+		rect[2].latitude = noflyZoneCheck_cmd.response.pt2_arg1+0.001;
+		rect[2].longitude = noflyZoneCheck_cmd.response.pt2_arg2+0.001;
+
+		rect[3].latitude = noflyZoneCheck_cmd.response.pt2_arg1+0.001;
+		rect[3].longitude = noflyZoneCheck_cmd.response.pt1_arg2-0.001;
+
+
+		if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) !=0)
+		{
+			ROS_INFO("eDrone_control_node: getAltPath(): no need to compute an alternate path");
+		}
+	}
+
+	
+
+	/* src-dst 간 우회 경로 계산 */
+
+	// SRC 다음에 이동할 Target (Target#1) 계산
+
+	cout << "Target#1 계산 " << endl; 
+	Target_Position target1, target2, target3;
+
+	double distToDst = -1;
+
+	int rectPointIdx = -1;
+
+	for (int i = 0; i < 4; i++)
+	{
+		
+		noflyZoneCheck_cmd.request.src_arg1 = src.pos_global.latitude;
+		noflyZoneCheck_cmd.request.src_arg2 = src.pos_global.longitude;
+
+		noflyZoneCheck_cmd.request.dst_arg1 = rect[i].latitude;
+		noflyZoneCheck_cmd.request.dst_arg2 = rect[i].longitude;
+
+		if (noflyZoneCheck_client.call (noflyZoneCheck_cmd) == true)
+		{       // src - rect[i] 사이의 경로가 비행금지구역과 겹치지 않으면 rect[i]를 Target#1으로 지정 
+			if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) !=0)
+			{
+					target1.is_global = true;
+					target1.pos_global.latitude = rect[i].latitude;
+					target1.pos_global.longitude = rect[i].longitude;
+		
+					rectPointIdx = i;
+
+					// ENU로 좌표변환
+					Point point = convertGeoToENU(target1.pos_global.latitude, target1.pos_global.longitude, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+
+					target1.pos_local.x = point.x;
+					target1.pos_local.y = point.y;
+					target1.pos_local.z = point.z;
+					path.push_back(target1);
+					break;
+			}
+		}
+	}
+
+	// Target#1 - Dst 간 직선 경로가 비행금지구역과 겹치지 않으면 
+	// 대체 경로는 <Target#1, Dst>
+
+	// Target#1 - Dst 간 직선경로가 비행금지구역과 겹치면 Target#2 계산
+
+	// Target#N - Dst 간 직선경로가 비행금지구역과 겹치지 않으면 
+
+	// 대체 경로는 <Target#1, Target#2, ..., Target#N, Dst>
+
+
+	// (Target#2) 계산
+	cout << " Target#2 계산 " << endl;	
+	noflyZoneCheck_cmd.request.src_arg1 = target1.pos_global.latitude;
+	noflyZoneCheck_cmd.request.src_arg2 = target1.pos_global.longitude;
+	noflyZoneCheck_cmd.request.dst_arg1 = dst.pos_global.latitude;
+	noflyZoneCheck_cmd.request.dst_arg2 = dst.pos_global.longitude;
+
+	if (noflyZoneCheck_client.call (noflyZoneCheck_cmd) == true)
+	{
+		if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) ==0)
+		{
+			// target#1-Dst 간 직선 경로가 NFZONE 과 겹침. 
+			// target#2 계산 필요
+			target2.is_global = true;
+			target2.pos_global.latitude = rect[(rectPointIdx+1)%4 ].latitude;
+ 			target2.pos_global.longitude = rect[(rectPointIdx+1)%4 ].longitude;
+
+			// ENU로 좌표변환
+			Point point = convertGeoToENU(target2.pos_global.latitude, target2.pos_global.longitude, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+
+			target2.pos_local.x = point.x;
+			target2.pos_local.y = point.y;
+			target2.pos_local.z = point.z;
+			
+			path.push_back(target2);
+		}		
+	}
+	// (Target#3) 계산
+	cout << " Target#3 계산 " << endl;	
+
+	noflyZoneCheck_cmd.request.src_arg1 = target2.pos_global.latitude;
+	noflyZoneCheck_cmd.request.src_arg2 = target2.pos_global.longitude;
+	noflyZoneCheck_cmd.request.dst_arg1 = dst.pos_global.latitude;
+	noflyZoneCheck_cmd.request.dst_arg2 = dst.pos_global.longitude;
+
+	if (noflyZoneCheck_client.call (noflyZoneCheck_cmd) == true)
+	{
+		if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) ==0)
+		{
+			// target#1-Dst 간 직선 경로가 NFZONE 과 겹침. 
+			// target#2 계산 필요
+			target3.is_global = true;
+			target3.pos_global.latitude = rect[(rectPointIdx+2)%4 ].latitude;
+ 			target3.pos_global.longitude = rect[(rectPointIdx+2)%4 ].longitude;
+
+			// ENU로 좌표변환
+			Point point = convertGeoToENU(target2.pos_global.latitude, target2.pos_global.longitude, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+
+			target3.pos_local.x = point.x;
+			target3.pos_local.y = point.y;
+			target3.pos_local.z = point.z;
+			path.push_back(target3);
+
+		}		
+	}
+
+
+	path.push_back(dst);
+
+/*	
+	for (int i = 0; i < 4; i++)
+	{
+		noflyZoneCheck_cmd.request.src_arg1 = rect[i].latitude;
+		noflyZoneCheck_cmd.request.src_arg2 = rect[i].longitude;
+	
+		noflyZoneCheck_cmd.request.dst_arg1 = dst.pos_global.latitude;
+		noflyZoneCheck_cmd.request.dst_arg2 = src.pos_global.longitude;
+
+		if (noflyZoneCheck_client.call (noflyZoneCheck_cmd) == true)
+		{       // rect[i]-dst 사이의 경로가 비행금지구역과 겹치지 않으면 rect[i]를 Target#2로 지정 
+			if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) !=0)
+			{
+					target2.is_global = true;
+					target2.pos_global.latitude = rect[i].latitude;
+					target2.pos_global.longitude = rect[i].longitude;
+
+					// ENU로 좌표변환
+					Point point = convertGeoToENU(target2.pos_global.latitude, target2.pos_global.longitude, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+					target2.pos_local.x = point.x;
+					target2.pos_local.y = point.y;
+					target2.pos_local.z = point.z;
+	
+			}
+		}
+	}
+*/
+
+
+	// 만약 Target#1과 Target#2가 같으면 우회 경로는 <Target#1, DST >
+	// 다르면 우회 경로는 <Target#1, Target#2, DST> 가 됨 
+/*	
+	if ( (target1.pos_global.latitude == target2.pos_global.latitude ) && (target1.pos_global.latitude == target2.pos_global.latitude) )
+	{
+		path.push_back(target1);
+		path.push_back(target2);
+		path.push_back(dst);
+	} 
+	else 
+	{
+		path.push_back(target1);
+		path.push_back(dst);
+	}*/
+	return path; 
+}
+
+void printAltPath (std::vector<Target_Position> altPath)
+{
+	//  대체 path 정보를 화면에 출력  
+	cout << "eDrone_control_node: printAltPath() " << endl;
+	int cnt = 0;
+
+	 for (std::vector<Target_Position>::iterator it = altPath.begin() ; it != altPath.end(); ++it)
+	{
+		cnt++;
+		Target_Position target = *it;
+
+		cout << "Target#" << cnt << ": lat: " << target.pos_global.latitude << ", lon: " << target.pos_global.longitude << endl;
+
+		
+	}
+
+
+}
 
 
 
@@ -349,40 +580,39 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr& msg){
 	}
 
 
-	if (!autonomous_flight)
-		return;
-
-	if(  (target_position.reached == false) && (target_position.is_global == false))
-	{
-		// 목적지 도착 여부 확인
-		double distance;
-
-		if ( ((target_position.pos_local.x - DIST_RANGE) < current_pos_local.pose.position.x) &&
-			 (current_pos_local.pose.position.x <(target_position.pos_local.x + DIST_RANGE) ) )
+	if (phase.compare("GOTO")==0)
+	{	
+	
+		if(  (target_position.reached == false) && (target_position.is_global == false))
 		{
-			
-			if ( ((target_position.pos_local.y - DIST_RANGE) < current_pos_local.pose.position.y) &&
-			 (current_pos_local.pose.position.y <(target_position.pos_local.y + DIST_RANGE) ) )
-			{
-					
-				if ( ((target_position.pos_local.z - 0.5) < current_pos_local.pose.position.z) && 
-				(current_pos_local.pose.position.z <(target_position.pos_local.z +0.5) ) )
-				{
-					target_position.reached = true;
-					ROS_INFO("pos_cb_local(): The UAV reached to the target position");	
+			// 목적지 도착 여부 확인
+			double distance;
 
-					printf("current_position: (%f, %f, %f \n)", current_pos_local.pose.position.x, current_pos_local.pose.position.y, current_pos_local.pose.position.z);	
+			if ( ((target_position.pos_local.x - DIST_RANGE) < current_pos_local.pose.position.x) &&
+				 (current_pos_local.pose.position.x <(target_position.pos_local.x + DIST_RANGE) ) )
+			{
+			
+				if ( ((target_position.pos_local.y - DIST_RANGE) < current_pos_local.pose.position.y) &&
+				 (current_pos_local.pose.position.y <(target_position.pos_local.y + DIST_RANGE) ) )
+				{
 					
-			//		modeChange_cmd.request.base_mode = 0;
-			//		modeChange_cmd.request.custom_mode = MAV_MODE_AUTO_ARMED;
-			//		modeChange_cmd.request.custom_mode = "Hold";
-			//		modeChange_client.call(modeChange_cmd);
-				}
+					if ( ((target_position.pos_local.z - 0.5) < current_pos_local.pose.position.z) && 
+					(current_pos_local.pose.position.z <(target_position.pos_local.z +0.5) ) )
+					{
+						target_position.reached = true;
+						ROS_INFO("pos_cb_local(): The UAV reached to the target position");	
+
+						printf("current_position: (%f, %f, %f \n)", current_pos_local.pose.position.x, current_pos_local.pose.position.y, current_pos_local.pose.position.z);	
+					
+			
+					}
 
 				
-			}
+				}
 
+			}
 		}
+
 	}
 }
 
@@ -395,42 +625,35 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr& msg){
 
 //					printf("current_position: (%f, %f, %f \n)", current_pos_global.latitude, current_pos_global.longitude, current_pos_global.altitude-HOME_ALT);
 	
-	if (!autonomous_flight)
-		return;
+	if (phase.compare("GOTO")==0)
+	{	
 
-	if( (target_position.reached == false) && (target_position.is_global == true))
-	
-
-	{
+		if( (target_position.reached == false) && (target_position.is_global == true))
+		{
 		// 목적지 도착 여부 확인
-		double distance;
+			double distance;
 
-		if ( ((target_position.pos_global.latitude - 0.0001) < current_pos_global.latitude) &&
+			if ( ((target_position.pos_global.latitude - 0.0001) < current_pos_global.latitude) &&
 
 			 (current_pos_global.latitude <(target_position.pos_global.latitude +0.0001) ) )
-		{
-			
-			if ( ((target_position.pos_global.longitude - 0.0001) < current_pos_global.longitude) &&
-			 (current_pos_global.longitude <(target_position.pos_global.longitude +0.0001) ) )
 			{
-					
-				if ( ((target_position.pos_global.altitude - 0.5) < current_pos_global.longitude) && 
-				(current_pos_global.longitude <(target_position.pos_global.longitude +0.5) ) )
+			
+				if ( ((target_position.pos_global.longitude - 0.0001) < current_pos_global.longitude) &&
+				 (current_pos_global.longitude <(target_position.pos_global.longitude +0.0001) ) )
 				{
-					target_position.reached = true;
-					ROS_INFO("pos_cb_global(): The UAV reached to the target position");	
 					
-					
-					
-				//	modeChange_cmd.request.base_mode = 0;
-				//	modeChange_cmd.request.custom_mode = "Hold";
-				//	modeChange_client.call(modeChange_cmd);
-					//printf("current_position: (%f, %f, %f \n)", current_pos_global.latitude, current_pos_global.longitude, current_pos_global.altitude);	
-				}
+					if ( ((target_position.pos_global.altitude - 0.5) < current_pos_global.longitude) && 
+					(current_pos_global.longitude <(target_position.pos_global.longitude +0.5) ) )
+					{
+						target_position.reached = true;
+						ROS_INFO("pos_cb_global(): The UAV reached to the target position");						
+								
+					}
 
 				
-			}
+				}
 
+			}
 		}
 	}
 }
@@ -496,7 +719,7 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Re
 	takeoff_altitude = req.altitude; // 이륙 고도 저장 
 	//double offset = 25;
 
-	ROS_INFO("Takeoff request received\n");
+	ROS_INFO("***Takeoff request received\n");
 	// 서비스 요청 메시지 필드 선언
 
 	takeoff_cmd.request.altitude = 2.5;
@@ -619,10 +842,170 @@ bool srv_rtl_cb(eDrone_msgs::RTL::Request &req, eDrone_msgs::RTL::Response &res)
 
 
 bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &res)
-{
-	// goto 서비스 콜백 함수
-	// goto 서비스 처리 절차
+{	
 
+	ROS_INFO("eDrone_control_node: Goto request received\n");
+	printf("eDrone_control_node: target_seq_no: %d\n", target_position.target_seq_no);
+
+
+	cout<< "req.x_lat: " << req.x_lat << ", req.y_long: " << req.y_long << endl;
+
+	/* goto 서비스 처리 절차 */
+
+	// 좌표계 종류 확인 (ex. WGS84, ENU) & 목적지 좌표 (지역, 전역) 저장 
+	if (req.ref_system.compare("WGS84")==0) // 전역 좌표인 경우
+	{
+		target_position.pos_global.latitude = req.x_lat;
+		target_position.pos_global.longitude = req.y_long;
+		target_position.pos_global.altitude = req.z_alt;
+
+
+		// ENU로 좌표변환
+		Point point = convertGeoToENU(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
+
+		target_position.pos_local.x = point.x;
+		target_position.pos_local.y = point.y;
+		target_position.pos_local.z = point.z;
+
+	}
+
+	else if (req.ref_system.compare("ENU")==0)
+	{
+		target_position.pos_local.x = req.x_lat;	
+		target_position.pos_local.y = req.y_long;
+		target_position.pos_local.z = req.z_alt;
+
+		// WGS84로 좌표 변환
+		GeoPoint geoPoint = convertENUToGeo(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
+		cout <<"converENUToGeo() was called" << endl;
+
+		target_position.pos_global.latitude = geoPoint.latitude;	
+		target_position.pos_global.longitude = geoPoint.longitude;		
+		target_position.pos_global.altitude = geoPoint.altitude;		
+
+	}
+
+	// Geofence 검사
+
+		geofenceCheck_cmd.request.ref_system = "WGS84";	
+		geofenceCheck_cmd.request.arg1= target_position.pos_global.latitude;
+        	geofenceCheck_cmd.request.arg2= target_position.pos_global.longitude;
+		geofenceCheck_cmd.request.arg3= target_position.pos_global.altitude;
+
+	//	geofenceCheck_cmd.request.arg1=  req.x_lat;
+        //	geofenceCheck_cmd.request.arg2= req.y_long;
+	//	geofenceCheck_cmd.request.arg3= req.z_alt;
+		
+		ROS_INFO("eDrone_control_node: trying to call GeofenceCheck service");
+
+		if (geofenceCheck_client.call (geofenceCheck_cmd) == true)
+		{
+
+			if (geofenceCheck_cmd.response.value == true )
+			{
+				if (geofenceCheck_cmd.response.violation == true)
+				{			
+					target_position.geofence_violation = true;				
+					ROS_INFO("eDrone_control_node: Goto service rejected: geofence violation!\n");
+					res.value = false;
+					return true;
+				}
+			else
+			{
+				target_position.geofence_violation = false; 				
+			}		
+		}		
+	}
+
+
+	// NoflyZone 검사 
+
+ 	// path 목록에 목적지 정보 추가   
+		// (비행 금지 구역과 src-dst 간 직선경로가 겹치는 경우, path 재설정 필요)
+
+		
+		ROS_INFO("eDrone_control_node: trying to call noflyZoneCheck service");
+
+		noflyZoneCheck_cmd.request.ref_system = "WGS84";
+
+		noflyZoneCheck_cmd.request.src_arg1 = current_pos_global.latitude;
+ 		noflyZoneCheck_cmd.request.src_arg2 = current_pos_global.longitude;
+		noflyZoneCheck_cmd.request.src_arg3 = current_pos_global.altitude;
+		noflyZoneCheck_cmd.request.dst_arg1 = target_position.pos_global.latitude;
+		noflyZoneCheck_cmd.request.dst_arg2 = target_position.pos_global.longitude;
+		noflyZoneCheck_cmd.request.dst_arg3 = target_position.pos_global.altitude;
+
+	//	noflyZoneCheck_cmd.request.dst_arg1 = req.x_lat;
+	//	noflyZoneCheck_cmd.request.dst_arg2 = req.y_long;
+	//	noflyZoneCheck_cmd.request.dst_arg3 = req.z_alt;
+
+		cout<< "_req.x_lat: " << req.x_lat << ", req.y_long: " << req.y_long << endl;
+	
+
+		if (noflyZoneCheck_client.call(noflyZoneCheck_cmd) == true)
+		{
+			// 현재 위치가 비행 금지 구역 이내이면 Home으로 복귀 
+
+			if (noflyZoneCheck_cmd.response.result.compare ("SRC_IN_NF_ZONE" ) ==0) 
+			{
+				ROS_INFO("CASE#1: noflyZoneCheck result: SRC_IN_NF_ZONE");
+
+				target_position.noflyZone_status = "SRC_IN_NF_ZONE";
+
+				rtl_client.call(rtl_cmd); // 이륚 위치로 복귀 
+				phase = "RTL";		
+				res.value = false;
+				return true;
+			}
+
+
+			// 목적지가 비행 금지 구역 이내이면 요청 거부 
+			else if (noflyZoneCheck_cmd.response.result.compare ("DST_IN_NF_ZONE" ) ==0)
+			{
+				ROS_INFO("CASE#2: noflyZoneCheck result: DST_IN_NF_ZONE");
+				res.value= false;
+				res.value = false;
+				return true;
+			}
+			
+			// src-dst 간 직선 경로가 비행금지구역과 겹치는 경우
+			else if (noflyZoneCheck_cmd.response.result.compare ("PATH_OVERLAP_NF_ZONE" ) ==0)
+			{
+				ROS_INFO("CASE#3: noflyZoneCheck result: PATH_OVERLAP_NF_ZONE");
+
+				Target_Position src;
+				src.pos_global.latitude = current_pos_global.latitude;
+				src.pos_global.longitude = current_pos_global.longitude;			
+
+				Target_Position dst;
+				dst.pos_global.latitude = target_position.pos_global.latitude;
+				dst.pos_global.longitude = target_position.pos_global.longitude;			
+
+				std::vector<Target_Position> altPath = getAltPath(src, dst);
+
+				printAltPath(altPath);		
+				path.insert( path.end(), altPath.begin(), altPath.end() );
+				// 우회 경로를 path에 저장 
+
+				
+			}
+
+			// src, dst가 비행금지구역과 독립적으로 위치한 경우 	
+			else
+			{
+				ROS_INFO("CASE#4: noflyZoneCheck result: NONE");
+				// path에 목적지 정보 저장
+				target_position.reached = false;
+				path.push_back (target_position);
+				//target_position.target_seq_no++; // target_position 에 실제로 정보를 저장할 때 sequ_no 증가 
+			}
+
+		}	
+	
+	return true;
+}	
+
+	// ========================================================== 이전 소스 =======================================================
 	// # 요청 받은 위치 정보 저장
 
 	// # noflyZone, geofence 위반 여부를 가리키는 변수 값 reset (false)
@@ -630,7 +1013,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 	// 현재 target (목적지)의 sequnce number 지정 (이전 값에 +1)
 
 	// autonomous_flight 변수: goto 서비스가 한 번이라도 호출된 경우 true, 그렇지 않은 경우 false 값을 가짐 -> 목적지 좌표를 publish 할 것인가를 결정하는데 사용됨 
-
+/*
 	double distance_home = 0;
 
 	target_position.reached = false;
@@ -647,7 +1030,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 
 	ROS_INFO("eDrone_control_node: Goto request received\n");
 	printf("eDrone_control_node: target_seq_no: %d\n", target_position.target_seq_no);
-
+*/
 
 	
 	// 전역 좌표인 경우, 지역 좌표롤 변환하여 사용 	
@@ -658,7 +1041,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 	  // 목적지가 noflyZone 내부이면 서비스 거부
 
 	  // 목적지가 noflyZone 외부이더라도 현재 위치 - 목적지 사이의 최단 경로 상에 비행금지구역이 위치하면 새로 경로를 구성해야 함
-
+/*
 	
 
 	
@@ -666,7 +1049,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 	{
 
 		/* Geofence check */				
-
+/*
 		geofenceCheck_cmd.request.ref_system = "WGS84";
 		geofenceCheck_cmd.request.arg1=  req.x_lat;
         	geofenceCheck_cmd.request.arg2= req.y_long;
@@ -697,7 +1080,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		
 
 		/* 비행 금지 구역 check */		
-		noflyZoneCheck_cmd.request.ref_system = "WGS84";
+/*		noflyZoneCheck_cmd.request.ref_system = "WGS84";
 		noflyZoneCheck_cmd.request.arg1 = req.x_lat;
 		noflyZoneCheck_cmd.request.arg2 = req.y_long;
 		
@@ -723,7 +1106,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 
 		/* 비행 금지 구역 check 완료 */
 
-
+/*
 			
 		if ( target_position.noflyZone_violation = false && target_position.geofence_violation == false)
 		{
@@ -740,7 +1123,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		target_pos_global.longitude = req.y_long;
 		target_pos_global.altitude = req.z_alt;
 		*/
-		
+/*		
 		Point point = convertGeoToENU(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
 
 		//Point point = convertGeoToENU(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
@@ -771,7 +1154,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		GeoPoint geoPoint = convertENUToGeo(req.x_lat, req.y_long, req.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
 		cout <<"converENUToGeo() was called" << endl;
 		/* Geofence check */				
-
+/*
 		geofenceCheck_cmd.request.ref_system = "WGS84";
 		geofenceCheck_cmd.request.arg1= geoPoint.latitude;
         	geofenceCheck_cmd.request.arg2= geoPoint.longitude;		
@@ -800,7 +1183,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		/* Geofence check 완료 */	
 		
 		/* 비행 금지 구역 check */ 
-
+/*
 		noflyZoneCheck_cmd.request.ref_system = "WGS84";
 
 		noflyZoneCheck_cmd.request.arg1 = geoPoint.latitude;
@@ -851,7 +1234,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 			res.value = false;
 		}
 		else
-*/		{
+*/	/*	{
 			printf("goto the target: (%f, %f, %f)\n", req.x_lat, req.y_long, req.z_alt);
 		//	target_position.reached = false;
 			sleep(5);
@@ -869,7 +1252,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 		}
 	}
 	return true;
-}
+}*/
 /*
 bool srv_geofence_cb(eDrone_msgs::Geofence::Request &req, eDrone_msgs::Geofence::Response &res)
 {
@@ -1052,8 +1435,6 @@ int main(int argc, char** argv)
 
 	// noflyZoneReset_srv_server = nh.advertiseService("srv_noflyZoneReset", srv_noflyZoneReset_cb);
 
-
-
 	//// 서비스 클라이언트 선언
 
         arming_client = nh.serviceClient<mavros_msgs::CommandBool> ("mavros/cmd/arming"); // service client 선언
@@ -1062,21 +1443,194 @@ int main(int argc, char** argv)
 	noflyZoneCheck_client = nh.serviceClient<eDrone_msgs::NoflyZoneCheck> ("srv_noflyZoneCheck" );
 	geofenceCheck_client = nh.serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck" );
 	rtl_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
-
 	modeChange_client = nh.serviceClient<mavros_msgs::SetMode> ("/mavros/set_mode");
 	target_position.reached = false; // 목적지 도착 여부를 false로 초기화
 
 //        ROS_INFO("control_node: home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON, HOME_ALT); 	
 
+	while (ros::ok() )
+	{
+
+		// 현재 phase 토픽 출판
+
+		cur_phase.phase = phase;
+		cur_phase_pub.publish (cur_phase);
+
+		if (phase.compare ("UNARMED") ==0)
+		{
+			// 시동 명령 대기 
+		}
+		else if (phase.compare ("ARMED") ==0)
+		{
+			// 이륙 명령 대기
+		}
+		else if (phase.compare ("TAKEOFF") == 0) // 현재 이륙 중인 경우 
+		{
+			//cout << "eDrone_control_node: publish Topic to takeoff - altitude " << takeoff_altitude <<  endl;	
+
+			// change mode to offboard
+			modeChange_cmd.request.base_mode = 0;
+			modeChange_cmd.request.custom_mode = "OFFBOARD";
+			if (modeChange_client.call(modeChange_cmd))
+			{
+				if (modeChange_cmd.response.mode_sent)
+				{;
+					//cout << "offboard enabled" << endl;
+				}
+
+			}	
+				
+			// set topic field values
+			target_pos_local.pose.position.x = 0;
+			target_pos_local.pose.position.y = 0;	
+			target_pos_local.pose.position.z = takeoff_altitude;	
+			
+			// publish topic
+			
+			pos_pub_local.publish (target_pos_local);
+			ros::spinOnce();
+			rate.sleep();
+		}
+		else if (phase.compare ("READY") ==0)
+		{
+			// 이륙 후, GOTO 등의 명령을 대기하고 있는 상태 
+
+			  // path에 목적지 정보가 있으면 첫 번째 데이터를 읽어 와서 target position 갱신 
+
+				if (!path.empty() )
+				{
+
+
+					target_position = path[0];
+					target_position.target_seq_no++;
+					
+					path.erase(path.begin());
+
+					phase = "GOTO";
+
+					/*
+					// 갱신된 target 정보 publish (응용 프로그램에 타겟 정보 전달)
+					cur_target.x_lat = target_position.pos_local.x;
+					cur_target.y_long = target_position.pos_local.y;
+					cur_target.z_alt = target_position.pos_local.z;
+	
+					// 위치 이동을 위한 publish 
+					target_pos_local.pose.position.x = target_position.pos_local.x;
+					target_pos_local.pose.position.y = target_position.pos_local.y;
+					target_pos_local.pose.position.z = target_position.pos_local.z;
+					*/
+				}
+				else
+				{
+					//cout << "eDrone_control_node: main() - phase is READY & path is empty" << endl;
+
+					// 갱신된 target 정보 publish (응용 프로그램에 타겟 정보 전달)
+					cur_target.target_seq_no = target_position.target_seq_no;
+					cur_target.ref_system = target_position.ref_system;
+					cur_target.x_lat = target_position.pos_local.x;
+					cur_target.y_long = target_position.pos_local.y;
+					cur_target.z_alt = target_position.pos_local.z;
+					cur_target.reached = target_position.reached;
+					cur_target_pub.publish(cur_target);	
+
+					// 현재 목적지 위치 publish (실제 위치 이동)	
+					target_pos_local.pose.position.x = target_position.pos_local.x;
+					target_pos_local.pose.position.y = target_position.pos_local.y;
+					target_pos_local.pose.position.z = target_position.pos_local.z;
+			
+					pos_pub_local.publish (target_pos_local);
+				}
+
+		}
+		else if (phase.compare ("GOTO") ==0)
+		{
+			// target position으로 현재 이동 중이면 위치 정보 publish 
+			if (target_position.reached != true)
+			{
+			
+				// 현재 목적지 정보 publish (응용 프로그램에 target 정보 제공)
+				cur_target.target_seq_no = target_position.target_seq_no;
+				cur_target.ref_system = target_position.ref_system;
+				cur_target.is_global = target_position.is_global;
+				cur_target.reached = target_position.reached;
+
+				if (target_position.is_global == false)
+				{
+					cur_target.x_lat = target_position.pos_local.x;
+					cur_target.y_long = target_position.pos_local.y;
+					cur_target.z_alt = target_position.pos_local.z;
+				}
+
+				else
+				{
+					cur_target.x_lat  = target_position.pos_global.latitude;
+					cur_target.y_long  = target_position.pos_global.longitude;
+					cur_target.z_alt  = target_position.pos_global.altitude;
+				}
+
+				cur_target_pub.publish(cur_target);			
+
+				// 현재 목적지 위치 publish (실제 위치 이동)	
+				target_pos_local.pose.position.x = target_position.pos_local.x;
+				target_pos_local.pose.position.y = target_position.pos_local.y;
+				target_pos_local.pose.position.z = target_position.pos_local.z;
+			
+				pos_pub_local.publish (target_pos_local);
+			}			
+
+			else// target position에 도착했으면 path 검사
+			{
+			  // path에 목적지 정보가 있으면 첫 번째 데이터를 읽어 와서 target position 갱신 
+
+				if (!path.empty() )
+				{
+					target_position = path[0];
+					target_position.target_seq_no++;
+
+					path.erase(path.begin());
+
+					// 갱신된 target 정보 publish (응용 프로그램에 타겟 정보 전달)
+					cur_target.x_lat = target_position.pos_local.x;
+					cur_target.y_long = target_position.pos_local.y;
+					cur_target.z_alt = target_position.pos_local.z;
+
+					//cout <<" eDrone_control_node: main() - arrived at the target position. path is not empty() " << endl;
+					//cout <<" target_seq_no: " << target_position.target_seq_no << endl;
+					//sleep(5);
+					// 위치 이동을 위한 publish 
+					target_pos_local.pose.position.x = target_position.pos_local.x;
+					target_pos_local.pose.position.y = target_position.pos_local.y;
+					target_pos_local.pose.position.z = target_position.pos_local.z;
+				}
+
+			  // path가 비어 있으면 READY phase로 전이
+				else
+				{	
+				       //cout <<" eDrone_control_node: main() - arrived at the target position. path is empty() " << endl;
+					//cout <<" target_seq_no: " << target_position.target_seq_no << endl;
+					phase = "READY";
+					//sleep(5);					
+				}
+			}
+		}
+
+		ros::spinOnce();
+	  	rate.sleep();
+	
+	}
+
+
+/*
 	while ( ros::ok() )
 	{
+
         	// ref_system_conversion_test();
-/*
-		if (current_state.mode.compare("AUTO.RTL") == 0) // RTL 모드일 경우 바로 종료
-		{
-			break;
-		}
-*/
+
+//		if (current_state.mode.compare("AUTO.RTL") == 0) // RTL 모드일 경우 바로 종료
+//		{
+//			break;
+//		}
+
 		// 현재 목적지 정보 publish
 		
 		// 1) Target 토픽 publish (응용 프로그램 측에 현재 진행 중인 target 위치 및 도착 여부 알림)
@@ -1084,10 +1638,12 @@ int main(int argc, char** argv)
 		// 2) 위치 이동을 위한 setpoint_position/local 또는 setpoint_raw/global 토픽 출판
 		cur_phase.phase = phase;
 		cur_phase_pub.publish (cur_phase);
-		if (phase.compare ("IDLE") !=0)
-		{
-			printf("altitude: %lf, phase: %s\n", current_pos_local.pose.position.z, cur_phase.phase.c_str());
-		}
+				
+	//	if (phase.compare ("IDLE") !=0)
+	//	{
+	//		printf("altitude: %lf, phase: %s\n", current_pos_local.pose.position.z, cur_phase.phase.c_str());
+	//	}
+		
 		if (phase.compare ("TAKEOFF") == 0) // 현재 이륙 중인 경우 
 		{
 			//cout << "eDrone_control_node: publish Topic to takeoff - altitude " << takeoff_altitude <<  endl;	
@@ -1166,13 +1722,13 @@ int main(int argc, char** argv)
 				{
 				//	pos_pub_local.
 					ROS_INFO("Moving to the target point (local coord.)");
-				/*
-				printf("target position: (%f, %f, %f)\n", target_position.pos_local.x,
-				 target_position.pose_local.y, target_position.pos_local.z);
-				*/
+				
+			//	printf("target position: (%f, %f, %f)\n", target_position.pos_local.x,
+		//		 target_position.pose_local.y, target_position.pos_local.z);
+				
 					printf("target position: (%f, %f, %f)\n", target_pos_local.pose.position.x,
 				 target_pos_local.pose.position.y, target_pos_local.pose.position.z);
-						printf("phase: %s", phase.c_str());
+						//printf("phase: %s", phase.c_str());
 			
 					pos_pub_local.publish(target_pos_local); // 목적지 위치 정보 (지역 좌표) 출판 - type: geometry_msgs::poseStamped
 				}
@@ -1182,8 +1738,8 @@ int main(int argc, char** argv)
 				//	pos_pub_global
 
 					ROS_INFO("Moving to the target point (global coord)");
-					/*printf("target position: (%f, %f, %f)\n", target_position.pos_global.latitude, 
-					target_position.pos_global.longitude, 	target_position.pos_global.altitude);*/
+					//printf("target position: (%f, %f, %f)\n", target_position.pos_global.latitude, 
+					target_position.pos_global.longitude, 	target_position.pos_global.altitude);
  					//mavros_msgs::GlobalPositionTarget target_pos_global; // 목적지 위치 정보 (전역 좌표)
 				
 					printf("target position: (%f, %f, %f)\n", target_pos_global.latitude, 
@@ -1213,7 +1769,7 @@ int main(int argc, char** argv)
       		  	rate.sleep();
 
 	}
-
+*/
 	return 0;
 }
 

@@ -15,7 +15,7 @@
 #include <eDrone_msgs/Landing.h>
 #include <eDrone_msgs/CheckState.h>
 #include <eDrone_msgs/CheckPosition.h>
-#include <eDrone_msgs/CheckState.h>
+#include <eDrone_msgs/CheckHome.h>
 //#include <eDrone_lib/GeoUtils.h>
 //#include <eDrone_lib/GeoInfo.h>
 

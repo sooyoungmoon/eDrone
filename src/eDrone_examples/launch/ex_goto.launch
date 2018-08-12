@@ -37,6 +37,8 @@
 
  <node name="eDrone_application_node" pkg="eDrone_lib" type="eDrone_application_node" output="screen">  </node> 
 
+ <node name="safety_node" pkg="eDrone_lib" type="safety_node" output="screen">  </node> 
+
  <node name="ex_goto" pkg="eDrone_examples" type="ex_goto" args="$(arg my_args)" output="screen">  </node> 
 
 </launch>

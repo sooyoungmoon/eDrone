@@ -283,12 +283,22 @@ int main(int argc, char** argv)
 
 			cur_target_seq_no = 0;
 			goto_cmd.request.is_global = IS_GLOBAL;
+			
+			if (goto_cmd.request.is_global == true)
+			{
+				goto_cmd.request.ref_system = "WGS84";
+			}
+			else
+			{
+				goto_cmd.request.ref_system = "ENU";
+			}
+
 			goto_cmd.request.x_lat = x_vector[0];
 			goto_cmd.request.y_long = y_vector[0];
 			goto_cmd.request.z_alt = z_vector[0];
 			
 			goto_client.call(goto_cmd);
-			ROS_INFO("Goto command was sent\n");
+			ROS_INFO("Goto command#1 was sent\n");
 		   
 	//int prev_target_seq_no = -1; // 이전에 도착한 목적지 번호 (cur_target.target_seq_no)
 
@@ -306,12 +316,22 @@ int main(int argc, char** argv)
 	cur_target_seq_no = cur_target.target_seq_no +1; 
 	
 	goto_cmd.request.is_global = IS_GLOBAL;
+
+	if (goto_cmd.request.is_global == true)
+	{
+		goto_cmd.request.ref_system = "WGS84";
+	}
+	else
+	{
+		goto_cmd.request.ref_system = "ENU";
+	}
+
 	goto_cmd.request.x_lat = x_vector[1];
 	goto_cmd.request.y_long = y_vector[1];
 	goto_cmd.request.z_alt = z_vector[1];
 
 	goto_client.call(goto_cmd);
-	ROS_INFO("Goto command was sent\n");
+	ROS_INFO("Goto command#2 was sent\n");
 
 
 	// Goto 호출문 (#3)
@@ -325,12 +345,21 @@ int main(int argc, char** argv)
 	cur_target_seq_no = cur_target.target_seq_no +1; 
 	
 	goto_cmd.request.is_global = IS_GLOBAL;
+	if (goto_cmd.request.is_global == true)
+	{
+		goto_cmd.request.ref_system = "WGS84";
+	}
+	else
+	{
+		goto_cmd.request.ref_system = "ENU";
+	}
+
 	goto_cmd.request.x_lat = x_vector[2];
 	goto_cmd.request.y_long = y_vector[2];
 	goto_cmd.request.z_alt = z_vector[2];
 
 	goto_client.call(goto_cmd);
-	ROS_INFO("Goto command was sent\n");
+	ROS_INFO("Goto command#3 was sent\n");
 
 	
 

@@ -365,7 +365,20 @@ bool srv_noflyZoneReset_cb(eDrone_msgs::NoflyZoneReset::Request &req, eDrone_msg
 bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msgs::NoflyZoneCheck::Response &res)
 {
 
+  /* 비행금지구역 정보 반환 */
+  res.pt1_arg1 = nofly_zone.pt1_arg1;
+  res.pt1_arg2 = nofly_zone.pt1_arg2;
+  res.pt1_arg3 = nofly_zone.pt1_arg3;
+  
+  res.pt2_arg1 = nofly_zone.pt2_arg1;
+  res.pt2_arg2 = nofly_zone.pt2_arg2;
+  res.pt2_arg3 = nofly_zone.pt2_arg3;
+
+
+
   /* 출발지, 목적지 정보를 입력 받아 비행 금지 구역과의 관계 반환 */
+
+  
 
   
   //
@@ -385,7 +398,7 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
   // 출발지와 비행 금지 구역 간 관계 확인
   if ( (req.src_arg1 < nofly_zone.pt1_arg1) != ( req.src_arg1 < nofly_zone.pt2_arg1)  )
   {
-	ROS_INFO ("TEST1");
+//	ROS_INFO ("TEST1");
 
 	if ( (req.src_arg2 < nofly_zone.pt1_arg2) != ( req.src_arg2 < nofly_zone.pt2_arg2))
 	{
@@ -398,7 +411,7 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
      // 목적지와 비행 금지 구역 간 관계 확인 
    if ( (req.dst_arg1 < nofly_zone.pt1_arg1) != ( req.dst_arg1 < nofly_zone.pt2_arg1)  )
   {
-	ROS_INFO ("TEST2");
+//	ROS_INFO ("TEST2");
 
 	if ( (req.dst_arg2 < nofly_zone.pt1_arg2) != ( req.dst_arg2 < nofly_zone.pt2_arg2))
 	{
@@ -453,7 +466,7 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 	rect_point[3].x = nofly_zone.pt1_arg2;
 	rect_point[3].y = nofly_zone.pt2_arg1;
 
-	ROS_INFO ("TEST3-1");	
+	//ROS_INFO ("TEST3-1");	
 
 
    // 2) 직선 경로와 사각형의 각 변 사이에 교차 여부 확인
@@ -505,16 +518,16 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 
 		if ( (c1 <0) && (c2 < 0) ) // directPath와 rect_line[i]는 서로 교차함 
 		{
-			ROS_INFO ("test3-2");
-			cout << "directPath: (" << directPath.x << ", " << directPath.y << " )" << endl;			   	       cout << "rect_line: (" << rect_line[i].x << ", " << rect_line[i].y << " )" << endl;
+//			ROS_INFO ("test3-2");
+//			cout << "directPath: (" << directPath.x << ", " << directPath.y << " )" << endl;			   	       cout << "rect_line: (" << rect_line[i].x << ", " << rect_line[i].y << " )" << endl;
 
-			cout << "c1: " << c1 << endl;
-			cout << "c2: " << c2 << endl;
+//			cout << "c1: " << c1 << endl;
+//			cout << "c2: " << c2 << endl;
 
 			crossing = true;
 			overlap = true;
 
-			cout << "line crossing: " << i << endl;
+//			cout << "line crossing: " << i << endl;
 		}
 	}
 
@@ -525,8 +538,14 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 
 	if (overlap ==  true)
 	{
-		ROS_INFO ("_Src-Dst direct path overlaps the NF zone! " );
+		ROS_INFO ("Src-Dst direct path overlaps the NF zone! " );
 		res.result.assign("PATH_OVERLAP_NF_ZONE");
+	}
+
+	else
+	{
+		ROS_INFO ("Src-Dst direct path does not overlap the NF zone! " );
+		res.result.assign("NONE");
 	}
 
     //선분의 기울기 계산

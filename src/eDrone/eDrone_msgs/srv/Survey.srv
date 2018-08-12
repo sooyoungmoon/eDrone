@@ -1,4 +1,6 @@
 bool is_global
+string ref_system
+float64 altitude
 float64 min_x_lat
 float64 min_y_long
 float64 max_x_lat
