@@ -15,12 +15,11 @@
 #include <eDrone_msgs/Landing.h>
 #include <eDrone_msgs/CheckState.h>
 #include <eDrone_msgs/CheckPosition.h>
-#include <eDrone_msgs/CheckState.h>
-#include <eDrone_lib/GeoUtils.h>
-#include <eDrone_lib/GeoInfo.h>
+#include <eDrone_msgs/CheckHome.h>
+//#include <eDrone_lib/GeoUtils.h>
+//#include <eDrone_lib/GeoInfo.h>
 
 using namespace std;
-using namespace Mission_API;
 eDrone_msgs::Arming arming_cmd;
 eDrone_msgs::Takeoff takeoff_cmd;
 eDrone_msgs::Landing landing_cmd;
@@ -218,8 +217,7 @@ int main(int argc, char** argv)
 
 	cout <<"local frame: (" << checkPosition_cmd.response.x << ", " << checkPosition_cmd.response.y << ", " << checkPosition_cmd.response.z << ") " << endl; 
   }
-  GeoInfo::add();
-  GeoInfo::sub();
+  
   
   ros::spinOnce();
   rate.sleep(); 

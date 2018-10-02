@@ -21,6 +21,7 @@ add_message_files(
 DIRECTORY msg
 FILES 
 Target.msg
+Phase.msg
 ) 
 
 # service 선언
@@ -42,17 +43,15 @@ MissionUpload.srv
 MissionDownload.srv
 MissionClear.srv
 Goto.srv
-Geofence.srv
+GotoPath.srv
 GeofenceSet.srv
 GeofenceCheck.srv
 GeofenceReset.srv
 NoflyZoneSet.srv
 NoflyZoneReset.srv
 NoflyZoneCheck.srv
-Survey.srv
-Survey_New.srv
-SprayStart.srv
-SprayStop.srv
+SurveyArea.srv
+SurveyPath.srv
 )
 
 # 메시지 생성을 위한 매크로 함수
@@ -63,7 +62,7 @@ generate_messages(DEPENDENCIES std_msgs geometry_msgs geographic_msgs mavros_msg
 # 캐킨 빌드에서 cmake 파일과 config 파일 생성에 사용되는 명령어 (매크로 함수)
 catkin_package(
 INCLUDE_DIRS inc
-LIBRARIES hello
+#LIBRARIES hello
 CATKIN_DEPENDS geometry_msgs sensor_msgs geographic_msgs message_runtime std_msgs
 )
 
@@ -96,7 +95,7 @@ include_directories(
 #)
 
 install (
-DIRECTORY include
+DIRECTORY inc
 DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 

@@ -1,0 +1,5 @@
+string orbit_ref_system
+geomety_msgs/Point point
+geographic_msgs/GeoPoint geoPoint
+---
+bool value

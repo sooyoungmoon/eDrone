@@ -1,4 +1,6 @@
 
+/* 2018.07.06 */
+
 
 /* include */
 
@@ -22,7 +24,7 @@
 #include <eDrone_msgs/Goto.h>
 #include <eDrone_msgs/RTL.h>
 #include <eDrone_msgs/Target.h>
-
+#include <eDrone_msgs/Phase.h>
 // 파라미터 초기값 선언 header
 #include <eDrone_examples/params.h>
 
@@ -34,7 +36,7 @@ ros::NodeHandle* nh_ptr; // node handle pointer (서버/클라이언트 또는 �
 
 eDrone_msgs::Target* cur_target_ptr; // cur_target 변수 접근을 위한 포인터 변수 
 
-
+eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
 
 /* 콜백 함수 정의 */
 
@@ -53,6 +55,19 @@ void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 		ROS_INFO("we reached at the current target\n");
 	} 
 }
+void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
+{
+	*cur_phase_ptr = *msg;
+
+	// 현재 목적지 도달 여부 확인
+	ROS_INFO("cur_phase_cb(): \n");
+	ROS_INFO("current phase: %s \n", cur_phase_ptr->phase.c_str());
+	
+ 
+}
+
+
+
 
 // 서비스 콜백 함수 (내용 없음) 
 
@@ -87,8 +102,10 @@ int main(int argc, char** argv)
 
 	// 토픽 메시지 변수 선언  
 	eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
+	eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
 	cur_target_ptr = &cur_target; // cur_target 변수 주소 저장 
 	eDrone_msgs::Target next_target; // 다음 목적지 
+	cur_phase_ptr = &cur_phase;
 
 	// 서비스 메시지 변수 선언 
 	eDrone_msgs::CheckState checkState_cmd;
@@ -106,7 +123,9 @@ int main(int argc, char** argv)
 
 	// 토픽 subscriber 선언 & 초기화 
 
-	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); // 
+	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); 
+ 	ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb); // 
+
 
 	// 서비스 서버 선언 & 초기화 (내용 없음)
 
@@ -119,6 +138,9 @@ int main(int argc, char** argv)
 	ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
 	ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
 	ros::ServiceClient rtl_client = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
+
+	
+	
 	
 	// 무인기 자율 비행 경로 
 	std::vector<eDrone_msgs::Target> path; 
@@ -210,7 +232,7 @@ int main(int argc, char** argv)
 				ROS_INFO("Takeoff command was sent\n");
 			}
 		}
-		sleep(10);
+//		sleep(10);
 
 
 	    // 경로 비행 (임무 수행)
@@ -242,7 +264,7 @@ int main(int argc, char** argv)
 			for (int vector_index = 0 ; vector_index < x_vector.size(); vector_index++)
 			{
 				next_target.target_seq_no = vector_index;
-				next_target.is_global = GOTO_IS_GLOBAL;
+				next_target.is_global = IS_GLOBAL;
 				next_target.x_lat = x_vector[vector_index];
 				next_target.y_long = y_vector[vector_index];
 				next_target.z_alt = z_vector[vector_index];
@@ -252,21 +274,130 @@ int main(int argc, char** argv)
 
 			//// Goto
 
+			
+			while (cur_phase.phase.compare ("READY")!=0)
+			{
+				ros::spinOnce();
+				rate.sleep();
+			}
 
 			ROS_INFO("Send goto command ...\n");
 			ROS_INFO("let's start a mission! \n");
 
 			cur_target_seq_no = 0;
-			goto_cmd.request.is_global = GOTO_IS_GLOBAL;
+			goto_cmd.request.is_global = IS_GLOBAL;
+			
+			if (goto_cmd.request.is_global == true)
+			{
+				goto_cmd.request.ref_system = "WGS84";
+			}
+			else
+			{
+				goto_cmd.request.ref_system = "ENU";
+			}
+
 			goto_cmd.request.x_lat = x_vector[0];
 			goto_cmd.request.y_long = y_vector[0];
 			goto_cmd.request.z_alt = z_vector[0];
 			
 			goto_client.call(goto_cmd);
-			ROS_INFO("Goto command was sent\n");
-		   
+			ROS_INFO("Goto command#1 was sent\n");
+		   	//sleep (10); //(2018.10.02) 
 	//int prev_target_seq_no = -1; // 이전에 도착한 목적지 번호 (cur_target.target_seq_no)
 
+	// (2018.05.04) 
+
+	// Goto 호출문 (#2)
+	
+	//int loop_cnt = 0;	
+
+	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
+	{
+		//cout << "loop cnt: " << loop_cnt << endl;
+		//loop_cnt++;
+
+		
+		ros::spinOnce();
+		rate.sleep();
+	}
+	cur_target_seq_no = cur_target.target_seq_no +1; 
+	
+	goto_cmd.request.is_global = IS_GLOBAL;
+
+	if (goto_cmd.request.is_global == true)
+	{
+		goto_cmd.request.ref_system = "WGS84";
+	}
+	else
+	{
+		goto_cmd.request.ref_system = "ENU";
+	}
+
+	goto_cmd.request.x_lat = x_vector[1];
+	goto_cmd.request.y_long = y_vector[1];
+	goto_cmd.request.z_alt = z_vector[1];
+
+	goto_client.call(goto_cmd);
+	ROS_INFO("Goto command#2 was sent\n");
+
+
+	// Goto 호출문 (#3)
+	
+	
+	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
+	{			
+		ros::spinOnce();
+		rate.sleep();
+	}
+	cur_target_seq_no = cur_target.target_seq_no +1; 
+	
+	goto_cmd.request.is_global = IS_GLOBAL;
+	if (goto_cmd.request.is_global == true)
+	{
+		goto_cmd.request.ref_system = "WGS84";
+	}
+	else
+	{
+		goto_cmd.request.ref_system = "ENU";
+	}
+
+	goto_cmd.request.x_lat = x_vector[2];
+	goto_cmd.request.y_long = y_vector[2];
+	goto_cmd.request.z_alt = z_vector[2];
+
+	goto_client.call(goto_cmd);
+	ROS_INFO("Goto command#3 was sent\n");
+
+
+	// Goto 호출문 (#4)
+	
+	
+	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
+	{			
+		ros::spinOnce();
+		rate.sleep();
+	}
+	cur_target_seq_no = cur_target.target_seq_no +1; 
+	
+	goto_cmd.request.is_global = IS_GLOBAL;
+	if (goto_cmd.request.is_global == true)
+	{
+		goto_cmd.request.ref_system = "WGS84";
+	}
+	else
+	{
+		goto_cmd.request.ref_system = "ENU";
+	}
+
+	goto_cmd.request.x_lat = x_vector[3];
+	goto_cmd.request.y_long = y_vector[3];
+	goto_cmd.request.z_alt = z_vector[3];
+
+	goto_client.call(goto_cmd);
+	ROS_INFO("Goto command#3 was sent\n");
+	
+
+/*
 	 while(ros::ok() )
 	    {
 		
@@ -311,14 +442,22 @@ int main(int argc, char** argv)
 		// 경유지 추가 (필요 시)			 
 
 	    }
-	 		
- 	   rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
-	   if (rtl_cmd.response.value == true)
-	   {
+*/	 		
+	while (cur_target.reached != true || cur_target.target_seq_no < cur_target_seq_no)
+	{			
+		ros::spinOnce();
+		rate.sleep();
+	}
+ 	
+	rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
+	
+	if (rtl_cmd.response.value == true)
+	{
 		ROS_INFO("RTL command was sent\n");
-	   }
+        }
 
 	return 0; 
 }
+
 
 

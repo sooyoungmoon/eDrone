@@ -1,9 +1,15 @@
-string ref_system
+string NFSet_ref_system
 float64 pt1_arg1
 float64 pt1_arg2
 float64 pt1_arg3
 float64 pt2_arg1
 float64 pt2_arg2
 float64 pt2_arg3
+float64 pt3_arg1
+float64 pt3_arg2
+float64 pt3_arg3
+float64 pt4_arg1
+float64 pt4_arg2
+float64 pt4_arg3
 ---
 bool value
