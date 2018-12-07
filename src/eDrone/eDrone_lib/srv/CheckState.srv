@@ -1,6 +1,0 @@
-bool value
----
-bool value
-bool armed
-bool connected
-string mode

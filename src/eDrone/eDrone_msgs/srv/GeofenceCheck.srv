@@ -1,7 +1,7 @@
 string geofence_ref_system
-float64 arg1
-float64 arg2
-float64 arg3
+float64 geofence_arg1
+float64 geofence_arg2
+float64 geofence_arg3
 ---
 bool value
 bool violation

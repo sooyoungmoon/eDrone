@@ -1,6 +1,5 @@
-string path_ref_system
-float64 path_altitude
-geometry_msgs/Point[] path_pts_local
-geographic_msgs/GeoPoint[] path_pts_global
+string gotoPath_ref_system
+float64 gotoPath_altitude
+eDrone_msgs/Target[] gotoPath_pts
 ---
 bool value

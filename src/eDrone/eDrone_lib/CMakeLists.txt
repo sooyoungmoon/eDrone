@@ -56,7 +56,7 @@ include_directories(
 )
 
 # 여러 개의 노드를 하나의 라이브러리로 생성하려고 할 경우 에러 발생 (multiple definitions of main fuctions)
-add_library(eDrone_lib src/GeoInfo.cpp src/GeoUtils.cpp src/Vehicle.cpp)
+add_library(eDrone_lib src/GeoInfo.cpp src/GeoUtils.cpp src/Vehicle.cpp src/PathPlanning.cpp)
 
 
 add_executable (eDrone_monitor_node
@@ -108,6 +108,17 @@ target_link_libraries (eDrone_safety_node
  eDrone_lib
  ${catkin_LIBRARIES}
  ${GeographicLib_LIBRARIES}
+)
+
+# (2018.10.05) 신규 노드 추가 (eDrone_mavlink_node: mavlink 통신 API 구현)
+add_executable (eDrone_mavlink_node
+src/eDrone_mavlink_node.cpp
+)
+
+target_link_libraries (eDrone_mavlink_node
+  eDrone_lib
+  ${catkin_LIBRARIES}
+  ${GeographicLib_LIBRARIES}
 )
 
 #add_dependencies(eDrone_application_node eDrone_lib_generate_messages_cpp)

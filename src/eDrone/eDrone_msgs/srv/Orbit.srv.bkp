@@ -1,5 +1,6 @@
 string orbit_ref_system
-Target orbit_center
+geometry_msgs/Point orbit_point
+geographic_msgs/GeoPoint orbit_geoPoint
 float64 orbit_radius
 int64 orbit_req_cnt
 ---

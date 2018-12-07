@@ -3,3 +3,4 @@ bool value
 bool armed
 bool connected
 string mode
+float64 battery_remain

@@ -14,7 +14,6 @@ find_package(catkin REQUIRED COMPONENTS
 	mavros_msgs	
 )
 
-
 # topic 선언
 # 사용되는 메시지 파일 목록: 현재 패키지 내 msg 디렉토리에 위치해야 함-->
 add_message_files(
@@ -22,6 +21,10 @@ DIRECTORY msg
 FILES 
 Target.msg
 Phase.msg
+Heartbeat.msg
+NoflyZone.msg
+NoflyZones.msg
+Geofence.msg
 ) 
 
 # service 선언
@@ -52,6 +55,7 @@ NoflyZoneReset.srv
 NoflyZoneCheck.srv
 SurveyArea.srv
 SurveyPath.srv
+Orbit.srv
 )
 
 # 메시지 생성을 위한 매크로 함수

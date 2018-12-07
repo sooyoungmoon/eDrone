@@ -46,10 +46,6 @@
 
 #include <eDrone_lib/GeoUtils.h> // 좌표 변환 라이브러리 헤더 파일 
 
-
-
-
-
 using namespace std;
 using namespace mavros_msgs;
 using namespace geographic_msgs;
@@ -163,7 +159,8 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 	
 
 	mavros_msgs::Waypoint waypoint;
-	
+	waypoint = req.missionAddItem_waypoint;
+	/*
 	waypoint.frame = req.frame;
 	waypoint.command = req.command;
 	waypoint.is_current = req.is_current;
@@ -175,7 +172,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 	waypoint.x_lat = req.x_lat;
 	waypoint.y_long = req.y_long;
 	waypoint.z_alt = req.z_alt;
-
+	*/
 	double distance_home;
 
 /*
@@ -212,7 +209,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 	
 
-	switch (req.command)
+	switch (waypoint.command)
 	{
 		case MAV_CMD_NAV_TAKEOFF:
 
@@ -220,27 +217,31 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 		//waypoint.y_long = home_position.longitude;
 		waypoint.x_lat = HOME_LAT;
 		waypoint.y_long = HOME_LON;
-		waypoint.z_alt = req.z_alt;
+		waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
 		break;		
 
 		case MAV_CMD_NAV_WAYPOINT:
-		waypoint.frame = req.frame;
-		waypoint.command = req.command;
-		waypoint.z_alt = req.z_alt;
+		waypoint.frame = req.missionAddItem_waypoint.frame;
+		waypoint.command = req.missionAddItem_waypoint.command;
+		waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
 
-		if (req.is_global) // 전역 좌표인 경우
+		if (waypoint.frame == waypoint.FRAME_LOCAL_ENU) // 지역 좌표인 경우 
 		{
-			;
-		}
-		else // 지역 좌표인 경우 
-		{
-			;
+		
 			// (x, y, z) -> (lat, long, alt) 변환 필요
 
 			GeoPoint geoPoint = convertENUToGeo( waypoint.x_lat, waypoint.y_long, waypoint.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
 
 			waypoint.x_lat = geoPoint.latitude;
 			waypoint.y_long = geoPoint.longitude;
+			waypoint.frame = waypoint.FRAME_GLOBAL_REL_ALT; // (10/25)
+/*
+			cout << "srv_missionAddItem_cb: " << endl;
+			cout << "waypoint.x_lat: " <<waypoint.x_lat << endl;
+			cout << "waypoint.y_long: " <<waypoint.x_lat << endl;
+			cout << "waypoint.z_alt: " <<waypoint.x_lat << endl;
+*/		
+	
 			//waypoint.z_alt = geoPoint.altitude;
 
 		}
@@ -275,7 +276,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
         /* 비행 금지 구역 check */
 
 	bool noflyZone_violation = false;
-
+/*
 	eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // noflyZone 확인 서비스 요청 메시지	
 
 	ros::ServiceClient noflyZoneCheck_client = nh_ptr->serviceClient<eDrone_msgs::NoflyZoneCheck>("srv_noflyZoneCheck" );; // noflyZone 확인 서비스 클라이언트 
@@ -283,8 +284,8 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 	noflyZoneCheck_cmd.request.NFCheck_ref_system = "WGS84";
 
-	noflyZoneCheck_cmd.request.arg1 = waypoint.x_lat;
-	noflyZoneCheck_cmd.request.arg2 = waypoint.y_long;	
+	noflyZoneCheck_cmd.request.NFCheck_src.x_lat = waypoint.x_lat;
+	noflyZoneCheck_cmd.request.NFCheck_src.y_long = waypoint.y_long;	
 
 	ROS_INFO("eDrone_autoflight_node: trying to call NoflyZoneCheck service... ");
 	
@@ -304,7 +305,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 			}
 	
 		}
-	
+*/	
 	/* Geofence check */
 
 	bool geofence_violation = false;
@@ -313,8 +314,8 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 	ros::ServiceClient geofenceCheck_client = nh_ptr-> serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck"); // geofence 확인 서비스 클라이언트
 
 	geofenceCheck_cmd.request.geofence_ref_system = "WGS84";
-	geofenceCheck_cmd.request.arg1= waypoint.x_lat;
-        geofenceCheck_cmd.request.arg2= waypoint.y_long;
+	geofenceCheck_cmd.request.geofence_arg1= waypoint.x_lat;
+        geofenceCheck_cmd.request.geofence_arg2= waypoint.y_long;
 		
 	ROS_INFO("eDrone_autoflight_node: trying to call GeofenceCheck service");
 

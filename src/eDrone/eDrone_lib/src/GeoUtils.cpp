@@ -14,14 +14,167 @@
 #include <stdlib.h>
 #include <eDrone_lib/Vehicle.h>
 #include <eDrone_lib/GeoUtils.h>
+#include <eDrone_lib/types.h>
 
 using namespace std;
 using namespace Mission_API;
+
+// (2018.11.21)
+
+Vector_type crossproduct (Vector_type a, Vector_type b)
+{
+        Vector_type product;
+       // cout << "crossproduct()" <<endl;
+       // cout << "\tvector a: (" << a.x << ", " << a.y << ", " << a.z << ")" <<endl;
+       // cout << "\tvector b: (" << b.x << ", " << b.y << ", " << b.z << ")" <<endl;
+
+        product.x = 0;
+        product.y = 0;
+        product.z = a.x*b.y - a.y*b.x;
+
+
+
+
+        return product;
+}
+
+
+bool pathOverlap(Point src, Point dest, const vector<Point> polygon_area)
+{
+    bool result = false;
+
+    // 1) vector declaration
+    Vector_type directPath;
+    directPath.x = dest.x - src.x;
+    directPath.y = dest.y - src.y;
+    directPath.z = 0;
+
+    // cout << "pathOverlap" << endl;
+
+    //cout << "directPath: (" <<directPath.x << ", " << directPath.y << ") " << endl;
+
+    int pCnt = 0;
+
+    vector<Point> polygon = polygon_area;
+
+    for (vector<Point>::iterator it = polygon.begin(); it!= polygon.end(); it++)
+    {
+        Point p = *it;
+        //cout << "point#"<< pCnt << "(" << p.x << ", " << p.y << ")" << endl;
+        pCnt++;
+    }
+
+
+    //Vector_type polygon_lines[sizeof(polygon_area)];
+    Vector_type polygon_line;
+
+    // 2) check if src-dest path overlaps the polygon_area
+
+    bool crossing = false;
+    bool overlap = false;
+
+
+    for (int i =0; i < polygon_area.size(); i++)
+    {
+        Point p1 = polygon_area[i];
+        Point p2 = polygon_area[(i+1)%(polygon_area.size())];
+
+       // cout << "\npolygon_line: (" << p1.x << ", " << p1.y << ")->(" << p2.x << ", " << p2.y << ")" << endl;
+        polygon_line.x = p2.x - p1.x; // polygon line connects point#i and point#(i+1)
+        polygon_line.y = p2.y - p1.y;
+
+       // cout << "polygon_line.x:" << polygon_line.x << endl;
+       // cout << "polygon_line.y:" << polygon_line.y << endl;
+
+
+
+        // check if src-dest path overlaps i-th polygon_line
+
+        Vector_type vec1, vec2;
+
+        vec1.x = p1.x - src.x; // (src->p1)
+        vec1.y = p1.y - src.y;
+
+       //cout << "vec1: (" << src.x << ", " << src.y << ")->(" << p1.x << ", " << p1.y << ")" << endl;
+
+        vec2.x = p2.x - src.x; // (src->p2)
+        vec2.y = p2.y - src.y;
+
+        //cout << "vec2: (" << src.x << ", " << src.y << ")->(" << p2.x << ", " << p2.y << ")" << endl;
+
+        Vector_type product1 =  crossproduct(directPath, vec1);
+        Vector_type product2 =  crossproduct(directPath, vec2);
+
+        //cout << "product1: " << product1.z << endl;
+        //cout << "product2: " << product2.z << endl;
+
+        Vector_type vec3, vec4;
+
+        vec3.x = src.x - p1.x; // (p1->src)
+        vec3.y = src.y - p1.y;
+
+        //cout << "vec3: (" << p1.x << ", " << p1.y << ")->(" << src.x << ", " << src.y << ")" << endl;
+        //cout << "vec3.x: " << vec3.x << endl;
+        //cout << "vec3.y: " << vec3.y << endl;
+
+        vec4.x = dest.x - p1.x; // (p1->dest)
+        vec4.y = dest.y - p1.y;
+
+        //cout << "vec4: (" << p1.x << ", " << p1.y << ")->(" << dest.x << ", " << dest.y << ")" << endl;
+        //cout << "vec4.x: " << vec4.x << endl;
+        //cout << "vec4.y: " << vec4.y << endl;
+
+        Vector_type product3 = crossproduct(polygon_line, vec3);
+        Vector_type product4 = crossproduct(polygon_line, vec4);
+
+        //cout << "product3: " << product3.z << endl;
+        //cout << "product4: " << product4.z << endl;
+
+        if ( (product1.z*product2.z < 0) && ((product3.z*product4.z) < 0) )
+        {
+            crossing = true;
+            overlap = true;
+            // cout << "line crossing:" << endl;
+            break;
+        }
+    }
+
+    // 3) return result
+
+    if (overlap == true)
+    {
+        result = true;
+    }
+
+    return result;
+
+}
+
 
 
 //** 다각형 영역 내부 점 판단
 bool isInside(Point point, const vector<Point> polygon_area)
 {
+
+        //cout << "isInside()" << endl;
+
+        //cout << "<polygon>" << endl;
+        // print polygon
+        vector<Point> polygon = polygon_area;
+        for (vector<Point>::iterator it = polygon.begin();
+               it != polygon.end();
+                it++)
+        {
+            Point point = *it;
+            //cout << "(" << point.x << ", " << point.y << ", " << point.z << ")" << endl;
+
+        }
+
+        //cout <<"<point>" << endl;
+        //cout << "(" << point.x << ", " << point.y << ", " << point.z << ")" << endl;
+
+
+
 	bool result = false;
 
 	int crosses = 0; // point에서 오른쪽 방향 반직선과 polygon_area 간 교점 개수
@@ -53,6 +206,20 @@ bool isInside(Point point, const vector<Point> polygon_area)
 	else
 		result = false;
 	// ...
+
+        //cout << "crosses:" << crosses << endl;
+
+
+        if (result == true)
+        {
+
+            //cout << " point is inside the area" << endl;
+        }
+        else
+        {
+
+            // cout << " point is outside of the area" << endl;
+        }
 
 	return result;
 

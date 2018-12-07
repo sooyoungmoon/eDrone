@@ -1,8 +1,0 @@
-bool is_global
-float64 min_x_lat
-float64 min_y_long
-float64 max_x_lat
-float64 max_y_long
-float64 row_col_width
----
-bool value

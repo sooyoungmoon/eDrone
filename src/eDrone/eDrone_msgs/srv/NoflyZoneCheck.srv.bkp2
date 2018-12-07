@@ -1,0 +1,10 @@
+string NFCheck_ref_system
+Target NFCheck_src
+Target NFCheck_dst
+---
+bool value
+bool violation
+string result
+string ref_system
+Target pt1
+Target pt2

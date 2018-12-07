@@ -1,4 +1,0 @@
-float32 radius
-uint32 action
----
-bool value

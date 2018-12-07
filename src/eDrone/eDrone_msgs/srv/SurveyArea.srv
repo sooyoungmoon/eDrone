@@ -1,7 +1,6 @@
-string survey_ref_system
-float64 survey_altitude
-int64 interval
-geometry_msgs/Point[] boundary_pts_local
-geographic_msgs/GeoPoint[] boundary_pts_global
+string surveyArea_ref_system
+float64 surveyArea_altitude
+int64 surveyArea_interval
+eDrone_msgs/Target[] surveyArea_pts
 ---
 bool value

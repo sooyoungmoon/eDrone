@@ -1,7 +1,4 @@
-string ref_system
-bool is_global
-float32 x_lat
-float32 y_long
-float32 z_alt
+string goto_ref_system
+Target goto_point
 ---
 bool value
