@@ -14,13 +14,17 @@ find_package(catkin REQUIRED COMPONENTS
 	mavros_msgs	
 )
 
-
 # topic 선언
 # 사용되는 메시지 파일 목록: 현재 패키지 내 msg 디렉토리에 위치해야 함-->
 add_message_files(
 DIRECTORY msg
 FILES 
 Target.msg
+Phase.msg
+Heartbeat.msg
+NoflyZone.msg
+NoflyZones.msg
+Geofence.msg
 ) 
 
 # service 선언
@@ -42,16 +46,16 @@ MissionUpload.srv
 MissionDownload.srv
 MissionClear.srv
 Goto.srv
+GotoPath.srv
 GeofenceSet.srv
 GeofenceCheck.srv
 GeofenceReset.srv
 NoflyZoneSet.srv
 NoflyZoneReset.srv
 NoflyZoneCheck.srv
-Survey.srv
-Survey_New.srv
-SprayStart.srv
-SprayStop.srv
+SurveyArea.srv
+SurveyPath.srv
+Orbit.srv
 )
 
 # 메시지 생성을 위한 매크로 함수
@@ -95,7 +99,7 @@ include_directories(
 #)
 
 install (
-DIRECTORY include
+DIRECTORY inc
 DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 

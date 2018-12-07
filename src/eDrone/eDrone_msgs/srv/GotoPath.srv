@@ -1,0 +1,5 @@
+string gotoPath_ref_system
+float64 gotoPath_altitude
+eDrone_msgs/Target[] gotoPath_pts
+---
+bool value

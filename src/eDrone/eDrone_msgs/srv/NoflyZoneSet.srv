@@ -1,9 +1,4 @@
-string ref_system
-float64 pt1_arg1
-float64 pt1_arg2
-float64 pt1_arg3
-float64 pt2_arg1
-float64 pt2_arg2
-float64 pt2_arg3
+string noflyZoneSet_ref_system
+eDrone_msgs/Target[] noflyZoneSet_pts
 ---
 bool value

@@ -13,6 +13,7 @@
 #include <geometry_msgs/Vector3Stamped.h>
 #include <mavros_msgs/HomePosition.h>
 #include <mavros_msgs/State.h>
+#include <sensor_msgs/BatteryState.h>
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/CommandTOL.h>
 #include <mavros_msgs/CommandLong.h>
@@ -50,7 +51,7 @@ Vehicle* vehicle = Vehicle::getInstance();
 
 // (무인기 상태 정보 수신 목적)
 mavros_msgs::State current_state; // 무인기 상태 정보
-
+sensor_msgs::BatteryState battery_state; // 배터리 상태 정보 
 // (무인기 위치 확인 목적)
 geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
 sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
@@ -74,6 +75,7 @@ ros::Subscriber state_sub;
 ros::Subscriber pos_sub_local;
 ros::Subscriber pos_sub_global;
 ros::Subscriber home_sub;
+ros::Subscriber battery_sub;
 
 // 서비스 서버 선언
 
@@ -129,6 +131,11 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
 	
 	cout << "flight mode:" <<  cState.flight_mode << endl;
 */
+}
+
+void battery_cb (const sensor_msgs::BatteryState::ConstPtr& msg){
+	
+	battery_state = *msg;
 }
 
 
@@ -189,7 +196,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 	HOME_LON = home.longitude;		
 	HOME_ALT = home.altitude;
 	
-	printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
+	//printf("home position: (%f, %f, %f) \n", home.latitude, home.longitude, home.altitude);	
 }
 
 // callback 함수 (서비스 제공) 정의
@@ -206,11 +213,9 @@ bool srv_chkState_cb(eDrone_msgs::CheckState::Request &req, eDrone_msgs::CheckSt
 	res.armed = cState.armed;
 	res.connected = cState.connected;
 	res.mode.assign(cState.flight_mode);
-
+	res.battery_remain = battery_state.percentage;
 	res.value = true;	
-
 	return true;
-
 }
 
 bool srv_chkPosition_cb(eDrone_msgs::CheckPosition::Request &req, eDrone_msgs::CheckPosition::Response &res)
@@ -262,6 +267,10 @@ int main(int argc, char** argv)
 	state_sub = nh.subscribe<mavros_msgs::State> ("mavros/state", 10, state_cb);
 	pos_sub_local = nh.subscribe<geometry_msgs::PoseStamped> ("mavros/local_position/pose",10,  pos_cb_local); 
 	pos_sub_global = nh.subscribe<sensor_msgs::NavSatFix> ("mavros/global_position/global",10,  pos_cb_global); 
+
+
+	battery_sub = nh.subscribe<sensor_msgs::BatteryState> ("mavros/battery", 10, battery_cb);
+
 	home_sub = nh.subscribe<mavros_msgs::HomePosition> ("mavros/home_position/home", 10, homePosition_cb);
 
 	//// 서비스 서버 선언

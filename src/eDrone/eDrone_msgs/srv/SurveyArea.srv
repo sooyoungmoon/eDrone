@@ -1,0 +1,6 @@
+string surveyArea_ref_system
+float64 surveyArea_altitude
+int64 surveyArea_interval
+eDrone_msgs/Target[] surveyArea_pts
+---
+bool value

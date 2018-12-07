@@ -1,0 +1,5 @@
+string ref_system
+float64 altitude
+geometry_msgs/Point[] points
+---
+bool value

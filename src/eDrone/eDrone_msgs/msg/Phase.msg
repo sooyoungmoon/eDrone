@@ -1,0 +1,3 @@
+# The current phase of a UAV
+# ex) UNARMED, ARMED, TAKEOFF, GOTO, RTL, ...
+string phase

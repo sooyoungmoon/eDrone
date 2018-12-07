@@ -1,14 +1,6 @@
-string ref_system
-float64 arg1
-float64 arg2
-float64 arg3
+eDrone_msgs/Target noflyZoneCheck_src
+eDrone_msgs/Target noflyZoneCheck_dest
 ---
 bool value
-bool violation
-string ref_system
-float64 pt1_arg1
-float64 pt1_arg2
-float64 pt1_arg3
-float64 pt2_arg1
-float64 pt2_arg2
-float64 pt2_arg3
+string result
+

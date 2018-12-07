@@ -25,7 +25,7 @@ namespace Mission_API
 	class GeoInfo
 	{
 		private:
-			GeoInfo(){printf("GeoInfo(): cnt is %d", cnt); };
+			GeoInfo(){ };
 			~GeoInfo(){instanceFlag = false;};
 
 			static bool instanceFlag;
