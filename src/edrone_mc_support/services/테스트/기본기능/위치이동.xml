@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="" name="위치이동">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="CheckState" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="armed" type="bool"/>
+    <param default="" description="" io="out" name="connected" type="bool"/>
+    <param default="" description="" io="out" name="mode" type="string"/>
+    <param default="" description="" io="out" name="battery_remain" type="float64"/>
+  </service>
+  <service description="" name="CheckPosition" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="latitude" type="float64"/>
+    <param default="" description="" io="out" name="longitude" type="float64"/>
+    <param default="" description="" io="out" name="altitude" type="float64"/>
+    <param default="" description="" io="out" name="x" type="float64"/>
+    <param default="" description="" io="out" name="y" type="float64"/>
+    <param default="" description="" io="out" name="z" type="float64"/>
+  </service>
+  <service description="" name="Arming" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Takeoff" priority="5.0">
+    <param default="" description="" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Goto" priority="5.0">
+    <param default="" description="" io="in" name="goto_ref_system" ptype="Text" type="string"/>
+    <param default="3;float64,x_lat,100,None,None,None;float64,y_long,100,0,1000,None;float64,z_alt,30,5,100,None;" description="" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>

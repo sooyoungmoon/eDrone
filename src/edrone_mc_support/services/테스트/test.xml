@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="" name="test">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="Goto" priority="5.0">
+    <param default="" description="" io="in" name="goto_ref_system" ptype="Text" type="string"/>
+    <param default="2;int64,new,10,None,None,None;int64,new2,20,None,None,None;" description="" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="NoflyZoneSet" priority="5.0">
+    <param default="" description="" io="in" name="noflyZoneSet_ref_system" ptype="Text" type="string"/>
+    <param default="3;int32,member,5,10,None;int8,member2,3,15,None;int64,member3,None,None,None;10,20,30,11,21,31" description="" io="in" name="noflyZoneSet_pts" ptype="Vector" type="eDrone_msgs/Target[]"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+
+<basicType from="string" to="std::string"/>
+<basicType from="int8" to="int"/>
+<basicType from="int16" to="int"/>
+<basicType from="int32" to="int"/>
+<basicType from="int64" to="int"/>
+<basicType from="float32" to="double"/>
+<basicType from="float64" to="double"/>
+<basicType from="uint8" to="uint"/>
+<basicType from="uint16" to="uint"/>
+<basicType from="uint32" to="uint"/>
+<basicType from="uint64" to="uint"/>
+<basicType from="bool" to="bool"/>
+
+<customType name="Point">
+<member type="int32" name="x"/>
+<member type="int32" name="x"/>
+<member type="int32" name="x"/>
+</customType>
+
+</root>
