@@ -309,7 +309,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 	/* Geofence check */
 
 	bool geofence_violation = false;
-	
+/*
 	eDrone_msgs::GeofenceCheck geofenceCheck_cmd;
 	ros::ServiceClient geofenceCheck_client = nh_ptr-> serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck"); // geofence 확인 서비스 클라이언트
 
@@ -341,7 +341,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 		}
 		
 	}
-
+*/
 	 if (noflyZone_violation != true && geofence_violation!=true)
 	{	
 		waypoints.push_back(waypoint);	

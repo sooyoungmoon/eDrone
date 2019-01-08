@@ -1,6 +1,0 @@
-string NoflyZoneCheck_ref_system
-eDrone_msgs/Target NoflyZoneCheck_src
-eDrone_msgs/Target NoflyZoneCheck_dest
----
-bool value
-

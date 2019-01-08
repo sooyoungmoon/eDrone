@@ -2423,7 +2423,21 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 	vector<Target_Position> coveragePath;
 
 	if (req.surveyArea_ref_system == "ENU")
-	{	
+        {
+            //// Geofence 검사 (2019.01.07)
+            for (vector<Target>::iterator it = req.surveyArea_pts.begin(); it != req.surveyArea_pts.end(); it++)
+            {
+                    Target target = *it;
+                    double distance_to_home = sqrt ( pow ( (double) target.x_lat, (double) 2) + pow ( (double) target.y_long , (double) 2) );
+                    if (distance_to_home > geofence.geofence_radius)
+                    {
+                        cout << "control_node - surveyArea_cb(): target Area is outside of the geofence!!" << endl;
+                        res.value = false;
+                        return true;
+                    }
+            }
+            ////
+
 		coveragePath = getCoveragePath(req.surveyArea_pts, req.surveyArea_altitude, req.surveyArea_interval);	
 	}
 	else if (req.surveyArea_ref_system == "WGS84")
@@ -2441,10 +2455,39 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 			Point point = convertGeoToENU(target.x_lat, target.y_long, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
 			target.x_lat = point.x;
 			target.y_long = point.y;	
+
+                        //// geofence check (2019.01.07)
+                        double distance_to_home = sqrt ( pow ( (double) target.x_lat, (double) 2) + pow ( (double) target.y_long , (double) 2) );
+                        if (distance_to_home > geofence.geofence_radius)
+                        {
+                            cout << "control_node - surveyArea_cb(): target Area is outside of the geofence!!" << endl;
+                            res.value = false;
+                            return true;
+                        }
+
+                        //// geofence check (2019.01.07)
+                        /*
+                         * double distance_to_home = sqrt ( pow ( (double) target.x_lat, (double) 2) + pow ( (double) target.y_long , (double) 2) );
+                        if (distance_to_home > geofence.geofence_radius)
+                        {
+                            cout << "control_node - surveyArea_cb(): target Area is outside of the geofence!!" << endl;
+                            res.value = false;
+                            return true;
+                        }
+                         *
+                         */
+
+
+                        ////
+
+
+
 			target.ref_system = "ENU";		
 			surveyArea_pts.push_back(target);
 
 		}
+
+
 
 		coveragePath = getCoveragePath(surveyArea_pts, req.surveyArea_altitude, req.surveyArea_interval);	
 
@@ -2472,6 +2515,7 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 //	path.insert( path.end(), coveragePath.begin(), coveragePath.end() );
 
 	result = true;
+        res.value = true;
 	return result;
 }
 
@@ -2493,6 +2537,22 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req, eDrone_msgs::Orbit::Response
 	if (req.orbit_ref_system == "ENU")
 	{
 		orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
+
+                //// Geofence 검사 (2019.01.07)
+
+                Target target;
+                target.x_lat = req.orbit_center.x_lat;
+                target.y_long = req.orbit_center.y_long;
+
+                double distance_to_home = sqrt ( pow ( (double) target.x_lat, (double) 2) + pow ( (double) target.y_long , (double) 2) );
+                        if ( (distance_to_home + req.orbit_radius) > geofence.geofence_radius)
+                        {
+                            cout << "control_node - orbit_cb(): target area is outside of the geofence!!" << endl;
+                            res.value = false;
+                            return true;
+                        }
+
+                ////
 
 	
 		// #1. (기준점과 r로 결정되는 원)과 (현 위치와 기준점을 잇는 직선) 사이의 교점 (2개)을 구하고 그 중 현 위치에 더 가까운 지점을 path에 추가 (선회 비행 시작점)
@@ -2658,6 +2718,23 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req, eDrone_msgs::Orbit::Response
 	else if (req.orbit_ref_system == "WGS84" )
 	{
             orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
+             Point orbit_center_point = convertGeoToENU(req.orbit_center.x_lat, req.orbit_center.y_long, req.orbit_center.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+
+            //// Geofence 검사 (2019.01.07)
+
+            Target target;
+            target.x_lat = orbit_center_point.x;
+            target.y_long = orbit_center_point.y;
+
+            double distance_to_home = sqrt ( pow ( (double) target.x_lat, (double) 2) + pow ( (double) target.y_long , (double) 2) );
+                    if ( (distance_to_home + req.orbit_radius) > geofence.geofence_radius)
+                    {
+                        cout << "control_node - orbit_cb(): target area is outside of the geofence!!" << endl;
+                        res.value = false;
+                        return true;
+                    }
+
+            ////
 
 
             // #1. (기준점과 r로 결정되는 원)과 (현 위치와 기준점을 잇는 직선) 사이의 교점 (2개)을 구하고 그 중 현 위치에 더 가까운 지점을 path에 추가 (선회 비행 시작점)
@@ -2673,7 +2750,7 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req, eDrone_msgs::Orbit::Response
             // (y 절편): intercept_y = cur_position.y -  inclination * cur_position.x
 
             ////// (1205)
-            Point orbit_center_point = convertGeoToENU(req.orbit_center.x_lat, req.orbit_center.y_long, req.orbit_center.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+           // Point orbit_center_point = convertGeoToENU(req.orbit_center.x_lat, req.orbit_center.y_long, req.orbit_center.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
 
             double inclination = (orbit_center_point.y - cur_position.y ) / (orbit_center_point.x - cur_position.x);
             double A = inclination;
