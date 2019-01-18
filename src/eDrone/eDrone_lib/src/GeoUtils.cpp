@@ -8,7 +8,8 @@
  *
  ****************************************************************************/
 
-
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Vector3Stamped.h>
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -153,6 +154,41 @@ bool pathOverlap(Point src, Point dest, const vector<Point> polygon_area)
 
 
 //** 다각형 영역 내부 점 판단
+
+// (2019.01.10) isInside function
+bool isInside2(Target point, vector<Target> polygon_area, float HOME_LAT, float HOME_LONG, float HOME_ALT)
+{
+    // ENU Coordinates are assumed - need conversion when calling the function
+
+    bool result = false;
+
+    Point pt;
+
+        pt.x = point.x_lat;
+        pt.y = point.y_long;
+        pt.z = point.z_alt;
+
+    vector<Point> poly_area;
+
+    for (vector<Target>::iterator it = polygon_area.begin(); it != polygon_area.end(); it++)
+    {
+        Target target = *it;
+        Point temp_p;
+
+        temp_p.x = target.x_lat;
+        temp_p.y = target.y_long;
+        temp_p.z = target.z_alt;
+
+        poly_area.push_back(temp_p);
+    }
+
+    result = isInside (pt, poly_area);
+
+
+    return result;
+
+}
+
 bool isInside(Point point, const vector<Point> polygon_area)
 {
 
@@ -196,7 +232,6 @@ bool isInside(Point point, const vector<Point> polygon_area)
 				crosses++;
 			}
 		}
-
 	}
 	
 	if ( (crosses%2) > 0)
@@ -227,7 +262,7 @@ bool isInside(Point point, const vector<Point> polygon_area)
 
 
 
-//** GeoPoint (위도/경도/고도) <=> ENU 좌표 변환 코드 (QGC에서 발췌)
+//** GeoPoint (위도/경도/고도) <=> ENU 좌표 변환 코드
 
 Point convertGeoToENU(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt) {
 
@@ -362,20 +397,30 @@ GeoPoint convertENUToGeo(double x, double y, double z, double home_lat, double h
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 
-
+/*
 double deg2rad(double deg) {
   return (deg * PI / 180);
 }
-
+*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::  This function converts radians to decimal degrees             :*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-
+/*
 double rad2deg(double rad) {
   return (rad * 180 / PI);
 }
+*/
 
+double distance (Target p1, Target p2)
+{
+    double dist;
+    // ...
+    return dist;
+
+}
+
+/*
 double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
   double theta, dist;
   theta = lon1 - lon2;
@@ -399,3 +444,4 @@ double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
   }
   return (dist);
 }
+*/
