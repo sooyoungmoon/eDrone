@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description=" 비행금지구역 설정 및 우회 " name="NoflyZone">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="CheckState" priority="5.0">
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+    <param default="" description=" 기체 시동 여부 (T/F)" io="out" name="armed" type="bool"/>
+    <param default="" description=" MC-FC 연결 여부 (T/F)" io="out" name="connected" type="bool"/>
+    <param default="" description=" 비행 모드 " io="out" name="mode" type="string"/>
+    <param default="" description=" 배터리 잔량 " io="out" name="battery_remain" type="float64"/>
+  </service>
+  <service description="" name="CheckPosition" priority="5.0">
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+    <param default="" description=" 위도" io="out" name="latitude" type="float64"/>
+    <param default="" description=" 경도 " io="out" name="longitude" type="float64"/>
+    <param default="" description=" 고도 " io="out" name="altitude" type="float64"/>
+    <param default="" description=" x 좌표 " io="out" name="x" type="float64"/>
+    <param default="" description="  y 좌표 " io="out" name="y" type="float64"/>
+    <param default="" description="  z 좌표 " io="out" name="z" type="float64"/>
+  </service>
+  <service description="" name="NoflyZoneSet" priority="5.0">
+    <param back_value="2,ENU,WGS84" default="ENU" description=" 사용 좌표계" io="in" name="noflyZoneSet_ref_system" ptype="Combo" type="string"/>
+    <param default="3;float64,x_lat;float64,y_long;float64,z_alt;5,5,10,5,15,10,15,15,10,15,5,10" description="  비행금지구역 경계점 목록 " io="in" name="noflyZoneSet_pts" ptype="Vector" type="eDrone_msgs/Target[]"/>
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Arming" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Takeoff" priority="5.0">
+    <param default="10" description=" 이륙 고도 " io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Goto" priority="5.0">
+    <param back_value="2,ENU,WGS84" default="ENU" description="  사용 좌표계 " io="in" name="goto_ref_system" ptype="Combo" type="string"/>
+    <param default="3;float64,x_lat,20;float64,y_long,30;float64,z_alt,10;" description=" 위치 이동 좌표" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description=" API 호출 결과 (T/F)" io="out" name="value" type="bool"/>
+  </service>
+</section>

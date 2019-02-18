@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="" name="newservice">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="Arming" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Takeoff" priority="9.0">
+    <param default="" description="" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Goto" priority="5.0">
+    <param default="" description="" io="in" name="goto_ref_system" ptype="Text" type="string"/>
+    <param default="3;int32,x,10,10,100,30;int32,y,20,10,100,30;int32,z,15,10,100,30;" description="" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>

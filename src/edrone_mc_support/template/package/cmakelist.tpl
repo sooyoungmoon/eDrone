@@ -25,6 +25,11 @@ find_package(
 	?[DEP]
 )
 
+#add_compile_options(-std=c++11 -Wno-deprecated-declarations)
+
+#if(NOT EDrone)
+add_compile_options(-std=c++11 -Wno-deprecated-declarations)
+#endif()
 
 #find_library (
 #eDroneLIB
@@ -40,6 +45,8 @@ catkin_package(
 	CATKIN_DEPENDS
 	?[DEP]
 )
+
+if(EDrone)
 include_directories(
 	# ~/devel/.private/eDrone_lib/lib
 	~	
@@ -55,11 +62,23 @@ include_directories(
 	/usr/local/include
 )
 
+else()
+include_directories(
+	# ~/devel/.private/eDrone_lib/lib
+	~	
+	inc
+	${catkin_INCLUDE_DIRS}
+	/usr/include
+	/usr/local/include
+)
+endif()
+
 #link_directories(~/catkin_ws/devel/lib)
 add_executable(ex_?[PRJ] src/ex_?[PRJ].cpp)
 add_dependencies (
 	ex_?[PRJ]
 	${${PROJECT_NAME}_EXPORTED_TARGETS}
 	${catkin_EXPORTED_TARGETS}
+	
 )
 target_link_libraries(ex_?[PRJ] ${catkin_LIBRARIES} )

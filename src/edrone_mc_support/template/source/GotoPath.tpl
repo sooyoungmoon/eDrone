@@ -68,17 +68,17 @@ ros::ServiceClient gotoPath_client = nh.serviceClient<eDrone_msgs::GotoPath>("sr
 				numCnt++;
 				token = gotoPath_pts_str.substr(0, delimiter_pos);
 				gotoPath_pts_str = gotoPath_pts_str.substr (delimiter_pos+1);
-				cout << "token: " << token << endl;
+				//cout << "token: " << token << endl;
 				strVector.push_back(token);
-				cout << "gotoPath_pts_str: " << gotoPath_pts_str << endl;
+				//cout << "gotoPath_pts_str: " << gotoPath_pts_str << endl;
 				delimiter_pos = gotoPath_pts_str.find(",");
 			}
 
 			token = gotoPath_pts_str.substr(0, delimiter_pos);
 			strVector.push_back(token);
 			numCnt++;
-			cout << "token: " << token << endl;
-			cout << "numCnt: " << numCnt << endl;
+			//cout << "token: " << token << endl;
+			//cout << "numCnt: " << numCnt << endl;
 
 		// 도구에서 자동 생성 요 (종료)
 

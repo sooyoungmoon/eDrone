@@ -14,4 +14,5 @@
   <section annotation=" ROS Service Client 객체 " name="section_main_service_client"/>
   <section annotation="ROS Service 호출" name="section_main_service_call"/>
   <section annotation="end of main" name="section_end"/>
+  <section annotation="this is new section" name="new_section"/>
 </root>

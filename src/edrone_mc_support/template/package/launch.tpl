@@ -8,7 +8,7 @@ DEP : dependencies
 <launch>  
 <!-- connection setup -->  
 
-	<arg name="fcu_url" default="udp://:14540@129.254.189.194:14557" />  
+	<arg name="fcu_url" default="udp://:14540@129.254.189.194:14570" />    
 	<arg name="gcs_url" default="" />  
 	<!-- <arg name="gcs_url" default="udp://@127.0.0.1:14550" /> -->  
 	<arg name="tgt_system" default="1" />  

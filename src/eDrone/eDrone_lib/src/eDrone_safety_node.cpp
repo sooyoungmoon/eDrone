@@ -525,10 +525,10 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 
 	cout << "noflyZoneCheck_cb() " << endl;
 
-        cout << "src: (" <<  req.noflyZoneCheck_src.x_lat << ", " << req.noflyZoneCheck_src.y_long << ", " << req.noflyZoneCheck_src.z_alt << ")" <<endl;
-        cout << "dest: (" <<  req.noflyZoneCheck_dest.x_lat << ", " << req.noflyZoneCheck_dest.y_long << ", " << req.noflyZoneCheck_dest.z_alt << ")" <<endl;
+       // cout << "src: (" <<  req.noflyZoneCheck_src.x_lat << ", " << req.noflyZoneCheck_src.y_long << ", " << req.noflyZoneCheck_src.z_alt << ")" <<endl;
+       // cout << "dest: (" <<  req.noflyZoneCheck_dest.x_lat << ", " << req.noflyZoneCheck_dest.y_long << ", " << req.noflyZoneCheck_dest.z_alt << ")" <<endl;
 	
-	cout << "target type: " << req.noflyZoneCheck_dest.ref_system << endl;
+        //cout << "target type: " << req.noflyZoneCheck_dest.ref_system << endl;
 
 
 	//#2 목적지가 비행금지구역에 속하는 지 여부 확인 

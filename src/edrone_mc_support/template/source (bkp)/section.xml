@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+  <section annotation="include" name="section_include"/>
+  <section annotation="namespace" name="section_namespace"/>
+  <section annotation="포인터 변수 선언" name="section_pointer_variables"/>
+  <section annotation="콜백 함수 정의" name="section_topic_callback_functions"/>
+  <section annotation="begin of main" name="section_main"/>
+  <section annotation="ROS node 초기화" name="section_main_init"/>
+  <section annotation="Topic 메시지 변수 " name="section_main_topic_msg_variables"/>
+  <section annotation="Service 메시지 변수" name="section_main_service_msg_variables"/>
+  <section annotation="Topic Subscriber 객체 " name="section_main_topic_subscriber"/>
+  <section annotation=" ROS Service Client 객체 " name="section_main_service_client"/>
+  <section annotation="ROS Service 호출" name="section_main_service_call"/>
+  <section annotation="end of main" name="section_end"/>
+</root>

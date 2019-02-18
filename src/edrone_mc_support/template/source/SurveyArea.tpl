@@ -45,7 +45,7 @@ SURVEYAREA_PTS:SURVEYAREA_PTS
 				numCnt++;
 				token = surveyArea_pts.substr(0, delimiter_pos);
 				surveyArea_pts = surveyArea_pts.substr (delimiter_pos+1);
-				cout << "token: " << token << endl;
+				//cout << "token: " << token << endl;
 				strVector.push_back(token);
 				cout << "surveyArea_pts: " << surveyArea_pts << endl;
 				delimiter_pos = surveyArea_pts.find(",");
@@ -54,8 +54,8 @@ SURVEYAREA_PTS:SURVEYAREA_PTS
 			token = surveyArea_pts.substr(0, delimiter_pos);
 			strVector.push_back(token);
 			numCnt++;
-			cout << "token: " << token << endl;
-			cout << "numCnt: " << numCnt << endl;
+			//cout << "token: " << token << endl;
+			//cout << "numCnt: " << numCnt << endl;
 
 
 			// 문자열 벡터에 저장된 token들을 숫자로 변환 - 벡터 타입에 맞게 저장 (사용자가 코드 템플릿에 명시)

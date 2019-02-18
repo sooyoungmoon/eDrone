@@ -22,6 +22,8 @@ using namespace Mission_API;
 
 // (2018.11.21)
 
+bool isOnLine(Point point, Point p1, Point p2);
+
 Vector_type crossproduct (Vector_type a, Vector_type b)
 {
         Vector_type product;
@@ -232,6 +234,17 @@ bool isInside(Point point, const vector<Point> polygon_area)
 				crosses++;
 			}
 		}
+
+                // (2019.02.12) if the point is one of the polygon boundary lines, we consider it is included in the polygon area
+                // (for noflyZoneChek)
+
+                if ( isOnLine(point, polygon_area[i], polygon_area[j]) == true)
+                {
+                    //cout << "point (" << point.x << ", " << point.y << ") is inside the noflyZone" << endl;
+
+                    result = true;
+                    return result;
+                }
 	}
 	
 	if ( (crosses%2) > 0)
@@ -260,6 +273,51 @@ bool isInside(Point point, const vector<Point> polygon_area)
 
 }
 
+// (2019.02.13)
+// check if a point is on line (p1-p2)
+
+bool isOnLine (geometry_msgs::Point point, geometry_msgs::Point p1, geometry_msgs::Point p2)
+{
+    bool result;
+
+    double inclination = 0;
+    double y_intercept = 0;
+
+    if ( abs( p1.x - p2.x) > 0.1)
+    {
+        inclination = (p2.y - p1.y) / (p2.x - p1.x);
+        y_intercept = p1.y - inclination * p1.x;
+
+        //cout << " inclination: " << inclination << endl;
+        //cout << " y_intercept: " << y_intercept << endl;
+
+
+        if ( abs( inclination * point.x + y_intercept - point.y) < 0.1)
+        {
+            if ( (point.x <= p1.x) != (point.x <= p2.x) )
+            {
+                result = true;
+            }
+            else
+                result = false;
+        }
+        else
+            result = false;
+
+        return result;
+    }
+    else // p1.x == p2.x;
+    {
+        if ( ( (point.y <= p1.y) != (point.y <= p2.y)) &&  abs(point.x - p1.x) < 0.1)
+        {
+            result = true;
+        }
+        else
+            result = false;
+    }
+
+    return result;
+}
 
 
 //** GeoPoint (위도/경도/고도) <=> ENU 좌표 변환 코드

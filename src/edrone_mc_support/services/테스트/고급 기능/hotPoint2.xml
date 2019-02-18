@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="" name="hotPoint2">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="CheckState" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="armed" type="bool"/>
+    <param default="" description="" io="out" name="connected" type="bool"/>
+    <param default="" description="" io="out" name="mode" type="string"/>
+    <param default="" description="" io="out" name="battery_remain" type="float64"/>
+  </service>
+  <service description="" name="CheckPosition" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="latitude" type="float64"/>
+    <param default="" description="" io="out" name="longitude" type="float64"/>
+    <param default="" description="" io="out" name="altitude" type="float64"/>
+    <param default="" description="" io="out" name="x" type="float64"/>
+    <param default="" description="" io="out" name="y" type="float64"/>
+    <param default="" description="" io="out" name="z" type="float64"/>
+  </service>
+  <service description="" name="Arming" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Takeoff" priority="5.0">
+    <param default="None,None,None;10" description="" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Orbit" priority="5.0">
+    <param default="None,None,None;ENU" description="" io="in" name="orbit_ref_system" ptype="Text" type="string"/>
+    <param default="3;int64,x_lat,50,None,None,None;int64,y_long,50,None,None,None;int64,z_alt,10,None,None,None;" description="" io="in" name="orbit_center" ptype="Class" type="Target"/>
+    <param default="None,None,None;10" description="" io="in" name="orbit_radius" ptype="Text" type="float64"/>
+    <param default="None,None,None;1" description="" io="in" name="orbit_req_cnt" ptype="Text" type="int64"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>

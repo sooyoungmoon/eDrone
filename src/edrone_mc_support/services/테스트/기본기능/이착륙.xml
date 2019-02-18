@@ -30,11 +30,15 @@
     <param default="false" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
   </service>
   <service description="무인기　이륙　명령" name="Takeoff" priority="5.0">
-    <param default="10" description="이륙　고도（meter)" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="5,None,None;10" description="이륙　고도（meter)" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
     <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
   </service>
-  <service description="무인기 착륙 명령" name="Landing" priority="8.0">
-    <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
+  <service description="" name="Goto" priority="5.0">
+    <param default="" description="" io="in" name="goto_ref_system" ptype="Text" type="string"/>
+    <param default="" description="" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
   </service>
- 
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
 </section>

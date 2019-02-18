@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section name="고해상도" description="측량을 위한 고해상도 영상 수집 예제입니다.">
+
+	<!-- topics -->
+	<topic name="Target">
+		<field type="unit16" name="target_seq_no" />
+		<field type="bool" name="is_global" />
+		<field type="float64" name="x_lat" />
+		<field type="float64" name="y_long" />
+		<field type="float64" name="z_alt" />
+		<field type="bool" name="reached" />
+	</topic>
+	<topic name="Phase">
+		<field type="String" name="phase" />
+	</topic>
+	
+	
+	
+	<!-- services -->
+	<service name="CheckState" priority="10" description="무인기　현재　상태　확인">
+		<param io="out" type="bool" name="value" default="10"
+			description="서비스　호출　성공　여부　(True/False)" />
+		<param io="out" type="bool" name="armed" default="10"
+			description="시동여부 (True/False)" />
+		<param io="out" type="bool" name="connected" default="10"
+			description="MC-FCC 연결 여부 (True/False)" />
+		<param io="out" type="string" name="mode" default="10"
+			description="비행모드" />
+	</service>
+	
+
+	<service name="CheckPosition" priority="9" description="무인기　현재　위치　확인">
+		<param io="out" type="bool" name="value" default="10"
+			description="서비스　호출　성공　여부　(True/False)" />
+		<param io="out" type="float64" name="latitude" default="10"
+			description="（WGS84) 위도" />
+		<param io="out" type="float64" name="longitude" default="10"
+			description="(WGS84) 경도" />
+		<param io="out" type="float64" name="altitude" default="10"
+			description="(WGS84) 고도" />
+		<param io="out" type="float64" name="x" default="10"
+			description="(ENU) x좌표" />
+		<param io="out" type="float64" name="y" default="10"
+			description="(ENU)　y좌표" />
+		<param io="out" type="float64" name="z" default="10"
+			description="(ENU)　z좌표" />
+	</service>
+	<service name="Arming" priority="8" description="무인기　시동　명령">
+		<param io="out" type="bool" name="value" default="false"
+			description="서비스　호출　성공　여부　(True/False)" />
+	</service>
+
+	<service name="Takeoff" priority="7" description="무인기　이륙　명령">
+		<param io="in" type="float32" name="altitude" default="10"
+			description="이륙　고도（meter)" />
+		<param io="out" type="bool" name="value" default="10"
+			description="서비스　호출　성공　여부　(True/False)" />
+	</service>
+	
+	<service name="SurveyArea">
+		<param io="in" type="string" name="survey_ref_system"
+			default="ENU" description="좌표계" />
+		<param io="in" type="float64" name="survey_altitude"
+			default="10" description="고도" />
+		<param io="in" type="int64" name="interval" default="5"
+			description="인접 경로 사이의 간격" />
+		<param io="in" type="geometry_msgs/Point[]"
+			name="boundary_pts_local" default="" description="경계점 (ENU)" />
+		<param io="in" type="geographic_msgs/GeoPoint[]"
+			name="boundary_pts_global" default="" description="경계점 (WGS84)" />
+		<param io="out" type="bool" name="value" />
+	</service>
+
+	<!-- 
+	<service name="SurveyArea" description="영역 탐색 명령">
+		<param io="in" type="string" name="survey_ref_system"
+			default="ENU" description="사용 
+		좌표계 (ENU or WGS84)" />
+		<param io="in" type="float64" name="survey_altitude"
+			default="10" description="영역 탐색 고도 (meter)" />
+		<param io="in" type="int64" name="interval" default="5"
+			description="인접한 경로 사이의 간격 (meter)" />
+		<param io="in" type="geometry_msgs/Point[]"
+			name="boundary_pts_local" description="경계점 목록 (ENU 좌표 사용 시)" />
+		<param io="in" type="geographic_msgs/GeoPoint[]"
+			name="boundary_pts_global" default=""
+			description="경계점 목록 (WGS84 좌표 사용 
+		시)" />
+		<param io="out" type="bool" name="value" default="10"
+			description="서비스 
+		호출 성공 여부 (True/False)" />
+	</service>
+ 	-->
+
+
+	<service name="RTL" priority="5" description="복귀명령">
+		<param io="out" type="bool" name="value" default="True"
+			description="서비스　호출　성공　여부　(True/False)" />
+	</service>
+</section>

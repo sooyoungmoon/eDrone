@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="정해진 경로로 자동 비행 " name="autoflight">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="" name="CheckPosition" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="latitude" type="float64"/>
+    <param default="" description="" io="out" name="longitude" type="float64"/>
+    <param default="" description="" io="out" name="altitude" type="float64"/>
+    <param default="" description="" io="out" name="x" type="float64"/>
+    <param default="" description="" io="out" name="y" type="float64"/>
+    <param default="" description="" io="out" name="z" type="float64"/>
+  </service>
+  <service description="" name="CheckState" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+    <param default="" description="" io="out" name="armed" type="bool"/>
+    <param default="" description="" io="out" name="connected" type="bool"/>
+    <param default="" description="" io="out" name="mode" type="string"/>
+    <param default="" description="" io="out" name="battery_remain" type="float64"/>
+  </service>
+  <service description="" name="Arming" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="Takeoff" priority="5.0">
+    <param default="" description="" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="MissionAddItem" priority="5.0">
+    <param default="3;float64,x_lat,50,None,None,None;float64,y_long,50,None,None,None;float64,z_alt,10,5,100,None;" description="" io="in" name="missionAddItem_waypoint" ptype="Class" type="mavros_msgs/Waypoint"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="MissionAddItem" priority="5.0">
+    <param default="3;float64,x_lat,50,None,None,None;float64,y_long,100,None,None,None;float64,z_alt,10,5,100,None;" description="" io="in" name="missionAddItem_waypoint" ptype="Class" type="mavros_msgs/Waypoint"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="MissionAddItem" priority="5.0">
+    <param default="3;float64,x_lat,100,None,None,None;float64,y_long,100,None,None,None;float64,z_alt,10,None,None,None;" description="" io="in" name="missionAddItem_waypoint" ptype="Class" type="mavros_msgs/Waypoint"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="MissionAddItem" priority="5.0">
+    <param default="3;float64,x_lat,100,None,None,None;float64,y_long,50,None,None,None;float64,z_alt,10,None,None,None;" description="" io="in" name="missionAddItem_waypoint" ptype="Class" type="mavros_msgs/Waypoint"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="MissionUpload" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="ModeChange" priority="5.0">
+    <param back_value="2,AUTO.MISSION,OFFBOARD,RTL" default="AUTO.MISSION" description="" io="in" name="modeChange_mode" ptype="Combo" type="string"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>

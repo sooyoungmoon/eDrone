@@ -37,16 +37,15 @@ ORBIT_REQ_CNT:ORBIT_REQ_CNT
 ---section_main_service_call	
    // Orbit
 	while (cur_phase.phase.compare ("READY")!=0)
-	{
-		ros::spinOnce();
-		rate.sleep();
-		cout << "cur_phase: " << cur_phase_ptr->phase << endl;      
-	}
-	
+		{
+			ros::spinOnce();
+			rate.sleep();
+			cout << "cur_phase: " << cur_phase_ptr->phase << endl;
+		}
 	string orbit_ref_system = ?[ORBIT_REF_SYSTEM];
-	
 	Target orbit_center;
-	string orbit_center_str = ?[ORBIT_CENTER];
+	string orbit_center_str = ?[ORBIT_CENTER]; // template에 포함
+	
 	orbit_cmd.request.orbit_ref_system = orbit_ref_system;
 	
 	// Target이 구조체이므로 orbit_center을 초기화 하는데 필요한 문자열 변수 (orbit_center_str)가 선언되었다는 가정 하에 아래 코드 생성  	
@@ -57,6 +56,7 @@ ORBIT_REQ_CNT:ORBIT_REQ_CNT
 	
 	  // 2) 명령줄 인자에 의한 초기화의 경우 
 	  // orbit_center_str = argv[i]; 
+
 
 	// 1), 2) 공통  
 	{
@@ -99,6 +99,7 @@ ORBIT_REQ_CNT:ORBIT_REQ_CNT
 			orbit_cmd.request.orbit_center = orbit_center;
 	} 
 		
+
 	double orbit_radius = ?[ORBIT_RADIUS];
 	orbit_cmd.request.orbit_radius = orbit_radius;
 
@@ -111,17 +112,15 @@ ORBIT_REQ_CNT:ORBIT_REQ_CNT
 
 	if (orbit_cmd.response.value == true) // 서비스 호출 결과 확인 
 	{
-		ROS_INFO("Orbit command was called\n");
-
-		while (cur_phase.phase.compare ("READY") ==0)
-		{
-				ros::spinOnce();
-				rate.sleep();
-				cout << "cur_phase: " << cur_phase_ptr->phase << endl;
-		}
+		ROS_INFO("Orbit command was sent to FC\n");
 	}
 
-
+	while (cur_phase.phase.compare ("READY")==0)
+		{
+			ros::spinOnce();
+			rate.sleep();
+			cout << "cur_phase: " << cur_phase_ptr->phase << endl;
+		}
 ---
 
 

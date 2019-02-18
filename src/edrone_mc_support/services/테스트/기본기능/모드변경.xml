@@ -30,11 +30,11 @@
     <param default="false" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
   </service>
   <service description="무인기　이륙　명령" name="Takeoff" priority="5.0">
-    <param default="10" description="이륙　고도（meter)" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="None,None,None;10" description="이륙　고도（meter)" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
     <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
   </service>
   <service description="비행 모드 변경" name="ModeChange" priority="5.0">
-    <param default="OFFBOARD" description=" 비행 모드" io="in" name="modeChange_mode" ptype="Text" type="string"/>
+    <param default="None,None,None;OFFBOARD" description=" 비행 모드" io="in" name="modeChange_mode" ptype="Text" type="string"/>
     <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
   </service>
 </section>

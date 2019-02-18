@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<section description="무인기 위치이동 API 기능 테스트" name="위치이동_new">
+  <topic name="Target">
+    <field name="target_seq_no" type="uint16"/>
+    <field name="is_global" type="bool"/>
+    <field name="x_lat" type="float64"/>
+    <field name="y_long" type="float64"/>
+    <field name="z_alt" type="float64"/>
+    <field name="reached" type="bool"/>
+  </topic>
+  <topic name="Phase">
+    <field name="phase" type="String"/>
+  </topic>
+  <service description="무인기　현재　상태　확인" name="CheckState" priority="5.0">
+    <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
+    <param default="10" description="시동여부 (True/False)" io="out" name="armed" type="bool"/>
+    <param default="10" description="MC-FCC 연결 여부 (True/False)" io="out" name="connected" type="bool"/>
+    <param default="10" description="비행모드" io="out" name="mode" type="string"/>
+  </service>
+  <service description="무인기　현재　위치　확인" name="CheckPosition" priority="5.0">
+    <param default="10" description="API　호출　성공　여부　(True/False)" io="out" name="value" type="bool"/>
+    <param default="10" description="（WGS84) 위도" io="out" name="latitude" type="float64"/>
+    <param default="10" description="(WGS84) 경도" io="out" name="longitude" type="float64"/>
+    <param default="10" description="(WGS84) 고도" io="out" name="altitude" type="float64"/>
+    <param default="10" description="(ENU) x좌표" io="out" name="x" type="float64"/>
+    <param default="10" description="(ENU)　y좌표" io="out" name="y" type="float64"/>
+    <param default="10" description="(ENU)　z좌표" io="out" name="z" type="float64"/>
+  </service>
+  <service description="무인기　시동　명령" name="Arming" priority="5.0">
+    <param default="false" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="무인기　이륙　명령" name="Takeoff" priority="5.0">
+    <param default="None,None,None;10" description="이륙　고도（meter)" io="in" name="takeoff_altitude" ptype="Text" type="float64"/>
+    <param default="None,None,None;10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="무인기 위치 이동" name="Goto" priority="5.0">
+    <param default="ENU" description="사용 좌표계 (ENU or WGS84)" io="in" name="goto_ref_system" ptype="Text" type="string"/>
+    <param default="3;float64,x_lat,10,None,None,None;float64,y_long,10,None,None,None;float64,z_alt,10,None,None,None" description="이동 지점" io="in" name="goto_point" ptype="Class" type="Target"/>
+    <param default="10" description="API 호출 성공 여부 (True/False)" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="RTL" priority="5.0">
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+  <service description="" name="NoflyZoneSet" priority="5.0">
+    <param default="" description="" io="in" name="noflyZoneSet_ref_system" ptype="Text" type="string"/>
+    <param default="" description="" io="in" name="noflyZoneSet_pts" ptype="Vector" type="eDrone_msgs/Target[]"/>
+    <param default="" description="" io="out" name="value" type="bool"/>
+  </service>
+</section>
