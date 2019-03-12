@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<package format="2">
+	<name>modeChange1024_2</name>
+
+	<version> 0.0.1 </version>
+
+	<description>프로젝트 관련 사항을 자유롭게 기입해주세요.</description>
+
+	<maintainer email="sample@gmail.com">sample.maintainter</maintainer>
+
+	<license>TODO</license>
+
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<depend>roscpp</depend>
+	<depend>rospy</depend>
+	<depend>std_msgs</depend>
+	<depend>eDrone_msgs</depend>
+
+</package>
