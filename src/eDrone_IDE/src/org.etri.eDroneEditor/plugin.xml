@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            id="editor_codegen.project"
+            name="editor_codegen.project"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="tpl">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editorContentTypeBinding
+            contentTypeId="editor_codegen.project"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.presentationReconcilers">
+      <presentationReconciler
+            class="org.etri.eDroneEditor.ProjectPresentationReconciler"
+            contentType="editor_codegen.project">
+      </presentationReconciler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.contentAssistProcessors">
+      <contentAssistProcessor
+            class="org.etri.eDroneEditor.ProjectContentAssistProcessor"
+            contentType="editor_codegen.project">
+      </contentAssistProcessor>
+   </extension>
+
+</plugin>

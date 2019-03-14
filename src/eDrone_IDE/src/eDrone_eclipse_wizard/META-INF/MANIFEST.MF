@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: eDroneSupport
+Bundle-SymbolicName: org.etri.eDrone;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.etri.eDrone.Activator
+Bundle-Vendor: etri
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.debug.ui,
+ org.eclipse.ui.console,
+ org.eclipse.jface,
+ org.eclipse.swt
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

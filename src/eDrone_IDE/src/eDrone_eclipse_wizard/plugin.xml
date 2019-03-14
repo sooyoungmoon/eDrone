@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="eDrone"
+            id="com.kouno.eDrone-env-interface">
+      </category>
+      <wizard
+            canFinishEarly="false"
+            category="com.kouno.eDrone-env-interface"
+            class="org.etri.eDroneWizard.WizardMain"
+            icon="icons/logo_@1x.png"
+            id="com.kouno.edroneenvinterface.wizards.eDroneNewWizard"
+            name="eDrone Project"
+            project="true">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.cdt.ui.CPerspective">
+             <view
+                  id="org.etri.eDroneWizard.view_service"
+                  ratio="0.5"
+                  relationship="right"
+                  relative="org.eclipse.ui.editorss">
+       		  </view>
+             <view
+                   id="org.etri.eDroneWizard.view_template"
+                   minimized="false"
+                   relationship="stack"
+                   relative="org.etri.eDroneWizard.view_service">
+             </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.etri.eDroneWizard.category1"
+            name="eDrone Support Views"
+            parentCategory="org.eclipse.cdt.ui.views">
+      </category>
+      <view
+            category="org.etri.eDroneWizard.category1"
+            class="org.etri.eDroneView.Service.ViewPart_Service"
+            icon="icons/logo_@1x.png"
+            id="org.etri.eDroneWizard.view_service"
+            name="eDrone Service View"
+            restorable="true">
+      </view>
+      <view
+            class="org.etri.eDroneView.Template.ViewPart_Template"
+            icon="icons/logo_@1x.png"
+            id="org.etri.eDroneWizard.view_template"
+            inject="true"
+            name="eDrone Template View"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.etri.eDroneLauncher.LaunchConfiguration"
+            id="org.etri.launchConfigurationType"
+            modes="run"
+            name="eDrone launch">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.etri.eDroneLauncher.LaunchShortcut"
+            icon="icons/logo_@1x.png"
+            id="org.etri.eDroneWizard.shortcut1"
+            label="eDrone launch"
+            modes="run">
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.etri.eDroneLauncher.LaunchTabGroup"
+            id="org.etri.launchConfigurationTabGroup"
+            type="org.etri.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.etri.launchConfigurationType"
+            icon="icons/logo_@1x.png"
+            id="org.etri.ui.launch.launchconfigurationtypeimage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="org.etri.eDrone.category1"
+            name="eDrone">
+      </category>
+      <command
+            categoryId="org.etri.eDrone.category1"
+            id="org.etri.eDrone.command1"
+            name="Terminate  eDrone">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.etri.eDroneLauncher.TerminateHandler"
+            commandId="org.etri.eDrone.command1">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="test.toolbars.sampleToolbar">
+            <command
+                  commandId="org.etri.eDrone.command1"
+                  icon="icons/logo_@1x.png"
+                  id="org.etri.eDrone.terminateCommand"
+                  label="Terminate eDrone"
+                  style="push"
+                  tooltip="ROS Application을 종료">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+</plugin>
