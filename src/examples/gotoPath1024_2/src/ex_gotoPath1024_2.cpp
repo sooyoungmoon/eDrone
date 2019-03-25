@@ -5,7 +5,6 @@
 
 #ifndef gotoPath1024_2
 // 기본 header (ROS & C/C++)
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <iostream>
 #include <std_msgs/String.h>
@@ -211,6 +210,7 @@ ros::ServiceClient gotoPath_client = nh.serviceClient<eDrone_msgs::GotoPath>("sr
 		{
 			ROS_INFO("Arming command was sent to FC");
 		}
+	sleep(5);
   // Takeoff
 	
 	double takeoff_altitude = 0;
@@ -331,14 +331,14 @@ ros::ServiceClient gotoPath_client = nh.serviceClient<eDrone_msgs::GotoPath>("sr
 		rate.sleep();
 		//cout << "cur_phase: " << cur_phase_ptr->phase << endl;
 	}
-
+/*
 	rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
 	
 	if (rtl_cmd.response.value == true)
 	{
 		ROS_INFO("RTL command was sent\n");
         }
-
+*/
 
 return 0;
 

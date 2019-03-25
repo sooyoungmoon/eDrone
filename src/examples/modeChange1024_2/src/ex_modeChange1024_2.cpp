@@ -5,7 +5,6 @@
 
 #ifndef modeChange1024_2
 // 기본 header (ROS & C/C++)
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <iostream>
 #include <std_msgs/String.h>

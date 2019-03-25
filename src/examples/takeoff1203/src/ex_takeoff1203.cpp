@@ -3,7 +3,6 @@
 /*include*/
 #ifndef takeoff1203
 // 기본 header (ROS & C/C++)
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <iostream>
 #include <std_msgs/String.h>
@@ -226,6 +225,8 @@ ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_l
 		{
 			ROS_INFO("Arming command was sent to FC");
 		}
+
+	sleep(5);
   // Takeoff
 	
 	double takeoff_altitude = 0;

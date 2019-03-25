@@ -3,7 +3,6 @@
 /*include*/
 #ifndef preflightCheck1129
 // 기본 header (ROS & C/C++)
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <iostream>
 #include <std_msgs/String.h>
@@ -142,49 +141,52 @@ int main (int argc, char** argv)
 	    // 연결 상태 확인
 
 		sleep(10); // (수정)
-		ROS_INFO("Send checkState command ... \n");
-		ROS_INFO("Checking the connection ... \n");
-		
-		if (checkState_client.call(checkState_cmd))
+
+		while(true)
 		{
-			ROS_INFO ("CheckState service was requested");
-			
-			while (checkState_cmd.response.connected == false)
+			ROS_INFO("Send checkState command ... \n");
+			ROS_INFO("Checking the connection ... \n");
+		
+			if (checkState_client.call(checkState_cmd))
 			{
-				if (checkState_client.call(checkState_cmd))
+				ROS_INFO ("CheckState service was requested");
+			
+				while (checkState_cmd.response.connected == false)
 				{
-					ROS_INFO ("Checking state...");
+					if (checkState_client.call(checkState_cmd))
+					{
+						ROS_INFO ("Checking state...");
+					}
+
+					ros::spinOnce();
+					rate.sleep();
 				}
 
-				ros::spinOnce();
-				rate.sleep();
-			}
+				ROS_INFO("UAV connection established!");
 
-			ROS_INFO("UAV connection established!");
-
-			if (checkState_cmd.response.connected == true)
-			{
-				cout << "UAV connected: " << endl;
-			}
+				if (checkState_cmd.response.connected == true)
+				{
+					cout << "UAV connected: " << endl;
+				}
 			
-			if (checkState_cmd.response.armed == true )
-			{
-				cout << "UAV armed: " << endl;
+				if (checkState_cmd.response.armed == true )
+				{
+					cout << "UAV armed: " << endl;
+				}
+
+				cout << "flight mode: " << checkState_cmd.response.mode << endl;
+
+				cout << "remaining battery(%): " << checkState_cmd.response.battery_remain << endl;
 			}
 
-			cout << "flight mode: " << checkState_cmd.response.mode << endl;
+	  	  // 무인기 위치 확인
 
-			cout << "remaining battery(%): " << checkState_cmd.response.battery_remain << endl;
-		}
+			 ROS_INFO("Send checkPosition command ... \n");
+			 ROS_INFO("Checking the position ... \n");
 
-	    // 무인기 위치 확인
-
-		 ROS_INFO("Send checkPosition command ... \n");
-		 ROS_INFO("Checking the position ... \n");
-
-		 if (checkPosition_client.call(checkPosition_cmd))
-		 {
-			ROS_INFO ("CheckPosition service was requested");
+			 if (checkPosition_client.call(checkPosition_cmd))
+				{
+				ROS_INFO ("CheckPosition service was requested");
 
 			while (checkPosition_cmd.response.value == false)
 			{
@@ -208,6 +210,11 @@ int main (int argc, char** argv)
 			}
 			
 			ROS_INFO("UAV position was checked!");
+			sleep(1);
+		}
+
+
+		
 
 
 

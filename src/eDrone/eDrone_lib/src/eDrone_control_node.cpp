@@ -32,10 +32,10 @@
 
 // eDrone 관련
 // ROS Topics
-#include <eDrone_msgs/Geofence.h> // 가상울타리 정보
+#include <eDrone_msgs/Geofence.h>   // 가상울타리 정보
 #include <eDrone_msgs/NoflyZones.h> //	(2018.11.19) 다수 비행 금지구역 topoic msg type
-#include <eDrone_msgs/Phase.h> // 무인기 임무 수행 단계
-#include <eDrone_msgs/Target.h> // 현재 목적지 topic 메시지가 선언된 헤더 파일 포함
+#include <eDrone_msgs/Phase.h>      // 무인기 임무 수행 단계
+#include <eDrone_msgs/Target.h>     // 현재 목적지 topic 메시지가 선언된 헤더 파일 포함
 
 // eDrone (ROS Topics, ROS Services, Data types, parameters)
 #include <eDrone_lib/GeoInfo.h>
@@ -43,23 +43,23 @@
 #include <eDrone_lib/Vehicle.h>
 #include <eDrone_lib/params.h>
 #include <eDrone_lib/types.h>
-#include <eDrone_msgs/Arming.h>        // 시동 API 헤더 파일
-#include <eDrone_msgs/GeofenceCheck.h> // GeofenceCheck API 헤더 파일
-#include <eDrone_msgs/GeofenceReset.h> // GeofenceReset API 헤더 파일
-#include <eDrone_msgs/GeofenceSet.h>   // GeofenceSet API 헤더 파일
-#include <eDrone_msgs/Goto.h> // 무인기 위치 이동 API 헤더 파일 포함
-#include <eDrone_msgs/GotoPath.h>   // 경로 비행 API 헤더 파일 포함
-#include <eDrone_msgs/Landing.h>    // 착륙 API 헤더 파일
-#include <eDrone_msgs/ModeChange.h> // 비행 모드 변경 API 헤더 파일
-#include <eDrone_msgs/NoflyZone.h>  // (2018.11.19) 비행금지구역 data type
+#include <eDrone_msgs/Arming.h>         // 시동 API 헤더 파일
+#include <eDrone_msgs/GeofenceCheck.h>  // GeofenceCheck API 헤더 파일
+#include <eDrone_msgs/GeofenceReset.h>  // GeofenceReset API 헤더 파일
+#include <eDrone_msgs/GeofenceSet.h>    // GeofenceSet API 헤더 파일
+#include <eDrone_msgs/Goto.h>           // 무인기 위치 이동 API 헤더 파일 포함
+#include <eDrone_msgs/GotoPath.h>       // 경로 비행 API 헤더 파일 포함
+#include <eDrone_msgs/Landing.h>        // 착륙 API 헤더 파일
+#include <eDrone_msgs/ModeChange.h>     // 비행 모드 변경 API 헤더 파일
+#include <eDrone_msgs/NoflyZone.h>      // (2018.11.19) 비행금지구역 data type
 #include <eDrone_msgs/NoflyZoneCheck.h> // 비행 금지 구역 확인
 #include <eDrone_msgs/NoflyZoneReset.h> // 비행 금지 구역 해제
 #include <eDrone_msgs/NoflyZoneSet.h>   // 비행 금지 구역 설정
 #include <eDrone_msgs/Orbit.h>          // hotPoint API를 위한 선회 비행
 #include <eDrone_msgs/RTL.h>            // RTL
 #include <eDrone_msgs/SurveyArea.h>     // 영역 탐색
-#include <eDrone_msgs/SurveyPath.h> // 경로 탐색 (경로 이동, 사진 촬영, +a)
-#include <eDrone_msgs/Takeoff.h> // 이륙 API 헤더 파일
+#include <eDrone_msgs/SurveyPath.h>     // 경로 탐색 (경로 이동, 사진 촬영, +a)
+#include <eDrone_msgs/Takeoff.h>        // 이륙 API 헤더 파일
 
 using namespace std;
 using namespace mavros_msgs;
@@ -108,7 +108,7 @@ mavros_msgs::State current_state; // 무인기 상태 정보
 
 // (무인기 위치 확인 목적)
 geometry_msgs::PoseStamped
-    current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
+    current_pos_local;                     // 현재 위치 및 자세 정보 (지역 좌표)
 sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
 
 // (홈 위치 획득 목적)
@@ -139,17 +139,17 @@ std::vector<Target_Position> path; // 무인기 자율 비행 경로
 
 // Orbit API (hotPoint) 관련
 std::vector<Target_Position>
-    orbit_path; // 특정 위치를 기준으로 하는 선회 비행 경로
+    orbit_path;        // 특정 위치를 기준으로 하는 선회 비행 경로
 int orbit_req_cnt = 0; // (요청된) 선회 비행 횟수
 int orbit_cnt = 0;     // 현재 선회 비행 횟수
 
 //// 서비스 요청 메시지 선언 (mavros)
-mavros_msgs::CommandBool arming_cmd; // 시동 명령에 사용될 서비스 선언
-mavros_msgs::CommandTOL takeoff_cmd; // 이륙 명령에 사용될 서비스 선언
-mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선언
+mavros_msgs::CommandBool arming_cmd;      // 시동 명령에 사용될 서비스 선언
+mavros_msgs::CommandTOL takeoff_cmd;      // 이륙 명령에 사용될 서비스 선언
+mavros_msgs::CommandTOL landing_cmd;      // 착륙 명령에 사용될 서비스 선언
 mavros_msgs::CommandLong commandLong_cmd; // 무인기 제어에 사용될 서비스 선언
-mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
-mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지
+mavros_msgs::SetMode modeChange_cmd;      // 모드 변경에 사용될 서비스 요청 메시지
+mavros_msgs::SetMode rtl_cmd;             // 복귀 명령에 사용될 서비스 요청 메시지
 eDrone_msgs::GeofenceCheck
     geofenceCheck_cmd; // 가상 울타리 확인에 사용될 요청 메시지
 eDrone_msgs::NoflyZoneCheck
@@ -162,8 +162,8 @@ ros::Publisher pos_pub_local;
 ros::Publisher pos_pub_global;
 ros::Publisher cur_target_pub; // (offboard control에 필요한) 현재 목적지 정보
                                // (도착 여부 포함)
-ros::Publisher cur_phase_pub; // 현재 무인기 임무 수행 단계 정보 (Q. 어떤 동작을
-                              // 하고 있는지?)
+ros::Publisher cur_phase_pub;  // 현재 무인기 임무 수행 단계 정보 (Q. 어떤 동작을
+                               // 하고 있는지?)
 
 // subscriber 선언
 
@@ -186,11 +186,11 @@ ros::ServiceServer surveyArea_srv_server;
 ros::ServiceServer orbit_srv_server;
 
 //서비스 클라이언트 선언
-ros::ServiceClient arming_client;  // 서비스 클라이언트 선언
-ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
-ros::ServiceClient landing_client; // 서비스 클라이언트 선언
+ros::ServiceClient arming_client;     // 서비스 클라이언트 선언
+ros::ServiceClient takeoff_client;    // 서비스 클라이언트 선언
+ros::ServiceClient landing_client;    // 서비스 클라이언트 선언
 ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
-ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트
+ros::ServiceClient rtl_client;        // 복귀 서비스 클라이언트
 ros::ServiceClient geofenceCheck_client;
 ros::ServiceClient noflyZoneCheck_client;
 
@@ -214,7 +214,8 @@ string phase = "UNARMED";
 double takeoff_altitude = 0;
 
 // 경로 계산
-vector<Target_Position> getIndirectPath(Target src, Target dest) {
+vector<Target_Position> getIndirectPath(Target src, Target dest)
+{
   std::vector<Target_Position> path;
 
   ROS_INFO("eDrone_control_node: getIndirectPath()");
@@ -224,19 +225,25 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
   Point src_pt;
   Point dest_pt;
 
-  if (src.ref_system == "WGS84") {
+  if (src.ref_system == "WGS84")
+  {
     src_pt = convertGeoToENU(src.x_lat, src.y_long, src.z_alt, HOME_LAT,
                              HOME_LON, HOME_ALT);
-  } else if (src.ref_system == "ENU") {
+  }
+  else if (src.ref_system == "ENU")
+  {
     src_pt.x = src.x_lat;
     src_pt.y = src.y_long;
     src_pt.z = src.z_alt;
   }
 
-  if (dest.ref_system == "WGS84") {
+  if (dest.ref_system == "WGS84")
+  {
     dest_pt = convertGeoToENU(dest.x_lat, dest.y_long, dest.z_alt, HOME_LAT,
                               HOME_LON, HOME_ALT);
-  } else if (dest.ref_system == "ENU") {
+  }
+  else if (dest.ref_system == "ENU")
+  {
     dest_pt.x = dest.x_lat;
     dest_pt.y = dest.y_long;
     dest_pt.z = dest.z_alt;
@@ -266,18 +273,24 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
   double margin_x = (distance - distance_x) / 2;
   double margin_y = (distance - distance_y) / 2;
 
-  if (src_pt.x < dest_pt.x) {
+  if (src_pt.x < dest_pt.x)
+  {
     x_min = src_pt.x - margin_x;
     x_max = dest_pt.x + margin_x;
-  } else {
+  }
+  else
+  {
     x_min = dest_pt.x - margin_x;
     x_max = src_pt.x + margin_x;
   }
 
-  if (src_pt.y < dest_pt.y) {
+  if (src_pt.y < dest_pt.y)
+  {
     y_min = src_pt.y - margin_y;
     y_max = dest_pt.y + margin_y;
-  } else {
+  }
+  else
+  {
     y_min = dest_pt.y - margin_y;
     y_max = src_pt.y + margin_y;
   }
@@ -325,15 +338,18 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
 
   // CELL 배열 동적할당
 
-  for (int c = 0; c < AREA_WIDTH + 1; c++) {
+  for (int c = 0; c < AREA_WIDTH + 1; c++)
+  {
     mental_map.grid[c] = new Cell[AREA_HEIGHT + 1];
   }
 
   // cout << "Dynamic allocation" << endl;
 
   // Cell 정보 초기화
-  for (int i = 0; i < AREA_WIDTH + 1; i++) {
-    for (int j = 0; j < AREA_HEIGHT + 1; j++) {
+  for (int i = 0; i < AREA_WIDTH + 1; i++)
+  {
+    for (int j = 0; j < AREA_HEIGHT + 1; j++)
+    {
       //	cout << " i, j = " << i << ", " << j << endl;
       Cell *cell_ptr = &(mental_map.grid[i][j]);
       initCell(cell_ptr, i, j, CELL_WIDTH, CELL_HEIGHT, x_min, y_min);
@@ -371,18 +387,24 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
 
   int **waveFrontMap = new int *[AREA_WIDTH + 1];
 
-  for (int c = 0; c < AREA_WIDTH + 1; c++) {
+  for (int c = 0; c < AREA_WIDTH + 1; c++)
+  {
     waveFrontMap[c] = new int[AREA_HEIGHT + 1];
   }
 
-  for (int x_index = 0; x_index < AREA_WIDTH + 1; x_index++) {
-    for (int y_index = 0; y_index < AREA_HEIGHT + 1; y_index++) {
-      if (mental_map.grid[x_index][y_index].noflyZone == true) {
+  for (int x_index = 0; x_index < AREA_WIDTH + 1; x_index++)
+  {
+    for (int y_index = 0; y_index < AREA_HEIGHT + 1; y_index++)
+    {
+      if (mental_map.grid[x_index][y_index].noflyZone == true)
+      {
         //			cout << "waveFrontMap[" <<  x_index << ", " <<
         // y_index << "] = 2" << endl;
         waveFrontMap[x_index][y_index] =
             2; // noflyZone에 속한 cell을  wavefront 상에 표시
-      } else {
+      }
+      else
+      {
         waveFrontMap[x_index][y_index] = 0;
       }
     }
@@ -399,11 +421,13 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
 
   bool pathExist = false; // whether a path from src to dst exists
 
-  while (queue.empty() != true) {
+  while (queue.empty() != true)
+  {
     Cell *nextCell =
         queue.front(); // queue에서 다음 cell 제거, wavefront map 확장
-    if (nextCell == src_cell_ptr) { // wavefront map이 현재 cell까지 생성된 경우
-                                    // map 생성 중단
+    if (nextCell == src_cell_ptr)
+    { // wavefront map이 현재 cell까지 생성된 경우
+      // map 생성 중단
       break;
     }
     queue.erase(queue.begin());
@@ -411,17 +435,21 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
     int index_y = nextCell->index_y;
 
     // 다음 cell의 이웃 cell(8개) 들을 queue에 추가
-    for (int local_index_x = -1; local_index_x < 2; local_index_x++) {
+    for (int local_index_x = -1; local_index_x < 2; local_index_x++)
+    {
       // x 인덱스 범위가 mental_map 범위를 벗어 나면 continue
       if ((index_x + local_index_x) < 0 ||
-          (index_x + local_index_x) > (AREA_WIDTH)) {
+          (index_x + local_index_x) > (AREA_WIDTH))
+      {
         continue;
       }
 
-      for (int local_index_y = -1; local_index_y < 2; local_index_y++) {
+      for (int local_index_y = -1; local_index_y < 2; local_index_y++)
+      {
         // y 인덱스의 범위가 mental_map 범위를 벗어 나면 continue
         if (((index_y + local_index_y) < 0) ||
-            ((index_y + local_index_y) > (AREA_HEIGHT))) {
+            ((index_y + local_index_y) > (AREA_HEIGHT)))
+        {
           continue;
         }
 
@@ -439,37 +467,42 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
         }
 
         // Case#1 이미 방문된 Cell인 경우
-        if (neighbor->visited == true) {
+        if (neighbor->visited == true)
+        {
 
           waveFrontMap[index_x_neighbor][index_y_neighbor] = 3;
           queue.push_back(neighbor);
 
           if (neighbor ==
-              src_cell_ptr) { // queue에 추가된 노드가 starting node이면
+              src_cell_ptr)
+          {                   // queue에 추가된 노드가 starting node이면
             pathExist = true; // s->g까지 경로 존재 여부를 true로 설정
           }
-
         }
         // Case#2 장애물이 있는 Cell인 경우, 높이를 기준으로 선택적으로 queue에
         // 추가
         // (2018.11.06) 현재는 모든 경우에 우회하도록 구현
 
-        else if (isOccupiedCell(neighbor) == true) {
+        else if (isOccupiedCell(neighbor) == true)
+        {
           waveFrontMap[index_x_neighbor][index_y_neighbor] = 1;
         }
 
         // Case#3 비행금지구역에 속한 Cell인 경우
-        else if ((neighbor->noflyZone) == true) {
+        else if ((neighbor->noflyZone) == true)
+        {
           waveFrontMap[index_x_neighbor][index_y_neighbor] = 2;
         }
 
         // Case#4 그 밖의 경우
-        else {
+        else
+        {
           waveFrontMap[index_x_neighbor][index_y_neighbor] =
               waveFrontMap[index_x][index_y] + 1; //(2018.10.02)
           queue.push_back(neighbor);
           if (neighbor ==
-              src_cell_ptr) { // queue에 추가된 노드가 starting node이면
+              src_cell_ptr)
+          {                   // queue에 추가된 노드가 starting node이면
             pathExist = true; // s->g까지 경로 존재 여부를 true로 설정
           }
         }
@@ -513,17 +546,21 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
   path.push_back(target_entry_point); // path에 waypoint 추가
   src_cell_ptr->includedInPath = true;
 
-
   // (이웃 cell 선택) 반복
 
-  while (cur_cell_ptr != dst_cell_ptr) {
-    if (cnt > 1000) {
+  while (cur_cell_ptr != dst_cell_ptr)
+  {
+    if (cnt > 1000)
+    {
       break;
-    } else {
+    }
+    else
+    {
       cnt++;
     }
 
-    if (pathComputed == true) {
+    if (pathComputed == true)
+    {
       break;
     }
 
@@ -533,42 +570,52 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
     int index_x = cur_cell_ptr->index_x;
     int index_y = cur_cell_ptr->index_y;
 
-    for (int local_index_x = -1; local_index_x < 2; local_index_x++) {
+    for (int local_index_x = -1; local_index_x < 2; local_index_x++)
+    {
       int index_x_neighbor = index_x + local_index_x;
 
-      if (index_x_neighbor < 0 || index_x_neighbor > AREA_WIDTH) {
+      if (index_x_neighbor < 0 || index_x_neighbor > AREA_WIDTH)
+      {
         continue;
       }
 
-      for (int local_index_y = -1; local_index_y < 2; local_index_y++) {
+      for (int local_index_y = -1; local_index_y < 2; local_index_y++)
+      {
         int index_y_neighbor = index_y + local_index_y;
 
-        if (index_y_neighbor < 0 || index_y_neighbor > AREA_HEIGHT) {
+        if (index_y_neighbor < 0 || index_y_neighbor > AREA_HEIGHT)
+        {
           continue;
         }
 
-        if (local_index_x == 0 && local_index_y == 0) {
+        if (local_index_x == 0 && local_index_y == 0)
+        {
           continue;
         } // 자기 자신은 탐색 대상에서 제외
 
         neighbor_cell_ptr =
             &(mental_map_ptr->grid[index_x_neighbor][index_y_neighbor]);
 
-        if (neighbor_cell_ptr->includedInPath == true) {
+        if (neighbor_cell_ptr->includedInPath == true)
+        {
           continue;
         } // 이미 경로에 추가된 cell은 제외
-        if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 1) {
+        if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 1)
+        {
           continue;
         } // 장애물이 있는 cell은 제외
-        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 2) {
+        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 2)
+        {
           continue;
         } // 비행금지구역에 속한 cell은 제외
-        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 3) {
+        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 3)
+        {
           continue;
         } // 기 방문된 cell은 제외
 
         if (&mental_map_ptr->grid[index_x_neighbor][index_y_neighbor] ==
-            dst_cell_ptr) { // 이웃 cell이 목적지 cell인 경우
+            dst_cell_ptr)
+        { // 이웃 cell이 목적지 cell인 경우
           min_label = waveFrontMap[index_x_neighbor][index_y_neighbor];
           neighbor_min_label =
               &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor];
@@ -586,20 +633,25 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
         }
       }
 
-      if (pathComputed == true) {
+      if (pathComputed == true)
+      {
         break;
       }
 
     } // 현재 노드의 이웃 노드 검사 - 다음 노드 선택
     // cout << "neighbor_min_label: (" << neighbor_min_label->x << "," <<
     // neighbor_min_label->y << ")" << endl;
-    if (neighbor_min_label != NULL) {
+    if (neighbor_min_label != NULL)
+    {
       cur_cell_ptr = neighbor_min_label;
 
       // 고도값 설정
-      if (cur_cell_ptr->occupied == true) {
+      if (cur_cell_ptr->occupied == true)
+      {
         cur_cell_ptr->z = cur_cell_ptr->obstacle_height + dest_pt.z;
-      } else {
+      }
+      else
+      {
         cur_cell_ptr->z = dest_pt.z;
       }
 
@@ -637,7 +689,8 @@ vector<Target_Position> getIndirectPath(Target src, Target dest) {
 bool isOccupiedCell(Cell *cell_ptr) { return false; }
 
 void initCell(Cell *cell_ptr, int index_x, int index_y, const int CELL_WIDTH,
-              const int CELL_HEIGHT, const double base_x, const double base_y) {
+              const int CELL_HEIGHT, const double base_x, const double base_y)
+{
   cell_ptr->index_x = index_x;
   cell_ptr->index_y = index_y;
   cell_ptr->x = index_x * CELL_WIDTH + base_x;
@@ -657,7 +710,8 @@ void initCell(Cell *cell_ptr, int index_x, int index_y, const int CELL_WIDTH,
   // cout << " y: " << cell_ptr->y << endl;
 }
 
-void checkNoflyZoneCells(Mental_Map *mental_map) {
+void checkNoflyZoneCells(Mental_Map *mental_map)
+{
   int area_width = mental_map->area_width;
   int area_height = mental_map->area_height;
 
@@ -666,7 +720,8 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
   int cnt = 0;
   // Noflyzone을 하나씩 검사
   for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-       it != nfZones.noflyZones.end(); it++) {
+       it != nfZones.noflyZones.end(); it++)
+  {
     NoflyZone nfZone = *it;
     cout << "NoflyZone#" << cnt++ << endl;
 
@@ -682,20 +737,23 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
     int pcnt = 0;
 
     for (vector<Target>::iterator it = nfZone.noflyZone_pts.begin();
-         it != nfZone.noflyZone_pts.end(); it++) {
+         it != nfZone.noflyZone_pts.end(); it++)
+    {
       Target boundary_point = *it;
       Point point;
       //                   cout << "boundary point#" << pcnt++ << "(" <<
       //                   boundary_point.x_lat <<", " << boundary_point.y_long
       //                   << ", " << boundary_point.z_alt << ")" << endl;
 
-      if (nfZone.noflyZone_ref_system == "WGS84") {
+      if (nfZone.noflyZone_ref_system == "WGS84")
+      {
         // cout << " boundary_point.ref_system == WGS84" << endl;
         point =
             convertGeoToENU(boundary_point.x_lat, boundary_point.y_long,
                             boundary_point.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
-
-      } else if (nfZone.noflyZone_ref_system == "ENU") {
+      }
+      else if (nfZone.noflyZone_ref_system == "ENU")
+      {
         // cout << " boundary_point.ref_system == ENU" << endl;
 
         point.x = boundary_point.x_lat;
@@ -705,16 +763,20 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
       // cout << "point#" << pcnt++ << "(" << point.x << ", " << point.y << ", "
       // << point.z << ")" << endl;
 
-      if (x_min < 0 || point.x < x_min) {
+      if (x_min < 0 || point.x < x_min)
+      {
         x_min = point.x;
       }
-      if (x_max < 0 || point.x > x_max) {
+      if (x_max < 0 || point.x > x_max)
+      {
         x_max = point.x;
       }
-      if (y_min < 0 || point.y < y_min) {
+      if (y_min < 0 || point.y < y_min)
+      {
         y_min = point.y;
       }
-      if (y_max < 0 || point.y > y_max) {
+      if (y_max < 0 || point.y > y_max)
+      {
         y_max = point.y;
       }
 
@@ -729,8 +791,10 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
     cout <<" y_max: " << y_max << endl;
 */
 
-    for (int i = 0; i < area_width + 1; i++) {
-      for (int j = 0; j < area_height + 1; j++) {
+    for (int i = 0; i < area_width + 1; i++)
+    {
+      for (int j = 0; j < area_height + 1; j++)
+      {
         //      cout << " i, j = " << i << ", " << j << endl;
         Cell *cell_ptr = &(mental_map->grid[i][j]);
         Point cell_point;
@@ -743,7 +807,8 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
 
         //   if ((cell_ptr->x < x_min) != (cell_ptr->x < x_max)) {
         //     if ((cell_ptr->y < y_min) != (cell_ptr->y < y_max)) {
-        if (isInside(cell_point, points) == true) {
+        if (isInside(cell_point, points) == true)
+        {
 
           // cout <<  "grid["<<i<<","<<j<<"] is inside the NF!" << endl;
           // printPoint(cell_point);
@@ -751,7 +816,8 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
           // cell_ptr->noflyZone = true; // noflyZone check
         }
 
-        else {
+        else
+        {
           // cout <<  "grid["<<i<<","<<j<<"] is outside of the NF!" << endl;
           // printPoint(cell_point);
         }
@@ -763,7 +829,8 @@ void checkNoflyZoneCells(Mental_Map *mental_map) {
 }
 
 bool isNoflyZoneCell(
-    Cell *cell_ptr) { // 주어진 cell이 Noflyzone에 속하는 지 판단
+    Cell *cell_ptr)
+{ // 주어진 cell이 Noflyzone에 속하는 지 판단
 
   Point cell_point;
 
@@ -772,7 +839,8 @@ bool isNoflyZoneCell(
   cell_point.z = cell_ptr->z;
 
   for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-       it != nfZones.noflyZones.end(); it++) {
+       it != nfZones.noflyZones.end(); it++)
+  {
     NoflyZone nfZone = *it;
 
     vector<Target> noflyZone_pts = nfZone.noflyZone_pts;
@@ -780,14 +848,18 @@ bool isNoflyZoneCell(
     vector<Point> boundary_pts;
 
     for (vector<Target>::iterator it = noflyZone_pts.begin();
-         it != noflyZone_pts.end(); it++) {
+         it != noflyZone_pts.end(); it++)
+    {
       Target point = *it;
       Point boundary_point;
 
-      if (point.ref_system == "WGS84") {
+      if (point.ref_system == "WGS84")
+      {
         boundary_point = convertGeoToENU(point.x_lat, point.y_long, point.z_alt,
                                          HOME_LAT, HOME_LON, HOME_ALT);
-      } else if (point.ref_system == "ENU") {
+      }
+      else if (point.ref_system == "ENU")
+      {
         boundary_point.x = point.x_lat;
         boundary_point.y = point.y_long;
         boundary_point.z = point.z_alt;
@@ -802,18 +874,27 @@ bool isNoflyZoneCell(
 } // (2018.11.06) - 추후 구현 예정
 
 void printMentalMap(Mental_Map *mental_map_ptr, const int AREA_WIDTH,
-                    const int AREA_HEIGHT) {
+                    const int AREA_HEIGHT)
+{
   cout << "mental map" << endl;
 
-  for (int j = AREA_HEIGHT - 1; j > -1; j--) {
-    for (int i = 0; i < AREA_WIDTH; i++) {
-      if (mental_map_ptr->grid[i][j].observed == true) {
-        if (mental_map_ptr->grid[i][j].occupied == true) {
+  for (int j = AREA_HEIGHT - 1; j > -1; j--)
+  {
+    for (int i = 0; i < AREA_WIDTH; i++)
+    {
+      if (mental_map_ptr->grid[i][j].observed == true)
+      {
+        if (mental_map_ptr->grid[i][j].occupied == true)
+        {
           cout << 'x' << ' ';
-        } else {
+        }
+        else
+        {
           cout << 'o' << ' ';
         }
-      } else {
+      }
+      else
+      {
         cout << '-' << ' ';
       }
 
@@ -829,8 +910,10 @@ void printWavefrontMap(int **m, int area_width, int area_height)
   //
   cout << " printWavefrontMap(): " << endl;
 
-  for (int index_y = area_height; index_y >= 0; index_y--) {
-    for (int index_x = 0; index_x < area_width + 1; index_x++) {
+  for (int index_y = area_height; index_y >= 0; index_y--)
+  {
+    for (int index_x = 0; index_x < area_width + 1; index_x++)
+    {
       cout << " " << m[index_x][index_y] << " ";
     }
     cout << endl;
@@ -838,7 +921,8 @@ void printWavefrontMap(int **m, int area_width, int area_height)
   sleep(10);
 }
 
-void printPoint(Point point) {
+void printPoint(Point point)
+{
   cout << "(" << point.x << ", " << point.y << ", " << point.z << ")" << endl;
 }
 
@@ -850,24 +934,28 @@ void printAltPath(std::vector<Target_Position>
   int cnt = 0;
 
   for (std::vector<Target_Position>::iterator it = altPath.begin();
-       it != altPath.end(); ++it) {
+       it != altPath.end(); ++it)
+  {
     cnt++;
     Target_Position target = *it;
 
-    if (target.ref_system == "WGS84") {
+    if (target.ref_system == "WGS84")
+    {
       cout << "Target#" << cnt << ": lat: " << target.pos_global.latitude
            << ", lon: " << target.pos_global.longitude << ", alt: " << target.pos_global.altitude << endl;
-    } else if (target.ref_system == "ENU") {
+    }
+    else if (target.ref_system == "ENU")
+    {
       cout << "Target#" << cnt << ": x: " << target.pos_local.x
            << ", y: " << target.pos_local.y << ", z: " << target.pos_local.z << endl;
     }
-
   }
 }
 
 // 주어진 영역 탐색에 필요한 coverage path 계산
 std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
-                                             double altitude, double interval) {
+                                             double altitude, double interval)
+{
   // ENU 좌표계 가정 - 함수 호출 위치에서 좌표 변환 필요 (WGS84->ENU)
 
   std::vector<Target_Position> path;
@@ -886,20 +974,25 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   Target entry_point;
   Target exit_point;
 
-  for (vector<Target>::iterator it = points.begin(); it != points.end(); it++) {
+  for (vector<Target>::iterator it = points.begin(); it != points.end(); it++)
+  {
     Target point = *it;
 
-    if (x_min < 0 || point.x_lat < x_min) {
+    if (x_min < 0 || point.x_lat < x_min)
+    {
       x_min = point.x_lat;
     }
-    if (y_min < 0 || point.y_long < y_min) {
+    if (y_min < 0 || point.y_long < y_min)
+    {
       y_min = point.y_long;
     }
 
-    if (x_max < 0 || point.x_lat > x_max) {
+    if (x_max < 0 || point.x_lat > x_max)
+    {
       x_max = point.x_lat;
     }
-    if (y_max < 0 || point.y_long > y_max) {
+    if (y_max < 0 || point.y_long > y_max)
+    {
       y_max = point.y_long;
     }
 
@@ -921,7 +1014,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
       vector<Point> poly_area;
 
       for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-           it != nfz.noflyZone_pts.end(); it++) {
+           it != nfz.noflyZone_pts.end(); it++)
+      {
         Target target = *it;
         Point temp_p;
         temp_p.x = target.x_lat;
@@ -930,7 +1024,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         poly_area.push_back(temp_p);
       }
 
-      if (isInside(pt, poly_area) == true) {
+      if (isInside(pt, poly_area) == true)
+      {
         continue; // if a boundary point is inside a noflyZone, it cannot become
                   // the entry_exit point
       }
@@ -943,11 +1038,13 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         pow((double)current_pos_local.pose.position.y - (double)point.y_long,
             (double)2));
 
-    if (distance_min < 0 || distance < distance_min) {
+    if (distance_min < 0 || distance < distance_min)
+    {
       distance_min = distance;
       entry_point = point;
     }
-    if (distance_max < 0 || distance > distance_max) {
+    if (distance_max < 0 || distance > distance_max)
+    {
       distance_max = distance;
       exit_point = point;
     }
@@ -972,15 +1069,17 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   dest.z_alt = entry_point.z_alt;
 
   for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-       it != nfZones.noflyZones.end(); it++) {
+       it != nfZones.noflyZones.end(); it++)
+  {
     NoflyZone nfz = *it;
 
     for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-         it != nfz.noflyZone_pts.end(); it++) {
+         it != nfz.noflyZone_pts.end(); it++)
+    {
       Target boundary_point = *it;
       //cout << "boundary point: (" << boundary_point.x_lat << " , "
       //     << boundary_point.y_long << ", " << boundary_point.z_alt << ") "
-       //    << endl;
+      //    << endl;
     }
 
     noflyZoneCheck_cmd.request.noflyZoneCheck_src = src;
@@ -990,7 +1089,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     noflyZoneCheck_cmd.request.noflyZoneCheck_dest.y_long = entry_point.y_long;
     noflyZoneCheck_cmd.request.noflyZoneCheck_dest.z_alt = entry_point.z_alt;
 
-    if (noflyZoneCheck_client.call(noflyZoneCheck_cmd)) {
+    if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
+    {
       cout << " noflyZoneCheck API was called " << endl;
     }
 
@@ -998,12 +1098,14 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
              noflyZoneCheck_cmd.response.result.c_str());
   }
 
-  if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP") {
+  if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP")
+  {
     vector<Target_Position> indirectPath = getIndirectPath(src, dest);
     printAltPath(indirectPath);
 
     for (vector<Target_Position>::iterator it = indirectPath.begin();
-         it != indirectPath.end(); it++) {
+         it != indirectPath.end(); it++)
+    {
       Target_Position target_position = *it;
       target_position.reached = false;
       path.push_back(target_position);
@@ -1011,16 +1113,13 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   }
   else
   {
-
-
   }
 
   /// end (current_point -> entry point) path computation
 
-   cout << " <entry point>: (" << entry_point.x_lat << ", " << entry_point.y_long
-   << ")" << endl;
-   cout << " <exit point>: (" << exit_point.x_lat << ", " << exit_point.y_long <<
-   ")" << endl;
+  cout << " <entry point>: (" << entry_point.x_lat << ", " << entry_point.y_long
+       << ")" << endl;
+  cout << " <exit point>: (" << exit_point.x_lat << ", " << exit_point.y_long << ")" << endl;
 
   // Mental Map & Grid 생성
 
@@ -1044,13 +1143,12 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   mental_map.area_width = AREA_WIDTH;
   mental_map.area_height = AREA_HEIGHT;
 
-
   mental_map.grid = new Cell *[AREA_WIDTH + 1];
 
   // CELL 배열 동적 할당
 
-
-  for (int c = 0; c < AREA_WIDTH + 1; c++) {
+  for (int c = 0; c < AREA_WIDTH + 1; c++)
+  {
     mental_map.grid[c] = new Cell[AREA_HEIGHT + 1];
   }
 
@@ -1058,10 +1156,10 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
   // Cell 정보 초기화
 
-
-
-  for (int i = 0; i < AREA_WIDTH + 1; i++) {
-    for (int j = 0; j < AREA_HEIGHT + 1; j++) {
+  for (int i = 0; i < AREA_WIDTH + 1; i++)
+  {
+    for (int j = 0; j < AREA_HEIGHT + 1; j++)
+    {
       //	cout << " i, j = " << i << ", " << j << endl;
       Cell *cell_ptr = &(mental_map.grid[i][j]);
       initCell(cell_ptr, i, j, CELL_WIDTH, CELL_HEIGHT, x_min, y_min);
@@ -1077,17 +1175,15 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   int src_cell_index_y = (entry_point.y_long - y_min) / CELL_HEIGHT;
   src_cell_ptr = &(mental_map.grid[src_cell_index_x][src_cell_index_y]);
 
-   cout << " (src cell) index_x:" << src_cell_ptr-> index_x << ", index_y: "
-   << src_cell_ptr-> index_y << "x: " << src_cell_ptr->x << "y: " <<
-   src_cell_ptr->y << endl;
+  cout << " (src cell) index_x:" << src_cell_ptr->index_x << ", index_y: "
+       << src_cell_ptr->index_y << "x: " << src_cell_ptr->x << "y: " << src_cell_ptr->y << endl;
 
   int dst_cell_index_x = (exit_point.x_lat - x_min) / CELL_WIDTH;
   int dst_cell_index_y = (exit_point.y_long - y_min) / CELL_HEIGHT;
 
-    dst_cell_ptr = &(mental_map.grid[dst_cell_index_x][dst_cell_index_y]);
-   cout << " (dst cell) index_x:" << dst_cell_ptr-> index_x << ", index_y: "
-   << dst_cell_ptr-> index_y << "x: " << dst_cell_ptr->x << "y: " <<
-   dst_cell_ptr->y << endl;
+  dst_cell_ptr = &(mental_map.grid[dst_cell_index_x][dst_cell_index_y]);
+  cout << " (dst cell) index_x:" << dst_cell_ptr->index_x << ", index_y: "
+       << dst_cell_ptr->index_y << "x: " << dst_cell_ptr->x << "y: " << dst_cell_ptr->y << endl;
 
   /* Wavefront Map 생성 */
 
@@ -1102,13 +1198,15 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
   int **waveFrontMap = new int *[AREA_WIDTH + 1];
 
-
-  for (int c = 0; c < AREA_WIDTH + 1; c++) {
+  for (int c = 0; c < AREA_WIDTH + 1; c++)
+  {
     waveFrontMap[c] = new int[AREA_HEIGHT + 1];
   }
 
-  for (int x_index = 0; x_index < AREA_WIDTH + 1; x_index++) {
-    for (int y_index = 0; y_index < AREA_HEIGHT + 1; y_index++) {
+  for (int x_index = 0; x_index < AREA_WIDTH + 1; x_index++)
+  {
+    for (int y_index = 0; y_index < AREA_HEIGHT + 1; y_index++)
+    {
       waveFrontMap[x_index][y_index] = 0;
     }
   }
@@ -1124,11 +1222,13 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
   bool pathExist = false; // whether a path from src to dst exists
 
-  while (queue.empty() != true) {
+  while (queue.empty() != true)
+  {
     Cell *nextCell =
         queue.front(); // queue에서 다음 cell 제거, wavefront map 확장
-    if (nextCell == src_cell_ptr) { // wavefront map이 현재 cell까지 생성된 경우
-                                    // map 생성 중단
+    if (nextCell == src_cell_ptr)
+    { // wavefront map이 현재 cell까지 생성된 경우
+      // map 생성 중단
       break;
     }
     queue.erase(queue.begin());
@@ -1136,17 +1236,21 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     int index_y = nextCell->index_y;
 
     // 다음 cell의 이웃 cell(8개) 들을 queue에 추가
-    for (int local_index_x = -1; local_index_x < 2; local_index_x++) {
+    for (int local_index_x = -1; local_index_x < 2; local_index_x++)
+    {
       // x 인덱스 범위가 mental_map 범위를 벗어 나면 continue
       if ((index_x + local_index_x) < 0 ||
-          (index_x + local_index_x) > (AREA_WIDTH)) {
+          (index_x + local_index_x) > (AREA_WIDTH))
+      {
         continue;
       }
 
-      for (int local_index_y = -1; local_index_y < 2; local_index_y++) {
+      for (int local_index_y = -1; local_index_y < 2; local_index_y++)
+      {
         // y 인덱스의 범위가 mental_map 범위를 벗어 나면 continue
         if (((index_y + local_index_y) < 0) ||
-            ((index_y + local_index_y) > (AREA_HEIGHT))) {
+            ((index_y + local_index_y) > (AREA_HEIGHT)))
+        {
           continue;
         }
 
@@ -1164,22 +1268,24 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         }
 
         // Case#1 이미 방문된 Cell인 경우
-        if (neighbor->visited == true) {
+        if (neighbor->visited == true)
+        {
 
           waveFrontMap[index_x_neighbor][index_y_neighbor] = 3;
           queue.push_back(neighbor);
 
           if (neighbor ==
-              src_cell_ptr) { // queue에 추가된 노드가 starting node이면
+              src_cell_ptr)
+          {                   // queue에 추가된 노드가 starting node이면
             pathExist = true; // s->g까지 경로 존재 여부를 true로 설정
           }
-
         }
         // Case#2 장애물이 있는 Cell인 경우, 높이를 기준으로 선택적으로 queue에
         // 추가
         // (2018.11.06) 현재는 모든 경우에 우회하도록 구현
 
-        else if (isOccupiedCell(neighbor) == true) {
+        else if (isOccupiedCell(neighbor) == true)
+        {
           waveFrontMap[index_x_neighbor][index_y_neighbor] = 1;
         }
 
@@ -1191,12 +1297,14 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         }
 
         // Case#4 그 밖의 경우
-        else {
+        else
+        {
           waveFrontMap[index_x_neighbor][index_y_neighbor] =
               waveFrontMap[index_x][index_y] + 1; //(2018.10.02)
           queue.push_back(neighbor);
           if (neighbor ==
-              src_cell_ptr) { // queue에 추가된 노드가 starting node이면
+              src_cell_ptr)
+          {                   // queue에 추가된 노드가 starting node이면
             pathExist = true; // s->g까지 경로 존재 여부를 true로 설정
           }
         }
@@ -1233,8 +1341,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
   target_position_entry.pos_local.x = dest.x_lat;
   target_position_entry.pos_local.y = dest.y_long;
-  target_position_entry.pos_local.z = dest.z_alt;;
-
+  target_position_entry.pos_local.z = dest.z_alt;
+  ;
 
   path.push_back(target_position_entry); // path에 entry_point 추가
   src_cell_ptr->includedInPath = true;
@@ -1246,14 +1354,19 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
   int cnt = 0;
   // (이웃 cell 선택) 반복
 
-  while (cur_cell_ptr != dst_cell_ptr) {
-    if (cnt > 1000) {
+  while (cur_cell_ptr != dst_cell_ptr)
+  {
+    if (cnt > 1000)
+    {
       break;
-    } else {
+    }
+    else
+    {
       cnt++;
     }
 
-    if (pathComputed == true) {
+    if (pathComputed == true)
+    {
       break;
     }
 
@@ -1263,42 +1376,52 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     int index_x = cur_cell_ptr->index_x;
     int index_y = cur_cell_ptr->index_y;
 
-    for (int local_index_x = -1; local_index_x < 2; local_index_x++) {
+    for (int local_index_x = -1; local_index_x < 2; local_index_x++)
+    {
       int index_x_neighbor = index_x + local_index_x;
 
-      if (index_x_neighbor < 0 || index_x_neighbor > AREA_WIDTH) {
+      if (index_x_neighbor < 0 || index_x_neighbor > AREA_WIDTH)
+      {
         continue;
       }
 
-      for (int local_index_y = -1; local_index_y < 2; local_index_y++) {
+      for (int local_index_y = -1; local_index_y < 2; local_index_y++)
+      {
         int index_y_neighbor = index_y + local_index_y;
 
-        if (index_y_neighbor < 0 || index_y_neighbor > AREA_HEIGHT) {
+        if (index_y_neighbor < 0 || index_y_neighbor > AREA_HEIGHT)
+        {
           continue;
         }
 
-        if (local_index_x == 0 && local_index_y == 0) {
+        if (local_index_x == 0 && local_index_y == 0)
+        {
           continue;
         } // 자기 자신은 탐색 대상에서 제외
 
         neighbor_cell_ptr =
             &(mental_map_ptr->grid[index_x_neighbor][index_y_neighbor]);
 
-        if (neighbor_cell_ptr->includedInPath == true) {
+        if (neighbor_cell_ptr->includedInPath == true)
+        {
           continue;
         } // 이미 경로에 추가된 cell은 제외
-        if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 1) {
+        if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 1)
+        {
           continue;
         } // 장애물이 있는 cell은 제외
-        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 2) {
+        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 2)
+        {
           continue;
         } // 비행금지구역에 속한 cell은 제외
-        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 3) {
+        else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 3)
+        {
           continue;
         } // 기 방문된 cell은 제외
 
         if (&mental_map_ptr->grid[index_x_neighbor][index_y_neighbor] ==
-            dst_cell_ptr) { // 이웃 cell이 목적지 cell인 경우
+            dst_cell_ptr)
+        { // 이웃 cell이 목적지 cell인 경우
           max_label = waveFrontMap[index_x_neighbor][index_y_neighbor];
           neighbor_max_label =
               &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor];
@@ -1316,20 +1439,25 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         }
       }
 
-      if (pathComputed == true) {
+      if (pathComputed == true)
+      {
         break;
       }
 
     } // 현재 노드의 이웃 노드 검사 - 다음 노드 선택
     // cout << "neighbor_max_label: (" <<  neighbor_max_label->x << "," <<
     // neighbor_max_label->x << ")" << endl;
-    if (neighbor_max_label != NULL) {
+    if (neighbor_max_label != NULL)
+    {
       cur_cell_ptr = neighbor_max_label;
 
       // 고도값 설정
-      if (cur_cell_ptr->occupied == true) {
+      if (cur_cell_ptr->occupied == true)
+      {
         cur_cell_ptr->z = cur_cell_ptr->obstacle_height + altitude;
-      } else {
+      }
+      else
+      {
         cur_cell_ptr->z = altitude;
       }
 
@@ -1366,7 +1494,8 @@ const int CELL_HEIGHT, const double base_x, const double base_y){
   cell_ptr->rel_altitude_estimated = 0;
 }*/
 
-void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y) {
+void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y)
+{
   ROS_INFO("updateMap was called");
 
   cout << " Current Cell index: " << curCell_x << ", " << curCell_y << endl;
@@ -1414,10 +1543,12 @@ void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y) {
     }
 
     for (int local_index_y = (-1) * SENSING_RANGE;
-         local_index_y < SENSING_RANGE; local_index_y++) {
+         local_index_y < SENSING_RANGE; local_index_y++)
+    {
       int index_y = curCell_y + local_index_y;
 
-      if (index_y < 0 || index_y > AREA_HEIGHT - 1) {
+      if (index_y < 0 || index_y > AREA_HEIGHT - 1)
+      {
         continue;
       }
 
@@ -1439,14 +1570,16 @@ void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y) {
 
         // 1) free cell인 경우
 
-        if (isOccupied == false) {
+        if (isOccupied == false)
+        {
           observedCell->occupied = false;
           mental_map_ptr->freeCells.push_back(observedCell);
         }
 
         // 2) occupied cell인 경우
         // occupiedCells.push_back(else
-        else {
+        else
+        {
           observedCell->occupied = true;
           mental_map_ptr->occupiedCells.push_back(observedCell);
         }
@@ -1454,7 +1587,8 @@ void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y) {
         observedCell->observed = true; //
       }
 
-      if (observedCell->occupied == true) {
+      if (observedCell->occupied == true)
+      {
         cout << "observedCell: " << endl;
         cout << " (index_x, index_y): (" << index_x << ", " << index_y << ")"
              << endl;
@@ -1469,7 +1603,8 @@ void updateMap(Mental_Map *mental_map_ptr, int curCell_x, int curCell_y) {
   } // 장애물 확인, mental_map 확장
 }
 
-void ref_system_conversion_test() {
+void ref_system_conversion_test()
+{
   printf("reference system conversion test: \n");
 
   printf("GeoPoint => Point\n");
@@ -1505,7 +1640,8 @@ void ref_system_conversion_test() {
        << geoPoint.altitude << ") " << endl;
 }
 
-void state_cb(const mavros_msgs::State::ConstPtr &msg) {
+void state_cb(const mavros_msgs::State::ConstPtr &msg)
+{
 
   current_state = *msg;
   /*
@@ -1539,7 +1675,8 @@ void state_cb(const mavros_msgs::State::ConstPtr &msg) {
           }*/
 }
 
-void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg) {
+void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg)
+{
 
   current_pos_local = *msg;
 
@@ -1560,7 +1697,8 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg) {
 
   distance_home = sqrt(distance_home);
 
-  if (distance_home > geofence.geofence_radius) {
+  if (distance_home > geofence.geofence_radius)
+  {
     ROS_INFO(
         "control_node - pos_cb_local(): current position is out of geofence ");
 
@@ -1606,11 +1744,13 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg) {
   */
   // geofence (end)
 
-  if (phase.compare("TAKEOFF") == 0) {
+  if (phase.compare("TAKEOFF") == 0)
+  {
     // cout << "TAKEOFF is ongoing: takeoff_altitude is " << takeoff_altitude <<
     // endl;
 
-    if (current_pos_local.pose.position.z >= takeoff_altitude - 0.1) {
+    if (current_pos_local.pose.position.z >= takeoff_altitude - 0.1)
+    {
       cout << "eDrone_control_node: TAKEOFF completed!" << endl;
 
       phase = "READY";
@@ -1626,24 +1766,28 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg) {
   {
 
     if ((target_position.reached == false) &&
-        (target_position.is_global == false)) {
+        (target_position.is_global == false))
+    {
       // 목적지 도착 여부 확인
       double distance;
 
       if (((target_position.pos_local.x - DIST_RANGE) <
            current_pos_local.pose.position.x) &&
           (current_pos_local.pose.position.x <
-           (target_position.pos_local.x + DIST_RANGE))) {
+           (target_position.pos_local.x + DIST_RANGE)))
+      {
 
         if (((target_position.pos_local.y - DIST_RANGE) <
              current_pos_local.pose.position.y) &&
             (current_pos_local.pose.position.y <
-             (target_position.pos_local.y + DIST_RANGE))) {
+             (target_position.pos_local.y + DIST_RANGE)))
+        {
 
           if (((target_position.pos_local.z - 0.5) <
                current_pos_local.pose.position.z) &&
               (current_pos_local.pose.position.z <
-               (target_position.pos_local.z + 0.5))) {
+               (target_position.pos_local.z + 0.5)))
+          {
             target_position.reached = true;
             ROS_INFO("pos_cb_local(): The UAV reached to the target position");
 
@@ -1658,7 +1802,8 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr &msg) {
   }
 }
 
-void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr &msg) {
+void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr &msg)
+{
 
   current_pos_global = *msg;
 
@@ -1667,10 +1812,12 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr &msg) {
   // current_pos_global.latitude, current_pos_global.longitude,
   // current_pos_global.altitude-HOME_ALT);
 
-  if (phase.compare("GOTO") == 0) {
+  if (phase.compare("GOTO") == 0)
+  {
 
     if ((target_position.reached == false) &&
-        (target_position.is_global == true)) {
+        (target_position.is_global == true))
+    {
       // 목적지 도착 여부 확인
       double distance;
 
@@ -1678,17 +1825,20 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr &msg) {
            current_pos_global.latitude) &&
 
           (current_pos_global.latitude <
-           (target_position.pos_global.latitude + 0.0001))) {
+           (target_position.pos_global.latitude + 0.0001)))
+      {
 
         if (((target_position.pos_global.longitude - 0.0001) <
              current_pos_global.longitude) &&
             (current_pos_global.longitude <
-             (target_position.pos_global.longitude + 0.0001))) {
+             (target_position.pos_global.longitude + 0.0001)))
+        {
 
           if (((target_position.pos_global.altitude - 0.5) <
                current_pos_global.longitude) &&
               (current_pos_global.longitude <
-               (target_position.pos_global.longitude + 0.5))) {
+               (target_position.pos_global.longitude + 0.5)))
+          {
             target_position.reached = true;
             ROS_INFO("pos_cb_global(): The UAV reached to the target position");
           }
@@ -1698,7 +1848,8 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr &msg) {
   }
 }
 
-void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr &msg) {
+void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr &msg)
+{
   home_position = *msg;
 
   //	printf("home position: (%f, %f, %f) \n", home_position.position.x,
@@ -1710,14 +1861,16 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr &msg) {
 
   static int print_count = 0;
 
-  if (print_count < 10) {
+  if (print_count < 10)
+  {
     printf("control_node: home position: (%f, %f, %f) \n", HOME_LAT, HOME_LON,
            HOME_ALT);
     print_count++;
   }
 }
 
-void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr &msg) {
+void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr &msg)
+{
   // 현재 목적지 도달 여부 확인
   // ROS_INFO("eDrone_control_node: noflyZones_cb(): \n");
 
@@ -1744,7 +1897,8 @@ void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr &msg) {
 
 // callback 함수 (서비스 제공) 정의
 
-void geofence_cb(const eDrone_msgs::Geofence::ConstPtr &msg) {
+void geofence_cb(const eDrone_msgs::Geofence::ConstPtr &msg)
+{
 
   //	cout << "eDrone_control_node - geofence_cb(): " << endl;
   geofence = *msg;
@@ -1753,7 +1907,8 @@ void geofence_cb(const eDrone_msgs::Geofence::ConstPtr &msg) {
 }
 
 bool srv_arming_cb(eDrone_msgs::Arming::Request &req,
-                   eDrone_msgs::Arming::Response &res) {
+                   eDrone_msgs::Arming::Response &res)
+{
 
   ROS_INFO("ARMing request received\n");
   arming_cmd.request.value = true; // 서비스 요청 메시지 필드 설정
@@ -1764,10 +1919,12 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req,
   {
     printf("eDrone_control_node: send Arming command ...\n");
 
-    if (!arming_client.call(arming_cmd)) {
+    if (!arming_client.call(arming_cmd))
+    {
       ros::spinOnce();
       //   	  	 rate.sleep();
-    } else
+    }
+    else
       break;
   }
 
@@ -1777,7 +1934,8 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req,
 }
 
 bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req,
-                    eDrone_msgs::Takeoff::Response &res) {
+                    eDrone_msgs::Takeoff::Response &res)
+{
 
   takeoff_altitude = req.takeoff_altitude; // 이륙 고도 저장
   // double offset = 25;
@@ -1797,13 +1955,16 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req,
 
   // 서비스 요청 메시지 전달
 
-  while (ros::ok()) {
+  while (ros::ok())
+  {
     printf("send Takeoff command ...\n");
 
-    if (!takeoff_client.call(takeoff_cmd)) {
+    if (!takeoff_client.call(takeoff_cmd))
+    {
       ros::spinOnce();
       //  rate.sleep();
-    } else
+    }
+    else
       break;
   }
   phase = "TAKEOFF";
@@ -1814,12 +1975,13 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req,
 }
 
 bool srv_landing_cb(eDrone_msgs::Landing::Request &req,
-                    eDrone_msgs::Landing::Response &res) {
+                    eDrone_msgs::Landing::Response &res)
+{
 
   ROS_INFO("Landing request received\n");
   //// 서비스 요청 메시지 필드 설정
 
-  landing_cmd.request.altitude = 10;
+  landing_cmd.request.altitude = 5;
 
   landing_cmd.request.latitude = HOME_LAT;
 
@@ -1834,20 +1996,24 @@ bool srv_landing_cb(eDrone_msgs::Landing::Request &req,
   //// Landing
 
   // 현재 이륙 중이면 false 반환
-  if (phase.compare("TAKEOFF") == 0) {
+  if (phase.compare("TAKEOFF") == 0)
+  {
     res.value = false;
     return true;
   }
 
   // landing 서비스 호출
 
-  while (ros::ok()) {
+  while (ros::ok())
+  {
     printf("send Landing command ...\n");
 
-    if (!landing_client.call(landing_cmd)) {
+    if (!landing_client.call(landing_cmd))
+    {
       ros::spinOnce();
       // rate.sleep();
-    } else
+    }
+    else
       break;
   }
   ROS_INFO("Landing command was sent\n");
@@ -1856,7 +2022,8 @@ bool srv_landing_cb(eDrone_msgs::Landing::Request &req,
 }
 
 bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req,
-                       eDrone_msgs::ModeChange::Response &res) {
+                       eDrone_msgs::ModeChange::Response &res)
+{
 
   std::cout << "srv_modeChange_cb(): change the mode to " << req.modeChange_mode
             << endl;
@@ -1865,7 +2032,8 @@ bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req,
 
   modeChange_cmd.request.custom_mode.assign(req.modeChange_mode);
 
-  if (modeChange_client.call(modeChange_cmd) == true) {
+  if (modeChange_client.call(modeChange_cmd) == true)
+  {
     std::cout << " modeChange cmd was sent!\n " << endl;
   }
 
@@ -1875,14 +2043,16 @@ bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req,
 }
 
 bool srv_rtl_cb(eDrone_msgs::RTL::Request &req,
-                eDrone_msgs::RTL::Response &res) {
+                eDrone_msgs::RTL::Response &res)
+{
   std::cout << "srv_rtl_cb():return to home" << endl;
 
   modeChange_cmd.request.base_mode = 0;
 
   modeChange_cmd.request.custom_mode.assign("AUTO.RTL");
 
-  if (modeChange_client.call(modeChange_cmd) == true) {
+  if (modeChange_client.call(modeChange_cmd) == true)
+  {
     std::cout << " modeChange cmd was sent!\n " << endl;
   }
   phase = "RTL";
@@ -1894,7 +2064,8 @@ bool srv_rtl_cb(eDrone_msgs::RTL::Request &req,
 }
 
 bool srv_goto_cb(eDrone_msgs::Goto::Request &req,
-                 eDrone_msgs::Goto::Response &res) {
+                 eDrone_msgs::Goto::Response &res)
+{
 
   ROS_INFO("eDrone_control_node: Goto request received\n");
   printf("eDrone_control_node: target_seq_no: %d\n",
@@ -1920,10 +2091,10 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req,
     target_position.pos_local.x = point.x;
     target_position.pos_local.y = point.y;
     target_position.pos_local.z = point.z;
-
   }
 
-  else if (req.goto_ref_system.compare("ENU") == 0) {
+  else if (req.goto_ref_system.compare("ENU") == 0)
+  {
     target_position.pos_local.x = req.goto_point.x_lat;
     target_position.pos_local.y = req.goto_point.y_long;
     target_position.pos_local.z = req.goto_point.z_alt;
@@ -1945,12 +2116,13 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req,
       sqrt(pow((double)target_position.pos_local.x, (double)2) +
            pow((double)target_position.pos_local.y, (double)2));
 
-  if (distance_to_home > geofence.geofence_radius) {
+  if (distance_to_home > geofence.geofence_radius)
+  {
     cout << "control_node-  goto_cb(): target position is outside of the "
             "geofence!! ("
          << geofence.geofence_radius << " m" << endl;
     res.value = false; // 목적지가 비행금지구역 내에 있으면 goto 명령 거부
-    return true; //
+    return true;       //
   }
 
   /*
@@ -2008,12 +2180,14 @@ geofence violation!\n");
   dest.z_alt = target_position.pos_local.z;
 
   for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-       it != nfZones.noflyZones.end(); it++) {
+       it != nfZones.noflyZones.end(); it++)
+  {
     NoflyZone nfz = *it;
     //	vector<Target> boundary_pts;
 
     for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-         it != nfz.noflyZone_pts.end(); it++) {
+         it != nfz.noflyZone_pts.end(); it++)
+    {
       Target boundary_point = *it;
       cout << "boundary point: (" << boundary_point.x_lat << " , "
            << boundary_point.y_long << ", " << boundary_point.z_alt << ") "
@@ -2037,7 +2211,8 @@ geofence violation!\n");
     // cout << "noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system:" <<
     // noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system << endl;
 
-    if (noflyZoneCheck_client.call(noflyZoneCheck_cmd)) {
+    if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
+    {
       cout << " noflyZoneCheck API was called " << endl;
     }
 
@@ -2045,17 +2220,20 @@ geofence violation!\n");
              noflyZoneCheck_cmd.response.result.c_str());
   }
 
-  if (noflyZoneCheck_cmd.response.result == "DST_IN_NF") {
+  if (noflyZoneCheck_cmd.response.result == "DST_IN_NF")
+  {
     res.value = false; // 목적지가 비행금지구역 내에 있으면 goto 명령 거부
-    return true; //
+    return true;       //
   }
 
-  else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP") {
+  else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP")
+  {
     vector<Target_Position> indirectPath = getIndirectPath(src, dest);
     printAltPath(indirectPath);
 
     for (vector<Target_Position>::iterator it = indirectPath.begin();
-         it != indirectPath.end(); it++) {
+         it != indirectPath.end(); it++)
+    {
       Target_Position target_position = *it;
       target_position.reached = false;
       path.push_back(target_position);
@@ -2063,8 +2241,9 @@ geofence violation!\n");
     // phase = "GOTO"; // (2018.11.28) to assure the completion of Goto API
     // before handling the next API call
     res.value = true;
-
-  } else {
+  }
+  else
+  {
     // ROS_INFO("noflyZoneCheck result: NONE");
     // path에 목적지 정보 저장
     res.value = true;
@@ -2078,7 +2257,8 @@ geofence violation!\n");
 }
 
 bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
-                     eDrone_msgs::GotoPath::Response &res) {
+                     eDrone_msgs::GotoPath::Response &res)
+{
 
   ROS_INFO("eDrone_control_node: GotoPath request received\n");
   // phase = "GOTOPATH";
@@ -2101,7 +2281,8 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
     prev_target.z_alt = current_pos_local.pose.position.z;
 
     for (vector<Target>::iterator it = req.gotoPath_pts.begin();
-         it != req.gotoPath_pts.end(); it++) {
+         it != req.gotoPath_pts.end(); it++)
+    {
 
       Target target = *it;
 
@@ -2123,7 +2304,8 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
           sqrt(pow((double)target_position.pos_local.x, (double)2) +
                pow((double)target_position.pos_local.y, (double)2));
 
-      if (distance_to_home > geofence.geofence_radius) {
+      if (distance_to_home > geofence.geofence_radius)
+      {
         cout << "control_node-  gotoPath_cb(): target position is outside of "
                 "the geofence!!"
              << endl;
@@ -2146,12 +2328,14 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
       // NoflyZoneCheck API Call
 
       for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-           it != nfZones.noflyZones.end(); it++) {
+           it != nfZones.noflyZones.end(); it++)
+      {
 
         NoflyZone nfz = *it;
 
         for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-             it != nfz.noflyZone_pts.end(); it++) {
+             it != nfz.noflyZone_pts.end(); it++)
+        {
           Target boundary_point = *it;
           cout << "boundary point: (" << boundary_point.x_lat << " , "
                << boundary_point.y_long << ", " << boundary_point.z_alt << ") "
@@ -2168,21 +2352,24 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
         // cout << "noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system:"
         // << noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system << endl;
 
-        if (noflyZoneCheck_client.call(noflyZoneCheck_cmd)) {
+        if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
+        {
           cout << " noflyZoneCheck API was called " << endl;
           ROS_INFO("noflyZoneCheck result: %s ",
                    noflyZoneCheck_cmd.response.result.c_str());
         }
       }
 
-      if (noflyZoneCheck_cmd.response.result == "DST_IN_NF") {
+      if (noflyZoneCheck_cmd.response.result == "DST_IN_NF")
+      {
 
         cout << "srv_gotoPath_cb(): target is in NoflyZone (" << dest.x_lat
              << ", " << dest.y_long << ", " << dest.z_alt << ")" << endl;
         break;
       }
 
-      else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP") {
+      else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP")
+      {
 
         cout << "srv_gotoPath_cb(): src-dst path overlaps NoflyZone!" << endl;
 
@@ -2191,12 +2378,14 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
 
         int tCnt = 0;
         for (vector<Target_Position>::iterator it = indirectPath.begin();
-             it != indirectPath.end(); it++) {
+             it != indirectPath.end(); it++)
+        {
           Target_Position target_position = *it;
           target_position.reached = false;
           path.push_back(target_position);
 
-          if (tCnt == (indirectPath.size() - 1)) {
+          if (tCnt == (indirectPath.size() - 1))
+          {
             prev_target.x_lat = target_position.pos_local.x;
             prev_target.y_long = target_position.pos_local.y;
             prev_target.z_alt = target_position.pos_local.z;
@@ -2208,7 +2397,8 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
         break;
       }
 
-      else {
+      else
+      {
         // path에 목적지 또는 부분 경로 추가
         target_position.reached = false;
         path.push_back(target_position);
@@ -2218,7 +2408,8 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
         prev_target.z_alt = dest.z_alt;
       }
     }
-  } else if (req.gotoPath_ref_system.compare("ENU") == 0) // 지역 좌표
+  }
+  else if (req.gotoPath_ref_system.compare("ENU") == 0) // 지역 좌표
   // else if (req.path_ref_system.compare("ENU") == 0) // 지역 좌표
   {
     cout << " gotoPath_cb(): req.gotoPath_ref_system == 'ENU' " << endl;
@@ -2237,7 +2428,8 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
     prev_target.z_alt = current_pos_local.pose.position.z;
 
     for (vector<Target>::iterator it = req.gotoPath_pts.begin();
-         it != req.gotoPath_pts.end(); it++) {
+         it != req.gotoPath_pts.end(); it++)
+    {
       Target target = *it;
       // Point point = *it;
       target_position.ref_system = "ENU";
@@ -2260,15 +2452,13 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
           sqrt(pow((double)target_position.pos_local.x, (double)2) +
                pow((double)target_position.pos_local.y, (double)2));
 
-      // cout << " target (" << target_position.pos_local.x << ", " <<
-      // target_position.pos_local.y << ") - dist: " << distance_to_home <<
-      // endl;
+      cout << " target (" << target_position.pos_local.x << ", " << target_position.pos_local.y << ") - dist: " << distance_to_home << endl;
 
-      if (distance_to_home > geofence.geofence_radius) {
-        // cout << "distance_to_home is larger than geofence.geofence_radius("
-        // << geofence.geofence_radius << ")" << endl;
-        // cout << "control_node-  gotoPath_cb(): target position is outside of
-        // the geofence!!" << endl;
+      if (distance_to_home > geofence.geofence_radius)
+      {
+        cout << "distance_to_home is larger than geofence.geofence_radius("
+             << geofence.geofence_radius << ")" << endl;
+        cout << "control_node-  gotoPath_cb(): target position is outside of the geofence!!" << endl;
         res.value = false; // 목적지가 비행금지구역 내에 있으면 pass
         continue;
       }
@@ -2285,8 +2475,10 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
 
       // NoflyZoneCheck API Check
 
+      cout << "noflyZoneCheck call: " << endl;
       for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-           it != nfZones.noflyZones.end(); it++) {
+           it != nfZones.noflyZones.end(); it++)
+      {
 
         NoflyZone nfz = *it;
         noflyZoneCheck_cmd.request.noflyZoneCheck_src = src;
@@ -2299,56 +2491,69 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req,
         // cout << "noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system:"
         // << noflyZoneCheck_cmd.request.noflyZoneCheck_dest.ref_system << endl;
 
-        if (noflyZoneCheck_client.call(noflyZoneCheck_cmd)) {
+        if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
+        {
           cout << " noflyZoneCheck API was called " << endl;
           ROS_INFO("noflyZoneCheck result: %s ",
                    noflyZoneCheck_cmd.response.result.c_str());
-
-          if (noflyZoneCheck_cmd.response.result == "DST_IN_NF") {
-            cout << "srv_gotoPath_cb(): target is in NoflyZone (" << dest.x_lat
-                 << ", " << dest.y_long << ", " << dest.z_alt << ")" << endl;
-            break;
-          } else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP") {
-            cout << "srv_gotoPath_cb(): src-dest path overlaps NoflyZone ("
-                 << dest.x_lat << ", " << dest.y_long << ", " << dest.z_alt
-                 << ")" << endl;
-
-            vector<Target_Position> indirectPath = getIndirectPath(src, dest);
-            printAltPath(indirectPath);
-
-            for (vector<Target_Position>::iterator it = indirectPath.begin();
-                 it != indirectPath.end(); it++) {
-              Target_Position target_position = *it;
-              target_position.reached = false;
-              path.push_back(target_position);
-            } // path에 indirectPath 추가
-
-            prev_target.x_lat = dest.x_lat;
-            prev_target.y_long = dest.y_long;
-            prev_target.z_alt = dest.z_alt;
-            break;
-          }
-
-          else {
-            // path에 목적지 또는 부분 경로 추가
-            target_position.reached = false;
-            path.push_back(target_position);
-
-            prev_target.x_lat = dest.x_lat;
-            prev_target.y_long = dest.y_long;
-            prev_target.z_alt = dest.z_alt;
-          }
         }
-
       } // noflyZone iteration
-    }   // target iteration
-  }     // Coord type: ENU
 
-  return true;
+      if (noflyZoneCheck_cmd.response.result == "DST_IN_NF")
+      {
+        cout << "srv_gotoPath_cb(): target is in NoflyZone (" << dest.x_lat
+             << ", " << dest.y_long << ", " << dest.z_alt << ")" << endl;
+        break;
+      }
+      else if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP")
+      {
+        cout << "srv_gotoPath_cb(): src-dest path overlaps NoflyZone ("
+             << dest.x_lat << ", " << dest.y_long << ", " << dest.z_alt
+             << ")" << endl;
+
+        vector<Target_Position> indirectPath = getIndirectPath(src, dest);
+        printAltPath(indirectPath);
+
+        for (vector<Target_Position>::iterator it = indirectPath.begin();
+             it != indirectPath.end(); it++)
+        {
+          Target_Position target_position = *it;
+          target_position.reached = false;
+          path.push_back(target_position);
+        } // path에 indirectPath 추가
+
+        prev_target.x_lat = dest.x_lat;
+        prev_target.y_long = dest.y_long;
+        prev_target.z_alt = dest.z_alt;
+        break;
+      }
+
+      else
+      {
+        // path에 목적지 또는 부분 경로 추가
+
+        // (0319)
+        cout << "target (" << target_position.pos_local.x << ", " << target_position.pos_local.y << ") was added to the path" << endl;
+
+        target_position.reached = false;
+        path.push_back(target_position);
+
+        prev_target.x_lat = dest.x_lat;
+        prev_target.y_long = dest.y_long;
+        prev_target.z_alt = dest.z_alt;
+      }
+
+    } // target iteration
+  } // Coord type: ENU
+
+
+
+return true;
 }
 
 bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
-                       eDrone_msgs::SurveyArea::Response &res) {
+                       eDrone_msgs::SurveyArea::Response &res)
+{
   bool result = false;
 
   ROS_INFO("eDrone_control_node: surveyArea service was called");
@@ -2357,14 +2562,17 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
 
   vector<Target_Position> coveragePath;
 
-  if (req.surveyArea_ref_system == "ENU") {
+  if (req.surveyArea_ref_system == "ENU")
+  {
     //// Geofence 검사 (2019.01.07)
     for (vector<Target>::iterator it = req.surveyArea_pts.begin();
-         it != req.surveyArea_pts.end(); it++) {
+         it != req.surveyArea_pts.end(); it++)
+    {
       Target target = *it;
       double distance_to_home = sqrt(pow((double)target.x_lat, (double)2) +
                                      pow((double)target.y_long, (double)2));
-      if (distance_to_home > geofence.geofence_radius) {
+      if (distance_to_home > geofence.geofence_radius)
+      {
         cout << "control_node - surveyArea_cb(): target Area is outside of the "
                 "geofence!!"
              << endl;
@@ -2376,14 +2584,17 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
 
     coveragePath = getCoveragePath(req.surveyArea_pts, req.surveyArea_altitude,
                                    req.surveyArea_interval);
-  } else if (req.surveyArea_ref_system == "WGS84") {
+  }
+  else if (req.surveyArea_ref_system == "WGS84")
+  {
 
     // ENU 좌표로 변환
 
     vector<Target> surveyArea_pts;
 
     for (vector<Target>::iterator it = req.surveyArea_pts.begin();
-         it != req.surveyArea_pts.end(); it++) {
+         it != req.surveyArea_pts.end(); it++)
+    {
       Target target = *it;
 
       // ENU로 좌표변환
@@ -2395,7 +2606,8 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
       //// geofence check (2019.01.07)
       double distance_to_home = sqrt(pow((double)target.x_lat, (double)2) +
                                      pow((double)target.y_long, (double)2));
-      if (distance_to_home > geofence.geofence_radius) {
+      if (distance_to_home > geofence.geofence_radius)
+      {
         cout << "control_node - surveyArea_cb(): target Area is outside of the "
                 "geofence!!"
              << endl;
@@ -2416,7 +2628,8 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
   printAltPath(coveragePath);
 
   for (vector<Target_Position>::iterator it = coveragePath.begin();
-       it != coveragePath.end(); it++) {
+       it != coveragePath.end(); it++)
+  {
     Target_Position target_position = *it;
     target_position.reached = false;
     path.push_back(target_position);
@@ -2434,7 +2647,8 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req,
 }
 
 bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
-                  eDrone_msgs::Orbit::Response &res) {
+                  eDrone_msgs::Orbit::Response &res)
+{
   ROS_INFO("eDrone_control_node: Orbit service was called");
 
   bool result = false;
@@ -2448,7 +2662,8 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
   // phase = "ORBIT"; // phase 변경
   cur_phase.phase = phase;
   // 선회 비행 시작 지점으로 이동하기 위해 target_position 설정
-  if (req.orbit_ref_system == "ENU") {
+  if (req.orbit_ref_system == "ENU")
+  {
 
     orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
 
@@ -2460,7 +2675,8 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
 
     double distance_to_home = sqrt(pow((double)target.x_lat, (double)2) +
                                    pow((double)target.y_long, (double)2));
-    if ((distance_to_home + req.orbit_radius) > geofence.geofence_radius) {
+    if ((distance_to_home + req.orbit_radius) > geofence.geofence_radius)
+    {
       cout << "control_node - orbit_cb(): target area is outside of the "
               "geofence!!"
            << endl;
@@ -2538,7 +2754,8 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
 
     Point cross_pt1, cross_pt2;
 
-    if ((pow(G, 2) - 4 * F * H) < 0) {
+    if ((pow(G, 2) - 4 * F * H) < 0)
+    {
       cout << " 교점을 구할 수 없음" << endl;
       return false;
     }
@@ -2572,14 +2789,15 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
     target_position.ref_system = "ENU";
     target_position.reached = false;
 
-    if (dist1 < dist2) {
+    if (dist1 < dist2)
+    {
       target_position.pos_local.x = cross_pt1.x;
       target_position.pos_local.y = cross_pt1.y;
       target_position.pos_local.z = takeoff_altitude;
-
     }
 
-    else {
+    else
+    {
       target_position.pos_local.x = cross_pt2.x;
       target_position.pos_local.y = cross_pt2.y;
       target_position.pos_local.z = takeoff_altitude;
@@ -2609,17 +2827,17 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
     dest.z_alt = target_position.pos_local.z;
 
     for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-         it != nfZones.noflyZones.end(); it++) {
+         it != nfZones.noflyZones.end(); it++)
+    {
       NoflyZone nfz = *it;
 
       for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-           it != nfz.noflyZone_pts.end(); it++) {
+           it != nfz.noflyZone_pts.end(); it++)
+      {
         Target boundary_point = *it;
         cout << "boundary point: (" << boundary_point.x_lat << " , "
              << boundary_point.y_long << ", " << boundary_point.z_alt << ") "
              << endl;
-
-
       }
 
       noflyZoneCheck_cmd.request.noflyZoneCheck_src = src;
@@ -2632,28 +2850,30 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
       noflyZoneCheck_cmd.request.noflyZoneCheck_dest.z_alt =
           target_position.pos_local.z;
 
-      if (noflyZoneCheck_client.call(noflyZoneCheck_cmd)) {
+      if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
+      {
         cout << " noflyZoneCheck API was called " << endl;
         ROS_INFO("noflyZoneCheck result: %s ",
                  noflyZoneCheck_cmd.response.result.c_str());
       }
-
-
     }
 
-    if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP") {
+    if (noflyZoneCheck_cmd.response.result == "PATH_OVERLAP")
+    {
       vector<Target_Position> indirectPath = getIndirectPath(src, dest);
       printAltPath(indirectPath);
 
       for (vector<Target_Position>::iterator it = indirectPath.begin();
-           it != indirectPath.end(); it++) {
+           it != indirectPath.end(); it++)
+      {
         Target_Position target_position = *it;
         target_position.reached = false;
         orbit_path.push_back(target_position);
       } // path에 indirectPath 추가
     }
 
-    else {
+    else
+    {
       target_position.reached = false;
       orbit_path.push_back(target_position);
     }
@@ -2679,9 +2899,11 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
     // #3-2 나머지 지점들의 좌표 계산, path에 추가 (요청된 선회 비행 횟수만큼
     // 반복)
 
-    for (int orbit_cnt = 0; orbit_cnt < orbit_req_cnt; orbit_cnt++) {
+    for (int orbit_cnt = 0; orbit_cnt < orbit_req_cnt; orbit_cnt++)
+    {
 
-      for (double theta = 0; theta < 2 * PI; theta += 0.05) {
+      for (double theta = 0; theta < 2 * PI; theta += 0.05)
+      {
         Target_Position point;
         point.pos_local.x = req.orbit_radius * cos(radian + theta) + center_x;
         point.pos_local.y = req.orbit_radius * sin(radian + theta) + center_y;
@@ -2695,11 +2917,13 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
         // (2019.02.01) NoflyZoneCheck
 
         for (vector<NoflyZone>::iterator it = nfZones.noflyZones.begin();
-             it != nfZones.noflyZones.end(); it++) {
+             it != nfZones.noflyZones.end(); it++)
+        {
           NoflyZone nfz = *it;
 
           for (vector<Target>::iterator it = nfz.noflyZone_pts.begin();
-               it != nfz.noflyZone_pts.end(); it++) {
+               it != nfz.noflyZone_pts.end(); it++)
+          {
             Target boundary_point = *it;
 
             cout << "boundary point: (" << boundary_point.x_lat << " , "
@@ -2710,27 +2934,25 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
 
             if (nfz.noflyZone_ref_system == "ENU")
             {
-                dist_to_center = sqrt(pow((double)req.orbit_center.x_lat - boundary_point.x_lat, (double)2) +
-                                             pow((double)req.orbit_center.y_long - boundary_point.y_long, (double)2));
-
+              dist_to_center = sqrt(pow((double)req.orbit_center.x_lat - boundary_point.x_lat, (double)2) +
+                                    pow((double)req.orbit_center.y_long - boundary_point.y_long, (double)2));
             }
             else if (nfz.noflyZone_ref_system == "WGS84")
             {
-                Point boundary_pt = convertGeoToENU(boundary_point.x_lat,
-                  boundary_point.y_long, boundary_point.z_alt, HOME_LAT, HOME_LON,
-                   HOME_ALT);
+              Point boundary_pt = convertGeoToENU(boundary_point.x_lat,
+                                                  boundary_point.y_long, boundary_point.z_alt, HOME_LAT, HOME_LON,
+                                                  HOME_ALT);
 
-                dist_to_center = sqrt(pow((double)req.orbit_center.x_lat - boundary_pt.x, (double)2) +
-                                             pow((double)req.orbit_center.y_long - boundary_pt.y, (double)2));
+              dist_to_center = sqrt(pow((double)req.orbit_center.x_lat - boundary_pt.x, (double)2) +
+                                    pow((double)req.orbit_center.y_long - boundary_pt.y, (double)2));
             }
 
-            if (dist_to_center < req.orbit_radius )
+            if (dist_to_center < req.orbit_radius)
             {
-                cout << "orbit path overlaps noflyzone!!" << endl;
-                res.value = false;
-                return true;
+              cout << "orbit path overlaps noflyzone!!" << endl;
+              res.value = false;
+              return true;
             }
-
           }
         }
 
@@ -2767,200 +2989,206 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
               }
       } // NoflyZone iteration
       */
+      }
     }
+    //	sleep(10);
   }
-  //	sleep(10);
-}
-if (req.orbit_ref_system == "WGS84") {
-  // else if (req.orbit_ref_system == "WGS84") {
-  orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
-  Point orbit_center_point =
-      convertGeoToENU(req.orbit_center.x_lat, req.orbit_center.y_long,
-                      req.orbit_center.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
+  if (req.orbit_ref_system == "WGS84")
+  {
+    // else if (req.orbit_ref_system == "WGS84") {
+    orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
+    Point orbit_center_point =
+        convertGeoToENU(req.orbit_center.x_lat, req.orbit_center.y_long,
+                        req.orbit_center.z_alt, HOME_LAT, HOME_LON, HOME_ALT);
 
-  //// Geofence 검사 (2019.01.07)
+    //// Geofence 검사 (2019.01.07)
 
-  Target target;
-  target.x_lat = orbit_center_point.x;
-  target.y_long = orbit_center_point.y;
+    Target target;
+    target.x_lat = orbit_center_point.x;
+    target.y_long = orbit_center_point.y;
 
-  double distance_to_home = sqrt(pow((double)target.x_lat, (double)2) +
-                                 pow((double)target.y_long, (double)2));
-  if ((distance_to_home + req.orbit_radius) > geofence.geofence_radius) {
-    cout << "control_node - orbit_cb(): target area is outside of the "
-            "geofence!!"
-         << endl;
-    res.value = false;
-    return true;
-  }
-
-  ////
-
-  // #1. (기준점과 r로 결정되는 원)과 (현 위치와 기준점을 잇는 직선) 사이의
-  // 교점 (2개)을 구하고 그 중 현 위치에 더 가까운 지점을 path에 추가 (선회
-  // 비행 시작점)
-
-  // #1-1 교점을 구하기 위한 이차방정식 계산
-
-  Point cur_position; // 현재 위치
-  cur_position.x = current_pos_local.pose.position.x;
-  cur_position.y = current_pos_local.pose.position.y;
-
-  // 직선의 방정식:  y = Ax + B
-  // 직선의 기울기: inclination = (y2 - y1) / (x2 - x1)
-  // (y 절편): intercept_y = cur_position.y -  inclination * cur_position.x
-
-  ////// (1205)
-  // Point orbit_center_point = convertGeoToENU(req.orbit_center.x_lat,
-  // req.orbit_center.y_long, req.orbit_center.z_alt, HOME_LAT, HOME_LON,
-  // HOME_ALT);
-
-  double inclination = (orbit_center_point.y - cur_position.y) /
-                       (orbit_center_point.x - cur_position.x);
-  double A = inclination;
-  double intercept_y = cur_position.y - inclination * cur_position.x;
-  double B = intercept_y;
-
-  cout << " y = Ax + B " << endl;
-  cout << " A = " << A << endl;
-  cout << " B = " << B << endl;
-
-  // 원의 방정식 (표준형): (x-center_x)^2 + (y-center_y)^2 =
-  // req.orbit_radius^2
-  // center_x = point.x, center_y = point.y, r = req.orbit_radius
-  double center_x = orbit_center_point.x;
-  // double center_x = req.x_lat;
-  // double C = center_x;
-  double center_y = orbit_center_point.y;
-  // double center_y = req.y_long;
-  // double D = center_y;
-  double r = req.orbit_radius;
-
-  // 원의 방정식 (일반형): x^2 + y^2 + Cx + Dy + E = 0
-
-  double C = (-2) * center_x;
-  double D = (-2) * center_y;
-  double E = pow(center_x, 2) + pow(center_y, 2) - pow(r, 2);
-
-  cout << " x^2 + y^2 + Cx + Dy + E = 0 " << endl;
-  cout << " C = " << C << endl;
-  cout << " D = " << D << endl;
-  cout << " E = " << E << endl;
-
-  // 직선의 방정식을 원의 방정식에 대입 -> x에 대한 이차방정식으로 표현
-
-  // Fx^2 + Gx + H = 0
-  // F = A^2 + 1
-  // G = 2AB + C + AD
-  // H = B^2 + BD + E
-
-  double F = pow(A, 2) + 1;
-  double G = 2 * A * B + C + A * D;
-  double H = pow(B, 2) + B * D + E;
-
-  cout << " Fx^2 + Gx + H = 0" << endl;
-  cout << " F = " << F << endl;
-  cout << " G = " << G << endl;
-  cout << " H = " << H << endl;
-
-  // #1-2 원과 직선과의 교점 (2개) 계산
-
-  // x = (-G +- sqrt(G^2-4FH))/2F
-
-  Point cross_pt1, cross_pt2;
-
-  if ((pow(G, 2) - 4 * F * H) < 0) {
-    cout << " 교점을 구할 수 없음" << endl;
-    return false;
-  }
-
-  cross_pt1.x = ((-1) * G + sqrt(pow(G, 2) - 4 * F * H)) / (2 * F);
-  cross_pt2.x = ((-1) * G - sqrt(pow(G, 2) - 4 * F * H)) / (2 * F);
-  cross_pt1.y = inclination * cross_pt1.x + intercept_y;
-  cross_pt2.y = inclination * cross_pt2.x + intercept_y;
-
-  cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")"
-       << endl;
-  cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")"
-       << endl;
-
-  // #2 첫 번째 목적지 계산, path 에 추가
-
-  double dist1 = 0;
-  double dist2 = 0;
-
-  dist1 = pow((cross_pt1.x - cur_position.x), 2) +
-          pow((cross_pt1.y - cur_position.y), 2);
-  dist2 = pow((cross_pt2.x - cur_position.x), 2) +
-          pow((cross_pt2.y - cur_position.y), 2);
-
-  cout << "dist1: " << dist1 << "dist2: " << dist2 << endl;
-
-  Target_Position starting_pt;
-
-  // Target_Position target;
-
-  target_position.ref_system = "ENU";
-  target_position.reached = false;
-
-  if (dist1 < dist2) {
-    target_position.pos_local.x = cross_pt1.x;
-    target_position.pos_local.y = cross_pt1.y;
-    target_position.pos_local.z = takeoff_altitude;
-
-  }
-
-  else {
-    target_position.pos_local.x = cross_pt2.x;
-    target_position.pos_local.y = cross_pt2.y;
-    target_position.pos_local.z = takeoff_altitude;
-
-    cout << " target position: (" << target_position.pos_local.x
-         << ", target_position.pos_local.y: " << target_position.pos_local.y
-         << endl;
-  }
-  // orbit_path.push_back(target_position);
-
-  // #2 나머지 목적지들 (원형 비행 경로) 계산, path에 추가
-  // #2-1 선회 비행 경로 상에서 시작점이 원점과 이루는 각도 계산
-
-  double rel_x = target_position.pos_local.x - orbit_center_point.x;
-
-  double rel_y = target_position.pos_local.y - orbit_center_point.y;
-  double radian = atan2(rel_y, rel_x);
-
-  double degree = radian * (180 / PI);
-
-  cout << "원점과 시작점이 이루는 각도: (radian) " << radian << ", (degree) "
-       << degree << endl;
-
-  // #2-2 나머지 지점들의 좌표 계산, path에 추가 (요청된 선회 비행 횟수만큼
-  // 반복)
-
-  for (int orbit_cnt = 0; orbit_cnt < orbit_req_cnt; orbit_cnt++) {
-
-    for (double theta = 0; theta < 2 * PI; theta += 0.05) {
-      Target_Position point;
-      point.pos_local.x = req.orbit_radius * cos(radian + theta) + center_x;
-      point.pos_local.y = req.orbit_radius * sin(radian + theta) + center_y;
-      point.pos_local.z = takeoff_altitude;
-      point.reached = false;
-      // orbit_path.push_back(point);
-
-      // cout << "(x, y) = (" << point.pos_local.x << ", " <<
-      // point.pos_local.y << ")" << endl;
+    double distance_to_home = sqrt(pow((double)target.x_lat, (double)2) +
+                                   pow((double)target.y_long, (double)2));
+    if ((distance_to_home + req.orbit_radius) > geofence.geofence_radius)
+    {
+      cout << "control_node - orbit_cb(): target area is outside of the "
+              "geofence!!"
+           << endl;
+      res.value = false;
+      return true;
     }
+
+    ////
+
+    // #1. (기준점과 r로 결정되는 원)과 (현 위치와 기준점을 잇는 직선) 사이의
+    // 교점 (2개)을 구하고 그 중 현 위치에 더 가까운 지점을 path에 추가 (선회
+    // 비행 시작점)
+
+    // #1-1 교점을 구하기 위한 이차방정식 계산
+
+    Point cur_position; // 현재 위치
+    cur_position.x = current_pos_local.pose.position.x;
+    cur_position.y = current_pos_local.pose.position.y;
+
+    // 직선의 방정식:  y = Ax + B
+    // 직선의 기울기: inclination = (y2 - y1) / (x2 - x1)
+    // (y 절편): intercept_y = cur_position.y -  inclination * cur_position.x
+
+    ////// (1205)
+    // Point orbit_center_point = convertGeoToENU(req.orbit_center.x_lat,
+    // req.orbit_center.y_long, req.orbit_center.z_alt, HOME_LAT, HOME_LON,
+    // HOME_ALT);
+
+    double inclination = (orbit_center_point.y - cur_position.y) /
+                         (orbit_center_point.x - cur_position.x);
+    double A = inclination;
+    double intercept_y = cur_position.y - inclination * cur_position.x;
+    double B = intercept_y;
+
+    cout << " y = Ax + B " << endl;
+    cout << " A = " << A << endl;
+    cout << " B = " << B << endl;
+
+    // 원의 방정식 (표준형): (x-center_x)^2 + (y-center_y)^2 =
+    // req.orbit_radius^2
+    // center_x = point.x, center_y = point.y, r = req.orbit_radius
+    double center_x = orbit_center_point.x;
+    // double center_x = req.x_lat;
+    // double C = center_x;
+    double center_y = orbit_center_point.y;
+    // double center_y = req.y_long;
+    // double D = center_y;
+    double r = req.orbit_radius;
+
+    // 원의 방정식 (일반형): x^2 + y^2 + Cx + Dy + E = 0
+
+    double C = (-2) * center_x;
+    double D = (-2) * center_y;
+    double E = pow(center_x, 2) + pow(center_y, 2) - pow(r, 2);
+
+    cout << " x^2 + y^2 + Cx + Dy + E = 0 " << endl;
+    cout << " C = " << C << endl;
+    cout << " D = " << D << endl;
+    cout << " E = " << E << endl;
+
+    // 직선의 방정식을 원의 방정식에 대입 -> x에 대한 이차방정식으로 표현
+
+    // Fx^2 + Gx + H = 0
+    // F = A^2 + 1
+    // G = 2AB + C + AD
+    // H = B^2 + BD + E
+
+    double F = pow(A, 2) + 1;
+    double G = 2 * A * B + C + A * D;
+    double H = pow(B, 2) + B * D + E;
+
+    cout << " Fx^2 + Gx + H = 0" << endl;
+    cout << " F = " << F << endl;
+    cout << " G = " << G << endl;
+    cout << " H = " << H << endl;
+
+    // #1-2 원과 직선과의 교점 (2개) 계산
+
+    // x = (-G +- sqrt(G^2-4FH))/2F
+
+    Point cross_pt1, cross_pt2;
+
+    if ((pow(G, 2) - 4 * F * H) < 0)
+    {
+      cout << " 교점을 구할 수 없음" << endl;
+      return false;
+    }
+
+    cross_pt1.x = ((-1) * G + sqrt(pow(G, 2) - 4 * F * H)) / (2 * F);
+    cross_pt2.x = ((-1) * G - sqrt(pow(G, 2) - 4 * F * H)) / (2 * F);
+    cross_pt1.y = inclination * cross_pt1.x + intercept_y;
+    cross_pt2.y = inclination * cross_pt2.x + intercept_y;
+
+    cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")"
+         << endl;
+    cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")"
+         << endl;
+
+    // #2 첫 번째 목적지 계산, path 에 추가
+
+    double dist1 = 0;
+    double dist2 = 0;
+
+    dist1 = pow((cross_pt1.x - cur_position.x), 2) +
+            pow((cross_pt1.y - cur_position.y), 2);
+    dist2 = pow((cross_pt2.x - cur_position.x), 2) +
+            pow((cross_pt2.y - cur_position.y), 2);
+
+    cout << "dist1: " << dist1 << "dist2: " << dist2 << endl;
+
+    Target_Position starting_pt;
+
+    // Target_Position target;
+
+    target_position.ref_system = "ENU";
+    target_position.reached = false;
+
+    if (dist1 < dist2)
+    {
+      target_position.pos_local.x = cross_pt1.x;
+      target_position.pos_local.y = cross_pt1.y;
+      target_position.pos_local.z = takeoff_altitude;
+    }
+
+    else
+    {
+      target_position.pos_local.x = cross_pt2.x;
+      target_position.pos_local.y = cross_pt2.y;
+      target_position.pos_local.z = takeoff_altitude;
+
+      cout << " target position: (" << target_position.pos_local.x
+           << ", target_position.pos_local.y: " << target_position.pos_local.y
+           << endl;
+    }
+    // orbit_path.push_back(target_position);
+
+    // #2 나머지 목적지들 (원형 비행 경로) 계산, path에 추가
+    // #2-1 선회 비행 경로 상에서 시작점이 원점과 이루는 각도 계산
+
+    double rel_x = target_position.pos_local.x - orbit_center_point.x;
+
+    double rel_y = target_position.pos_local.y - orbit_center_point.y;
+    double radian = atan2(rel_y, rel_x);
+
+    double degree = radian * (180 / PI);
+
+    cout << "원점과 시작점이 이루는 각도: (radian) " << radian << ", (degree) "
+         << degree << endl;
+
+    // #2-2 나머지 지점들의 좌표 계산, path에 추가 (요청된 선회 비행 횟수만큼
+    // 반복)
+
+    for (int orbit_cnt = 0; orbit_cnt < orbit_req_cnt; orbit_cnt++)
+    {
+
+      for (double theta = 0; theta < 2 * PI; theta += 0.05)
+      {
+        Target_Position point;
+        point.pos_local.x = req.orbit_radius * cos(radian + theta) + center_x;
+        point.pos_local.y = req.orbit_radius * sin(radian + theta) + center_y;
+        point.pos_local.z = takeoff_altitude;
+        point.reached = false;
+        // orbit_path.push_back(point);
+
+        // cout << "(x, y) = (" << point.pos_local.x << ", " <<
+        // point.pos_local.y << ")" << endl;
+      }
+    }
+    //	sleep(10);
   }
-  //	sleep(10);
-}
 
-// phase 설정
+  // phase 설정
 
-//	cur_phase.phase = phase;
-res.value = true;
-result = true;
+  //	cur_phase.phase = phase;
+  res.value = true;
+  result = true;
 
-return result;
+  return result;
 }
 
 int main(int argc, char **argv)
@@ -3044,7 +3272,8 @@ int main(int argc, char **argv)
   //        ROS_INFO("control_node: home position: (%f, %f, %f) \n", HOME_LAT,
   //        HOME_LON, HOME_ALT);
 
-  while (ros::ok()) {
+  while (ros::ok())
+  {
 
     //		cout << "eDrone_control_node: cur_phase = " << cur_phase.phase
     //<<
@@ -3058,11 +3287,15 @@ int main(int argc, char **argv)
     ros::spinOnce();
     rate.sleep();
 
-    if (phase.compare("UNARMED") == 0) {
+    if (phase.compare("UNARMED") == 0)
+    {
       // 시동 명령 대기
-    } else if (phase.compare("ARMED") == 0) {
+    }
+    else if (phase.compare("ARMED") == 0)
+    {
       // 이륙 명령 대기
-    } else if (phase.compare("TAKEOFF") == 0) // 현재 이륙 중인 경우
+    }
+    else if (phase.compare("TAKEOFF") == 0) // 현재 이륙 중인 경우
     {
       // cout << "eDrone_control_node: publish Topic to takeoff - altitude " <<
       // takeoff_altitude <<  endl;
@@ -3070,8 +3303,10 @@ int main(int argc, char **argv)
       // change mode to offboard
       modeChange_cmd.request.base_mode = 0;
       modeChange_cmd.request.custom_mode = "OFFBOARD";
-      if (modeChange_client.call(modeChange_cmd)) {
-        if (modeChange_cmd.response.mode_sent) {
+      if (modeChange_client.call(modeChange_cmd))
+      {
+        if (modeChange_cmd.response.mode_sent)
+        {
           ;
           // cout << "offboard enabled" << endl;
         }
@@ -3087,7 +3322,9 @@ int main(int argc, char **argv)
       pos_pub_local.publish(target_pos_local);
       ros::spinOnce();
       rate.sleep();
-    } else if (phase.compare("READY") == 0) {
+    }
+    else if (phase.compare("READY") == 0)
+    {
       // 이륙 후, 또는 직전 위치 이동 명령 수행 후, 다음 명령을 대기하고 있는
       // 상태
       // 위치 이동 관련 명령이 호출되면, 경로 재설정 후 READY 상태로 전이 ->
@@ -3096,7 +3333,8 @@ int main(int argc, char **argv)
       // path에 목적지 정보가 있으면 첫 번째 데이터를 읽어 와서 target position
       // 갱신
 
-      if (!orbit_path.empty()) {
+      if (!orbit_path.empty())
+      {
 
         target_position = orbit_path[0];
         target_position.target_seq_no++;
@@ -3104,7 +3342,8 @@ int main(int argc, char **argv)
         phase = "ORBIT";
       }
 
-      else if (!path.empty()) {
+      else if (!path.empty())
+      {
 
         target_position = path[0];
         target_position.target_seq_no++;
@@ -3122,7 +3361,9 @@ int main(int argc, char **argv)
         target_pos_local.pose.position.y = target_position.pos_local.y;
         target_pos_local.pose.position.z = target_position.pos_local.z;
         */
-      } else {
+      }
+      else
+      {
         // cout << "eDrone_control_node: main() - phase is READY & path is
         // empty" << endl;
 
@@ -3150,10 +3391,12 @@ int main(int argc, char **argv)
         ros::spinOnce();
         rate.sleep();
       }
-
-    } else if (phase.compare("GOTO") == 0) {
+    }
+    else if (phase.compare("GOTO") == 0)
+    {
       // target position으로 현재 이동 중이면 위치 정보 publish
-      if (target_position.reached != true) {
+      if (target_position.reached != true)
+      {
 
         // 현재 목적지 정보 publish (응용 프로그램에 target 정보 제공)
         cur_target.target_seq_no = target_position.target_seq_no;
@@ -3161,11 +3404,14 @@ int main(int argc, char **argv)
         cur_target.is_global = target_position.is_global;
         cur_target.reached = target_position.reached;
 
-        if (target_position.ref_system == "ENU") {
+        if (target_position.ref_system == "ENU")
+        {
           cur_target.x_lat = target_position.pos_local.x;
           cur_target.y_long = target_position.pos_local.y;
           cur_target.z_alt = target_position.pos_local.z;
-        } else if (target_position.ref_system == "WGS84") {
+        }
+        else if (target_position.ref_system == "WGS84")
+        {
           cur_target.x_lat = target_position.pos_global.latitude;
           cur_target.y_long = target_position.pos_global.longitude;
           cur_target.z_alt = target_position.pos_global.altitude;
@@ -3189,7 +3435,8 @@ int main(int argc, char **argv)
         // path에 목적지 정보가 있으면 첫 번째 데이터를 읽어 와서 target
         // position 갱신
 
-        if (!path.empty()) {
+        if (!path.empty())
+        {
           target_position = path[0];
 
           target_position.pos_local.x = path[0].pos_local.x;
@@ -3216,11 +3463,14 @@ int main(int argc, char **argv)
           cur_target.is_global = target_position.is_global;
           cur_target.reached = target_position.reached;
 
-          if (target_position.ref_system == "ENU") {
+          if (target_position.ref_system == "ENU")
+          {
             cur_target.x_lat = target_position.pos_local.x;
             cur_target.y_long = target_position.pos_local.y;
             cur_target.z_alt = target_position.pos_local.z;
-          } else if (target_position.ref_system == "WGS84") {
+          }
+          else if (target_position.ref_system == "WGS84")
+          {
             cur_target.x_lat = target_position.pos_global.latitude;
             cur_target.y_long = target_position.pos_global.longitude;
             cur_target.z_alt = target_position.pos_global.altitude;
@@ -3241,7 +3491,8 @@ int main(int argc, char **argv)
         }
 
         // path가 비어 있으면 READY phase로 전이
-        else {
+        else
+        {
 
           cout << "eDrone_control_node: Goto phase: path is empty" << endl;
 
@@ -3275,13 +3526,15 @@ int main(int argc, char **argv)
           cur_target.is_global = target_position.is_global;
           cur_target.reached = target_position.reached;
 
-          if (target_position.is_global == false) {
+          if (target_position.is_global == false)
+          {
             cur_target.x_lat = target_position.pos_local.x;
             cur_target.y_long = target_position.pos_local.y;
             cur_target.z_alt = target_position.pos_local.z;
           }
 
-          else {
+          else
+          {
             cur_target.x_lat = target_position.pos_global.latitude;
             cur_target.y_long = target_position.pos_global.longitude;
             cur_target.z_alt = target_position.pos_global.altitude;
@@ -3298,7 +3551,8 @@ int main(int argc, char **argv)
           ros::spinOnce();
 
           rate.sleep();
-        } else // 현재 목적지에 도착했으면 다음 목적지 정보 설정
+        }
+        else // 현재 목적지에 도착했으면 다음 목적지 정보 설정
         {
           if (!orbit_path.empty()) // 선회 비행 경로 변수에 목적지가 남아 있으면
                                    // 해당 위치로 이동
@@ -3321,8 +3575,8 @@ int main(int argc, char **argv)
             cur_phase_pub.publish(cur_phase);
             ros::spinOnce();
             rate.sleep();
-
-          } else // 선회 비행을 마쳤으면 READY 단계로 전이
+          }
+          else // 선회 비행을 마쳤으면 READY 단계로 전이
           {
             cout << "orbit path is empty. Go to READY phase" << endl;
             phase = "READY";

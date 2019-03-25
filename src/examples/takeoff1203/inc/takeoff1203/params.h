@@ -1,4 +1,4 @@
 
 
-const double TAKEOFF_ALTITUDE = 10;
+const double TAKEOFF_ALTITUDE = 1;
 
