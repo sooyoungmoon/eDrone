@@ -1,0 +1,3 @@
+eDrone_msgs/Target[] targets
+---
+bool value

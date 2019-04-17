@@ -1,5 +1,7 @@
-string geofenceCheck_ref_system
-Target geofencecheck_pt
+string geofence_ref_system
+float64 geofence_arg1
+float64 geofence_arg2
+float64 geofence_arg3
 ---
 bool value
 bool violation

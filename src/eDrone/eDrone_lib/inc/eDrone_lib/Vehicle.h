@@ -18,7 +18,7 @@ using namespace geographic_msgs;
 using namespace geometry_msgs;
 
 
-namespace Mission_API
+namespace eDrone
 {
 
 typedef struct str_state
@@ -78,4 +78,4 @@ class Vehicle
 
 };
 
-} // namespace Mission_API
+} // namespace eDrone

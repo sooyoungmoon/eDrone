@@ -19,34 +19,24 @@ using namespace geometry_msgs;
 using namespace std;
 
 
-namespace Mission_API
+namespace eDrone
 {
 
 	class GeoInfo
 	{
 		private:
-			GeoInfo(){ };
-			~GeoInfo(){instanceFlag = false;};
-
-			static bool instanceFlag;
-
-			//static GeoInfo* instance;
-			static GeoInfo instance;
-
-			static int cnt;
+			GeoInfo(){};
+			~GeoInfo(){};
+						
+			static GeoInfo* instance;
 			
 			Point position_local;
-
 			GeoPoint position_geo;
-
 			GeoPoint homePosition;
 
 		public:
 
-			static GeoInfo& getInstance();
-
-			static void add();
-			static void sub();
+			static GeoInfo* getInstance();
 		
 			void setLocalPosition(Point pos_local);
 			Point getLocalPosition();			
@@ -61,7 +51,7 @@ namespace Mission_API
 
 	};
 
-} // namespace Mission_API
+} // namespace eDrone
 
 #endif
 

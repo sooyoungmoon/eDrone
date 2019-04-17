@@ -62,41 +62,17 @@ Orbit.srv
 generate_messages(DEPENDENCIES std_msgs geometry_msgs geographic_msgs mavros_msgs)
 
 
-
 # 캐킨 빌드에서 cmake 파일과 config 파일 생성에 사용되는 명령어 (매크로 함수)
 catkin_package(
 INCLUDE_DIRS inc
-#LIBRARIES hello
 CATKIN_DEPENDS geometry_msgs sensor_msgs geographic_msgs message_runtime std_msgs
 )
 
 # catkin_INCLUDE_DIRS 환경 변수에 포함된 경로들을 include path에 포함 (find_package 명령으로 지정된 패키지들의 헤더 파일 포함)
-
 include_directories( 
 	inc
 	${catkin_INCLUDE_DIRS}       
 )
-
-
-#add_library (
-#	<build target>
-#	<src files>
-#)
-
-#add_dependencies(
-#	<build target>
-#	${${PROJECT_NAME}_EXPORTED_TARGETS}
-	#${catkin_EXPORTED_TARGETS}
-#)
-
-# target_link_libraries ( <build target> ${catkin_LIBRARIES} )
-
-#install(TARGETS <build target>
-
-#	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#	LIBRARY DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-#)
 
 install (
 DIRECTORY inc

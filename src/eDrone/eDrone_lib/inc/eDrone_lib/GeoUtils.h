@@ -30,9 +30,7 @@ using namespace geometry_msgs;
 bool isInside(Point point, std::vector<Point> polygon_area);
 
 
-
-
-//// WGS84 (위도/경도/고도) <=> ENU 좌표 변환 코드 (QGC 코드 수정 )
+//// 위도/경도/고도 <=> NED 좌표 변환 코드 (QGC 코드 수정 )
 
 // These defines are private
 #define M_DEG_TO_RAD (M_PI / 180.0)
@@ -54,26 +52,15 @@ using namespace std;
 
 static const float epsilon = std::numeric_limits<double>::epsilon();
 
-
-
-
 Point convertGeoToENU(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt);
 
 GeoPoint convertENUToGeo(double x, double y, double z, double home_lat, double home_long, double home_altitude);
-
-//Point convertGeoToPoint(double coord_lat, double coord_long, double coord_alt, double home_lat, double home_long, double home_alt);
-
-//GeoPoint convertPointToGeo(double x, double y, double z, double home_lat, double home_long, double home_altitude);
-
 
 
 
 //// 좌표 변환 코드
 
-
-
-
-//// 거리 계산 함수 (http://www.geodatasource.com/developers/c ) (LGPLv3)
+//// 거리 계산 함수 (http://www.geodatasource.com/developers/c )
 
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
