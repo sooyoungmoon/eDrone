@@ -1,0 +1,2874 @@
+[0m[ INFO] [1455209949.096154115]: FCU URL: /dev/ttyUSB0:921600[0m
+[0m[ INFO] [1455209949.107186170]: serial0: device: /dev/ttyUSB0 @ 921600 bps[0m
+[0m[ INFO] [1455209949.111923117]: GCS URL: udp://:14540@192.168.0.9:14550[0m
+[0m[ INFO] [1455209949.113349651]: udp1: Bind address: 0.0.0.0:14540[0m
+[0m[ INFO] [1455209949.113836079]: udp1: Remote address: 192.168.0.9:14550[0m
+[0m[ INFO] [1455209949.162049191]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1455209949.169996381]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1455209949.170546561]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1455209949.193825368]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1455209949.202143025]: Plugin adsb loaded[0m
+[0m[ INFO] [1455209949.225799091]: Plugin adsb initialized[0m
+[0m[ INFO] [1455209949.226335854]: Plugin altitude loaded[0m
+[0m[ INFO] [1455209949.233354730]: Plugin altitude initialized[0m
+[0m[ INFO] [1455209949.233810991]: Plugin cam_imu_sync loaded[0m
+[0m[ INFO] [1455209949.237746335]: Plugin cam_imu_sync initialized[0m
+[0m[ INFO] [1455209949.238256972]: Plugin command loaded[0m
+[0m[ INFO] [1455209949.266877282]: Plugin command initialized[0m
+[0m[ INFO] [1455209949.267313834]: Plugin debug_value loaded[0m
+[0m[ INFO] [1455209949.299846238]: Plugin debug_value initialized[0m
+[0m[ INFO] [1455209949.300307915]: Plugin distance_sensor loaded[0m
+[33m[ WARN] [1455209949.306930199]: DS: plugin not configured![0m
+[0m[ INFO] [1455209949.307030618]: Plugin distance_sensor initialized[0m
+[0m[ INFO] [1455209949.307505962]: Plugin fake_gps loaded[0m
+[0m[ INFO] [1455209949.371779167]: Plugin fake_gps initialized[0m
+[0m[ INFO] [1455209949.372323055]: Plugin ftp loaded[0m
+[0m[ INFO] [1455209949.416895079]: Plugin ftp initialized[0m
+[0m[ INFO] [1455209949.417458343]: Plugin global_position loaded[0m
+[0m[ INFO] [1455209949.508292391]: Plugin global_position initialized[0m
+[0m[ INFO] [1455209949.508954240]: Plugin hil loaded[0m
+[0m[ INFO] [1455209949.595393516]: udp1: Remote address: 192.168.0.9:14550[0m
+[0m[ INFO] [1455209949.623916824]: Plugin hil initialized[0m
+[0m[ INFO] [1455209949.624492088]: Plugin home_position loaded[0m
+[0m[ INFO] [1455209949.664992140]: Plugin home_position initialized[0m
+[0m[ INFO] [1455209949.665632363]: Plugin imu loaded[0m
+[0m[ INFO] [1455209949.703554812]: Plugin imu initialized[0m
+[0m[ INFO] [1455209949.704092534]: Plugin local_position loaded[0m
+[0m[ INFO] [1455209949.730506874]: Plugin local_position initialized[0m
+[0m[ INFO] [1455209949.731035220]: Plugin manual_control loaded[0m
+[0m[ INFO] [1455209949.735005065]: Plugin manual_control initialized[0m
+[0m[ INFO] [1455209949.735566453]: Plugin mocap_pose_estimate loaded[0m
+[0m[ INFO] [1455209949.767774515]: Plugin mocap_pose_estimate initialized[0m
+[0m[ INFO] [1455209949.768155650]: Plugin odom loaded[0m
+[0m[ INFO] [1455209949.804971239]: Plugin odom initialized[0m
+[0m[ INFO] [1455209949.805547419]: Plugin param loaded[0m
+[0m[ INFO] [1455209949.821192877]: Plugin param initialized[0m
+[0m[ INFO] [1455209949.821722889]: Plugin px4flow loaded[0m
+[0m[ INFO] [1455209949.845029864]: Plugin px4flow initialized[0m
+[0m[ INFO] [1455209949.845485125]: Plugin rangefinder loaded[0m
+[0m[ INFO] [1455209949.849576889]: Plugin rangefinder initialized[0m
+[0m[ INFO] [1455209949.850102235]: Plugin rc_io loaded[0m
+[0m[ INFO] [1455209949.878536915]: Plugin rc_io initialized[0m
+[0m[ INFO] [1455209949.879137721]: Plugin safety_area loaded[0m
+[0m[ INFO] [1455209949.910463304]: Plugin safety_area initialized[0m
+[0m[ INFO] [1455209949.911067902]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1455209949.933248599]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1455209949.933869822]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1455209949.992088548]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1455209949.992677313]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1455209950.024638577]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1455209950.025209341]: Plugin[0m[ INFO] [1455209948.641913039]: ==goto0129==
+[0m
+[0m[ INFO] [1455209948.724575558]: main arg[0]: /home/odroid/catkin_ws/devel/lib/goto0129/ex_goto0129[0m
+[0m[ INFO] [1455209948.724817314]: main arg[1]: 20,0,3[0m
+[0m[ INFO] [1455209958.862204836]: Send checkState command ... 
+[0m
+[0m[ INFO] [1455209958.862364757]: Checking the connection ... 
+[0m
+[0m[ INFO] [1455209958.886470709]: CheckState service was requested[0m
+[0m[ INFO] [1455209958.887454815]: UAV connection established![0m
+UAV connected: 
+flight mode: MANUAL
+remaining battery(%): 0.45
+[0m[ INFO] [1455209958.888355087]: Send checkPosition command ... 
+[0m
+[0m[ INFO] [1455209958.888730638]: Checking the position ... 
+[0m
+[0m[ INFO] [1455209958.935470798]: CheckPosition service was requested[0m
+global frame (WGS84): (36.3805, 127.365, 79.5463) 
+
+local frame (ENU): (15.6624, -14.6158, 1.347) 
+					 current_position (ENU): (15.409999, -14.608276, 1.393607 
+)					 current_position (ENU): (15.419683, -14.611409, 1.398422 
+)					 current_position (ENU): (15.427888, -14.613688, 1.403012 
+)					 current_position (ENU): (15.432838, -14.611820, 1.402153 
+)control_node: home position: (36.380554, 127.364746, 103.141298) 
+
+					 current_position (ENU): (15.436907, -14.611745, 1.404861 
+)					 current_position (ENU): (15.446300, -14.612172, 1.402941 
+)					 current_position (ENU): (15.463021, -14.613873, 1.396119 
+)					 current_position (ENU): (15.481950, -14.615122, 1.396480 
+)					 current_position (ENU): (15.497309, -14.616335, 1.399261 
+)					 current_position (ENU): (15.509191, -14.617593, 1.390157 
+)control_node: home position: (36.380554, 127.364746, 103.141298) 
+
+					 current_position (ENU): (15.523955, -14.622709, 1.373135 
+)					 current_position (ENU): (15.539372, -14.624341, 1.368151 
+)					 current_position (ENU): (15.554732, -14.624120, 1.370231 
+)					 current_position (ENU): (15.573788, -14.621492, 1.381928 
+)					 current_position (ENU): (15.590418, -14.617816, 1.387727 
+)					 current_position (ENU): (15.608130, -14.616565, 1.387414 
+)control_node: home position: (36.380554, 127.364746, 103.141298) 
+
+					 current_position (ENU): (15.620983, -14.613713, 1.392608 
+)					 current_position (ENU): (15.629883, -14.613198, 1.385596 
+)					 current_position (ENU): (15.637766, -14.611609, 1.377551 
+)					 current_position (ENU): (15.645296, -14.609935, 1.371028 
+)					 current_position (ENU): (15.653835, -14.605837, 1.363820 
+)					 current_position (ENU): (15.662139, -14.600805, 1.362476 
+)control_node: home position: (36.380554, 127.364746, 103.141298) 
+
+					 current_position (ENU): (15.664886, -14.600405, 1.358980 
+)					 current_position (ENU): (15.674464, -14.604186, 1.354488 
+)					 current_position (ENU): (15.672628, -14.604875, 1.347738 
+)					 current_position (ENU): (15.664987, -14.608504, 1.345795 
+)[0m[ INFO] [1455209958.957322029]: ARMing request received
+[0m
+eDrone_control_node: send Arming command ...
+[0m[ INFO] [1455209958.987490250]: ARMing command was sent
+[0m
+[0m[ INFO] [1455209958.987667213]: Send setHome cmd: [0m
+					 current_position (ENU): (15.659871, -14.618758, 1.348535 
+)					 current_position (ENU): (15.656281, -14.635746, 1.359089 
+)control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+					 current_position (ENU): (15.660707, -14.657185, 1.371920 
+)					 current_position (ENU): (15.663501, -14.669524, 1.380525 
+)					 current_position (ENU): (15.664854, -14.677437, 1.392013 
+)					 current_position (ENU): (15.668398, -14.692692, 1.389995 
+)					 current_position (ENU): (15.674856, -14.711402, 1.383752 
+)					 current_position (ENU): (15.683079, -14.731015, 1.371870 
+)control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+					 current_position (ENU): (15.693699, -14.748025, 1.384077 
+)					 current_position (ENU): (15.703076, -14.771560, 1.410313 
+)					 current_position (ENU): (15.709572, -14.786617, 1.429906 
+)					 current_position (ENU): (15.710100, -14.792600, 1.448957 
+)					 current_position (ENU): (15.708273, -14.793797, 1.464526 
+)					 current_position (ENU): (15.699017, -14.786826, 1.488457 
+)control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+					 current_position (ENU): (15.681018, -14.763004, 1.516985 
+)					 current_position (ENU): (15.663644, -14.735281, 1.528319 
+)[0m[ INFO] [1455209964.056801235]: ***Takeoff request received
+[0m
+[0m[ INFO] [1455209964.057089616]:  HOME_ALT: 128.149278, req.takeoff_altitude: 3.000000[0m
+send Takeoff command ...
+[0m[ INFO] [1455209964.072965538]: Takeoff command was sent
+[0m
+MAIN() phase = takeoff: target_position  (15.659918,-14.728641,4.528319)
+ MAIN() phase = takeoff: target_position  (15.652732,-14.714714,4.528319)
+ 					 current_position (ENU): (15.646003, -14.705061, 1.544729 
+)MAIN() phase = takeoff: target_position  (15.641441,-14.699627,4.528319)
+ MAIN() phase = takeoff: target_position  (15.629799,-14.695347,4.528319)
+ 					 current_position (ENU): (15.614278, -14.698009, 1.854855 
+)MAIN() phase = takeoff: target_position  (15.609478,-14.700104,4.528319)
+ MAIN() phase = takeoff: target_position  (15.585907,-14.712611,4.528319)
+ 					 current_position (ENU): (15.557735, -14.729263, 2.404692 
+)MAIN() phase = takeoff: target_position  (15.557735,-14.729263,4.528319)
+ MAIN() phase = takeoff: target_position  (15.531738,-14.740739,4.528319)
+ MAIN() phase = takeoff: target_position  (15.491628,-14.752947,4.528319)
+ 					 current_position (ENU): (15.484087, -14.754890, 2.913031 
+)MAIN() phase = takeoff: target_position  (15.460116,-14.761662,4.528319)
+ control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+MAIN() phase = takeoff: target_position  (15.420815,-14.768514,4.528319)
+ 					 current_position (ENU): (15.405857, -14.770088, 3.394511 
+)MAIN() phase = takeoff: target_position  (15.395068,-14.767290,4.528319)
+ MAIN() phase = takeoff: target_position  (15.371353,-14.756682,4.528319)
+ 					 current_position (ENU): (15.361260, -14.757361, 3.778857 
+)MAIN() phase = takeoff: target_position  (15.358034,-14.757446,4.528319)
+ MAIN() phase = takeoff: target_position  (15.345843,-14.750345,4.528319)
+ 					 current_position (ENU): (15.336136, -14.738811, 4.038574 
+)MAIN() phase = takeoff: target_position  (15.336136,-14.738811,4.528319)
+ MAIN() phase = takeoff: target_position  (15.322419,-14.717001,4.528319)
+ MAIN() phase = takeoff: target_position  (15.317025,-14.707712,4.528319)
+ 					 current_position (ENU): (15.315206, -14.705861, 4.243136 
+)MAIN() phase = takeoff: target_position  (15.303140,-14.693700,4.528319)
+ MAIN() phase = takeoff: target_position  (15.290683,-14.684657,4.528319)
+ 					 current_position (ENU): (15.284944, -14.680505, 4.380092 
+)MAIN() phase = takeoff: target_position  (15.276404,-14.675565,4.528319)
+ eDrone_control_node: TAKEOFF completed!
+main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.260224, -14.672159, 4.462959 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+					 current_position (ENU): (15.247417, -14.670764, 4.534487 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.276508, -14.686209, 4.563267 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.327002, -14.717764, 4.590848 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.376863, -14.757421, 4.612033 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.432510, -14.791669, 4.603489 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.471481, -14.814954, 4.612168 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ control_node: home position: (36.380527, 127.364731, 128.149278) 
+
+main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.498029, -14.838162, 4.595249 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.518220, -14.851540, 4.576290 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.548156, -14.852408, 4.570268 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.583768, -14.862015, 4.551782 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.606839, -14.861670, 4.545444 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.621356, -14.834490, 4.530524 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.631156, -14.791283, 4.525229 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.636242, -14.755605, 4.536484 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU):[0m[ INFO] [1455209958.935931142]: UAV position was checked![0m
+[0m[ INFO] [1455209958.936068645]: Send arming command ... 
+[0m
+[0m[ INFO] [1455209964.015093528]: takeoff_altitude: 3.000000[0m
+[0m[ INFO] [1455209964.015267074]: Send takeoff command ... 
+[0m
+[0m[ INFO] [1455209964.073544677]: Takeoff command was sent to FC
+[0m
+[0m[ INFO] [1455209974.074078800]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209974.074248012]: current phase: READY 
+[0m
+[0m[ INFO] [1455209974.074693690]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.075157492]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.075459041]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.075715006]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.075968345]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.076226185]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.076462399]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.077336295]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.077636802]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1455209974.077929517]: cur_target_cb(): 
+[0m
+cur_phase: READY
+token: 20
+goto_point_str: 0,3
+token: 0
+goto_point_str: 3
+token: 3
+numCnt: 3
+ (15.628756, -14.727838, 4.545862 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.609980, -14.711676, 4.547335 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.590156, -14.698265, 4.556242 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.574526, -14.692128, 4.555469 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.563358, -14.704186, 4.565173 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.556866, -14.724559, 4.564360 
+)main - phase == READY - path empty: target_pos_local  (15.663644,-14.735281,4.528319)
+ [0m[ INFO] [1455209974.106897210]: eDrone_control_node: Goto request received
+[0m
+eDrone_control_node: target_seq_no: -1098898360
+req.goto_point.x_lat: 20, req.goto_point.y_long: 0
+[0m[ INFO] [1455209974.109378394]: Goto command was sent to FC
+[0m
+cur_phase: READY
+cur_phase: READY
+[0m[ INFO] [1455209974.178541841]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209974.178698178]: current phase: READY 
+[0m
+cur_phase: READY
+cur_phase: READY
+cur_phase: GOTO
+[0m[ INFO] [1455209974.328609681]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.428686908]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.528581382]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.628539356]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.728538832]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.828543141]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209974.928534075]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.028541134]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.128546693]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209975.178557931]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209975.178708935]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209975.228550877]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.328549478]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.428528870]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.528561346]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.628592656]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.728589257]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.828552982]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209975.928584208]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.028539974]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.128549617]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209976.178546313]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209976.178703025]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209976.228539759]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.328542360]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.428547252]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.528548395]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.628591496]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.728553054]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.828547030]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209976.928619757]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.028525189]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.128547790]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209977.178546445]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209977.178700032]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209977.228553391]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.328566617]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.428542884]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.528540776]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.628592420]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.728626188]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.828549287]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209977.928549929]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.028543738]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.128547756]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209978.178556785]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209978.178718539]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209978.228563482]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.328549040]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.428560725]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.528550658]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.628547342]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.728560277]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.828551169]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209978.928596937]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.028532870]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.128573596]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209979.178540500]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209979.178697587]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209979.228542696]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.328566339]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.428537439]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.528569166]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.628547016]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.728555075]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.828542384]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209979.928552401]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.028551794]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.128560436]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209980.178538424]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209980.178693052]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209980.228599121]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.328551054]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.428799452]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.528572798]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.628573148]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.728648834]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.828583308]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209980.928637410]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.028571718]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.128531734]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209981.178544681]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209981.178701934]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209981.228547460]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.328551728]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.428531536]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.528568596]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.628545030]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.728546130]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.828549981]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209981.928532790]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.028599767]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.128535116]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209982.178543521]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209982.178700358]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209982.228538300]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.328513400]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.428590836]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.528567853]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.628562620]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.728580138]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.828584697]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209982.928579506]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.028535397]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.128557624]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209983.178554486]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209983.178711490]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209983.228546974]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.328542991]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.428545467]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.528551651]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.628541127]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.728532060]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.828540745]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209983.928560929]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.028588614]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.128736010]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209984.178554535]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209984.178711830]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209984.228548106]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.328649501]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.428568224]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.528538199]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.628552675]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.728697613]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.828575961]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209984.928758482]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.028558745]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.128547804]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209985.178546083]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209985.178752838]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209985.228563446]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.328567547]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.428541981]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.528663793]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.628546515]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.728565783]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.828551217]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209985.928596069]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.028564710]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.128568936]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209986.178583966]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209986.178746803]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209986.228565453]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.328556137]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.428564113]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.528553463]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.628550022]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.728544206]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.828556766]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209986.928566325]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.028546800]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.128608819]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209987.178555430]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209987.178712601]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209987.228548418]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.328546769]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.428537411]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.528584429]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.628568321]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.728560214]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.828553647]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209987.928552123]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209988.028531182]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209988.128546699]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209988.178545562]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1455209988.178701816]: current phase: GOTO 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209988.228549342]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209988.328564734]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209988.428559960]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+cur_phase: GOTO
+[0m[ INFO] [1455209988.528565269]: cur_target_cb(): 
+[0m
+cur_phase: GOTO
+[0m[ INFO] [1455209974.107780731]: eDrone_control_node: noflyZoneCheck[0m
+goto_cb(): target_position 'push'! (35.663644,-14.735281,4.528319)
+ goto_cb(): target_position 'pop'! (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.562075, -14.735838, 4.545456 
+)					 current_position (ENU): (15.596978, -14.739402, 4.526133 
+)					 current_position (ENU): (15.776580, -14.747251, 4.531650 
+)					 current_position (ENU): (16.084368, -14.755451, 4.555382 
+)					 current_position (ENU): (16.433212, -14.761420, 4.610705 
+)					 current_position (ENU): (16.811729, -14.768456, 4.651994 
+)					 current_position (ENU): (17.220068, -14.776433, 4.685900 
+)					 current_position (ENU): (17.623125, -14.786467, 4.712326 
+)					 current_position (ENU): (18.022211, -14.773371, 4.728687 
+)					 current_position (ENU): (18.437464, -14.760041, 4.737244 
+)					 current_position (ENU): (18.883608, -14.753341, 4.725232 
+)					 current_position (ENU): (19.340338, -14.751432, 4.705180 
+)					 current_position (ENU): (19.804682, -14.758809, 4.663836 
+)					 current_position (ENU): (20.287655, -14.769205, 4.614650 
+)					 current_position (ENU): (20.767513, -14.764478, 4.566161 
+)					 current_position (ENU): (21.247381, -14.760550, 4.546823 
+)					 current_position (ENU): (21.739292, -14.766072, 4.530891 
+)					 current_position (ENU): (22.232141, -14.787270, 4.534234 
+)					 current_position (ENU): (22.726015, -14.805038, 4.528746 
+)					 current_position (ENU): (23.224625, -14.807582, 4.515514 
+)					 current_position (ENU): (23.714855, -14.800216, 4.529590 
+)					 current_position (ENU): (24.187721, -14.776664, 4.541789 
+)					 current_position (ENU): (24.652050, -14.746398, 4.561194 
+)					 current_position (ENU): (25.111498, -14.709734, 4.583261 
+)					 current_position (ENU): (25.587658, -14.662989, 4.586210 
+)					 current_position (ENU): (26.086136, -14.625414, 4.560153 
+)					 current_position (ENU): (26.603144, -14.592602, 4.519922 
+)					 current_position (ENU): (27.114397, -14.559993, 4.459275 
+)					 current_position (ENU): (27.633783, -14.523171, 4.438552 
+)					 current_position (ENU): (28.145113, -14.492460, 4.417376 
+)					 current_position (ENU): (28.657244, -14.470509, 4.413527 
+)					 current_position (ENU): (29.190706, -14.454853, 4.413998 
+)					 current_position (ENU): (29.722980, -14.445244, 4.415033 
+)					 current_position (ENU): (30.246010, -14.444425, 4.409150 
+)					 current_position (ENU): (30.766966, -14.455426, 4.413189 
+)					 current_position (ENU): (31.288525, -14.459386, 4.421306 
+)					 current_position (ENU): (31.823879, -14.455998, 4.415708 
+)					 current_position (ENU): (32.362411, -14.452281, 4.416949 
+)					 current_position (ENU): (32.912415, -14.441968, 4.388921 
+)					 current_position (ENU): (33.467091, -14.440614, 4.396960 
+)					 current_position (ENU): (34.016693, -14.469435, 4.402671 
+)					 current_position (ENU): (34.538960, -14.517404, 4.415378 
+)					 current_position (ENU): (35.027321, -14.562096, 4.395905 
+)[0m[ INFO] [1455209988.506947335]: pos_cb_local(): The UAV reached to the target position[0m
+current_position: (35.201511, -14.581295, 4.390800 
+)eDrone_control_node: Goto phase: path is empty
+cur_phase: GOTO
+cur_phase: GOTO
+cur_phase: READY
+[0m[ INFO] [1455209991.728621034]: Sending landing cmd ... 
+[0m
+[0m[ INFO] [1455209991.786448084]: Landing command was sent to FCC
+[0m
+main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.425011, -14.605715, 4.390830 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.720711, -14.643150, 4.416755 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.922199, -14.672281, 4.408911 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.046276, -14.697680, 4.373557 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.120583, -14.716273, 4.340594 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.146957, -14.720394, 4.314718 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.128193, -14.728760, 4.291424 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.085602, -14.738418, 4.295816 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.021496, -14.750659, 4.322556 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.947254, -14.749007, 4.347553 
+)[0m[ INFO] [1455209991.756902002]: Landing request received
+[0m
+send Landing command ...
+[0m[ INFO] [1455209991.785537604]: Landing command was sent
+[0m
+main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.878872, -14.738609, 4.352973 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.849819, -14.732518, 4.189946 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.865948, -14.727738, 3.971553 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.886509, -14.693812, 3.749199 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.907677, -14.672941, 3.533262 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.931065, -14.641366, 3.316894 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.952461, -14.617510, 3.099269 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.963554, -14.627389, 2.885197 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.964127, -14.636145, 2.656210 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.958668, -14.642844, 2.408286 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.964676, -14.662569, 2.166662 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.979874, -14.689952, 1.940532 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.981781, -14.754931, 1.712798 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.971947, -14.778993, 1.716634 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.961670, -14.774936, 1.697386 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.948742, -14.759362, 1.723640 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.943790, -14.746897, 1.740323 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.945999, -14.736592, 1.709068 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.957745, -14.734087, 1.683632 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.973217, -14.733609, 1.684832 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.992474, -14.732610, 1.690208 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.010639, -14.731862, 1.679309 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.028976, -14.733847, 1.654856 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.048504, -14.739423, 1.646161 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.070972, -14.748930, 1.644750 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.092369, -14.755205, 1.646881 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.112530, -14.757923, 1.647088 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.126152, -14.771828, 1.659474 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.143246, -14.786262, 1.658833 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.161186, -14.804619, 1.655516 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.180676, -14.816514, 1.648443 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.199677, -14.826152, 1.662775 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.219471, -14.839338, 1.662828 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.239986, -14.857277, 1.640849 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.259804, -14.875742, 1.617608 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.281910, -14.889572, 1.607508 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.306881, -14.903769, 1.593939 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.335144, -14.919675, 1.583188 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.362190, -14.940856, 1.583736 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.381268, -14.964157, 1.577538 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.396915, -14.982708, 1.562197 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.413788, -14.999844, 1.542706 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.433311, -15.012362, 1.542629 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.453297, -15.024363, 1.553611 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.471195, -15.036147, 1.553195 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.487118, -15.053147, 1.545041 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.495514, -15.068059, 1.529815 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.492619, -15.075539, 1.583661 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.487885, -15.077694, 1.746709 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.487640, -15.066295, 1.970176 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.502251, -15.050955, 2.156702 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.507042, -15.055619, 2.303463 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.498169, -15.041260, 2.458004 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.480263, -15.021782, 2.642693 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.454056, -15.021482, 2.798424 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.427673, -15.024433, 2.853606 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.405773, -15.033327, 2.855957 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.390335, -15.045238, 2.854048 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.386318, -15.054569, 2.831088 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.375504, -15.042614, 2.804954 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.304039, -15.009159, 2.787685 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.180458, -14.963355, 2.820101 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.041874, -14.903034, 2.869588 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.903164, -14.846268, 2.895864 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.745850, -14.839767, 2.918859 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.555466, -14.880150, 2.929978 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.349079, -14.902829, 2.954736 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.142124, -14.914066, 2.945022 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.921059, -14.920954, 2.934120 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.696465, -14.921362, 2.923463 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.473644, -14.929978, 2.956571 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.240612, -14.941404, 2.990896 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.023945, -14.931351, 3.044914 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.808159, -14.921747, 3.121066 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.587959, -14.928760, 3.197062 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.348381, -14.938831, 3.263251 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.108131, -14.966262, 3.301266 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.883312, -15.025990, 3.316650 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.642612, -15.062760, 3.343859 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.370663, -15.071927, 3.359462 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.083149, -15.095860, 3.366817 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.784058, -15.112183, 3.394249 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.487885, -15.118391, 3.434380 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.193478, -15.132395, 3.477673 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.896418, -15.140434, 3.522882 
+)main - phase == READY - path empty: target_pos_local  (35.663 setpoint_raw loaded[0m
+[0m[ INFO] [1455209950.093303845]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1455209950.093875692]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1455209950.131468091]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1455209950.132157566]: Plugin sys_status loaded[0m
+[0m[ INFO] [1455209950.163203725]: Plugin sys_status initialized[0m
+[0m[ INFO] [1455209950.163750405]: Plugin sys_time loaded[0m
+[0m[ INFO] [1455209950.180260842]: TM: Timesync mode: MAVLINK[0m
+[0m[ INFO] [1455209950.186828166]: Plugin sys_time initialized[0m
+[0m[ INFO] [1455209950.187536891]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1455209950.209390205]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1455209950.209928343]: Plugin vibration loaded[0m
+[0m[ INFO] [1455209950.217173933]: Plugin vibration initialized[0m
+[0m[ INFO] [1455209950.217659653]: Plugin vision_pose_estimate loaded[0m
+[0m[ INFO] [1455209950.267893980]: Plugin vision_pose_estimate initialized[0m
+[0m[ INFO] [1455209950.268506578]: Plugin vision_speed_estimate loaded[0m
+[0m[ INFO] [1455209950.290248640]: Plugin vision_speed_estimate initialized[0m
+[0m[ INFO] [1455209950.290826612]: Plugin waypoint loaded[0m
+[0m[ INFO] [1455209950.321759185]: Plugin waypoint initialized[0m
+[0m[ INFO] [1455209950.321891814]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1455209950.322273531]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1455209950.322409118]: Built-in MAVLink package version: 2017.12.1[0m
+[0m[ INFO] [1455209950.322536454]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad icarous matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1455209950.322706291]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[0m[ INFO] [1455209950.325747489]: IMU: Attitude quaternion IMU detected![0m
+[0m[ INFO] [1455209950.342734770]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1455209950.370422808]: RC_CHANNELS message detected![0m
+[33m[ WARN] [1455209950.374590158]: CMD: Unexpected command 519, result 0[0m
+[0m[ INFO] [1455209950.567776029]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1455209950.574084639]: IMU: Attitude quaternion IMU detected![0m
+[0m[ INFO] [1455209950.574482815]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1455209950.583715619]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1455209950.594972847]: FCU: data link #1 lost[0m
+[0m[ INFO] [1455209950.611856500]: FCU: data link #1 regained[0m
+[0m[ INFO] [1455209951.583311408]: VER: 1.1: Capabilities         0x000000000000e4ef[0m
+[0m[ INFO] [1455209951.583542497]: VER: 1.1: Flight software:     010700ff (00000000B6F1E14B)[0m
+[0m[ INFO] [1455209951.583752168]: VER: 1.1: Middleware software: 010700ff (0000000000000001)[0m
+[0m[ INFO] [1455209951.583919339]: VER: 1.1: OS software:         071600ff (0000000000000001)[0m
+[0m[ INFO] [1455209951.584085551]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1455209951.584243930]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1455209951.584428310]: VER: 1.1: UID:                 3036511035323931[0m
+[0m[ INFO] [1455209958.989033079]: FCU: ARMED by arm/disarm component command[0m
+[0m[ INFO] [1455209959.014693443]: FCU: Home position: 36.3805275, 127.3647308, 103.14[0m
+[0m[ INFO] [1455209964.109383159]: FCU: Takeoff detected[0m
+[33m[ WARN] [1455209964.181680347]: CMD: Unexpected command 176, result 0[0m
+[0m[ INFO] [1455209965.574807884]: WP: mission received[0m
+[0m[ INFO] [1455209967.177259262]: FCU: data link #0 regained[0m
+[33m[ WARN] [1455209974.779704264]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455209988.613706514]: CMD: Unexpected command 519, result 0[0m
+[0m[ INFO] [1455209991.784629832]: FCU: Landing at current position[0m
+[0m[ INFO] [1455209997.291894336]: FCU: Landing detected[0m
+[0m[ INFO] [1455210003.222676304]: FCU: data link #0 lost[0m
+[0m[ INFO] [1455210007.102703503]: FCU: Takeoff detected[0m
+[0m[ INFO] [1455210015.136400031]: FCU: data link #0 regained[0m
+[33m[ WARN] [145521644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.606253, -15.150124, 3.589067 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.303104, -15.165624, 3.631159 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.983158, -15.170039, 3.670720 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.658239, -15.167584, 3.714183 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.323984, -15.164221, 3.750134 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.993301, -15.162437, 3.757879 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.646446, -15.170714, 3.778113 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.299007, -15.192787, 3.804430 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.954218, -15.210510, 3.804916 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.582630, -15.217112, 3.806236 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.181992, -15.221617, 3.829748 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.781900, -15.230895, 3.882543 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.380713, -15.257502, 3.943522 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.980850, -15.287985, 3.986040 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.601614, -15.316042, 4.025543 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.226048, -15.355920, 4.057627 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.825075, -15.403358, 4.073918 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.401829, -15.435505, 4.101034 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.974579, -15.461920, 4.118242 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.551563, -15.475074, 4.148025 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.116270, -15.475972, 4.179832 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.681864, -15.487245, 4.216016 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.298336, -15.509798, 4.259884 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.001282, -15.535159, 4.293213 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.775030, -15.570372, 4.325175 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.651260, -15.618605, 4.365854 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.597380, -15.660775, 4.405850 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.590555, -15.686575, 4.418790 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.607883, -15.704179, 4.419568 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.648437, -15.716561, 4.412919 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.707193, -15.731284, 4.390453 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.768215, -15.738048, 4.351234 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.822739, -15.737659, 4.332623 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.871410, -15.741144, 4.306422 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.917200, -15.743896, 4.273728 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.954685, -15.727315, 4.249232 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.985907, -15.690536, 4.226408 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.012831, -15.641816, 4.212257 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.030413, -15.595708, 4.172108 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.036419, -15.554937, 4.175450 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.034914, -15.519391, 4.214512 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.042183, -15.492259, 4.226017 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.054583, -15.468262, 4.209179 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.057854, -15.428904, 4.166222 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.067026, -15.381894, 4.161904 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.076435, -15.329392, 4.158496 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.091290, -15.261879, 4.145341 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.101465, -15.184074, 4.132154 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.106209, -15.121099, 4.162587 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.106619, -15.085234, 4.181996 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.116505, -15.069066, 4.144255 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.128742, -15.059439, 4.105665 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.134756, -15.015020, 4.083219 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.144287, -14.941854, 4.045627 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.167162, -14.874550, 4.001468 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.199352, -14.824244, 3.980815 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.220776, -14.795445, 3.978839 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.217037, -14.767610, 3.993450 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.197657, -14.748681, 4.018885 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.161030, -14.748509, 4.036962 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.117954, -14.759636, 4.050354 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.082705, -14.760432, 4.064917 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.044016, -14.770689, 4.096691 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.004551, -14.796188, 4.100722 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.974363, -14.829023, 4.088354 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.953587, -14.856892, 4.096192 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.925137, -14.883356, 4.116722 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.891155, -14.924621, 4.139978 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.848526, -14.947613, 4.149105 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.809526, -14.916156, 4.154903 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.778337, -14.878858, 4.157390 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.775608, -14.847821, 4.162206 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.789627, -14.822817, 4.162677 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.801563, -14.830514, 4.172727 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.814266, -14.855166, 4.134830 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.820545, -14.865274, 4.115638 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.820669, -14.855382, 4.102582 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.820982, -14.838018, 4.091403 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.815613, -14.825932, 4.091856 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.808558, -14.815973, 4.081556 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.803146, -14.806066, 4.064302 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.807116, -14.800118, 4.054687 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.814281, -14.806530, 4.047426 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.833323, -14.814597, 4.019723 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.856222, -14.826913, 3.982389 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.882847, -14.837415, 3.936509 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.906145, -14.845984, 3.882096 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.908159, -14.859789, 3.855840 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.901798, -14.869532, 3.868683 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.899136, -14.864726, 3.895477 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.905294, -14.838880, 3.962668 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.916414, -14.817585, 4.010613 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.938581, -14.815559, 4.008505 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.949793, -14.815644, 4.030604 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.952837, -14.803653, 4.089624 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.963491, -14.791877, 4.114912 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.971996, -14.784833, 4.138910 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.966951, -14.761127, 4.162899 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.954727, -14.718204, 4.168172 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.949171, -14.674205, 4.137005 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.959188, -14.657676, 4.119544 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.969288, -14.667089, 4.115825 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.987600, -14.686173, 4.129738 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.057343, -14.695815, 4.126913 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.192827, -14.700534, 4.104337 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.378149, -14.706852, 4.105601 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.611547, -14.723054, 4.138308 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.865805, -14.729160, 4.169979 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.129286, -14.724589, 4.208026 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.409492, -14.733290, 4.238215 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.697504, -14.740993, 4.261562 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.993343, -14.737218, 4.277427 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.297464, -14.722861, 4.289218 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.614471, -14.714745, 4.297515 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.932652, -14.714444, 4.310477 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.245785, -14.699406, 4.324317 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.562014, -14.668643, 4.322877 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.885521, -14.635190, 4.330775 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.219528, -14.595050, 4.335912 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.565344, -14.535626, 4.316910 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.929672, -14.478884, 4.287034 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.305260, -14.419196, 4.248273 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.671478, -14.346789, 4.249831 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.028238, -14.267827, 4.262159 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.369675, -14.190801, 4.242358 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.713848, -14.117300, 4.201028 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.065651, -14.054007, 4.166505 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.426842, -13.993565, 4.123227 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.784708, -13.943535, 4.080360 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.147751, -13.893761, 4.066378 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.517195, -13.844992, 4.052307 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.893511, -13.794473, 4.031092 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.272902, -13.750834, 4.034383 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.661501, -13.707314, 4.064724 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.064163, -13.655963, 4.081147 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.476952, -13.606738, 4.103958 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.890408, -13.580548, 4.103693 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.297516, -13.552401, 4.108627 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.695366, -13.526301, 4.124053 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.085873, -13.510822, 4.134647 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.461483, -13.497555, 4.128174 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.830112, -13.473945, 4.113847 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.193398, -13.432049, 4.130592 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.539097, -13.389867, 4.161180 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.861416, -13.353396, 4.201665 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.166538, -13.292587, 4.248924 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.448082, -13.198167, 4.316980 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.721397, -13.086514, 4.368896 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.000217, -12.992949, 4.443955 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.291325, -12.944148, 4.479508 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.624821, -12.926714, 4.445655 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.974880, -12.923354, 4.405157 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.261780, -12.864563, 4.387394 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.480640, -12.805065, 4.327201 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.662441, -12.791258, 4.258631 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.816784, -12.851540, 4.167095 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.949162, -12.943489, 4.063972 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (39.034969, -12.977579, 3.992664 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (39.064098, -12.976239, 3.953207 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (39.100510, -12.962523, 3.946738 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (39.116688, -12.928596, 3.945530 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (39.051872, -12.901167, 3.974462 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.952606, -12.881056, 3.979480 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.839603, -12.873477, 3.900265 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.703976, -12.921973, 3.821855 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.518330, -12.972521, 3.793251 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (38.263084, -12.982467, 3.769916 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.979084, -12.983172, 3.751707 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.695396, -13.005291, 3.737139 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.397034, -13.064940, 3.720386 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (37.090359, -13.149525, 3.724432 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.770931, -13.236682, 3.748281 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.440128, -13.321758, 3.771366 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (36.098362, -13.411753, 3.786290 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.746044, -13.507470, 3.782300 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.379295, -13.584873, 3.770079 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (35.014221, -13.644032, 3.778239 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.640472, -13.681657, 3.794391 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (34.300171, -13.705223, 3.818090 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.995781, -13.733218, 3.838307 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.670559, -13.749967, 3.874032 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (33.329388, -13.757887, 3.897937 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.985977, -13.777883, 3.899750 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.666912, -13.826356, 3.865848 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.374100, -13.860062, 3.842390 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (32.095383, -13.892557, 3.816430 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.762724, -13.942653, 3.792836 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.430288, -13.989079, 3.784423 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (31.122936, -14.029106, 3.777742 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.810366, -14.059474, 3.770378 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.472551, -14.075222, 3.765320 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (30.130203, -14.089530, 3.771532 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.770243, -14.108446, 3.780805 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.414099, -14.116037, 3.803246 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (29.046659, -14.123043, 3.829193 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.668419, -14.150036, 3.835974 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (28.269110, -14.184546, 3.822083 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.852732, -14.193944, 3.822370 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.456430, -14.193490, 3.827345 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (27.082497, -14.216399, 3.825755 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.699160, -14.254480, 3.813442 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (26.276377, -14.299681, 3.805923 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.831814, -14.327633, 3.818870 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (25.375278, -14.351627, 3.813576 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.928362, -14.397650, 3.806175 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.490458, -14.453878, 3.807574 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (24.048738, -14.530247, 3.812244 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.596521, -14.610399, 3.811193 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (23.147812, -14.690407, 3.816972 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.684586, -14.769988, 3.822454 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (22.211987, -14.837871, 3.827709 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.722509, -14.893824, 3.838335 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (21.222437, -14.935795, 3.849583 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (20.723656, -14.986538, 3.830313 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (20.224056, -15.024621, 3.803228 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (19.729389, -15.022879, 3.779890 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (19.256590, -15.042272, 3.755540 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (18.817295, -15.101130, 3.746046 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (18.406544, -15.179592, 3.756660 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (18.051193, -15.221922, 3.777220 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (17.690115, -15.252355, 3.782817 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (17.403286, -15.306127, 3.758144 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (17.205927, -15.296589, 3.746948 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (17.041832, -15.239811, 3.736514 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.904541, -15.168199, 3.705340 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.790636, -15.069366, 3.691717 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.647654, -15.013957, 3.695689 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.484314, -15.029817, 3.698877 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.379053, -15.054311, 3.699154 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.333622, -15.068034, 3.705412 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.321852, -15.069330, 3.675648 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.321123, -15.067600, 3.615541 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.320139, -15.072765, 3.554713 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.289722, -15.078153, 3.503197 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.191277, -15.104183, 3.461785 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.099888, -15.144844, 3.418551 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.048092, -15.175828, 3.348719 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.994892, -15.198274, 3.257989 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.965117, -15.213318, 3.154537 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.930720, -15.210162, 3.069653 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.890768, -15.190068, 2.982725 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.858165, -15.165604, 2.884916 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.828867, -15.147107, 2.794781 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.820773, -15.136551, 2.688851 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.831187, -15.118416, 2.606247 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.836911, -15.108216, 2.529350 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.844274, -15.108465, 2.474760 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.843249, -15.114740, 2.403087 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.847446, -15.117914, 2.334030 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.865230, -15.106319, 2.246294 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.878340, -15.100681, 2.185716 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.879436, -15.108318, 2.112466 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.849175, -15.103705, 2.067389 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.831836, -15.079499, 2.004597 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.837584, -15.051726, 1.954453 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.829884, -15.011608, 1.930226 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.822259, -14.974432, 1.853789 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.815867, -14.947730, 1.783229 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.811954, -14.933702, 1.773018 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.804555, -14.911406, 1.789896 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.792925, -14.900248, 1.785171 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786968, -14.893411, 1.761525 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786630, -14.883821, 1.736841 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786612, -14.873092, 1.721969 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.789328, -14.864322, 1.708366 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.791843, -14.855172, 1.714451 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.791324, -14.841558, 1.716037 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.789277, -14.832309, 1.710757 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786748, -14.823972, 1.707465 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786348, -14.816927, 1.704870 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.786192, -14.811529, 1.703835 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.785002, -14.806538, 1.689659 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.781628, -14.798939, 1.674114 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.778733, -14.789172, 1.660937 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.775791, -14.780256, 1.642760 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.779276, -14.771280, 1.631837 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.783743, -14.771526, 1.633361 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.785200, -14.775395, 1.631414 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.790029, -14.787239, 1.630439 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.795095, -14.801865, 1.626896 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.799329, -14.817380, 1.636884 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.806109, -14.835987, 1.641903 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.814271, -14.855072, 1.639686 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.822200, -14.873244, 1.651132 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.827953, -14.889456, 1.652914 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.830765, -14.910028, 1.642455 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.836083, -14.931521, 1.637309 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.838328, -14.948332, 1.638655 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.842289, -14.966985, 1.635974 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.846301, -14.983607, 1.637287 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.851016, -15.003072, 1.643971 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.857295, -15.029427, 1.646649 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.868200, -15.054842, 1.656835 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.877275, -15.079326, 1.663326 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.881722, -15.103693, 1.661656 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.885228, -15.129739, 1.666129 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.889832, -15.155173, 1.673489 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.895925, -15.183561, 1.683381 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.901125, -15.219574, 1.692377 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.904149, -15.255585, 1.691405 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.907063, -15.288533, 1.688318 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.911777, -15.320253, 1.684716 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913939, -15.347136, 1.674771 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.911168, -15.371139, 1.667901 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.910865, -15.396955, 1.653847 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913433, -15.422361, 1.653529 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913973, -15.446917, 1.655358 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913317, -15.471355, 1.651459 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.912859, -15.497356, 1.642665 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.909225, -15.520761, 1.642215 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.905513, -15.540391, 1.641551 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.906274, -15.558225, 1.649114 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.906776, -15.571455, 1.661225 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.911114, -15.582514, 1.668682 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913033, -15.589519, 1.678615 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913651, -15.591663, 1.679147 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.913448, -15.595074, 1.677253 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.911958, -15.598674, 1.678527 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.908573, -15.603422, 1.674980 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.900674, -15.603657, 1.659750 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.894587, -15.605515, 1.646159 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.889513, -15.609207, 1.645224 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.884244, -15.612359, 1.639032 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.872000, -15.611740, 1.632946 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.855748, -15.606082, 1.636704 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.834111, -15.600693, 1.632824 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.806197, -15.593683, 1.624384 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.774590, -15.581448, 1.623775 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.741609, -15.565542, 1.624955 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.703807, -15.544189, 1.629605 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.667034, -15.520930, 1.637143 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.631042, -15.498617, 1.645910 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.595646, -15.475404, 1.649498 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.560756, -15.455996, 1.646714 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.526668, -15.434285, 1.640189 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.495544, -15.410784, 1.644984 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.469667, -15.389236, 1.654581 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.448307, -15.367971, 1.655667 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.429682, -15.351451, 1.657450 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.412447, -15.338640, 1.664565 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.395302, -15.328300, 1.660088 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.384030, -15.322383, 1.661317 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.376012, -15.316844, 1.667048 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.370499, -15.308863, 1.678177 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.365435, -15.298885, 1.686978 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.364757, -15.289510, 1.687529 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.367921, -15.287952, 1.680381 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.368998, -15.285227, 1.678281 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.367814, -15.277348, 1.671745 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.363618, -15.267241, 1.657585 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.365087, -15.256726, 1.641743 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.369426, -15.243918, 1.638266 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.380153, -15.233558, 1.631662 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.390663, -15.218804, 1.634147 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.400296, -15.203686, 1.631817 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.412996, -15.191535, 1.645457 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.423808, -15.177379, 1.658481 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.431033, -15.159367, 1.671292 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.435231, -15.140961, 1.672731 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.441133, -15.123343, 1.669986 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.449931, -15.108548, 1.665537 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.458591, -15.093790, 1.659916 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.463660, -15.075333, 1.650325 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.466380, -15.054868, 1.636084 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.469511, -15.034781, 1.631569 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.469253, -15.015274, 1.626752 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.469755, -15.001835, 1.623297 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.469013, -14.993340, 1.615321 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.467465, -14.979427, 1.610953 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.466137, -14.965905, 1.613801 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.460403, -14.954973, 1.616500 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.455742, -14.948132, 1.616922 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.449161, -14.937248, 1.614367 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.443879, -14.927647, 1.615786 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.443503, -14.919086, 1.609361 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.445273, -14.909973, 1.616930 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.449743, -14.899690, 1.623174 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.455008, -14.889195, 1.627841 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.459412, -14.878403, 1.640990 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.461319, -14.865412, 1.653818 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.464260, -14.854430, 1.658149 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.467467, -14.840994, 1.663310 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.471859, -14.832357, 1.691528 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.476472, -14.832344, 1.696380 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.481681, -14.832012, 1.696740 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.486478, -14.830270, 1.696353 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.493011, -14.830558, 1.691821 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.499791, -14.829441, 1.701824 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.508971, -14.827187, 1.698993 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.523186, -14.826639, 1.708942 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.538874, -14.826289, 1.712456 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.556762, -14.831916, 1.708363 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.572512, -14.837409, 1.707121 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.585988, -14.840756, 1.716286 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.597410, -14.844825, 1.730701 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.607090, -14.849765, 1.730287 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.614114, -14.850784, 1.732832 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.617408, -14.848521, 1.733328 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.620309, -14.842207, 1.719386 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.620477, -14.834851, 1.718850 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.621507, -14.827837, 1.723070 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.625341, -14.820639, 1.735175 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.627919, -14.814409, 1.735896 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.629435, -14.815478, 1.725059 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.630055, -14.815203, 1.724972 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.630430, -14.816338, 1.728176 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.631562, -14.816014, 1.734024 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.637036, -14.817886, 1.733086 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.645848, -14.821241, 1.733414 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.658718, -14.826064, 1.736241 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.672712, -14.827783, 1.745144 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.688070, -14.829877, 1.749019 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.703523, -14.833052, 1.754148 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.719999, -14.834949, 1.745892 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.736204, -14.836571, 1.733877 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.748533, -14.837733, 1.719773 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.760220, -14.835320, 1.710282 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.770157, -14.831665, 1.710875 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.779631, -14.827387, 1.717311 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.787874, -14.823798, 1.725762 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.800407, -14.821046, 1.739866 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.816096, -14.823407, 1.753718 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.832690, -14.828297, 1.747808 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.848777, -14.827515, 1.730076 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.865741, -14.824662, 1.725220 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.884273, -14.823281, 1.731402 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.902390, -14.822051, 1.733718 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.921361, -14.819651, 1.747007 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.940837, -14.814613, 1.757853 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.961205, -14.805987, 1.758765 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.981204, -14.795585, 1.749683 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (15.998847, -14.779525, 1.753384 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.016775, -14.763949, 1.776433 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.032915, -14.750263, 1.788178 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.056520, -14.736116, 1.791076 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.078911, -14.721645, 1.779548 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.099447, -14.703811, 1.761104 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.118397, -14.687943, 1.752776 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.134466, -14.672026, 1.757276 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.149235, -14.653395, 1.756451 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.162533, -14.632704, 1.750717 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.173828, -14.611451, 1.754237 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.186251, -14.588364, 1.751821 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.198229, -14.562775, 1.749169 
+)main - phase == READwpList_cb(): waypointList was received 
+[0m[ INFO] [1455209958.885514811]: srv_chkState_cb() was called
+[0m
+Y - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.206203, -14.535304, 1.756828 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.214727, -14.509895, 1.756202 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.218390, -14.480511, 1.753017 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.218597, -14.452058, 1.762833 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.217911, -14.427752, 1.762888 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 					 current_position (ENU): (16.217268, -14.406690, 1.762047 
+)main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ main - phase == READY - path empty: target_pos_local  (35.663644,-14.735281,4.528319)
+ 0020.676464402]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455210032.674863697]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455210050.650524405]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455210062.619752001]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455210075.313290801]: CMD: Unexpected command 519, result 0[0m
+[33m[ WARN] [1455210090.529600829]: CMD: Unexpected command 519, result 0[0m
+[0m[ INFO] [1455210106.846002466]: FCU: Landing detected[0m
+[0m[ INFO] [1455210148.254910698]: FCU: data link #0 lost[0m
+... logging to /home/odroid/.ros/log/c25edd90-d0e0-11e5-9c46-8416f90b1d91/roslaunch-odroid-8601.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/odroid/catkin_ws/src/examples/goto0129/launch/goto0129.launch
+[1mstarted roslaunch server http://odroid:50546/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /mavros/conn_heartbeat: 5.0
+ * /mavros/conn_timeout: 5.0
+ * /mavros/fcu_url: /dev/ttyUSB0:921600
+ * /mavros/gcs_url: udp://:14540@192....
+ * /mavros/mocap/use_pose: False
+ * /mavros/mocap/use_tf: True
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.12
+
+NODES
+  /
+    eDrone_autoflight_node (eDrone_lib/eDrone_autoflight_node)
+    eDrone_control_node (eDrone_lib/eDrone_control_node)
+    eDrone_monitor_node (eDrone_lib/eDrone_monitor_node)
+    eDrone_safety_node (eDrone_lib/eDrone_safety_node)
+    ex_goto0129 (goto0129/ex_goto0129)
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [8611][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/odroid/catkin_ws/src/examples/goto0129/launch/goto0129.launch http://localhost:11311
+[1msetting /run_id to c25edd90-d0e0-11e5-9c46-8416f90b1d91[0m
+[1mprocess[rosout-1]: started with pid [8624][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [8631][0m
+[1mprocess[eDrone_monitor_node-3]: started with pid [8642][0m
+[1mprocess[eDrone_control_node-4]: started with pid [8648][0m
+[1mprocess[eDrone_autoflight_node-5]: started with pid [8665][0m
+[1mprocess[eDrone_safety_node-6]: started with pid [8689][0m
+[1mprocess[ex_goto0129-7]: started with pid [8709][0m
+[1m[ex_goto0129-7] process has finished cleanly
+log file: /home/odroid/.ros/log/c25edd90-d0e0-11e5-9c46-8416f90b1d91/ex_goto0129-7*.log[0m
+[eDrone_safety_node-6] killing on exit
+[eDrone_autoflight_node-5] killing on exit
+[eDrone_control_node-4] killing on exit
+[eDrone_monitor_node-3] killing on exit
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

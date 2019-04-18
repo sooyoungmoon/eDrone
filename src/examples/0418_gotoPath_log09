@@ -1,0 +1,192 @@
+[0m[ INFO] [1555586961.704751635]: FCU URL: udp://:14540@127.0.0.1:14557[0m
+[0m[ INFO] [1555586961.709441871]: udp0: Bind address: 0.0.0.0:14540[0m
+[0m[ INFO] [1555586961.709567904]: udp0: Remote address: 127.0.0.1:14557[0m
+[0m[ INFO] [1555586961.709973074]: GCS URL: udp://@129.254.189.134:14550[0m
+[0m[ INFO] [1555586961.710308339]: udp1: Bind address: 0.0.0.0:14555[0m
+[0m[ INFO] [1555586961.710771748]: udp1: Remote address: 129.254.189.134:14550[0m
+[0m[ INFO] [1555586961.713097255]: udp0: Remote address: 127.0.0.1:14580[0m
+[0m[ INFO] [1555586961.733358088]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1555586961.735162645]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1555586961.735303144]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1555586961.741972168]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1555586961.745644046]: Plugin adsb loaded[0m
+[0m[ INFO] [1555586961.750473618]: Plugin adsb initialized[0m
+[0m[ INFO] [1555586961.750627352]: Plugin altitude loaded[0m
+[0m[ INFO] [1555586961.752283819]: Plugin altitude initialized[0m
+[0m[ INFO] [1555586961.752418857]: Plugin cam_imu_sync loaded[0m
+[0m[ INFO] [1555586961.753397307]: Plugin cam_imu_sync initialized[0m
+[0m[ INFO] [1555586961.753554803]: Plugin command loaded[0m
+[0m[ INFO] [1555586961.762258397]: Plugin command initialized[0m
+[0m[ INFO] [1555586961.762385692]: Plugin debug_value loaded[0m
+[0m[ INFO] [1555586961.772561815]: Plugin debug_value initialized[0m
+[0m[ INFO] [1555586961.772920698]: Plugin distance_sensor loaded[0m
+[33m[ WARN] [1555586961.775083661]: DS: plugin not configured![0m
+[0m[ INFO] [1555586961.775123855]: Plugin distance_sensor initialized[0m
+[0m[ INFO] [1555586961.775250106]: Plugin fake_gps loaded[0m
+[0m[ INFO] [1555586961.793413072]: Plugin fake_gps initialized[0m
+[0m[ INFO] [1555586961.793549909]: Plugin ftp loaded[0m
+[0m[ INFO] [1555586961.813376987]: Plugin ftp initialized[0m
+[0m[ INFO] [1555586961.813503906]: Plugin global_position loaded[0m
+[0m[ INFO] [1555586961.837519868]: Plugin global_position initialized[0m
+[0m[ INFO] [1555586961.837684335]: Plugin gps_rtk loaded[0m
+[0m[ INFO] [1555586961.844834069]: Plugin gps_rtk initialized[0m
+[0m[ INFO] [1555586961.844994237]: Plugin hil loaded[0m
+[0m[ INFO] [1555586961.868783285]: Plugin hil initialized[0m
+[0m[ INFO] [1555586961.868962983]: Plugin home_position loaded[0m
+[0m[ INFO] [1555586961.877845478]: Plugin home_position initialized[0m
+[0m[ INFO] [1555586961.877975188]: Plugin imu loaded[0m
+[0m[ INFO] [1555586961.887167437]: Plugin imu initialized[0m
+[0m[ INFO] [1555586961.887456077]: Plugin local_position loaded[0m
+[0m[ INFO] [1555586961.901362281]: Plugin local_position initialized[0m
+[0m[ INFO] [1555586961.901501593]: Plugin log_transfer loaded[0m
+[0m[ INFO] [1555586961.912391900]: Plugin log_transfer initialized[0m
+[0m[ INFO] [1555586961.912553857]: Plugin manual_control loaded[0m
+[0m[ INFO] [1555586961.917302380]: Plugin manual_control initialized[0m
+[0m[ INFO] [1555586961.917424994]: Plugin mocap_pose_estimate loaded[0m
+[0m[ INFO] [1555586961.926947063]: Plugin mocap_pose_estimate initialized[0m
+[0m[ INFO] [1555586961.927065098]: Plugin obstacle_distance loaded[0m
+[0m[ INFO] [1555586961.930575683]: Plugin obstacle_distance initialized[0m
+[0m[ INFO] [1555586961.930707214]: Plugin odom loaded[0m
+[0m[ INFO] [1555586961.936279231]: Plugin odom initialized[0m
+[0m[ INFO] [1555586961.936436596]: Plugin param loaded[0m
+[0m[ INFO] [1555586961.943110437]: Plugin param initialized[0m
+[0m[ INFO] [1555586961.943226132]: Plugin px4flow loaded[0m
+[0m[ INFO] [1555586961.951903070]: Plugin px4flow initialized[0m
+[0m[ INFO] [1555586961.952057816]: Plugin rangefinder loaded[0m
+[0m[ INFO] [1555586961.953175556]: Plugin rangefinder initialized[0m
+[0m[ INFO] [1555586961.953334721]: Plugin rc_io loaded[0m
+[0m[ INFO] [1555586961.961657167]: Plugin rc_io initialized[0m
+[0m[ INFO] [1555586961.961792052]: Plugin safety_area loaded[0m
+[0m[ INFO] [1555586961.967135119]: Plugin safety_area initialized[0m
+[0m[ INFO] [1555586961.967374681]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1555586961.975967958]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1555586961.976096083]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1555586961.993746195]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1555586961.993879853]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1555586962.019752628]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1555586962.019913019]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1555586962.039563165]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1555586962.039928462]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1555586962.049007588]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1555586962.049251240]: Plugin sys_status loaded[0m
+[0m[ INFO] [1555586962.062693632]: udp1: Remote address: 129.254.189.134:14550[0m
+[0m[ INFO] [1555586962.064235649]: Plugin sys_status initialized[0m
+[0m[ INFO] [1555586962.064382236]: Plugin sys_time loaded[0m
+[0m[ INFO] [1555586962.076073820]: TM: Timesync mode: MAVLINK[0m
+[0m[ INFO] [1555586962.077760322]: Plugin sys_time initialized[0m
+[0m[ INFO] [1555586962.077912986]: Plugin trajectory loaded[0m
+[0m[ INFO] [1555586962.087369649]: Plugin trajectory initialized[0m
+[0m[ INFO] [1555586962.087636569]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1555586962.089740538]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1555586962.090038570]: Plugin vibration loaded[0m
+[0m[ INFO] [1555586962.093319437]: Plugin vibration initialized[0m
+[0m[ INFO] [1555586962.093453842]: Plugin vision_pose_estimate loaded[0m
+[0m[ INFO] [1555586962.103329738]: Plugin vision_pose_estimate initialized[0m
+[0m[ INFO] [1555586962.103466718]: Plugin vision_speed_estimate loaded[0m
+[0m[ INFO] [1555586962.116794506]: Plugin vision_speed_estimate initialized[0m
+[0m[ INFO] [1555586962.116974121]: Plugin waypoint loaded[0m
+[0m[ INFO] [1555586962.127092231]: Plugin waypoint initialized[0m
+[0m[ INFO] [1555586962.127232258]: Plugin wind_estimation loaded[0m
+[0m[ INFO] [1555586962.128016095]: Plugin wind_estimation initialized[0m
+[0m[ INFO] [1555586962.128058801]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1555586962.128203072]: Built-in SIMD instructions: SSE, SSE2[0m
+[0m[ INFO] [1555586962.128219371]: Built-in MAVLink package version: 2018.8.8[0m
+[0m[ INFO] [1555586962.128242548]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad icarous matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1555586962.128275138]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[0m[ INFO] [1555586962.133333550]: IMU: Attitude quaternion IMU detected![0m
+[33m[ WARN] [1555586962.141161860]: CMD: Unexpected command 519, result 0[0m
+[0m[ INFO] [1555586962.141466889]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1555586963.029056412]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1555586963.030436901]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1555586963.042003136]: IMU: Attitude quaternion IMU detected![0m
+[0m[ INFO] [1555586963.057522282]: FCU: RTL HOME activated[0m
+[0m[ INFO] [1555586963.109230518]: FCU: RTL: climb to 566 m (30 m above home)[0m
+[0m[ INFO] [1555586963.157767986]: FCU: data link #1 lost[0m
+[0m[ INFO] [1555586963.257366174]: FCU: RTL: return at 566 m (30 m above home)[0m
+[0m[ INFO] [1555586964.031229153]: VER: 1.1: Capabilities         0x000000000000e4ef[0m
+[0m[ INFO] [1555586964.031273643]: VER: 1.1: Flight software:     01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1555586964.031299480]: VER: 1.1: Middleware software: 01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1555586964.031331809]: VER: 1.1: OS software:         040f00ff (0000000000000000)[0m
+[0m[ INFO] [1555586964.031357568]: VER: 1.1: Board hardware:      00000001[0m
+[0m[ INFO] [1555586964.031389251]: VER: 1.1: VID/PID:             0000:0000[0m
+[0m[ INFO] [1555586964.031416697]: VER: 1.1: UID:                 4954414c44494e4f[0m
+[0m[ INFO] [1555586964.049010877]: FCU: data link #1 regained					 current_position (ENU): (-0.016175, -0.123653, -0.009163 
+) (UNARMED)					 current_position (ENU): (-0.020627, -0.123937, -0.003049 
+) (UNARMED)control_node: home position: (47.397999, 8.546000, 582.440471) 
+
+					 current_position (ENU): (-0.023878, -0.123447, 0.004393 
+) (UNARMED)					 current_position (ENU): (-0.024550, -0.124659, 0.009208 
+) (UNARMED)					 current_position (ENU): (-0.027207, -0.129294, 0.011271 
+) (UNARMED)					 current_position (ENU): (-0.029203, -0.131948, 0.009932 
+) (UNARMED)					 current_position (ENU): (-0.028193, -0.133115, 0.008484 
+) (UNARMED)					 current_position (ENU): (-0.027573, -0.136025, 0.009044 
+) (UNARMED)control_node: home position: (47.397999, 8.546000, 582.440471) 
+
+					 current_position (ENU): (-0.029008, -0.137363, 0.011557 
+) (UNARMED)					 current_position (ENU): (-0.030232, -0.138484, 0.014662 
+) (UNARMED)					 current_position (ENU): (-0.029408, -0.139902, 0.017164 
+) (UNARMED)					 current_position (ENU): (-0.028136, -0.139364, 0.013139 
+) (UNARMED)					 current_position (ENU): (-0.025977, -0.141856, 0.009418 
+) (UNARMED)					 current_position (ENU): (-0.024686, -0.147118, 0.005985 
+) (UNARMED)control_node: home position: (47.397999, 8.546000, 582.440471) 
+
+					 current_position (ENU): (-0.023071, -0.149377, 0.005775 
+) (UNARMED)					 current_position (ENU): (-0.018343, -0.151030, 0.003849 
+) (UNARMED)					 current_position (ENU): (-0.014943, -0.151373, 0.010183 
+) (UNARMED)[0m
+... logging to /home/sooyoung/.ros/log/35723bda-61cd-11e9-9ee5-ace0108ca819/roslaunch-sooyoung-Laptop2015-31382.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/sooyoung/catkin_ws/src/examples/gotoPath1024_2/launch/gotoPath1024_2.launch
+[1mstarted roslaunch server http://sooyoung-Laptop2015:36195/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /mavros/conn_heartbeat: 5.0
+ * /mavros/conn_timeout: 5.0
+ * /mavros/fcu_url: udp://:14540@127....
+ * /mavros/gcs_url: udp://@129.254.18...
+ * /mavros/mocap/use_pose: False
+ * /mavros/mocap/use_tf: True
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.13
+
+NODES
+  /
+    eDrone_autoflight_node (eDrone_lib/eDrone_autoflight_node)
+    eDrone_control_node (eDrone_lib/eDrone_control_node)
+    eDrone_monitor_node (eDrone_lib/eDrone_monitor_node)
+    eDrone_safety_node (eDrone_lib/eDrone_safety_node)
+    ex_gotoPath1024_2 (gotoPath1024_2/ex_gotoPath1024_2)
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [31392][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/sooyoung/catkin_ws/src/examples/gotoPath1024_2/launch/gotoPath1024_2.launch http://localhost:11311
+[1msetting /run_id to 35723bda-61cd-11e9-9ee5-ace0108ca819[0m
+[1mprocess[rosout-1]: started with pid [31405][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [31420][0m
+[1mprocess[eDrone_monitor_node-3]: started with pid [31423][0m
+[1mprocess[eDrone_control_node-4]: started with pid [31434][0m
+[1mprocess[eDrone_autoflight_node-5]: started with pid [31440][0m
+[1mprocess[eDrone_safety_node-6]: started with pid [31455][0m
+[1mprocess[ex_gotoPath1024_2-7]: started with pid [31462][0m
+[ex_gotoPath1024_2-7] killing on exit
+[eDrone_safety_node-6] killing on exit
+[eDrone_autoflight_node-5] killing on exit
+[eDrone_control_node-4] killing on exit
+[eDrone_monitor_node-3] killing on exit
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

@@ -19,7 +19,6 @@ find_package(
 	rospy
 	std_msgs
 	eDrone_msgs
-	eDrone_lib
 )
 
 

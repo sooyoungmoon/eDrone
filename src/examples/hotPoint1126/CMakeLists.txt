@@ -19,8 +19,6 @@ find_package(
 	rospy
 	std_msgs
 	eDrone_msgs
-	eDrone_lib
-	mavlink
 )
 
 
@@ -40,7 +38,6 @@ catkin_package(
 	rospy
 	std_msgs
 	eDrone_msgs
-	eDrone_lib
 )
 include_directories(
 	# ~/devel/.private/eDrone_lib/lib

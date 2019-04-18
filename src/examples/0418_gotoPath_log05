@@ -1,0 +1,1083 @@
+[0m[ INFO] [1555568175.139963558]: FCU URL: udp://:14540@127.0.0.1:14557[0m
+[0m[ INFO] [1555568175.142585097]: udp0: Bind address: 0.0.0.0:14540[0m
+[0m[ INFO] [1555568175.142696903]: udp0: Remote address: 127.0.0.1:14557[0m
+[0m[ INFO] [1555568175.142946290]: GCS URL: udp://@129.254.189.134:14550[0m
+[0m[ INFO] [1555568175.143226270]: udp1: Bind address: 0.0.0.0:14555[0m
+[0m[ INFO] [1555568175.143432605]: udp1: Remote address: 129.254.189.134:14550[0m
+[0m[ INFO] [1555568175.144841923]: udp0: Remote address: 127.0.0.1:14580[0m
+[0m[ INFO] [1555568175.165552545]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1555568175.169136763]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1555568175.169223915]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1555568175.173480175]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1555568175.177442656]: Plugin adsb loaded[0m
+[0m[ INFO] [1555568175.183572878]: Plugin adsb initialized[0m
+[0m[ INFO] [1555568175.183783349]: Plugin altitude loaded[0m
+[0m[ INFO] [1555568175.186811475]: Plugin altitude initialized[0m
+[0m[ INFO] [1555568175.186947948]: Plugin cam_imu_sync loaded[0m
+[0m[ INFO] [1555568175.187882759]: Plugin cam_imu_sync initialized[0m
+[0m[ INFO] [1555568175.188026866]: Plugin command loaded[0m
+[0m[ INFO] [1555568175.198043124]: Plugin command initialized[0m
+[0m[ INFO] [1555568175.198358910]: Plugin debug_value loaded[0m
+[0m[ INFO] [1555568175.207114797]: Plugin debug_value initialized[0m
+[0m[ INFO] [1555568175.207259733]: Plugin distance_sensor loaded[0m
+[33m[ WARN] [1555568175.208542858]: DS: plugin not configured![0m
+[0m[ INFO] [1555568175.208577688]: Plugin distance_sensor initialized[0m
+[0m[ INFO] [1555568175.208689228]: Plugin fake_gps loaded[0m
+[0m[ INFO] [1555568175.226058687]: Plugin fake_gps initialized[0m
+[0m[ INFO] [1555568175.226270776]: Plugin ftp loaded[0m
+[0m[ INFO] [1555568175.249215402]: Plugin ftp initialized[0m
+[0m[ INFO] [1555568175.249390046]: Plugin global_position loaded[0m
+[0m[ INFO] [1555568175.286585625]: Plugin global_position initialized[0m
+[0m[ INFO] [1555568175.286942566]: Plugin gps_rtk loaded[0m
+[0m[ INFO] [1555568175.290804049]: Plugin gps_rtk initialized[0m
+[0m[ INFO] [1555568175.290977935]: Plugin hil loaded[0m
+[0m[ INFO] [1555568175.322112728]: Plugin hil initialized[0m
+[0m[ INFO] [1555568175.322277155]: Plugin home_position loaded[0m
+[0m[ INFO] [1555568175.327998701]: Plugin home_position initialized[0m
+[0m[ INFO] [1555568175.328130943]: Plugin imu loaded[0m
+[0m[ INFO] [1555568175.341154655]: Plugin imu initialized[0m
+[0m[ INFO] [1555568175.341281068]: Plugin local_position loaded[0m
+[0m[ INFO] [1555568175.349955951]: Plugin local_position initialized[0m
+[0m[ INFO] [1555568175.350347617]: Plugin log_transfer loaded[0m
+[0m[ INFO] [1555568175.358099097]: Plugin log_transfer initialized[0m
+[0m[ INFO] [1555568175.358388803]: Plugin manual_control loaded[0m
+[0m[ INFO] [1555568175.374302578]: Plugin manual_control initialized[0m
+[0m[ INFO] [1555568175.374411418]: Plugin mocap_pose_estimate loaded[0m
+[0m[ INFO] [1555568175.382034147]: Plugin mocap_pose_estimate initialized[0m
+[0m[ INFO] [1555568175.382394893]: Plugin obstacle_distance loaded[0m
+[0m[ INFO] [1555568175.388610685]: Plugin obstacle_distance initialized[0m
+[0m[ INFO] [1555568175.388738261]: Plugin odom loaded[0m
+[0m[ INFO] [1555568175.394260282]: Plugin odom initialized[0m
+[0m[ INFO] [1555568175.394442001]: Plugin param loaded[0m
+[0m[ INFO] [1555568175.400840396]: Plugin param initialized[0m
+[0m[ INFO] [1555568175.400953887]: Plugin px4flow loaded[0m
+[0m[ INFO] [1555568175.417502799]: Plugin px4flow initialized[0m
+[0m[ INFO] [1555568175.417629732]: Plugin rangefinder loaded[0m
+[0m[ INFO] [1555568175.419812533]: Plugin rangefinder initialized[0m
+[0m[ INFO] [1555568175.419934913]: Plugin rc_io loaded[0m
+[0m[ INFO] [1555568175.426159474]: Plugin rc_io initialized[0m
+[0m[ INFO] [1555568175.426694870]: Plugin safety_area loaded[0m
+[0m[ INFO] [1555568175.437512794]: Plugin safety_area init[0m[ INFO] [1555568174.908264571]: ==gotoPath1024_2==
+[0m
+[0m[ INFO] [1555568174.961526777]: main arg[0]: /home/sooyoung/catkin_ws/devel/lib/gotoPath1024_2/ex_gotoPath1024_2[0m
+[0m[ INFO] [1555568174.961559840]: main arg[1]: 10,10,3,10,30,3,30,30,3,30,10,3[0m
+[0m[ INFO] [1555568185.077089006]: Send checkState command ... 
+[0m
+[0m[ INFO] [1555568185.077140073]: Checking the connection ... 
+[0m
+[0m[ INFO] [1555568185.127521263]: CheckState service was requested[0m
+[0m[ INFO] [1555568185.127550505]: UAV connection established![0m
+UAV connected: 
+flight mode: AUTO.LOITER
+remaining battery(%): 1
+[0m[ INFO] [1555568185.127679552]: Send checkPosition command ... 
+[0m
+[0m[ INFO] [1555568185.127706126]: Checking the position ... 
+[0m
+[0m[ INFO] [1555568185.177114745]: CheckPosition service was requested[0m
+global frame (WGS84): (47.398, 8.546, 535.206) 
+
+local frame (ENU): (-0.00706915, -0.00355039, 0.0250353) 
+					 current_position (ENU): (-0.000000, 0.000000, 0.043505 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.040903 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.036761 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.037535 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.039338 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.040973 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.038731 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.038568 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.037356 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.039803 
+) (UNARMED)					 current_position (ENU): (-0.000000, 0.000000, 0.045567 
+) (UNARMED)					 current_position (ENU): (-0.005722, 0.003173, 0.047269 
+) (UNARMED)					 current_position (ENU): (-0.006179, 0.004013, 0.045793 
+) (UNARMED)					 current_position (ENU): (-0.007849, -0.000156, 0.042255 
+) (UNARMED)control_node: home position: (47.398000, 8.546000, 535.223471) 
+
+					 current_position (ENU): (-0.011302, -0.005890, 0.038900 
+) (UNARMED)					 current_position (ENU): (-0.016522, -0.011025, 0.034394 
+) (UNARMED)					 current_position (ENU): (-0.022162, -0.017031, 0.029860 
+) (UNARMED)					 current_position (ENU): (-0.025396, -0.022074, 0.027103 
+) (UNARMED)					 current_position (ENU): (-0.028311, -0.025275, 0.023976 
+) (UNARMED)					 current_position (ENU): (-0.029371, -0.026423, 0.024202 
+) (UNARMED)control_node: home position: (47.398000, 8.546000, 535.223471) 
+
+					 current_position (ENU): (-0.030306, -0.026612, 0.026711 
+) (UNARMED)					 current_position (ENU): (-0.030197, -0.025506, 0.031374 
+) (UNARMED)					 current_position (ENU): (-0.028689, -0.023307, 0.031411 
+) (UNARMED)					 current_position (ENU): (-0.024406, -0.020673, 0.030574 
+) (UNARMED)					 current_position (ENU): (-0.017396, -0.015441, 0.029241 
+) (UNARMED)					 current_position (ENU): (-0.011926, -0.010658, 0.027995 
+) (UNARMED)control_node: home position: (47.398000, 8.546000, 535.223471) 
+
+					 current_position (ENU): (-0.009269, -0.008022, 0.026145 
+) (UNARMED)					 current_position (ENU): (-0.007926, -0.005755, 0.025253 
+) (UNARMED)[0m[ INFO] [1555568185.201323494]: ARMing request received
+[0m
+eDrone_control_node: send Arming command ...
+[0m[ INFO] [1555568185.209111529]: ARMing command was sent
+[0m
+[0m[ INFO] [1555568185.209138392]: Send setHome cmd: [0m
+[0m[ INFO] [1555568185.251276940]: ***Takeoff request received
+[0m
+[0m[ INFO] [1555568185.251314076]:  HOME_ALT: 535.223471, req.takeoff_altitude: 10.000000[0m
+send Takeoff command ...
+[0m[ INFO] [1555568185.263282025]: Takeoff command was sent
+[0m
+					 current_position (ENU): (-0.006084, -0.003142, 0.025661 
+) (TAKEOFF)					 current_position (ENU): (-0.000771, -0.002866, 0.028270 
+) (TAKEOFF)					 current_position (ENU): (-0.000050, -0.001511, 0.225402 
+) (TAKEOFF)					 current_position (ENU): (0.001100, 0.000659, 0.682205 
+) (TAKEOFF)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (0.008506, -0.002543, 1.182220 
+) (TAKEOFF)					 current_position (ENU): (0.011177, -0.008406, 1.685938 
+) (TAKEOFF)					 current_position (ENU): (0.012794, -0.010825, 2.209753 
+) (TAKEOFF)					 current_position (ENU): (0.015167, -0.013608, 2.721100 
+) (TAKEOFF)					 current_position (ENU): (0.018311, -0.018153, 3.247059 
+) (TAKEOFF)					 current_position (ENU): (0.020228, -0.022020, 3.770489 
+) (TAKEOFF)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (0.023969, -0.022588, 4.283203 
+) (TAKEOFF)					 current_position (ENU): (0.031956, -0.027814, 4.808577 
+) (TAKEOFF)					 current_position (ENU): (0.043284, -0.039013, 5.626110 
+) (TAKEOFF)					 current_position (ENU): (0.061464, -0.049559, 6.618122 
+) (TAKEOFF)					 current_position (ENU): (0.076488, -0.055263, 7.609716 
+) (TAKEOFF)					 current_position (ENU): (0.087600, -0.057306, 8.363834 
+) (TAKEOFF)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (0.098176, -0.057272, 8.896877 
+) (TAKEOFF)					 current_position (ENU): (0.106502, -0.057655, 9.261370 
+) (TAKEOFF)					 current_position (ENU): (0.109991, -0.057935, 9.515489 
+) (TAKEOFF)eDrone_control_node: TAKEOFF completed!
+[0m[ INFO] [1555568185.177221118]: UAV position was checked![0m
+[0m[ INFO] [1555568185.177284723]: Send arming command ... 
+[0m
+[0m[ INFO] [1555568185.215711140]: takeoff_altitude: 10.000000[0m
+[0m[ INFO] [1555568185.215744139]: Send takeoff command ... 
+[0m
+[0m[ INFO] [1555568185.263503990]: Takeoff command was sent to FC
+[0m
+[0m[ INFO] [1555568185.263595921]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263626914]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263642626]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263662306]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263681306]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263701125]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263718011]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263729676]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263744578]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.263758230]: cur_phase_cb(): UNARMED 
+[0m
+[0m[ INFO] [1555568185.314000174]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568185.463883174]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568185.613886723]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568185.763875632]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568185.913892978]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.063871427]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.213886856]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.363887661]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.513870344]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.663873401]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.813887848]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568186.963954782]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.113935934]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.263874268]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.413876726]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.563869133]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.713874229]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568187.863868485]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.013875720]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.163891576]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.313891409]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.463847192]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.613948681]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.763877108]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568188.913872109]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.063876858]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.213872827]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.363902797]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.513879607]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.663896353]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.813890436]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568189.963897961]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.113873847]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.263848958]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.413884737]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.563873796]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.713875316]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568190.863887961]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568191.013886817]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568191.163874007]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568191.313874486]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568191.463869625]: cur_phase_cb(): TAKEOFF 
+[0m
+[0m[ INFO] [1555568191.613935976]: cur_phase_cb(): READY 
+[0m
+token: 10
+gotoPath_pts_str: 10,3,10,30,3,30,30,3,30,10,3
+token: 10
+gotoPath_pts_str: 3,10,30,3,30,30,3,30,10,3
+token: 3
+gotoPath_pts_str: 10,30,3,30,30,3,30,10,3
+token: 10
+gotoPath_pts_str: 30,3,30,30,3,30,10,3
+token: 30
+gotoPath_pts_str: 3,30,30,3,30,10,3
+token: 3
+gotoPath_pts_str: 30,30,3,30,10,3
+token: 30
+gotoPath_pts_str: 30,3,30,10,3
+token: 30
+gotoPath_pts_str: 3,30,10,3
+token: 3
+gotoPath_pts_str: 30,10,3
+token: 30
+gotoPath_pts_str: 10,3
+token: 10
+gotoPath_pts_str: 3
+token: 3
+numCnt: 12
+point#0(10, 10, 3)
+point#1(10, 30, 3)
+point#2(30, 30, 3)
+point#3(30, 10, 3)
+[0m[ INFO] [1555568191.701322231]: eDrone_control_node: GotoPath request received
+[0m
+gotoPath_cb(): ref_system: ENU
+[0m[ INFO] [1555568191.701537925]: GotoPath API call - success![0m
+[0m[ INFO] [1555568191.701590594]: cur_phase_cb(): READY 
+[0m
+cur_phase: READY
+cur_phase: READY
+cur_phase: READY
+[0m[ INFO] [1555568191.813895166]: cur_phase_cb(): GOTO 
+[0m
+cur_phase: GOTO
+gotoPath completed:
+gotoPath_cb(): target_position 'push'! (10.000000,10.000000,3.000000)
+ gotoPath_cb(): target_position 'push'! (10.000000,30.000000,3.000000)
+ gotoPath_cb(): target_position 'push'! (30.000000,30.000000,3.000000)
+ gotoPath_cb(): target_position 'push'! (30.000000,10.000000,3.000000)
+ main(): target_position 'pop'! (10.000000,10.000000,3.000000)
+ 					 current_position (ENU): (0.109295, -0.060150, 9.669374 
+) (GOTO)					 current_position (ENU): (0.112197, -0.049911, 9.637389 
+) (GOTO)					 current_position (ENU): (0.450036, 0.275134, 9.337135 
+) (GOTO)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (1.364086, 1.191850, 9.005140 
+) (GOTO)					 current_position (ENU): (2.881539, 2.727987, 8.627012 
+) (GOTO)					 current_position (ENU): (4.602429, 4.476732, 8.266552 
+) (GOTO)					 current_position (ENU): (6.096516, 6.015226, 7.893370 
+) (GOTO)					 current_position (ENU): (7.263358, 7.220101, 7.511548 
+) (GOTO)					 current_position (ENU): (8.181900, 8.156144, 7.130260 
+) (GOTO)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (8.882112, 8.857185, 6.745977 
+) (GOTO)					 current_position (ENU): (9.347749, 9.311699, 6.384709 
+) (GOTO)					 current_position (ENU): (9.640502, 9.592071, 6.017209 
+) (GOTO)					 current_position (ENU): (9.780267, 9.717626, 5.669680 
+) (GOTO)					 current_position (ENU): (9.812001, 9.747197, 5.318123 
+) (GOTO)					 current_position (ENU): (9.776267, 9.719860, 4.975070 
+) (GOTO)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (9.701731, 9.660820, 4.622891 
+) (GOTO)					 current_position (ENU): (9.612777, 9.591623, 4.280552 
+) (GOTO)					 current_position (ENU): (9.525638, 9.527130, 3.933058 
+) (GOTO)					 current_position (ENU): (9.451035, 9.476273, 3.630064 
+) (GOTO)					 current_position (ENU): (9.397294, 9.444542, 3.417133 
+) (GOTO)					 current_position (ENU): (9.369415, 9.432912, 3.275088 
+) (GOTO)control_node: home position: (47.397999, 8.546000, 582.443471) 
+
+					 current_position (ENU): (9.355579, 9.440317, 3.179167 
+) (GOTO)					 current_position (ENU): (9.355440, 9.460739, 3.120527 
+) (GOTO)					 current_position (ENU): (9.372496, 9.494283, 3.082376 
+) (GOTO)					 current_position (ENU): (9.400537, 9.536523, 3.063626 
+) (GOTO)					 current_position (ENU): (9.437571, 9.582859, 3.051884 
+) (GOTO)					 current_position (ENU): (9.477807, 9.626569, 3.043989 
+) (GOTO)[0m[ INFO] [1555568200.801400107]: pos_cb_local(): The UAV reached to the target position[0m
+current_position: (9.500429, 9.647710, 3.039602 
+)main(): target_position 'pop'! (10.000000,30.000000,3.000000)
+  target_seq_no: 1
+					 current_position (ENU): (9.525073, 9.668410, 3.036047 
+) (GOTO)					 current_position (ENU): (9.575787, 9.842463, 3.071408 
+) (GOTO)					 current_position (ENU): (9.620209, 10.750764, 3.061644 
+) (GOTO)					 current_position (ENU): (9.653105, 12.432948, 3.055975 
+) (GOTO)					 current_position (ENU): (9.674766, 15.002378, 3.048658 
+) (GOTO)					 current_position (ENU): (9.691985, 18.239662, 3.020364 
+) (GOTO)					 current_position (ENU): (9.704008, 21.431976, 3.018816 
+) (GOTO)					 current_position (ENU): (9.713418, 23.987810, 2.966084 
+) (GOTO)					 current_position (ENU): (9.732762, 26.084684, 2.922621 
+) (GOTO)					 current_position (ENU): (9.764891, 27.649614, 2.902564 
+) (GOTO)					 current_position (ENU): (9.805317, 28.685839, 2.906023 
+) (GOTO)					 current_position (ENU): (9.850923, 29.320358, 2.920231 
+) (GOTO)[0m[ INFO] [1555568204.901321616]: pos_cb_local(): The UAV reached to the target position[0m
+current_position: (9.874951, 29.505804, 2.927807 
+)main(): target_position 'pop'! (30.000000,30.000000,3.000000)
+  target_seq_no: 2
+[0m[ INFO] [1555568201.863998807]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864036227]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864060029]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864082259]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864105714]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864126680]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864150194]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864172259]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864195844]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.864221678]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568201.914338483]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.016337998]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.114366653]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.214338349]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.314341103]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.414340611]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.514361435]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.614365228]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.714362122]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.814349455]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568202.914369628]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.014362045]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.114353035]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.214353317]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.314345995]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.414352532]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.514370962]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.614340718]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.714341489]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.814346656]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568203.914351691]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.014368854]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.114366959]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.214346193]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.314324408]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.414445902]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.514339322]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.614369083]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.714351872]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.814343110]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568204.914359895]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.014339837]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.114342575]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.214359704]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.314356820]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.414342722]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.514347229]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.614362506]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.714339381]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.814337222]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568205.914337554]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.014356984]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.114338902]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.214346170]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.314341766]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.414359086]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.514351321]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.614347561]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.714358753]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.814338585]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568206.914338682]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.014343387]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.114381512]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.214364807]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.314351048]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.414345481]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.514345290]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.614347389]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.714363819]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.814343236]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568207.914347184]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.014355195]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.114341852]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.214351958]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.314352644]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.414356303]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.514377939]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.614353412]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.714356909]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.814356602]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568208.914344241]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.014358983]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.114343069]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.214341755]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.314338208]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.414345025]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.514353470]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.614350638]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.714353523]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.814364991]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568209.914354088]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.014346062]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.114344433]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.214355947]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.314354273]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.414407902]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.514359203]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.614339034]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.714355967]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.814345675]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568210.914356599]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.014342530]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.114341537]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.214350799]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.314361582]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.414347047]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.514364370]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.614375356]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.714351384]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.814342848]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568211.914347238]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.014343984]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.114379372]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.214343451]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.314346777]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.414341144]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.514356565]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.614352788]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.714346467]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.814349746]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568212.914326941]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.014356318]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.114347877]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.214351817]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.314360706]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.414352197]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.514354407]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.614345225]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.714353925]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568213.814358190]: cur_phase_cb(): GOTO 
+[0m
+[					 current_position (ENU): (9.896598, 29.613379, 2.934593 
+) (GOTO)					 current_position (ENU): (10.086720, 29.672712, 2.980884 
+) (GOTO)					 current_position (ENU): (10.986917, 29.602354, 2.973032 
+) (GOTO)					 current_position (ENU): (12.761819, 29.429089, 2.960286 
+) (GOTO)					 current_position (ENU): (15.461741, 29.204201, 2.936955 
+) (GOTO)					 current_position (ENU): (18.730326, 29.024012, 2.895077 
+) (GOTO)					 current_position (ENU): (21.848038, 28.907495, 2.874413 
+) (GOTO)					 current_position (ENU): (24.381365, 28.862986, 2.817552 
+) (GOTO)					 current_position (ENU): (26.467817, 28.853594, 2.782240 
+) (GOTO)					 current_position (ENU): (28.001257, 28.848064, 2.774018 
+) (GOTO)					 current_position (ENU): (29.074154, 28.840160, 2.794818 
+) (GOTO)					 current_position (ENU): (29.727558, 28.835825, 2.837074 
+) (GOTO)					 current_position (ENU): (30.052769, 28.837439, 2.881733 
+) (GOTO)					 current_position (ENU): (30.146872, 28.857447, 2.919827 
+) (GOTO)					 current_position (ENU): (30.089285, 28.903706, 2.951275 
+) (GOTO)					 current_position (ENU): (29.944601, 28.975632, 2.976574 
+) (GOTO)					 current_position (ENU): (29.759832, 29.066868, 2.993639 
+) (GOTO)					 current_position (ENU): (29.564186, 29.175804, 3.003245 
+) (GOTO)					 current_position (ENU): (29.394411, 29.281908, 3.010655 
+) (GOTO)					 current_position (ENU): (29.252045, 29.386185, 3.016893 
+) (GOTO)					 current_position (ENU): (29.148518, 29.480995, 3.023889 
+) (GOTO)					 current_position (ENU): (29.085646, 29.566978, 3.026186 
+) (GOTO)					 current_position (ENU): (29.055695, 29.639208, 3.029361 
+) (GOTO)					 current_position (ENU): (29.057961, 29.697210, 3.034629 
+) (GOTO)					 current_position (ENU): (29.083838, 29.742792, 3.038050 
+) (GOTO)					 current_position (ENU): (29.128895, 29.778078, 3.041500 
+) (GOTO)					 current_position (ENU): (29.184725, 29.804468, 3.047043 
+) (GOTO)					 current_position (ENU): (29.244263, 29.824409, 3.050651 
+) (GOTO)					 current_position (ENU): (29.308783, 29.837738, 3.052973 
+) (GOTO)					 current_position (ENU): (29.371765, 29.848812, 3.048962 
+) (GOTO)					 current_position (ENU): (29.432041, 29.859697, 3.045710 
+) (GOTO)					 current_position (ENU): (29.485620, 29.868343, 3.040408 
+) (GOTO)[0m[ INFO] [1555568215.701458733]: pos_cb_local(): The UAV reached to the target position[0m
+current_position: (29.501640, 29.870253, 3.040558 
+)main(): target_position 'pop'! (30.000000,10.000000,3.000000)
+  target_seq_no: 3
+					 current_position (ENU): (29.536127, 29.874313, 3.044349 
+) (GOTO)					 current_position (ENU): (29.579098, 29.654211, 3.085746 
+) (GOTO)					 current_position (ENU): (29.622149, 28.636049, 3.077942 
+) (GOTO)					 current_position (ENU): (29.664583, 26.709415, 3.074754 
+) (GOTO)					 current_position (ENU): (29.701485, 23.958429, 3.068523 
+) (GOTO)					 current_position (ENU): (29.736614, 20.656702, 3.067371 
+) (GOTO)					 current_position (ENU): (29.767792, 17.720009, 3.063049 
+) (GOTO)					 current_position (ENU): (29.791702, 15.344295, 3.013271 
+) (GOTO)					 current_position (ENU): (29.805706, 13.403297, 2.970741 
+) (GOTO)					 current_position (ENU): (29.810339, 12.010937, 2.953445 
+) (GOTO)					 current_position (ENU): (29.811615, 11.044015, 2.955662 
+) (GOTO)					 current_position (ENU): (29.809122, 10.466056, 2.969407 
+) (GOTO)[0m[ INFO] [1555568219.701289262]: pos_cb_local(): The UAV reached to the target position[0m
+current_position: (29.809122, 10.466056, 2.969407 
+)eDrone_control_node: Goto phase: path is empty
+0m[ INFO] [1555568213.914364989]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.014357950]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.114345917]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.214365455]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.314347497]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.414366736]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.514340492]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.614337332]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.714340431]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.814365352]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568214.914341056]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.014340069]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.114364327]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.214349849]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.314351756]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.414339457]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.514367765]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.614341928]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.714295060]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.814340356]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568215.914320083]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.014340946]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.114340396]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.214341189]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.314340443]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.414360303]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.514351406]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.614354719]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.714344533]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.814343806]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568216.914340617]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.014367880]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.114343058]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.214354212]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.314366721]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.414350868]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.514370383]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.614370740]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.714357958]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.814368791]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568217.914340371]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.014337386]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.114344714]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.214339465]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.314353463]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.414341401]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.514370951]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.614357115]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.714339136]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.814339346]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568218.914318281]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.014339675]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.114341280]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.214371663]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.314356256]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.414345547]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.514342871]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.614344984]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.714344199]: cur_phase_cb(): GOTO 
+[0m
+[0m[ INFO] [1555568219.814348977]: cur_phase_cb(): READY 
+[0m
+rtl service call:
+srv_rtl_cb():return to home
+ modeChange cmd was sent!
+ 
+ialized[0m
+[0m[ INFO] [1555568175.437776769]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1555568175.443263272]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1555568175.443457404]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1555568175.451997904]: udp1: Remote address: 129.254.189.134:14550[0m
+[0m[ INFO] [1555568175.457637547]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1555568175.457813548]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1555568175.483994241]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1555568175.484113210]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1555568175.501341369]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1555568175.501494070]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1555568175.512396580]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1555568175.512535981]: Plugin sys_status loaded[0m
+[0m[ INFO] [1555568175.532300978]: Plugin sys_status initialized[0m
+[0m[ INFO] [1555568175.532442300]: Plugin sys_time loaded[0m
+[0m[ INFO] [1555568175.541877900]: TM: Timesync mode: MAVLINK[0m
+[0m[ INFO] [1555568175.544463693]: Plugin sys_time initialized[0m
+[0m[ INFO] [1555568175.544614244]: Plugin trajectory loaded[0m
+[0m[ INFO] [1555568175.555669707]: Plugin trajectory initialized[0m
+[0m[ INFO] [1555568175.555825207]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1555568175.556935483]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1555568175.557107514]: Plugin vibration loaded[0m
+[0m[ INFO] [1555568175.559860803]: Plugin vibration initialized[0m
+[0m[ INFO] [1555568175.559991460]: Plugin vision_pose_estimate loaded[0m
+[0m[ INFO] [1555568175.578595328]: Plugin vision_pose_estimate initialized[0m
+[0m[ INFO] [1555568175.578763748]: Plugin vision_speed_estimate loaded[0m
+[0m[ INFO] [1555568175.587831506]: Plugin vision_speed_estimate initialized[0m
+[0m[ INFO] [1555568175.587999863]: Plugin waypoint loaded[0m
+[0m[ INFO] [1555568175.595117720]: Plugin waypoint initialized[0m
+[0m[ INFO] [1555568175.595455529]: Plugin wind_estimation loaded[0m
+[0m[ INFO] [1555568175.597741917]: Plugin wind_estimation initialized[0m
+[0m[ INFO] [1555568175.597806370]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1555568175.597988706]: Built-in SIMD instructions: SSE, SSE2[0m
+[0m[ INFO] [1555568175.598014446]: Built-in MAVLink package version: 2018.8.8[0m
+[0m[ INFO] [1555568175.598048765]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad icarous matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1555568175.598083130]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[0m[ INFO] [1555568175.603223021]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1555568175.604621884]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1555568175.619565021]: IMU: Attitude quaternion IMU detected![0m
+[33m[ WARN] [1555568175.915448927]: CMD: Unexpected command 519, result 0[0m
+[0m[ INFO] [1555568176.606354479]: VER: 1.1: Capabilities         0x000000000000e4ef[0m
+[0m[ INFO] [1555568176.606418148]: VER: 1.1: Flight software:     01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1555568176.606461034]: VER: 1.1: Middleware software: 01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1555568176.606494262]: VER: 1.1: OS software:         040f00ff (0000000000000000)[0m
+[0m[ INFO] [1555568176.606524991]: VER: 1.1: Board hardware:      00000001[0m
+[0m[ INFO] [1555568176.606562921]: VER: 1.1: VID/PID:             0000:0000[0m
+[0m[ INFO] [1555568176.606593984]: VER: 1.1: UID:                 4954414c44494e4f[0m
+[0m[ INFO] [1555568185.209064472]: FCU: ARMED by arm/disarm component command[0m
+[0m[ INFO] [1555568185.292319888]: FCU: Using minimum takeoff altitude: 2.50 m[0m
+[0m[ INFO] [1555568185.415633078]: FCU: Takeoff detected[0m
+[33m[ WARN] [1555568185.959277138]: CMD: Unexpected command 176, result 0[0m
+[0m[ INFO] [1555568190.603867043]: WP: mission received[0m
+[33m[ WARN] [1555568219.907261594]: CMD: Unexpected command 176, result 0[0m
+[0m[ INFO] [1555568219.931152630]: FCU: RTL HOME activated[0[0m[ INFO] [1555568219.903816632]: RTL command was sent
+[0m
+					 current_position (ENU): (29.806305, 10.170706, 2.989437 
+) (RTL)					 current_position (ENU): (29.787111, 10.083529, 3.056708 
+) (RTL)					 current_position (ENU): (29.747627, 10.160970, 3.437471 
+) (RTL)					 current_position (ENU): (29.713200, 10.321996, 4.319040 
+) (RTL)					 current_position (ENU): (29.685120, 10.518140, 5.321003 
+) (RTL)					 current_position (ENU): (29.664717, 10.698533, 6.349965 
+) (RTL)					 current_position (ENU): (29.650723, 10.843197, 7.390936 
+) (RTL)					 current_position (ENU): (29.642267, 10.948265, 8.409927 
+) (RTL)					 current_position (ENU): (29.637302, 11.013309, 9.448587 
+) (RTL)					 current_position (ENU): (29.637054, 11.032668, 10.457473 
+) (RTL)					 current_position (ENU): (29.636972, 11.024197, 11.490861 
+) (RTL)					 current_position (ENU): (29.635353, 10.990906, 12.504507 
+) (RTL)					 current_position (ENU): (29.632353, 10.935978, 13.536680 
+) (RTL)					 current_position (ENU): (29.631706, 10.875628, 14.560108 
+) (RTL)					 current_position (ENU): (29.631546, 10.812840, 15.560549 
+) (RTL)					 current_position (ENU): (29.634424, 10.746073, 16.557726 
+) (RTL)					 current_position (ENU): (29.636938, 10.684131, 17.522377 
+) (RTL)					 current_position (ENU): (29.640598, 10.623942, 18.513847 
+) (RTL)					 current_position (ENU): (29.643551, 10.572228, 19.471764 
+) (RTL)					 current_position (ENU): (29.644875, 10.526526, 20.438461 
+) (RTL)					 current_position (ENU): (29.649717, 10.487269, 21.375641 
+) (RTL)					 current_position (ENU): (29.653397, 10.456155, 22.312016 
+) (RTL)					 current_position (ENU): (29.659315, 10.433498, 23.249723 
+) (RTL)					 current_position (ENU): (29.666389, 10.415132, 24.206306 
+) (RTL)					 current_position (ENU): (29.671068, 10.400698, 25.160912 
+) (RTL)					 current_position (ENU): (29.674522, 10.387361, 26.091358 
+) (RTL)					 current_position (ENU): (29.679722, 10.374954, 27.040609 
+) (RTL)					 current_position (ENU): (29.685211, 10.368304, 27.969521 
+) (RTL)					 current_position (ENU): (29.687479, 10.364202, 28.923828 
+) (RTL)					 current_position (ENU): (29.690458, 10.359762, 29.880299 
+) (RTL)					 current_position (ENU): (29.688581, 10.360683, 30.819794 
+) (RTL)					 current_position (ENU): (29.684689, 10.362769, 31.782515 
+) (RTL)					 current_position (ENU): (29.680990, 10.364177, 32.744278 
+) (RTL)					 current_position (ENU): (29.679184, 10.364979, 33.681011 
+) (RTL)					 current_position (ENU): (29.681080, 10.367249, 34.639282 
+) (RTL)					 current_position (ENU): (29.681000, 10.368527, 35.600952 
+) (RTL)					 current_position (ENU): (29.682436, 10.367975, 36.538822 
+) (RTL)					 current_position (ENU): (29.682825, 10.366780, 37.480934 
+) (RTL)					 current_position (ENU): (29.679306, 10.366239, 38.448502 
+) (RTL)					 current_position (ENU): (29.680599, 10.366356, 39.410969 
+) (RTL)					 current_position (ENU): (29.684904, 10.366632, 40.346802 
+) (RTL)					 current_position (ENU): (29.690908, 10.366147, 41.302082 
+) (RTL)					 current_position (ENU): (29.698418, 10.360415, 42.264400 
+) (RTL)					 current_position (ENU): (29.707184, 10.351389, 43.199764 
+) (RTL)					 current_position (ENU): (29.715977, 10.344981, 44.145874 
+) (RTL)					 current_position (ENU): (29.721066, 10.333838, 45.115135 
+) (RTL)					 current_position (ENU): (29.726749, 10.321345, 46.064529 
+) (RTL)					 current_position (ENU): (29.731632, 10.309573, 47.035435 
+) (RTL)					 current_position (ENU): (29.738220, 10.301315, 48.009815 
+) (RTL)					 current_position (ENU): (29.743525, 10.298131, 48.960823 
+) (RTL)					 current_position (ENU): (29.745462, 10.295104, 49.935719 
+) (RTL)					 current_position (ENU): (29.745207, 10.292915, 50.911198 
+) (RTL)					 current_position (ENU): (29.743124, 10.292201, 51.866703 
+) (RTL)					 current_position (ENU): (29.743330, 10.292069, 52.851860 
+) (RTL)					 current_position (ENU): (29.747618, 10.289019, 53.836838 
+) (RTL)					 current_position (ENU): (29.749012, 10.283877, 54.796513 
+) (RTL)					 current_position (ENU): (29.747358, 10.278832, 55.759415 
+) (RTL)					 current_position (ENU): (29.747711, 10.276234, 56.749069 
+) (RTL)					 current_position (ENU): (29.748234, 10.274040, 57.718449 
+) (RTL)					 current_position (ENU): (29.751345, 10.270480, 58.685360 
+) (RTL)					 current_position (ENU): (29.756437, 10.266460, 59.672905 
+) (RTL)					 current_position (ENU): (29.758827, 10.263956, 60.660511 
+) (RTL)					 current_position (ENU): (29.759214, 10.263114, 61.647213 
+) (RTL)					 current_position (ENU): (29.760103, 10.261442, 62.620430 
+) (RTL)					 current_position (ENU): (29.763863, 10.258651, 63.592876 
+) (RTL)					 current_position (ENU): (29.768965, 10.258578, 64.587959 
+) (RTL)					 current_position (ENU): (29.775045, 10.258578, 65.582748 
+) (RTL)					 current_position (ENU): (29.779800, 10.255917, 66.549843 
+) (RTL)					 current_position (ENU): (29.782789, 10.256448, 67.542343 
+) (RTL)					 current_position (ENU): (29.787664, 10.259851, 68.504761 
+) (RTL)					 current_position (ENU): (29.796827, 10.261867, 69.345673 
+) (RTL)					 current_position (ENU): (29.801926, 10.259905, 70.103348 
+) (RTL)					 current_position (ENU): (29.804775, 10.255592, 70.800995 
+) (RTL)					 current_position (ENU): (29.805609, 10.251695, 71.420181 
+) (RTL)					 current_position (ENU): (29.804632, 10.249125, 71.959885 
+) (RTL)					 current_position (ENU): (29.805647, 10.245981, 72.459846 
+) (RTL)					 current_position (ENU): (29.806644, 10.243141, 72.904053 
+) (RTL)					 current_position (ENU): (29.808016, 10.239197, 73.319359 
+) (RTL)					 current_position (ENU): (29.809334, 10.233835, 73.693230 
+) (RTL)					 current_position (ENU): (29.812342, 10.225107, 74.031425 
+) (RTL)					 current_position (ENU): (29.814266, 10.219930, 74.334267 
+) (RTL)					 current_position (ENU): (29.817814, 10.217719, 74.613434 
+) (RTL)					 current_position (ENU): (29.824072, 10.220469, 74.858452 
+) (RTL)					 current_position (ENU): (29.828709, 10.223634, 75.086792 
+) (RTL)					 current_position (ENU): (29.830214, 10.226116, 75.293022 
+) (RTL)					 current_position (ENU): (29.830694, 10.223962, 75.476341 
+) (RTL)					 current_position (ENU): (29.830284, 10.220141, 75.638924 
+) (RTL)					 current_position (ENU): (29.832891, 10.216925, 75.791840 
+) (RTL)					 current_position (ENU): (29.833334, 10.216916, 75.930672 
+) (RTL)					 current_position (ENU): (29.830935, 10.216304, 76.057152 
+) (RTL)					 current_position (ENU): (29.827896, 10.215507, 76.174187 
+) (RTL)					 current_position (ENU): (29.825159, 10.215855, 76.280945 
+) (RTL)					 current_position (ENU): (29.822472, 10.216022, 76.366951 
+) (RTL)					 current_position (ENU): (29.820234, 10.215770, 76.448181 
+) (RTL)					 current_position (ENU): (29.815899, 10.211729, 76.529228 
+) (RTL)					 current_position (ENU): (29.753557, 10.147652, 76.603111 
+) (RTL)					 current_position (ENU): (29.445877, 9.995936, 76.663597 
+) (RTL)					 current_position (ENU): (28.842226, 9.788125, 76.719490 
+) (RTL)					 current_position (ENU): (27.951883, 9.492393, 76.770432 
+) (RTL)					 current_position (ENU): (26.803001, 9.126687, 76.814415 
+) (RTL)					 current_position (ENU): (25.426662, 8.685977, 76.848541 
+) (RTL)					 current_position (ENU): (23.816504, 8.169918, 76.878967 
+) (RTL)					 current_position (ENU): (22.207088, 7.652712, 76.912621 
+) (RTL)					 current_position (ENU): (20.568375, 7.111714, 76.946663 
+) (RTL)					 current_position (ENU): (18.960581, 6.573664, 76.975197 
+) (RTL)					 current_position (ENU): (17.313147, 6.006806, 76.999863 
+) (RTL)					 current_position (ENU): (15.689683, 5.437706, 77.021873 
+) (RTL)					 current_position (ENU): (14.109447, 4.882484, 77.049896 
+) (RTL)					 current_position (ENU): (12.621071, 4.352617, 77.076286 
+) (RTL)					 current_position (ENU): (11.229245, 3.844285, 77.097557 
+) (RTL)					 current_position (ENU): (10.001256, 3.388991, 77.108673 
+) (RTL)					 current_position (ENU): (8.975487, 3.000337, 77.118103 
+) (RTL)					 current_position (ENU): (8.061626, 2.655956, 77.133804 
+) (RTL)					 current_position (ENU): (7.281479, 2.367699, 77.148239 
+) (RTL)					 current_position (ENU): (6.591527, 2.117510, 77.155067 
+) (RTL)					 current_position (ENU): (6.012586, 1.910804, 77.16292[0m[ INFO] [1555568185.127149787]: srv_chkState_cb() was called
+[0m
+6 
+) (RTL)					 current_position (ENU): (5.487122, 1.723512, 77.170143 
+) (RTL)					 current_position (ENU): (5.009901, 1.558672, 77.176117 
+) (RTL)					 current_position (ENU): (4.581864, 1.413810, 77.180374 
+) (RTL)					 current_position (ENU): (4.205729, 1.287672, 77.181808 
+) (RTL)					 current_position (ENU): (3.845395, 1.168158, 77.185371 
+) (RTL)					 current_position (ENU): (3.518360, 1.058650, 77.191315 
+) (RTL)					 current_position (ENU): (3.208970, 0.959388, 77.196587 
+) (RTL)					 current_position (ENU): (2.929897, 0.871448, 77.203018 
+) (RTL)					 current_position (ENU): (2.658560, 0.783778, 77.206177 
+) (RTL)					 current_position (ENU): (2.414479, 0.707846, 77.215118 
+) (RTL)					 current_position (ENU): (2.185628, 0.641368, 77.217308 
+) (RTL)					 current_position (ENU): (1.981632, 0.583572, 77.222275 
+) (RTL)					 current_position (ENU): (1.787072, 0.524788, 77.219826 
+) (RTL)					 current_position (ENU): (1.604488, 0.475739, 77.154663 
+) (RTL)					 current_position (ENU): (1.447464, 0.431119, 76.870979 
+) (RTL)					 current_position (ENU): (1.301033, 0.380349, 76.546448 
+) (RTL)					 current_position (ENU): (1.168094, 0.335881, 76.205582 
+) (RTL)					 current_position (ENU): (1.040799, 0.291626, 75.843590 
+) (RTL)					 current_position (ENU): (0.931153, 0.254339, 75.500053 
+) (RTL)					 current_position (ENU): (0.826759, 0.217449, 75.154190 
+) (RTL)					 current_position (ENU): (0.725090, 0.179691, 74.822403 
+) (RTL)					 current_position (ENU): (0.627586, 0.141945, 74.489174 
+) (RTL)					 current_position (ENU): (0.544709, 0.105625, 74.154007 
+) (RTL)					 current_position (ENU): (0.473565, 0.071751, 73.817238 
+) (RTL)					 current_position (ENU): (0.411803, 0.041081, 73.483261 
+) (RTL)					 current_position (ENU): (0.355776, 0.013447, 73.149429 
+) (RTL)					 current_position (ENU): (0.301824, -0.012728, 72.808907 
+) (RTL)					 current_position (ENU): (0.257000, -0.029591, 72.466194 
+) (RTL)					 current_position (ENU): (0.222225, -0.043457, 72.144714 
+) (RTL)					 current_position (ENU): (0.190279, -0.056731, 71.801659 
+) (RTL)					 current_position (ENU): (0.165292, -0.068006, 71.470085 
+) (RTL)					 current_position (ENU): (0.146502, -0.080300, 71.129402 
+) (RTL)					 current_position (ENU): (0.132721, -0.092902, 70.801216 
+) (RTL)					 current_position (ENU): (0.121321, -0.101726, 70.474472 
+) (RTL)					 current_position (ENU): (0.111841, -0.106011, 70.147362 
+) (RTL)					 current_position (ENU): (0.106271, -0.107489, 69.801376 
+) (RTL)					 current_position (ENU): (0.099238, -0.105623, 69.478531 
+) (RTL)					 current_position (ENU): (0.091521, -0.100457, 69.137924 
+) (RTL)					 current_position (ENU): (0.085218, -0.094235, 68.812088 
+) (RTL)					 current_position (ENU): (0.078519, -0.090117, 68.477692 
+) (RTL)					 current_position (ENU): (0.071518, -0.085685, 68.145195 
+) (RTL)					 current_position (ENU): (0.066960, -0.077691, 67.807655 
+) (RTL)					 current_position (ENU): (0.060649, -0.069923, 67.477448 
+) (RTL)					 current_position (ENU): (0.055678, -0.063630, 67.135406 
+) (RTL)					 current_position (ENU): (0.053383, -0.059159, 66.807693 
+) (RTL)					 current_position (ENU): (0.051686, -0.055304, 66.473213 
+) (RTL)					 current_position (ENU): (0.049416, -0.051775, 66.145866 
+) (RTL)m
+[0m[ INFO] [1555568219.983145214]: FCU: RTL: climb to 566 m (30 m above home)[0m
+[0m[ INFO] [1555568251.755325471]: FCU: RTL: return at 566 m (30 m above home)[0m
+[0m[ INFO] [1555568263.443243886]: FCU: RTL: descend to 546 m (10 m above home)[0m
+... logging to /home/sooyoung/.ros/log/77bfe1a8-61a1-11e9-9ee5-ace0108ca819/roslaunch-sooyoung-Laptop2015-31553.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/sooyoung/catkin_ws/src/examples/gotoPath1024_2/launch/gotoPath1024_2.launch
+[1mstarted roslaunch server http://sooyoung-Laptop2015:33733/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /mavros/conn_heartbeat: 5.0
+ * /mavros/conn_timeout: 5.0
+ * /mavros/fcu_url: udp://:14540@127....
+ * /mavros/gcs_url: udp://@129.254.18...
+ * /mavros/mocap/use_pose: False
+ * /mavros/mocap/use_tf: True
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.13
+
+NODES
+  /
+    eDrone_autoflight_node (eDrone_lib/eDrone_autoflight_node)
+    eDrone_control_node (eDrone_lib/eDrone_control_node)
+    eDrone_monitor_node (eDrone_lib/eDrone_monitor_node)
+    eDrone_safety_node (eDrone_lib/eDrone_safety_node)
+    ex_gotoPath1024_2 (gotoPath1024_2/ex_gotoPath1024_2)
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [31563][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/sooyoung/catkin_ws/src/examples/gotoPath1024_2/launch/gotoPath1024_2.launch http://localhost:11311
+[1msetting /run_id to 77bfe1a8-61a1-11e9-9ee5-ace0108ca819[0m
+[1mprocess[rosout-1]: started with pid [31576][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [31584][0m
+[1mprocess[eDrone_monitor_node-3]: started with pid [31594][0m
+[1mprocess[eDrone_control_node-4]: started with pid [31600][0m
+[1mprocess[eDrone_autoflight_node-5]: started with pid [31611][0m
+[1mprocess[eDrone_safety_node-6]: started with pid [31624][0m
+[1mprocess[ex_gotoPath1024_2-7]: started with pid [31637][0m
+[1m[ex_gotoPath1024_2-7] process has finished cleanly
+log file: /home/sooyoung/.ros/log/77bfe1a8-61a1-11e9-9ee5-ace0108ca819/ex_gotoPath1024_2-7*.log[0m
+[eDrone_safety_node-6] killing on exit
+[eDrone_autoflight_node-5] killing on exit
+[eDrone_control_node-4] killing on exit
+[eDrone_monitor_node-3] killing on exit
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
