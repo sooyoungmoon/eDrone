@@ -1543,7 +1543,6 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 
 bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req, eDrone_msgs::GotoPath::Response &res)
 {	
-
     ROS_INFO("eDrone_control_node: GotoPath request received\n");
     cout << "gotoPath_cb(): ref_system: " << req.gotoPath_ref_system << endl;
 
@@ -1551,26 +1550,27 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req, eDrone_msgs::GotoPath:
     if (req.gotoPath_ref_system.compare("WGS84")==0) // 전역 좌표인 경우
     {
         for (vector<Target>::iterator it = req.gotoPath_pts.begin(); it != req.gotoPath_pts.end(); it++)
-            //for (vector<GeoPoint>::iterator it = req.path_pts_global.begin(); it != req.path_pts_global.end(); it++)
+        //for (vector<GeoPoint>::iterator it = req.path_pts_global.begin(); it != req.path_pts_global.end(); it++)
         {
             Target target = *it;
+    		Target_Position new_waypoint;
             //GeoPoint geoPoint = *it;
 
-            target_position.pos_global.latitude = target.x_lat;
-            target_position.pos_global.longitude = target.y_long;
-            target_position.pos_global.altitude = target.z_alt;
+            new_waypoint.ref_system = "ENU";
+            new_waypoint.pos_global.latitude = target.x_lat;
+            new_waypoint.pos_global.longitude = target.y_long;
+            new_waypoint.pos_global.altitude = target.z_alt;
 
             // ENU로 좌표변환
-            Point point = convertGeoToENU(target.x_lat, target.y_long, target.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
-            target_position.ref_system = "ENU";
-            target_position.pos_local.x = point.x;
-            target_position.pos_local.y = point.y;
-            target_position.pos_local.z = point.z;
-
-            target_position.reached = false;
+            Point point = convertGeoToENU(target.x_lat, target.y_long, target.z_alt, 
+										HOME_LAT, HOME_LON, HOME_ALT );
+            new_waypoint.pos_local.x = point.x;
+            new_waypoint.pos_local.y = point.y;
+            new_waypoint.pos_local.z = point.z;
+            new_waypoint.reached = false;
 
             // path에 목적지 또는 부분 경로 추가
-            path.push_back (target_position);
+            path.push_back (new_waypoint);
         }
     }
     else if (req.gotoPath_ref_system.compare("ENU") == 0) // 지역 좌표
@@ -1578,21 +1578,41 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req, eDrone_msgs::GotoPath:
         for (vector<Target>::iterator it = req.gotoPath_pts.begin(); it != req.gotoPath_pts.end(); it++)
         {
             Target target = *it;
-            target_position.ref_system = "ENU";
-            target_position.pos_local.x = target.x_lat;
-            target_position.pos_local.y = target.y_long;
-            target_position.pos_local.z = target.z_alt;
+    		Target_Position new_waypoint;
+
+            new_waypoint.ref_system = "ENU";
+            new_waypoint.pos_local.x = target.x_lat;
+            new_waypoint.pos_local.y = target.y_long;
+            new_waypoint.pos_local.z = target.z_alt;
 
             // WGS84로 좌표변환
-            GeoPoint geoPoint = convertENUToGeo(target.x_lat, target.y_long, target.z_alt, HOME_LAT, HOME_LON, HOME_ALT );
-            target_position.pos_global.latitude = geoPoint.latitude;
-            target_position.pos_global.longitude = geoPoint.longitude;
-            target_position.pos_global.altitude = geoPoint.latitude;
-            target_position.reached = false;
-            path.push_back (target_position);  // path에 목적지 또는 부분 경로 추가
-            printf("gotoPath_cb(): target_position 'push'! (%lf,%lf,%lf)\n " , target_position.pos_local.x, target_position.pos_local.y, target_position.pos_local.z );
+            GeoPoint geoPoint = convertENUToGeo(target.x_lat, target.y_long, target.z_alt, 
+												HOME_LAT, HOME_LON, HOME_ALT );
+            new_waypoint.pos_global.latitude = geoPoint.latitude;
+            new_waypoint.pos_global.longitude = geoPoint.longitude;
+            new_waypoint.pos_global.altitude = geoPoint.latitude;
+            new_waypoint.reached = false;
+
+			// path에 목적지 또는 부분 경로 추가
+            path.push_back (new_waypoint);
         }
     }
+	else
+	{
+		printf("[%s] INVALID gotoPath_ref_system: %s\n", 
+					__func__, req.gotoPath_ref_system.c_str());
+
+		res.value = false;
+		return true;
+	}
+
+	printf("[%s] push to path (%lf, %lf, %lf) %s\n", 
+									__func__,
+									new_waypoint.pos_local.x, 
+									new_waypoint.pos_local.y, 
+									new_waypoint.pos_local.z,
+									req.gotoPath_ref_system.c_str());
+
     res.value = true;
     return true;
 }
