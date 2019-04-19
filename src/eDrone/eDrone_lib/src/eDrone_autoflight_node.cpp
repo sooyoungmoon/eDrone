@@ -111,6 +111,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     waypoint = req.missionAddItem_waypoint;
     double distance_home;
 
+
     switch (waypoint.command)
     {
     case MAV_CMD_NAV_TAKEOFF:
@@ -123,7 +124,8 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     case MAV_CMD_NAV_WAYPOINT:
         waypoint.frame = req.missionAddItem_waypoint.frame;
         waypoint.command = req.missionAddItem_waypoint.command;
-        waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
+        //waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
+
 
         if (waypoint.frame == waypoint.FRAME_LOCAL_ENU) // 지역 좌표인 경우
         {
@@ -132,6 +134,10 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
             waypoint.x_lat = geoPoint.latitude;
             waypoint.y_long = geoPoint.longitude;
             waypoint.frame = waypoint.FRAME_GLOBAL_REL_ALT;
+            waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
+
+            printf("missionAddItem_cb(): (lat: %lf, lon: %lf, alt: %lf) HOME_ALT:%lf \n", waypoint.x_lat, waypoint.y_long, waypoint.z_alt, HOME_ALT);
+
         }
 
         break;
@@ -208,6 +214,8 @@ bool srv_missionUpload_cb(eDrone_msgs::MissionUpload::Request &req, eDrone_msgs:
     waypointPush_client.call(waypointPush_cmd);
 
     ROS_INFO("WaypointPush command was sent\n");
+
+    print_waypoints(waypoints);
 }
 
 bool srv_missionDownload_cb(eDrone_msgs::MissionDownload::Request &req, eDrone_msgs::MissionDownload::Response &res)

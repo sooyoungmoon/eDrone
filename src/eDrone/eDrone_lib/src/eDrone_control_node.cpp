@@ -1234,7 +1234,16 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr& msg)
 void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr& msg){
 
     current_pos_global = *msg;
-    static int idx = 0;
+    static int idx2 = 0;
+    if (idx2++ % 10 ==0)
+    {
+        printf("\t\t current_position (WGS84): (%f, %f, %f ) (%s) \n",
+               current_pos_global.latitude,
+               current_pos_global.latitude,
+               current_pos_global.altitude,
+               cur_phase.phase.c_str());
+
+    }
 }
 
 
@@ -1290,19 +1299,6 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
     ROS_INFO("ARMing command was sent\n");
     cur_phase.phase = "ARMED";
 
-    if (current_pos_global.latitude !=0 && current_pos_global.longitude !=0)
-    {
-        ROS_INFO("Send setHome cmd: " );
-        setHome_cmd.request.latitude= current_pos_global.latitude;
-        setHome_cmd.request.longitude = current_pos_global.longitude;
-        setHome_cmd.request.altitude = current_pos_global.altitude; // (2019.04.10) no altitude change
-        // setHome_cmd.request.altitude = HOME_ALT; // (2019.04.10) no altitude change
-        if (!setHome_client.call(setHome_cmd))
-        {
-            cout << " setHome failed!" << endl;
-        }
-
-    }
     return true;
 }
 
