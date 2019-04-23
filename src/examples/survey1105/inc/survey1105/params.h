@@ -2,8 +2,8 @@
 
 const double TAKEOFF_ALTITUDE = 5;
 
-//const std::string SURVEYAREA_REF_SYSTEM = "ENU";
-const std::string SURVEYAREA_REF_SYSTEM = "WGS84";
+const std::string SURVEYAREA_REF_SYSTEM = "ENU";
+//const std::string SURVEYAREA_REF_SYSTEM = "WGS84";
 
 
 const double SURVEYAREA_ALTITUDE = 5;

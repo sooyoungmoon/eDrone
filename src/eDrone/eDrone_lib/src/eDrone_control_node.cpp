@@ -165,6 +165,14 @@ double HOME_ALT;
 
 double takeoff_altitude = 0; // 이륙　고도
 
+// survey
+string survey_ref_system = "";
+vector<eDrone_msgs::Target> survey_points;
+double survey_altitude = 0;
+double survey_interval = 0;
+
+
+
 // 경로 계산
 vector<Target_Position> getIndirectPath(Target src, Target dest)//　비행금지구역 우회경로 계산
 {
@@ -788,8 +796,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     } // 경계점들을 포함하는 사각형 영역 계산, entry/exit point 계산
 
-    cout << "entry point: (" << entry_point.x_lat << ", " << entry_point.y_long << ")" << endl;
-    cout << "exit point: (" << exit_point.x_lat << ", " << exit_point.y_long <<  ")" << endl;
+    //cout << "entry point: (" << entry_point.x_lat << ", " << entry_point.y_long << ")" << endl;
+    //cout << "exit point: (" << exit_point.x_lat << ", " << exit_point.y_long <<  ")" << endl;
 
     // Mental Map & Grid 생성
 
@@ -799,17 +807,18 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     int CELL_WIDTH = interval;
     int CELL_HEIGHT = interval;
-    cout << "CELL_WIDTH: " << CELL_WIDTH << endl;
-    cout << "CELL_HEIGHT: " << CELL_HEIGHT << endl ;
+    // cout << "CELL_WIDTH: " << CELL_WIDTH << endl;
+    // cout << "CELL_HEIGHT: " << CELL_HEIGHT << endl ;
 
     int AREA_WIDTH = ceil ((x_max - x_min) / CELL_WIDTH)  ;
     int AREA_HEIGHT = ceil ((y_max - y_min) / CELL_HEIGHT)  ;
 
+    /*
     cout << "x: " << x_min << " ~ " << x_max << endl;
     cout << "y: " << y_min << " ~ " << y_max << endl;
     cout << "AREA_WIDTH: " << AREA_WIDTH << endl ;
     cout << "AREA_HEIGHT: " << AREA_HEIGHT << endl;
-
+    */
     mental_map.area_width = AREA_WIDTH;
     mental_map.area_height = AREA_HEIGHT;
     mental_map.grid = new Cell*[AREA_WIDTH+1];
@@ -821,7 +830,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         mental_map.grid[c] = new Cell[AREA_HEIGHT+1];
     }
 
-    cout << "Dynamic allocation" << endl;
+    // cout << "Dynamic allocation" << endl;
 
     // Cell 정보 초기화
     for (int i = 0; i < AREA_WIDTH+1; i++)
@@ -843,12 +852,12 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     int src_cell_index_y = (entry_point.y_long - y_min) / CELL_HEIGHT;
     src_cell_ptr = &(mental_map.grid[src_cell_index_x][src_cell_index_y]);
 
-    cout << " (src cell) index_x:" << src_cell_ptr-> index_x << ", index_y: " << src_cell_ptr-> index_y << "x: " << src_cell_ptr->x << "y: " << src_cell_ptr->y << endl;
+    // cout << " (src cell) index_x:" << src_cell_ptr-> index_x << ", index_y: " << src_cell_ptr-> index_y << "x: " << src_cell_ptr->x << "y: " << src_cell_ptr->y << endl;
 
     int dst_cell_index_x = (exit_point.x_lat - x_min) / CELL_WIDTH;
     int dst_cell_index_y = (exit_point.y_long - y_min) / CELL_HEIGHT;
     dst_cell_ptr = &(mental_map.grid[dst_cell_index_x][dst_cell_index_y]);
-    cout << " (dst cell) index_x:" << dst_cell_ptr-> index_x << ", index_y: " << dst_cell_ptr-> index_y << "x: " << dst_cell_ptr->x << "y: " << dst_cell_ptr->y << endl;
+    // cout << " (dst cell) index_x:" << dst_cell_ptr-> index_x << ", index_y: " << dst_cell_ptr-> index_y << "x: " << dst_cell_ptr->x << "y: " << dst_cell_ptr->y << endl;
 
     /* Wavefront Map 생성 */
     // label - 1: 장애물, 2: 비행금지구역, 3: 방문된 cell, 4: Goal cell
@@ -1025,7 +1034,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
             if (pathComputed == true) { break; }
 
         } // 현재 노드의 이웃 노드 검사 - 다음 노드 선택
-        cout << "neighbor_max_label: (" <<  neighbor_max_label->x << "," << neighbor_max_label->x << ")" << endl;
+        // cout << "neighbor_max_label: (" <<  neighbor_max_label->x << "," << neighbor_max_label->x << ")" << endl;
         if (neighbor_max_label != NULL) {
             cur_cell_ptr = neighbor_max_label;
 
@@ -1239,7 +1248,7 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr& msg){
     {
         printf("\t\t current_position (WGS84): (%f, %f, %f ) (%s) \n",
                current_pos_global.latitude,
-               current_pos_global.latitude,
+               current_pos_global.longitude,
                current_pos_global.altitude,
                cur_phase.phase.c_str());
 
@@ -1603,8 +1612,15 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 
     ROS_INFO ("eDrone_control_node: surveyArea service was called");
 
-    // 경로 계산
+    cur_phase.phase = "PLANNING";
 
+    survey_ref_system = req.surveyArea_ref_system;
+    survey_points = req.surveyArea_pts;
+    survey_altitude = req.surveyArea_altitude;
+    survey_interval =  req.surveyArea_interval;
+
+    // 경로 계산
+    /*
     vector<Target_Position> coveragePath;
 
     if (req.surveyArea_ref_system == "ENU")
@@ -1638,7 +1654,7 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
         target_position.reached = false;
         path.push_back(target_position);
     } // path에 coveragePath 추가
-
+*/
     result = true;
     return result;
 }
@@ -1852,14 +1868,16 @@ int main(int argc, char** argv)
             modeChange_cmd.request.custom_mode = "OFFBOARD";
             if (modeChange_client.call(modeChange_cmd))
             {
+                /*
                 if (modeChange_cmd.response.mode_sent)
                 {
-                    //cout << "offboard enabled" << endl;
+                    cout << "offboard enabled" << endl;
                 }
+                */
             }
             else
             {
-                 cout << "mode change failed!" << endl;
+                cout << "mode change failed!" << endl;
             }
 
             // publish topic
@@ -1919,6 +1937,24 @@ int main(int argc, char** argv)
         }
         else if (cur_phase.phase.compare ("GOTO") ==0)
         {
+            // (2019.04.22)
+            // OFFBOARD 모드로　비행　모드　변환
+
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "OFFBOARD";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "OFFBOARD mode enabled" << endl;
+                }
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
+
             // target position으로 현재 이동 중이면 위치 정보 publish
             if (target_position.reached != true)
             {
@@ -2022,6 +2058,113 @@ int main(int argc, char** argv)
                     cur_phase.phase = "READY";
                 }
             }
+        }
+
+        else if (cur_phase.phase.compare ("PLANNING") ==0) // (201９.04.22)
+        {
+            ROS_INFO ("PHASE = PLANNING");
+
+            // AUTO.LOITER 모드로　비행　모드　변환
+
+            // change mode to offboard
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "AUTO.LOITER";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "AUTO.LOITER enabled" << endl;
+                }
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
+
+            // 탐색　경로　계산
+
+            vector<Target_Position> coveragePath;
+
+            if (survey_ref_system != "" &&  survey_ref_system == "ENU")
+            {
+                if (survey_points.empty())
+                {
+                    cout << "(phase == PLANNING): coverage path cannot be computed! no survey point" << endl;
+                }
+
+                if (survey_altitude==0 || survey_interval==0)
+                {
+                    cout << "(phase == PLANNING): coverage path cannot be computed! (altitude or interval not initialized" << endl;
+                }
+
+                coveragePath = getCoveragePath(survey_points, survey_altitude, survey_interval);
+            }
+            else if (survey_ref_system == "WGS84")
+            {
+                // ENU 좌표로 변환
+                vector<Target> temp_pts;
+
+                for (vector<Target>::iterator it = survey_points.begin(); it != survey_points.end(); it++)
+                {
+                    Target target = *it;
+
+                    // ENU로 좌표변환
+                    Point point = convertGeoToENU(target.x_lat, target.y_long, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
+                    target.x_lat = point.x;
+                    target.y_long = point.y;
+                    target.ref_system = "ENU";
+                    temp_pts.push_back(target);
+                }
+
+                survey_points = temp_pts;
+
+                if (survey_points.empty())
+                {
+                    cout << "(phase == PLANNING): coverage path cannot be computed! no survey point" << endl;
+                }
+
+                if (survey_altitude==0 || survey_interval==0)
+                {
+                    cout << "(phase == PLANNING): coverage path cannot be computed! (altitude or interval not initialized" << endl;
+                }
+
+                coveragePath = getCoveragePath(survey_points, survey_altitude, survey_interval);
+            }
+
+            printPath(coveragePath);
+
+            for (vector<Target_Position>::iterator it = coveragePath.begin(); it != coveragePath.end(); it++ )
+            {
+                Target_Position target_position = *it;
+                target_position.reached = false;
+                path.push_back(target_position);
+            } // path에 coveragePath 추가
+
+
+            // 탐색　경로　계산　완료
+            sleep(3);
+
+            // OFFBOARD 모드로　비행　모드　변환
+
+            // change mode to offboard
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "OFFBOARD";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "OFFBOARD enabled" << endl;
+                }
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
+            cur_phase.phase = "GOTO";
+
+
         }
 
         else if (cur_phase.phase.compare ("ORBIT") ==0) // (2018.10.05)

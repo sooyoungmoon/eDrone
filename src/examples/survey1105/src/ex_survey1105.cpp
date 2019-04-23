@@ -215,7 +215,7 @@ ros::ServiceClient takeoff_client =nh.serviceClient<eDrone_msgs::Takeoff>("srv_t
 	
 	double takeoff_altitude = 0;
 
-	takeoff_altitude = TAKEOFF_ALTITUDE;
+        takeoff_altitude = atof (argv[1]);
 	// 1) 상수에 의한 초기화: takeoff_altitude = TAKEOFF_ALTITUDE;
 	// 2) 명령줄 인자에 의한 초기화: takeoff_altitude = atof (argv[1]); 
 
@@ -244,7 +244,8 @@ ros::ServiceClient takeoff_client =nh.serviceClient<eDrone_msgs::Takeoff>("srv_t
 		surveyArea_cmd.request.surveyArea_ref_system = SURVEYAREA_REF_SYSTEM;
 		surveyArea_cmd.request.surveyArea_altitude =  SURVEYAREA_ALTITUDE;
 		surveyArea_cmd.request.surveyArea_interval = SURVEYAREA_INTERVAL;		
-		std::string surveyArea_pts = SURVEYAREA_PTS;		
+                std::string surveyArea_pts = argv[2];
+                //std::string surveyArea_pts = SURVEYAREA_PTS;
 		{
 			// 경로 정보가 포함된 문자열을 (상수 또는 매개변수)를 구분자 기준으로 나눈 후 string 벡터에 저장 (api 종류에 관계 없이 공통적으로 적용)
 			int numCnt = 0;			
