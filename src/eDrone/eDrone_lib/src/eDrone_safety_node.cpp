@@ -49,46 +49,25 @@ using namespace eDrone_msgs;
 
 extern bool pathOverlap(Point, Point, vector<Point>);
 
-/* 주요 변수 선언 */
-
 eDrone_msgs::NoflyZones nfZones; // 비행금지구역 (다수)
 eDrone_msgs::Geofence geofence; // 가상울타리 
 
-// 메시지 변수 선언
+
 mavros_msgs::State current_state; // 무인기 상태 정보
-
-// (무인기 위치 확인 목적)
 geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
-sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)i
+sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
 
-// (홈 위치 획득 목적)
-mavros_msgs::HomePosition home_position; // home position
-
-// ('NoflyZones'  TOPIC 출판을 위한 메시지 변수)
-//eDrone_msgs::NoflyZone
-
-
-// API 호출&처리를 위한 메시지 변수 선언
-eDrone_msgs::GeofenceSet geofenceSet_cmd; // 가상울타리 설정 메시지 
-eDrone_msgs::GeofenceCheck geofenceCheck_cmd; //가상울타리 확인 메시지 
-eDrone_msgs::GeofenceReset geofenceReset_cmd; //가상울타리 해제 메시지
-
-eDrone_msgs::NoflyZoneSet noflyZoneSet_cmd; // 비행금지구역 설정 메시지
-eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // 비행금지구역 확인  메시지
-eDrone_msgs::NoflyZoneReset noflyZoneReset_cmd; // 비행금지구역 설정 메시지
-
-
-// ROS Service 서버 선언
-
+// ROS Service servers
 ros::ServiceServer geofenceSet_srv_server;
 ros::ServiceServer geofenceCheck_srv_server;
 ros::ServiceServer geofenceReset_srv_server;
-
 ros::ServiceServer noflyZoneSet_srv_server;
 ros::ServiceServer noflyZoneReset_srv_server;
 ros::ServiceServer noflyZoneCheck_srv_server;
 
 // publisher 선언
+ros::Publisher noflyZones_pub;
+ros::Publisher geofence_pub;
 
 // subscriber 선언 
 ros::Subscriber state_sub;
@@ -101,7 +80,6 @@ ros::Subscriber home_sub;
 float HOME_LAT ;
 float HOME_LON;
 float HOME_ALT;
-
 
 // printNoflyzone
 void printNFZones()
@@ -117,7 +95,6 @@ void printNFZones()
         {
             Target point = *it;
             cout << "point#" << cnt << "(" << point.x_lat <<", " << point.y_long << ", " << point.z_alt << ")" << endl;
-
         }
     }
 }
@@ -160,10 +137,9 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr& msg)
 
 void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 {
-    home_position = *msg;
-    HOME_LAT = home_position.geo.latitude;
-    HOME_LON = home_position.geo.longitude;
-    HOME_ALT = home_position.geo.altitude;
+    HOME_LAT = msg->geo.latitude;
+    HOME_LON = msg->geo.longitude;
+    HOME_ALT = msg->geo.altitude;
 }
 
 
@@ -173,7 +149,14 @@ bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::N
 
     // reference system: WGS84 지원
 
-    ROS_INFO ("eDrone_safety_node: NoflyZoneSet service was called");
+    printf ("eDrone_safety_node: NoflyZoneSet service was called");
+
+
+
+
+
+
+
 
     if ((req.noflyZoneSet_ref_system.compare("WGS84") ==0)||
             (req.noflyZoneSet_ref_system.compare("ENU") ==0))
@@ -182,6 +165,19 @@ bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::N
         nofly_zone.noflyZone_ref_system = req.noflyZoneSet_ref_system;
         nofly_zone.noflyZone_pts = req.noflyZoneSet_pts;
         nfZones.noflyZones.push_back(nofly_zone);
+
+
+        // (04/24 - test)
+        /*
+        int i = 0;
+        for(vector<Target>::iterator it = nofly_zone.noflyZone_pts.begin();
+            it != nofly_zone.noflyZone_pts.end();
+            it++ )
+        {
+            Target target = *it;
+            printf("\n noflyZoneSet_cb(): target %d, (%lf,%lf,%lfn", i++, target.x_lat, target.y_long, target.z_alt );
+        }
+        */
     }
 }
 
@@ -291,8 +287,10 @@ bool srv_noflyZoneCheck_cb(eDrone_msgs::NoflyZoneCheck::Request &req, eDrone_msg
 
 bool srv_geofenceSet_cb(eDrone_msgs::GeofenceSet::Request &req, eDrone_msgs::GeofenceSet::Response &res)
 {
-    cout << " safety_node - geofenceSet_cb(): " << endl;
+    cout << " safety_node - geofenceSet_cb():" << endl;
+    cout << " geofence radius:" << geofence.geofence_radius;
     geofence.geofence_radius = req.geofenceSet_radius;
+    cout << " -> " << geofence.geofence_radius << endl;
 
     return true;
 }
@@ -300,6 +298,8 @@ bool srv_geofenceSet_cb(eDrone_msgs::GeofenceSet::Request &req, eDrone_msgs::Geo
 
 bool srv_geofenceReset_cb(eDrone_msgs::GeofenceReset::Request &req, eDrone_msgs::GeofenceReset::Response &res)
 {
+    //(2019.04.23)
+    geofence.geofence_radius = GEOFENCE_RADIUS;
     return true;
 }
 
@@ -333,6 +333,7 @@ int main(int argc, char** argv )
     home_sub = nh.subscribe<mavros_msgs::HomePosition> ("mavros/home_position/home", 10, homePosition_cb);
 
     // 서비스 서버 초기화
+    geofenceSet_srv_server = nh.advertiseService ("srv_geofenceSet", srv_geofenceSet_cb ); // (2019.04.23)geofenceSet service server initialization
     noflyZoneSet_srv_server = nh.advertiseService ( "srv_noflyZoneSet", srv_noflyZoneSet_cb );
     noflyZoneReset_srv_server = nh.advertiseService ( "srv_noflyZoneReset", srv_noflyZoneReset_cb );
     noflyZoneCheck_srv_server = nh.advertiseService ( "srv_noflyZoneCheck", srv_noflyZoneCheck_cb );
@@ -344,7 +345,17 @@ int main(int argc, char** argv )
     {
         // noflyZones topic publish
         noflyZones_pub.publish(nfZones);
-        geofence_pub.publish(geofence);
+
+        if (geofence.geofence_radius > 0)
+        {
+            geofence_pub.publish(geofence);
+        }
+        else
+        {
+            cout << "geofence radius was not initialized!!" << endl;
+            break;
+        }
+
         ros::spinOnce();
         rate.sleep();
     }

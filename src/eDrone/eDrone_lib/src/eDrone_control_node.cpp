@@ -98,7 +98,6 @@ int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
 mavros_msgs::State current_state; // 무인기 상태 정보
 geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
 sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
-mavros_msgs::HomePosition home_position; // home position
 NoflyZones nfZones;
 Geofence geofence;
 
@@ -165,7 +164,11 @@ double HOME_ALT;
 
 double takeoff_altitude = 0; // 이륙　고도
 
-// survey
+// (0424) goto
+Target src;
+Target dest;
+
+// (0423) survey
 string survey_ref_system = "";
 vector<eDrone_msgs::Target> survey_points;
 double survey_altitude = 0;
@@ -178,7 +181,7 @@ vector<Target_Position> getIndirectPath(Target src, Target dest)//　비행금�
 {
     std::vector<Target_Position> path;
 
-    ROS_INFO("eDrone_control_node: getIndirectPath()");
+    printf("eDrone_control_node: getIndirectPath()");
     Point src_pt;
     Point dest_pt;
 
@@ -745,7 +748,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     // ENU 좌표계 가정 - 함수 호출 위치에서 좌표 변환 필요 (WGS84->ENU)
     std::vector<Target_Position> path;
 
-    ROS_INFO ("eDrone_control_node: getCoveragePath() was called");
+    printf ("eDrone_control_node: getCoveragePath() was called");
 
     // Mental Map 범위 계산
     cout << "set mental map range" << endl;
@@ -1065,7 +1068,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
 void updateMap(Mental_Map* mental_map_ptr, int curCell_x, int curCell_y)
 {
-    ROS_INFO("updateMap was called");
+    printf("updateMap was called");
 
     cout << " Current Cell index: " << curCell_x << ", " << curCell_y << endl;
     // 현재 위치 확인
@@ -1226,7 +1229,7 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr& msg)
                          (current_pos_local.pose.position.z <(target_position.pos_local.z +0.5) ) )
                     {
                         target_position.reached = true;
-                        ROS_INFO("pos_cb_local(): The UAV reached to the target position");
+                        printf("pos_cb_local(): The UAV reached to the target position");
 
                         printf("current_position: (%f, %f, %f \n)", current_pos_local.pose.position.x, current_pos_local.pose.position.y, current_pos_local.pose.position.z);
                     }
@@ -1259,11 +1262,9 @@ void pos_cb_global(const sensor_msgs::NavSatFix::ConstPtr& msg){
 
 void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 {
-    home_position = *msg;
-
-    HOME_LAT = home_position.geo.latitude;
-    HOME_LON = home_position.geo.longitude;
-    HOME_ALT = home_position.geo.altitude;
+    HOME_LAT = msg->geo.latitude;
+    HOME_LON = msg->geo.longitude;
+    HOME_ALT = msg->geo.altitude;
 
     static int i = 0;
 
@@ -1278,7 +1279,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr& msg)
 {
     // 현재 목적지 도달 여부 확인
-    // ROS_INFO("eDrone_control_node: noflyZones_cb(): \n");
+    //printf("eDrone_control_node: noflyZones_cb(): \n");
     nfZones = *msg;
 }
 
@@ -1290,7 +1291,7 @@ void geofence_cb(const eDrone_msgs::Geofence::ConstPtr& msg)
 
 bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Response &res )
 {
-    ROS_INFO("ARMing request received\n");
+    printf("arming_cb(): ARMing request received\n");
     arming_cmd.request.value = true; // 서비스 요청 메시지 필드 설정
 
     //// Arming
@@ -1305,7 +1306,7 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
         else break;
     }
 
-    ROS_INFO("ARMing command was sent\n");
+    printf("ARMing command was sent\n");
     cur_phase.phase = "ARMED";
 
     return true;
@@ -1315,10 +1316,10 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Re
 {
     takeoff_altitude = req.takeoff_altitude; // 이륙 고도 저장
 
-    ROS_INFO("***Takeoff request received\n");
+    printf("takeoff_cb(): takeoff request received\n");
 
     takeoff_cmd.request.altitude = 1;
-    ROS_INFO(" HOME_ALT: %lf, req.takeoff_altitude: %lf", HOME_ALT, req.takeoff_altitude);
+    printf(" HOME_ALT: %lf, req.takeoff_altitude: %lf", HOME_ALT, req.takeoff_altitude);
     takeoff_cmd.request.latitude = current_pos_global.latitude;
     takeoff_cmd.request.longitude = current_pos_global.longitude;
     takeoff_cmd.request.min_pitch = 0;
@@ -1344,14 +1345,14 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Re
         else break;
     }
     cur_phase.phase = "TAKEOFF";
-    ROS_INFO("Takeoff command was sent\n");
+    printf("Takeoff command was sent\n");
     res.value = true;
 }
 
 bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Response &res)
 {
 
-    ROS_INFO("Landing request received\n");
+    printf("Landing request received\n");
     //// 서비스 요청 메시지 필드 설정
 
     landing_cmd.request.altitude = 10;
@@ -1371,7 +1372,7 @@ bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Re
         else break;
 
     }
-    ROS_INFO("Landing command was sent\n");
+    printf("Landing command was sent\n");
     res.value = true;
     return true;
 }
@@ -1427,7 +1428,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 {
     Target_Position requested_target; // we use local variable, not a global varialble
 
-    ROS_INFO("eDrone_control_node: Goto request received\n");
+    printf("eDrone_control_node: Goto request received\n");
     printf("eDrone_control_node: target_seq_no: %d\n", requested_target.target_seq_no);
     cout<< "req.goto_point.x_lat: " << req.goto_point.x_lat << ", req.goto_point.y_long: " << req.goto_point.y_long << endl;
 
@@ -1477,20 +1478,19 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
     if (distance_to_home > geofence.geofence_radius)
     {
         cout << "control_node-  goto_cb(): target position is outside of the geofence!!" << endl;
+        cout << "distance_to_home: " << distance_to_home << ", geofence_radius: " << geofence.geofence_radius << endl;
         res.value = false; // 목적지가 비행금지구역 내에 있으면 goto 명령 거부
         return true; //
     }
 
     // NoflyZone 검사　－　비행 금지 구역과 src-dst 간 직선경로가 겹치는 경우, path 재설정 필요
-    ROS_INFO("eDrone_control_node: noflyZoneCheck");
+    printf("eDrone_control_node: noflyZoneCheck");
 
-    Target src;
     src.ref_system = "ENU";
     src.x_lat = current_pos_local.pose.position.x;
     src.y_long =  current_pos_local.pose.position.y;
     src.z_alt =  current_pos_local.pose.position.z;
 
-    Target dest;
     dest.ref_system = "ENU";
     dest.x_lat = requested_target.pos_local.x;
     dest.y_long =  requested_target.pos_local.y;
@@ -1505,17 +1505,23 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
     if (noflyZoneCheck_client.call(noflyZoneCheck_cmd))
     {
         cout << " noflyZoneCheck API was called " << endl;
-        // ROS_INFO("noflyZoneCheck result: %s ", noflyZoneCheck_cmd.response.result.c_str() );
+        // printf("noflyZoneCheck result: %s ", noflyZoneCheck_cmd.response.result.c_str() );
         if (noflyZoneCheck_cmd.response.result == "DST_IN_NF")
         {
-            ROS_INFO("noflyZoneCheck result: DST_IN_NF ");
+            printf("noflyZoneCheck result: DST_IN_NF ");
             res.value = false; // 목적지가 비행금지구역 내에 있으면 goto 명령 거부
             return true; //
         }
 
         else if (noflyZoneCheck_cmd.response.result ==  "PATH_OVERLAP")
         {
-            ROS_INFO("noflyZoneCheck result: PATH_OVERLAP ");
+            printf("noflyZoneCheck result: PATH_OVERLAP ");
+
+            // (2019.04.24)
+            cur_phase.phase = "PLANNING_GOTO";
+            //
+
+            /*
             vector<Target_Position> indirectPath = getIndirectPath(src, dest);
             printPath(indirectPath);
 
@@ -1526,12 +1532,13 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
                 waypoint.reached = false;
                 path.push_back(waypoint);
             } // path에 indirectPath 추가
+            */
 
             res.value = true;
         }
         else
         {
-            ROS_INFO("noflyZoneCheck result: NONE ");
+            printf("noflyZoneCheck result: NONE ");
             // path에 목적지 정보 저장
             res.value = true;
             requested_target.reached = false;
@@ -1553,7 +1560,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req, eDrone_msgs::GotoPath::Response &res)
 {	
 
-    ROS_INFO("eDrone_control_node: GotoPath request received\n");
+    printf("eDrone_control_node: GotoPath request received\n");
     cout << "gotoPath_cb(): ref_system: " << req.gotoPath_ref_system << endl;
 
     // 좌표계 종류 확인 (ex. WGS84, ENU) & 목적지 좌표 (지역, 전역) 저장
@@ -1610,9 +1617,9 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 {
     bool result = false;
 
-    ROS_INFO ("eDrone_control_node: surveyArea service was called");
+    printf ("eDrone_control_node: surveyArea service was called");
 
-    cur_phase.phase = "PLANNING";
+    cur_phase.phase = "PLANNING_SURVEY";
 
     survey_ref_system = req.surveyArea_ref_system;
     survey_points = req.surveyArea_pts;
@@ -1662,7 +1669,7 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
 bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
                   eDrone_msgs::Orbit::Response &res)
 {
-    ROS_INFO ("eDrone_control_node: Orbit service was called");
+    printf ("eDrone_control_node: Orbit service was called");
 
     bool result = false;
 
@@ -1863,22 +1870,9 @@ int main(int argc, char** argv)
         {
             //cout << "eDrone_control_node: publish Topic to takeoff - altitude " << takeoff_altitude <<  endl;
 
-            // change mode to offboard
-            modeChange_cmd.request.base_mode = 0;
-            modeChange_cmd.request.custom_mode = "OFFBOARD";
-            if (modeChange_client.call(modeChange_cmd))
-            {
-                /*
-                if (modeChange_cmd.response.mode_sent)
-                {
-                    cout << "offboard enabled" << endl;
-                }
-                */
-            }
-            else
-            {
-                cout << "mode change failed!" << endl;
-            }
+            // (2019.04.24) publish setpoint messages before mode change to 'TAKEOFF'
+            // please refer to the following example
+            // https://dev.px4.io/en/ros/mavros_offboard.html
 
             // publish topic
 
@@ -1891,9 +1885,31 @@ int main(int argc, char** argv)
                     target_pos_local.pose.position.x = current_pos_local.pose.position.x;
                     target_pos_local.pose.position.y = current_pos_local.pose.position.y;
                     target_pos_local.pose.position.z= base_pos_local.pose.position.z + takeoff_altitude;
-                    pos_pub_local.publish (target_pos_local);
+
+                    for (int i = 100; ros::ok() && i >0; --i)
+                    {
+                        pos_pub_local.publish (target_pos_local);
+                    }
                 }
             }
+
+            // change mode to offboard
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "OFFBOARD";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "(takeoff phase) offboard enabled" << endl;
+                }
+
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
         }
         else if (cur_phase.phase.compare ("READY") ==0)
         {
@@ -2059,14 +2075,70 @@ int main(int argc, char** argv)
                 }
             }
         }
+        // (2019.04.29) phase 추가　（PLANNING_GOTO)
 
-        else if (cur_phase.phase.compare ("PLANNING") ==0) // (201９.04.22)
+        else if (cur_phase.phase.compare ("PLANNING_GOTO") ==0) // (201９.04.22)
         {
-            ROS_INFO ("PHASE = PLANNING");
+            printf ("PHASE = PLANNING_GOTO");
+
+            // change mode to loiter
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "AUTO.LOITER";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "AUTO.LOITER enabled" << endl;
+                }
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
+            // 경로　계산
+            vector<Target_Position> indirectPath = getIndirectPath(src, dest);
+            printPath(indirectPath);
+            for( vector<Target_Position>::iterator it = indirectPath.begin();
+                 it != indirectPath.end(); it++ )
+            {
+                Target_Position waypoint = *it;
+                waypoint.reached = false;
+                path.push_back(waypoint);
+            } // path에 indirectPath 추가
+            //　경로　계산　완료
+
+            sleep(3);
+
+            // OFFBOARD 모드로　비행　모드　변환
+
+            // change mode to offboard
+            modeChange_cmd.request.base_mode = 0;
+            modeChange_cmd.request.custom_mode = "OFFBOARD";
+            if (modeChange_client.call(modeChange_cmd))
+            {
+                if (modeChange_cmd.response.mode_sent)
+                {
+                    cout << "OFFBOARD enabled" << endl;
+                }
+            }
+            else
+            {
+                cout << "mode change failed!" << endl;
+            }
+
+            cur_phase.phase = "GOTO";
+
+
+        }
+
+        else if (cur_phase.phase.compare ("PLANNING_SURVEY") ==0) // (201９.04.22)
+        {
+            printf ("PHASE = PLANNING_SURVEY");
 
             // AUTO.LOITER 모드로　비행　모드　변환
 
-            // change mode to offboard
+            // change mode to loiter
             modeChange_cmd.request.base_mode = 0;
             modeChange_cmd.request.custom_mode = "AUTO.LOITER";
             if (modeChange_client.call(modeChange_cmd))
@@ -2090,12 +2162,12 @@ int main(int argc, char** argv)
             {
                 if (survey_points.empty())
                 {
-                    cout << "(phase == PLANNING): coverage path cannot be computed! no survey point" << endl;
+                    cout << "(phase == PLANNING_SURVEY): coverage path cannot be computed! no survey point" << endl;
                 }
 
                 if (survey_altitude==0 || survey_interval==0)
                 {
-                    cout << "(phase == PLANNING): coverage path cannot be computed! (altitude or interval not initialized" << endl;
+                    cout << "(phase == PLANNING_SURVEY): coverage path cannot be computed! (altitude or interval not initialized" << endl;
                 }
 
                 coveragePath = getCoveragePath(survey_points, survey_altitude, survey_interval);
@@ -2121,12 +2193,12 @@ int main(int argc, char** argv)
 
                 if (survey_points.empty())
                 {
-                    cout << "(phase == PLANNING): coverage path cannot be computed! no survey point" << endl;
+                    cout << "(phase == PLANNING_SURVEY): coverage path cannot be computed! no survey point" << endl;
                 }
 
                 if (survey_altitude==0 || survey_interval==0)
                 {
-                    cout << "(phase == PLANNING): coverage path cannot be computed! (altitude or interval not initialized" << endl;
+                    cout << "(phase == PLANNING_SURVEY): coverage path cannot be computed! (altitude or interval not initialized" << endl;
                 }
 
                 coveragePath = getCoveragePath(survey_points, survey_altitude, survey_interval);
@@ -2169,7 +2241,7 @@ int main(int argc, char** argv)
 
         else if (cur_phase.phase.compare ("ORBIT") ==0) // (2018.10.05)
         {
-            ROS_INFO ("PHASE = ORBIT");
+            printf ("PHASE = ORBIT");
             double theta = 0 ;
             {
                 if (target_position.reached != true) // 현재 목적지에 도착 전이면 해당 좌표 출판 (pub)

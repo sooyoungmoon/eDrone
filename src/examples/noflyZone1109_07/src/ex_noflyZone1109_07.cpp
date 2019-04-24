@@ -83,7 +83,7 @@ void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr& msg)
 //	ROS_INFO("noflyZones_cb(): \n");
 
 	NoflyZones nfZones = *msg;
-/*
+
 	int cnt = 0;
         for ( vector<NoflyZone>::iterator it = nfZones.noflyZones.begin(); it != nfZones.noflyZones.end(); it++)
         {
@@ -96,7 +96,7 @@ void noflyZones_cb(const eDrone_msgs::NoflyZones::ConstPtr& msg)
                         cout << "point#" << cnt << "(" << point.x_lat <<", " << point.y_long << ", " << point.z_alt << ")" << endl;
                 }               
         }
-*/
+
 }
 
 /* 기타 함수 정의 */

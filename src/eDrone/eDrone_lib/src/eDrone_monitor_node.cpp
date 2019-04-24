@@ -69,8 +69,14 @@ double HOME_ALT;
 void state_cb(const mavros_msgs::State::ConstPtr& msg)
 {
     current_state = *msg;
-    vehicle->setState (current_state);
-    VehicleState cState = vehicle->getState();
+/*
+    if (current_state.mode =="")
+    {
+        cout << "state_cb(): state not initialized!" << endl;
+    }
+
+    //vehicle->setState (current_state);
+    //VehicleState cState = vehicle->getState();
 
     static int idx = 1;
 
@@ -78,6 +84,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg)
     {
         cout << "eDrone_monitor_node- state_cb(): flight mode = " << current_state.mode << endl;
     }
+    */
 }
 
 void battery_cb (const sensor_msgs::BatteryState::ConstPtr& msg)
@@ -112,7 +119,7 @@ void homePosition_cb(const mavros_msgs::HomePosition::ConstPtr& msg)
 
 bool srv_chkState_cb(eDrone_msgs::CheckState::Request &req, eDrone_msgs::CheckState::Response &res)
 {
-    ROS_INFO ("srv_chkState_cb() was called\n");
+    printf ("srv_chkState_cb() was called\n");
     VehicleState cState = vehicle->getState();
     res.armed = cState.armed;
     res.connected = cState.connected;

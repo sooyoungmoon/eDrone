@@ -104,7 +104,7 @@ void wpList_cb(const mavros_msgs::WaypointList::ConstPtr& msg)
 
 bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msgs::MissionAddItem::Response &res)
 {
-    ROS_INFO("eDrone_autoflight_node: MissionAddItem request received\n");
+    printf("eDrone_autoflight_node: MissionAddItem request received\n");
 
     // 웨이포인트 추가
     mavros_msgs::Waypoint waypoint;
@@ -164,7 +164,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     geofenceCheck_cmd.request.geofence_arg1= waypoint.x_lat;
     geofenceCheck_cmd.request.geofence_arg2= waypoint.y_long;
 
-    ROS_INFO("eDrone_autoflight_node: trying to call GeofenceCheck service");
+    printf("eDrone_autoflight_node: trying to call GeofenceCheck service");
 
     if (geofenceCheck_client.call (geofenceCheck_cmd) == true)
     {
@@ -174,7 +174,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
             if (geofenceCheck_cmd.response.violation == true)
             {
                 geofence_violation = true;
-                ROS_INFO("eDrone_autoflight_node: missionAddItem service rejected: geofence violation!\n");
+                printf("eDrone_autoflight_node: missionAddItem service rejected: geofence violation!\n");
                 res.value = false;
                 return true;
             }
@@ -189,7 +189,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     if (geofence_violation!=true)
     {
         waypoints.push_back(waypoint);
-        ROS_INFO("eDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.\n");
+        printf("eDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.\n");
         res.value = true;
     }
 
@@ -199,7 +199,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
 bool srv_missionUpload_cb(eDrone_msgs::MissionUpload::Request &req, eDrone_msgs::MissionUpload::Response &res)
 {
-    ROS_INFO("MissionUpload request received\n");
+    printf("MissionUpload request received\n");
 
     // 웨이포인트 업로드 메시지 설정
     waypointPush_cmd.request.start_index = 0;
@@ -213,24 +213,24 @@ bool srv_missionUpload_cb(eDrone_msgs::MissionUpload::Request &req, eDrone_msgs:
 
     waypointPush_client.call(waypointPush_cmd);
 
-    ROS_INFO("WaypointPush command was sent\n");
+    printf("WaypointPush command was sent\n");
 
     print_waypoints(waypoints);
 }
 
 bool srv_missionDownload_cb(eDrone_msgs::MissionDownload::Request &req, eDrone_msgs::MissionDownload::Response &res)
 {
-    ROS_INFO("MissionDownload request received\n");
+    printf("MissionDownload request received\n");
     res.waypoints = waypointList.waypoints;
 }
 
 
 bool srv_missionClear_cb(eDrone_msgs::MissionClear::Request &req, eDrone_msgs::MissionClear::Response &res)
 {
-    ROS_INFO("MIssionClear request received\n");
+    printf("MIssionClear request received\n");
     waypoints.clear();
     waypointClear_client.call(waypointClear_cmd);
-    ROS_INFO("WaypointClear command was sent\n");
+    printf("WaypointClear command was sent\n");
 }
 
 int main(int argc, char** argv)
