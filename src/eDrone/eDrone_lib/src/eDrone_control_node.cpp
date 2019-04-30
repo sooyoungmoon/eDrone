@@ -68,6 +68,9 @@ void printWavefrontMap(int** mental_map,
                        int AREA_HEIGHT);
 
 // 경로 계산 함수
+
+vector<Target_Position> getOrbitPath();// 선회비행경로계산
+
 std::vector<Target_Position> getCoveragePath(vector<geometry_msgs::Point> points,
                                              double altitude,
                                              double interval);
@@ -113,6 +116,8 @@ std::vector<Target_Position> path; // 자율 비행 경로
 std::vector<Target_Position> orbit_path; // 특정 위치를 기준으로 하는 선회 비행 경로
 int orbit_req_cnt = 0; // (요청된) 선회 비행 횟수
 int orbit_cnt = 0; // 현재 선회 비행 횟수
+Target orbit_center; // (04/30)
+double orbit_radius; // (04/30)
 
 //　ROS Service 요청 메시지 선언 (mavros)
 mavros_msgs::CommandBool arming_cmd; // 시동 명령에 사용될 서비스 선언 
@@ -160,8 +165,6 @@ double HOME_LAT;
 double HOME_LON;
 double HOME_ALT;
 
-
-
 double takeoff_altitude = 0; // 이륙　고도
 
 // (0424) goto
@@ -174,7 +177,114 @@ vector<eDrone_msgs::Target> survey_points;
 double survey_altitude = 0;
 double survey_interval = 0;
 
+vector<Target_Position> getOrbitPath()// 선회비행경로계산
+{
+    std::vector<Target_Position> path;
+    printf("getOrbitPath() was called\n");
 
+
+    printf("center: (%lf,%lf,%lf)\n", orbit_center.x_lat, orbit_center.y_long, orbit_center.z_alt);
+    printf("radius: %lf\n", orbit_radius);
+    printf("cnt: %d\n", orbit_req_cnt);
+
+    //sleep(10);
+    // #1. 선회 비행 시작점 계산
+    Point cur_position; // 현재 위치
+    cur_position.x = current_pos_local.pose.position.x;
+    cur_position.y = current_pos_local.pose.position.y;
+
+    double inclination = (orbit_center.y_long - cur_position.y ) / (orbit_center.x_lat - cur_position.x);
+    double A = inclination;
+    double intercept_y = cur_position.y -  inclination * cur_position.x;
+    double B = intercept_y;
+
+    cout << " y = Ax + B " << endl;
+    cout << " A = " << A << endl;
+    cout << " B = " << B << endl;
+
+    double center_x = orbit_center.x_lat;
+    double center_y = orbit_center.y_long;
+    double r = orbit_radius;
+    double C =  (-2) * center_x;
+    double D =  (-2) * center_y;
+    double E = pow ( center_x, 2) + pow ( center_y, 2) - pow ( r, 2);
+
+    // 직선의 방정식을 원의 방정식에 대입 -> x에 대한 이차방정식으로 표현
+
+    double F = pow (A, 2) + 1;
+    double G = 2* A*B + C + A*D;
+    double H = pow (B, 2) + B*D + E;
+
+    Point cross_pt1, cross_pt2;
+
+    if ( (pow (G,2) - 4 * F * H) < 0)
+    {
+        cout <<" 교점을 구할 수 없음" << endl;
+        return path;
+    }
+
+    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
+    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
+    cross_pt1.y = 	inclination * 	cross_pt1.x + intercept_y;
+    cross_pt2.y = 	inclination * 	cross_pt2.x + intercept_y;
+
+    cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")" << endl;
+    cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")" << endl;
+
+
+    // #2 첫 번째 목적지 계산, path 에 추가
+    double dist1 =0;
+    double dist2 =0;
+
+    dist1=  pow ( (cross_pt1.x - cur_position.x), 2) + pow ( (cross_pt1.y - cur_position.y), 2);
+    dist2=  pow ( (cross_pt2.x - cur_position.x), 2) + pow ( (cross_pt2.y - cur_position.y), 2);
+
+    Target_Position target;
+
+    target.ref_system = "ENU";
+    target.reached = false;
+
+    if (dist1 < dist2)
+    {
+        target.pos_local.x = cross_pt1.x;
+        target.pos_local.y = cross_pt1.y;
+        target.pos_local.z = takeoff_altitude;
+    }
+
+    else
+    {
+        target.pos_local.x = cross_pt2.x;
+        target.pos_local.y = cross_pt2.y;
+        target.pos_local.z = takeoff_altitude;
+    }
+    path.push_back (target);
+
+    // #3 나머지 목적지들 (원형 비행 경로) 계산, path에 추가
+
+    double rel_x = target.pos_local.x - orbit_center.x_lat;
+    double rel_y = target.pos_local.y - orbit_center.y_long;
+    double radian =  atan2 (rel_y, rel_x);
+    double degree = radian * (180 / PI);
+
+    for (int orbit_cnt = 0; orbit_cnt <orbit_req_cnt; orbit_cnt++)
+    {
+
+        cout << "orbit_cnt: " <<  orbit_cnt << endl;
+
+        for (double theta = 0; theta < 2*PI; theta += 0.05)
+        {
+            Target_Position point;
+            point.pos_local.x = orbit_radius * cos(radian + theta) + center_x;
+            point.pos_local.y = orbit_radius * sin(radian + theta) + center_y;
+            point.pos_local.z = takeoff_altitude;
+            point.ref_system = "ENU";
+            point.reached = false;
+            path.push_back (point);
+        }
+    }
+
+    return path;
+}
 
 // 경로 계산
 vector<Target_Position> getIndirectPath(Target src, Target dest)//　비행금지구역 우회경로 계산
@@ -1626,42 +1736,7 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
     survey_altitude = req.surveyArea_altitude;
     survey_interval =  req.surveyArea_interval;
 
-    // 경로 계산
-    /*
-    vector<Target_Position> coveragePath;
 
-    if (req.surveyArea_ref_system == "ENU")
-    {
-        coveragePath = getCoveragePath(req.surveyArea_pts, req.surveyArea_altitude, req.surveyArea_interval);
-    }
-    else if (req.surveyArea_ref_system == "WGS84")
-    {
-        // ENU 좌표로 변환
-        vector<Target> surveyArea_pts;
-
-        for (vector<Target>::iterator it = req.surveyArea_pts.begin(); it != req.surveyArea_pts.end(); it++)
-        {
-            Target target = *it;
-
-            // ENU로 좌표변환
-            Point point = convertGeoToENU(target.x_lat, target.y_long, HOME_ALT, HOME_LAT, HOME_LON, HOME_ALT );
-            target.x_lat = point.x;
-            target.y_long = point.y;
-            target.ref_system = "ENU";
-            surveyArea_pts.push_back(target);
-        }
-        coveragePath = getCoveragePath(surveyArea_pts, req.surveyArea_altitude, req.surveyArea_interval);
-    }
-
-    printPath(coveragePath);
-
-    for (vector<Target_Position>::iterator it = coveragePath.begin(); it != coveragePath.end(); it++ )
-    {
-        Target_Position target_position = *it;
-        target_position.reached = false;
-        path.push_back(target_position);
-    } // path에 coveragePath 추가
-*/
     result = true;
     return result;
 }
@@ -1671,125 +1746,36 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
 {
     printf ("eDrone_control_node: Orbit service was called");
 
-    bool result = false;
+    orbit_center.ref_system = req.orbit_ref_system;
+    orbit_center  = req.orbit_center;
+    orbit_radius = req.orbit_radius;
+    orbit_req_cnt = req.orbit_req_cnt;
 
-    if ( cur_phase.phase.compare ( "READY") != 0  ) // READY 상태에서만 선회 비행 가능
+    // path computation
+    vector<Target_Position> computedPath = getOrbitPath();
+    printf("computed path:");
+    printPath(computedPath);
+
+    for(vector<Target_Position>::iterator it = computedPath.begin(); it != computedPath.end(); it++ )
     {
-        return result;
+        int c=0;
+        Target_Position pos = *it;
+
+        //printf("target%d: (%lf,%lf,%lf) \n", c, pos.pos_local.x, pos.pos_local.y, pos.pos_local.z);
+
+        orbit_path.push_back(pos);
+        c++;
     }
 
-    cur_phase.phase = "ORBIT"; // phase 변경
+    target_position = computedPath[0];
+    target_position.ref_system = "ENU";
+    target_position.reached = false;
 
-    if (req.orbit_ref_system == "ENU")
-    {
-        orbit_req_cnt = req.orbit_req_cnt; // 요청된 선회비행횟수 저장
+    cur_phase.phase = "ORBIT";
 
-        // #1. 선회 비행 시작점 계산
-
-        Point cur_position; // 현재 위치
-        cur_position.x = current_pos_local.pose.position.x;
-        cur_position.y = current_pos_local.pose.position.y;
-
-        double inclination = (req.orbit_center.y_long - cur_position.y ) / (req.orbit_center.x_lat - cur_position.x);
-        double A = inclination;
-        double intercept_y = cur_position.y -  inclination * cur_position.x;
-        double B = intercept_y;
-
-        cout << " y = Ax + B " << endl;
-        cout << " A = " << A << endl;
-        cout << " B = " << B << endl;
-
-        double center_x = req.orbit_center.x_lat;
-        double center_y = req.orbit_center.y_long;
-        double r = req.orbit_radius;
-        double C =  (-2) * center_x;
-        double D =  (-2) * center_y;
-        double E = pow ( center_x, 2) + pow ( center_y, 2) - pow ( r, 2);
-
-        // 직선의 방정식을 원의 방정식에 대입 -> x에 대한 이차방정식으로 표현
-
-        double F = pow (A, 2) + 1;
-        double G = 2* A*B + C + A*D;
-        double H = pow (B, 2) + B*D + E;
-
-        Point cross_pt1, cross_pt2;
-
-        if ( (pow (G,2) - 4 * F * H) < 0)
-        {
-            cout <<" 교점을 구할 수 없음" << endl;
-            return false;
-        }
-
-        cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-        cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-        cross_pt1.y = 	inclination * 	cross_pt1.x + intercept_y;
-        cross_pt2.y = 	inclination * 	cross_pt2.x + intercept_y;
-
-        cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")" << endl;
-        cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")" << endl;
-
-        // #2 첫 번째 목적지 계산, path 에 추가
+    return true;
 
 
-        double dist1 =0;
-        double dist2 =0;
-
-        dist1=  pow ( (cross_pt1.x - cur_position.x), 2) + pow ( (cross_pt1.y - cur_position.y), 2);
-        dist2=  pow ( (cross_pt2.x - cur_position.x), 2) + pow ( (cross_pt2.y - cur_position.y), 2);
-
-        Target_Position starting_pt;
-
-        //Target_Position target;
-
-        target_position.ref_system = "ENU";
-        target_position.reached = false;
-
-        if (dist1 < dist2)
-        {
-            target_position.pos_local.x = cross_pt1.x;
-            target_position.pos_local.y = cross_pt1.y;
-            target_position.pos_local.z = takeoff_altitude;
-        }
-
-        else
-        {
-            target_position.pos_local.x = cross_pt2.x;
-            target_position.pos_local.y = cross_pt2.y;
-            target_position.pos_local.z = takeoff_altitude;
-        }
-        orbit_path.push_back (target_position);
-
-        // #2 나머지 목적지들 (원형 비행 경로) 계산, path에 추가
-
-        double rel_x = target_position.pos_local.x - req.orbit_center.x_lat;
-        double rel_y = target_position.pos_local.y - req.orbit_center.y_long;
-        double radian =  atan2 (rel_y, rel_x);
-        double degree = radian * (180 / PI);
-
-        for (int orbit_cnt = 0; orbit_cnt <orbit_req_cnt; orbit_cnt++)
-        {
-
-            for (double theta = 0; theta < 2*PI; theta += 0.05)
-            {
-                Target_Position point;
-                point.pos_local.x = req.orbit_radius * cos(radian + theta) + center_x;
-                point.pos_local.y = req.orbit_radius * sin(radian + theta) + center_y;
-                point.pos_local.z = takeoff_altitude;
-                point.reached = false;
-                orbit_path.push_back (point);
-            }
-        }
-    }
-
-    else if (req.orbit_ref_system == "WGS84" )
-    {
-        // 구현 예정
-    }
-
-    res.value = true;
-    result = true;
-
-    return result;
 }
 
 int main(int argc, char** argv)

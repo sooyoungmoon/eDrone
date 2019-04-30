@@ -69,13 +69,13 @@ double HOME_ALT;
 void state_cb(const mavros_msgs::State::ConstPtr& msg)
 {
     current_state = *msg;
-/*
+
     if (current_state.mode =="")
     {
         cout << "state_cb(): state not initialized!" << endl;
     }
 
-    //vehicle->setState (current_state);
+    vehicle->setState (current_state);
     //VehicleState cState = vehicle->getState();
 
     static int idx = 1;
@@ -84,7 +84,7 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg)
     {
         cout << "eDrone_monitor_node- state_cb(): flight mode = " << current_state.mode << endl;
     }
-    */
+
 }
 
 void battery_cb (const sensor_msgs::BatteryState::ConstPtr& msg)

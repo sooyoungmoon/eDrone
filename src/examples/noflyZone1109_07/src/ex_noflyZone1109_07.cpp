@@ -497,7 +497,7 @@ int main (int argc, char** argv)
 	}
 */
 	// RTL
-/*
+
 	while (cur_phase.phase.compare ("READY")!=0)
 	{
 		ros::spinOnce();
@@ -512,7 +512,7 @@ int main (int argc, char** argv)
 		ROS_INFO("RTL command was sent\n");
         }
 
-*/
+
 return 0;
 
 }

@@ -48,25 +48,23 @@ eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
 
 void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 {
-	*cur_target_ptr = *msg;
+    *cur_target_ptr = *msg;
 
-	// 현재 목적지 도달 여부 확인
-	ROS_INFO("cur_target_cb(): \n");
-	ROS_INFO("current target: %d \n", cur_target_ptr->target_seq_no);
-	
-	if (cur_target_ptr->reached == true)
-	{
-		ROS_INFO("we reached at the current target\n");
-	} 
+    // 현재 목적지 도달 여부 확인
+    printf("cur_target_cb(): current target: %d \n", cur_target_ptr->target_seq_no);
+
+    if (cur_target_ptr->reached == true)
+    {
+        ROS_INFO("we reached at the current target\n");
+    }
 }
 void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
 {
-	*cur_phase_ptr = *msg;
+    *cur_phase_ptr = *msg;
 
-	// 현재 목적지 도달 여부 확인
-	ROS_INFO("cur_phase_cb(): \n");
-	ROS_INFO("current phase: %s \n", cur_phase_ptr->phase.c_str());
- 
+    // 현재 목적지 도달 여부 확인
+    ROS_INFO("cur_phase_cb(): %s \n", cur_phase_ptr->phase.c_str());
+
 }
 
 // 서비스 콜백 함수 (내용 없음) 
@@ -76,275 +74,274 @@ void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
 
 int main(int argc, char** argv)
 {
-	ofstream logFile("test.txt");
-	
 
-	ROS_INFO("==ex_hotPoint==\n");
+    ROS_INFO("==ex_hotPoint==\n");
 
-	ros::init(argc, argv, "ex_hotPoint"); 
-	ros::NodeHandle nh;
-	nh_ptr = &nh; // node handle 주소 저장 
+    ros::init(argc, argv, "ex_hotPoint");
+    ros::NodeHandle nh;
+    nh_ptr = &nh; // node handle 주소 저장
 
-	/* 주요 변수 선언 */
+    /* 주요 변수 선언 */
 
-        if (argc < 3)
-	{
-		ROS_INFO ("usage: 'roslaunch eDrone_examples ex_hotPoint.launch my_args:=\"<takeoff_altitude> <hotPoint_x> <hotPoint_y> <radius> \" ");
-		ROS_ERROR("ex_hotPoint: the number of arguments should be at least 5!!" );
-		return -1;
-	}
+    if (argc < 3)
+    {
+        ROS_INFO ("usage: 'roslaunch eDrone_examples ex_hotPoint.launch my_args:=\"<takeoff_altitude> <hotPoint_x> <hotPoint_y> <radius> \" ");
+        ROS_ERROR("ex_hotPoint: the number of arguments should be at least 5!!" );
+        return -1;
+    }
 
 
-	for (int arg_index = 0; arg_index < argc; arg_index++)
-	{
-		ROS_INFO("main arg[%d]: %s", arg_index, argv[arg_index] );
-	}
+    for (int arg_index = 0; arg_index < argc; arg_index++)
+    {
+        ROS_INFO("main arg[%d]: %s", arg_index, argv[arg_index] );
+    }
 
 
-	// 토픽 메시지 변수 선언  
-	eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
-	eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
-	cur_target_ptr = &cur_target; // cur_target 변수 주소 저장 
-	eDrone_msgs::Target next_target; // 다음 목적지 
-	cur_phase_ptr = &cur_phase;
+    // 토픽 메시지 변수 선언
+    eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
+    eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
+    cur_target_ptr = &cur_target; // cur_target 변수 주소 저장
+    eDrone_msgs::Target next_target; // 다음 목적지
+    cur_phase_ptr = &cur_phase;
 
-	// 서비스 메시지 변수 선언 
-	eDrone_msgs::CheckState checkState_cmd;
-	eDrone_msgs::CheckPosition checkPosition_cmd;
-	eDrone_msgs::Arming arming_cmd;
-	eDrone_msgs::Takeoff takeoff_cmd;
-	eDrone_msgs::Landing landing_cmd;
-	eDrone_msgs::Goto goto_cmd;
-	eDrone_msgs::RTL rtl_cmd;
-	eDrone_msgs::Orbit orbit_cmd;
+    // 서비스 메시지 변수 선언
+    eDrone_msgs::CheckState checkState_cmd;
+    eDrone_msgs::CheckPosition checkPosition_cmd;
+    eDrone_msgs::Arming arming_cmd;
+    eDrone_msgs::Takeoff takeoff_cmd;
+    eDrone_msgs::Landing landing_cmd;
+    eDrone_msgs::Goto goto_cmd;
+    eDrone_msgs::RTL rtl_cmd;
+    eDrone_msgs::Orbit orbit_cmd;
 
-	// 토픽 publisher 초기화 (내용 없음)
-	// rate 설정 
-	ros::Rate rate(20.0);
+    // 토픽 publisher 초기화 (내용 없음)
+    // rate 설정
+    ros::Rate rate(20.0);
 
-	// 토픽 subscriber 선언 & 초기화 
-	ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); 
- 	ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb); // 
-
-
-	// 서비스 서버 선언 & 초기화 (내용 없음)
-	// 서비스 클라이언트 선언 & 초기화
-
-	ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");  
-        ros::ServiceClient checkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition"); 
-	ros::ServiceClient arming_client =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");
-	ros::ServiceClient takeoff_client =nh.serviceClient<eDrone_msgs::Takeoff>("srv_takeoff");
-	ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
-	ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
-	ros::ServiceClient rtl_client = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
-	ros::ServiceClient orbit_client = nh.serviceClient<eDrone_msgs::Orbit>("srv_orbit");	
-	
-	// 무인기 자율 비행 경로 
-	std::vector<eDrone_msgs::Target> path; 
+    // 토픽 subscriber 선언 & 초기화
+    ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb);
+    ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb); //
 
 
-        sleep(10);	
+    // 서비스 서버 선언 & 초기화 (내용 없음)
+    // 서비스 클라이언트 선언 & 초기화
 
-	    // 연결 상태 확인
+    ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");
+    ros::ServiceClient checkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition");
+    ros::ServiceClient arming_client =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");
+    ros::ServiceClient takeoff_client =nh.serviceClient<eDrone_msgs::Takeoff>("srv_takeoff");
+    ros::ServiceClient landing_client =nh.serviceClient<eDrone_msgs::Landing>("srv_landing");
+    ros::ServiceClient goto_client = nh.serviceClient<eDrone_msgs::Goto>("srv_goto");
+    ros::ServiceClient rtl_client = nh.serviceClient<eDrone_msgs::RTL>("srv_rtl");
+    ros::ServiceClient orbit_client = nh.serviceClient<eDrone_msgs::Orbit>("srv_orbit");
 
-
-		ROS_INFO("Send checkState command ... \n");
-		ROS_INFO("Checking the connection ... \n");
-		
-		if (checkState_client.call(checkState_cmd))
-		{
-			ROS_INFO ("CheckState service was requested");
-			
-			while (checkState_cmd.response.connected == false)
-			{
-				if (checkState_client.call(checkState_cmd))
-				{
-					ROS_INFO ("Checking state...");
-				}
-
-				ros::spinOnce();
-				rate.sleep();
-			}
-
-			ROS_INFO("UAV connection established!");
-		}
+    // 무인기 자율 비행 경로
+    std::vector<eDrone_msgs::Target> path;
 
 
-	    // 무인기 위치 확인
+    sleep(10);
 
-		 ROS_INFO("Send checkPosition command ... \n");
-		 ROS_INFO("Checking the position ... \n");
+    // CheckState
 
-		 if (checkPosition_client.call(checkPosition_cmd))
-		 {
-			ROS_INFO ("CheckPosition service was requested");
+    sleep(10); // (수정)
+    printf("Send checkState command ... \n");
 
-			while (checkPosition_cmd.response.value == false)
-			{
-				if (checkPosition_client.call(checkPosition_cmd));
-				{
-					ROS_INFO ("Checking position...");
-				}
+    if (!checkState_client.call(checkState_cmd))
+    {
+        cout << "CheckState failed!! " << endl;
+        return -1;
+    }
 
-				ros::spinOnce();
-				sleep(10);
-			}
+    cout << "checkState API was called" << endl << endl;
+    cout << "<UAV State>" << endl;
 
+    if (checkState_cmd.response.connected == true)
+    {
+        cout << "UAV connected!" << endl;
+    }
+    else
+    {
+        cout << "UAV not connected!" << endl;
+        return -1;
+    }
 
-			cout <<"global frame: (" << checkPosition_cmd.response.latitude << ", ";
-			cout << checkPosition_cmd.response.longitude << ", ";
-			cout << checkPosition_cmd.response.altitude << ") " << endl << endl;
+    if (checkState_cmd.response.armed == true)
+    {
+        cout << "UAV armed!" << endl;
+    }
+    else
+    {
+        cout << "UAV not armed!" << endl;
+    }
 
-			cout <<"local frame: (" << checkPosition_cmd.response.x << ", ";
-			cout << checkPosition_cmd.response.y << ", " << checkPosition_cmd.response.z << ") " << endl;
-			
-			}
-			
-			ROS_INFO("UAV position was checked!");
-		
-		  
-		// Arming
+    cout << "flight mode: " << checkState_cmd.response.mode << endl;
+    cout << "remaining battery(0~1): " << checkState_cmd.response.battery_remain << endl;
+    cout << endl << endl;
 
-		ROS_INFO("Send arming command ... \n"); 
-		arming_client.call(arming_cmd);
-		
-		if (arming_cmd.response.value == true)
-		{
-			ROS_INFO("Arming command was sent\n");
-		}
+    // CheckPosition
 
+    printf("\nSend checkPosition command ... \n");
 
-		// Takeoff
-		{
-			double altitude = 0;
-                        //altitude = atof (argv[1]);
-                        altitude = TAKEOFF_ALTITUDE;
-			ROS_INFO("Altitude: %lf", altitude);
+    if (!checkPosition_client.call(checkPosition_cmd))
+    {
+        cout << "CheckState failed!! " << endl;
+        return -1;
+    }
 
-			ROS_INFO("Send takeoff command ... \n");
-                        takeoff_cmd.request.takeoff_altitude = altitude; // 서비스 파라미터 설정
-			takeoff_client.call(takeoff_cmd); // 서비스 호출
+    cout << "checkPosition API was called" << endl << endl;
 
-			if (takeoff_cmd.response.value == true) // 서비스 호출 결과 확인 
-			{
-				ROS_INFO("Takeoff command was sent\n");
-			}
-		}
-//		sleep(10);		
-		   
-		
-		// Orbit 
+    cout << "<UAV Position>" << endl;
+    cout <<"global coordinates (WGS84): (" << checkPosition_cmd.response.latitude << ", ";
+    cout << checkPosition_cmd.response.longitude << ", ";
+    cout << checkPosition_cmd.response.altitude << ") " << endl;
 
-		while (cur_phase.phase.compare ("READY")!=0)
-		{
-			ros::spinOnce();
-			rate.sleep();
-
-			cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
-		}
-
-		geometry_msgs::Point point;
+    cout <<"local coordinates (ENU): (" << checkPosition_cmd.response.x << ", ";
+    cout << checkPosition_cmd.response.y << ", " << checkPosition_cmd.response.z << ") " << endl;
 
 
-                orbit_cmd.request.orbit_ref_system = ORBIT_REF_SYSTEM;
+    // Arming：
+
+    printf("Send arming command ... \n");
 
 
-                Target orbit_center; // template에 포함
-                string orbit_center_str = argv[1];
-                //string orbit_center_str = ORBIT_CENTER; // template에 포함
+    if (!arming_client.call(arming_cmd))
+    {
+        cout << "Arming failed!! " << endl;
+        return -1;
+    }
 
-                {
-                // 도구에서 자동 생성 요 (시작)
-                        int numCnt = 0;
-                        vector<string>  strVector;
 
-                        string token;
-                        size_t delimiter_pos = 0;
-                        delimiter_pos = orbit_center_str.find(",");
+    // Takeoff
 
-                        while (delimiter_pos != string::npos)
-                        {
-                                numCnt++;
-                                token = orbit_center_str.substr(0, delimiter_pos);
-                                orbit_center_str = orbit_center_str.substr (delimiter_pos+1);
-                                cout << "token: " << token << endl;
-                                strVector.push_back(token);
-                                cout << "orbit_center_str: " << orbit_center_str << endl;
-                                delimiter_pos = orbit_center_str.find(",");
-                        }
+    double takeoff_altitude = 0;
 
-                        token = orbit_center_str.substr(0, delimiter_pos);
-                        strVector.push_back(token);
-                        numCnt++;
-                        cout << "token: " << token << endl;
-                        cout << "numCnt: " << numCnt << endl;
+    takeoff_altitude = atof (argv[1]);
+    // 1) 상수에 의한 초기화: takeoff_altitude = TAKEOFF_ALTITUDE;s
+    // 2) 명령줄 인자에 의한 초기화: takeoff_altitude = atof (argv[1]);
 
-                // 도구에서 자동 생성 요 (종료)
+    printf("takeoff_altitude: %lf", takeoff_altitude);
 
-                        string x_lat_str = strVector[0];
-                        orbit_center.x_lat = atof (x_lat_str.c_str());
+    printf("Send takeoff command ... \n");
+    takeoff_cmd.request.takeoff_altitude = takeoff_altitude; // 서비스 파라미터 설정
 
-                        string y_long_str = strVector[1];
-                        orbit_center.y_long = atof (y_long_str.c_str());
+    if (!takeoff_client.call(takeoff_cmd)) // 서비스 호출
+    {
+        cout << "takeoff API call failed!!" << endl;
+        return -1;
+    }
 
-                        string z_alt_str = strVector[2];
-                        orbit_center.z_alt = atof (z_alt_str.c_str());
+    cout << "takeoff API was called" << endl;
 
-                        orbit_center.ref_system =  orbit_cmd.request.orbit_ref_system;
+    sleep(10);
 
-                        orbit_cmd.request.orbit_center = orbit_center;
-                        orbit_cmd.request.orbit_radius = ORBIT_RADIUS;
-                        orbit_cmd.request.orbit_req_cnt = ORBIT_REQ_CNT;
 
-                }
+    // Orbit
 
-                double radius = atof (argv[2]);
-		orbit_client.call (orbit_cmd);
-		cout << " hotPoint: (" << point.x << ", " << point.y << ") " << endl;	
-		cout << " radius: " << radius << endl;
+    while (cur_phase.phase.compare ("READY")!=0)
+    {
+        ros::spinOnce();
+        rate.sleep();
 
-		ROS_INFO("Orbit command was sent\n");
+        cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
+    }
 
-	sleep (10);
-	/*
-	while (cur_phase.phase.compare ("READY")!=0)
-	{			
-		ros::spinOnce();
-		rate.sleep();
-	}
- 	*/
+    geometry_msgs::Point point;
 
-	int t_cnt = 0;
-	while (t_cnt < 10) // 현재 phase 업데이트 
-	{
-		ros::spinOnce();
-		rate.sleep();
-		t_cnt++;
-	}
-	while (cur_phase.phase.compare ("READY") !=0)
-	{
-		cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
-		
-		logFile  << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
-		ros::spinOnce();
-		rate.sleep();
-	}
 
-	cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
-	logFile << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
+    orbit_cmd.request.orbit_ref_system = argv[2];
 
-	rtl_client.call(rtl_cmd); // rtl service 호출 (복귀)
-	
-	if (rtl_cmd.response.value == true)
-	{
-		ROS_INFO("RTL command was sent\n");
+
+    Target orbit_center; // template에 포함
+    string orbit_center_str = argv[3];
+    //string orbit_center_str = ORBIT_CENTER; // template에 포함
+
+    {
+        // 도구에서 자동 생성 요 (시작)
+        int numCnt = 0;
+        vector<string>  strVector;
+
+        string token;
+        size_t delimiter_pos = 0;
+        delimiter_pos = orbit_center_str.find(",");
+
+        while (delimiter_pos != string::npos)
+        {
+            numCnt++;
+            token = orbit_center_str.substr(0, delimiter_pos);
+            orbit_center_str = orbit_center_str.substr (delimiter_pos+1);
+            cout << "token: " << token << endl;
+            strVector.push_back(token);
+            cout << "orbit_center_str: " << orbit_center_str << endl;
+            delimiter_pos = orbit_center_str.find(",");
         }
-	
-	logFile << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
 
-	logFile.close();		
-	
-	return 0; 
+        token = orbit_center_str.substr(0, delimiter_pos);
+        strVector.push_back(token);
+        numCnt++;
+        cout << "token: " << token << endl;
+        cout << "numCnt: " << numCnt << endl;
+
+        // 도구에서 자동 생성 요 (종료)
+
+        string x_lat_str = strVector[0];
+        orbit_center.x_lat = atof (x_lat_str.c_str());
+
+        string y_long_str = strVector[1];
+        orbit_center.y_long = atof (y_long_str.c_str());
+
+        string z_alt_str = strVector[2];
+        orbit_center.z_alt = atof (z_alt_str.c_str());
+
+        orbit_center.ref_system =  orbit_cmd.request.orbit_ref_system;
+
+        orbit_cmd.request.orbit_center = orbit_center;
+        orbit_cmd.request.orbit_radius = ORBIT_RADIUS;
+        orbit_cmd.request.orbit_req_cnt = ORBIT_REQ_CNT;
+
+    }
+
+    double radius = atof (argv[4]);
+
+    if (!orbit_client.call(orbit_cmd)) // 서비스 호출
+    {
+        cout << "orbit API call failed!!" << endl;
+        return -1;
+    }
+
+    cout << "orbit API was called" << endl;
+
+    sleep (10);
+
+
+    int t_cnt = 0;
+    while (t_cnt < 10) // 현재 phase 업데이트
+    {
+        ros::spinOnce();
+        rate.sleep();
+        t_cnt++;
+    }
+    while (cur_phase.phase.compare ("READY") !=0)
+    {
+        cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
+        ros::spinOnce();
+        rate.sleep();
+    }
+
+    cout << "ex_hotPoint: cur_phase: " << cur_phase.phase << endl;
+
+
+    if (!rtl_client.call(rtl_cmd)) // 서비스 호출
+    {
+        cout << "RTL API call failed!!" << endl;
+        return -1;
+    }
+
+    cout << "RTL API was called" << endl;
+
+
+
+
+    return 0;
 }
 
 
