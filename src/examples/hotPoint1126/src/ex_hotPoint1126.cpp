@@ -51,7 +51,7 @@ void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
     *cur_target_ptr = *msg;
 
     // 현재 목적지 도달 여부 확인
-    printf("cur_target_cb(): current target: %d \n", cur_target_ptr->target_seq_no);
+    printf("cur_target_cb(): current target: (%lf, %lf, %lf) \n", cur_target_ptr->x_lat, cur_target_ptr->y_long, cur_target_ptr->z_alt);
 
     if (cur_target_ptr->reached == true)
     {

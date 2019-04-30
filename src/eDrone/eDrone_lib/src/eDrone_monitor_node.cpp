@@ -1,5 +1,4 @@
 
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,14 +75,9 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg)
     }
 
     vehicle->setState (current_state);
-    //VehicleState cState = vehicle->getState();
 
-    static int idx = 1;
+    cout << "eDrone_monitor_node- state_cb(): flight mode = " << current_state.mode << endl;
 
-    //if (idx++ %10 ==1)
-    {
-        cout << "eDrone_monitor_node- state_cb(): flight mode = " << current_state.mode << endl;
-    }
 
 }
 
@@ -177,10 +171,8 @@ int main(int argc, char** argv)
 
     while ( ros::ok() )
     {
-        VehicleState cState = vehicle->getState();
         ros::spinOnce();
         rate.sleep();
-        GeoPoint home = geoInfo->getHomePosition();
     }
 
     return 0;

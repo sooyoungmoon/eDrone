@@ -16,7 +16,7 @@
 #include <vector> 
 #include <geometry_msgs/Point.h>
 #include <ros/ros.h>
-#include <mavlink/v2.0/common/mavlink.h>
+//#include <mavlink/v2.0/common/mavlink.h>
 #include <mavros_msgs/HomePosition.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/CommandBool.h>
@@ -48,11 +48,8 @@ using namespace geometry_msgs;
 using namespace eDrone_msgs;
 
 extern bool pathOverlap(Point, Point, vector<Point>);
-
 eDrone_msgs::NoflyZones nfZones; // 비행금지구역 (다수)
 eDrone_msgs::Geofence geofence; // 가상울타리 
-
-
 mavros_msgs::State current_state; // 무인기 상태 정보
 geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
 sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
@@ -152,12 +149,6 @@ bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::N
     printf ("eDrone_safety_node: NoflyZoneSet service was called");
 
 
-
-
-
-
-
-
     if ((req.noflyZoneSet_ref_system.compare("WGS84") ==0)||
             (req.noflyZoneSet_ref_system.compare("ENU") ==0))
     {
@@ -165,26 +156,12 @@ bool srv_noflyZoneSet_cb(eDrone_msgs::NoflyZoneSet::Request &req, eDrone_msgs::N
         nofly_zone.noflyZone_ref_system = req.noflyZoneSet_ref_system;
         nofly_zone.noflyZone_pts = req.noflyZoneSet_pts;
         nfZones.noflyZones.push_back(nofly_zone);
-
-
-        // (04/24 - test)
-        /*
-        int i = 0;
-        for(vector<Target>::iterator it = nofly_zone.noflyZone_pts.begin();
-            it != nofly_zone.noflyZone_pts.end();
-            it++ )
-        {
-            Target target = *it;
-            printf("\n noflyZoneSet_cb(): target %d, (%lf,%lf,%lfn", i++, target.x_lat, target.y_long, target.z_alt );
-        }
-        */
     }
 }
 
 
 bool srv_noflyZoneReset_cb(eDrone_msgs::NoflyZoneReset::Request &req, eDrone_msgs::NoflyZoneReset::Response &res)
-{	
-    res.value = true;
+{	    
     return true;
 }
 
@@ -306,6 +283,34 @@ bool srv_geofenceReset_cb(eDrone_msgs::GeofenceReset::Request &req, eDrone_msgs:
 
 bool srv_geofenceCheck_cb(eDrone_msgs::GeofenceCheck::Request &req, eDrone_msgs::GeofenceCheck::Response &res)
 {
+    cout << " safety_node - geofenceCheck_cb():" << endl;
+    cout << " geofence radius:" << geofence.geofence_radius;
+
+    if (req.geofence_ref_system == "ENU")
+    {
+        double distance_to_home = sqrt ( pow ( (double) req.geofence_arg1, (double) 2) + pow ( (double) req.geofence_arg2 , (double) 2) );
+
+        if (distance_to_home > geofence.geofence_radius)
+        {
+            res.violation = true;
+            return true;
+        }
+    }
+    else if (req.geofence_ref_system == "WGS84")
+    {
+        Point point = convertGeoToENU(req.geofence_arg1, req.geofence_arg2, req.geofence_arg3, HOME_LAT, HOME_LON, HOME_ALT );
+        double distance_to_home = sqrt ( pow ( (double) point.x , (double) 2) + pow ( (double) point.y , (double) 2) );
+
+        if (distance_to_home > geofence.geofence_radius)
+        {
+            res.violation = true;
+            return true;
+        }
+
+    }
+
+    res.violation = false;
+
     return true;
 }
 

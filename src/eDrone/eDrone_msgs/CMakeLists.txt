@@ -54,7 +54,6 @@ NoflyZoneSet.srv
 NoflyZoneReset.srv
 NoflyZoneCheck.srv
 SurveyArea.srv
-SurveyPath.srv
 Orbit.srv
 )
 

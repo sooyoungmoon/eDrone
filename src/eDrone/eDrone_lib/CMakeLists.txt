@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 	sensor_msgs
 	geographic_msgs	
 	mavros_msgs
+	mavros
 	eDrone_msgs
 	libmavconn
 	

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <ros/ros.h>
-#include <mavlink/v2.0/common/mavlink.h>
+//#include <mavlink/v2.0/common/mavlink.h>
 #include <mavros_msgs/HomePosition.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/CommandBool.h>
@@ -44,7 +44,7 @@
 #include <eDrone_msgs/NoflyZone.h> // (2018.11.19) 비행금지구역 data type  
 #include <eDrone_msgs/NoflyZones.h> //	(2018.11.19) 다수 비행 금지구역 topoic msg type
 #include <eDrone_msgs/SurveyArea.h> // 영역 탐색 
-#include <eDrone_msgs/SurveyPath.h> // 경로 탐색 (경로 이동, 사진 촬영, +a) 
+//#include <eDrone_msgs/SurveyPath.h> // 경로 탐색 (경로 이동, 사진 촬영, +a)
 #include <eDrone_msgs/Orbit.h> // hotPoint API를 위한 선회 비행 
 #include <eDrone_lib/Vehicle.h>
 #include <eDrone_lib/GeoInfo.h>
@@ -93,7 +93,7 @@ void checkNoflyZoneCells(Mental_Map* mental_map); // (Mental_Map 상에서) 비�
 
 void printPoint(Point point); // Point 출력 함수 
 
-Target_Position target_position = { .target_seq_no = -1 }; // 현재 목적지 정보 (published topic)
+Target_Position target_position;// (04.30) // 현재 목적지 정보 (published topic)
 
 int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
 
@@ -1456,7 +1456,8 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Re
     }
     cur_phase.phase = "TAKEOFF";
     printf("Takeoff command was sent\n");
-    res.value = true;
+
+    return true;
 }
 
 bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Response &res)
@@ -1483,7 +1484,7 @@ bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Re
 
     }
     printf("Landing command was sent\n");
-    res.value = true;
+
     return true;
 }
 
@@ -1500,12 +1501,11 @@ bool srv_modeChange_cb(eDrone_msgs::ModeChange::Request &req, eDrone_msgs::ModeC
     if (modeChange_client.call(modeChange_cmd)==true)
     {
         std::cout << " modeChange cmd was sent!\n " << endl;
-        res.value = true;
     }
     else
     {
         cout << " modeChange cmd failed!\n " << endl;
-        res.value = false;
+        return false;
     }
 
     return true;
@@ -1526,10 +1526,11 @@ bool srv_rtl_cb(eDrone_msgs::RTL::Request &req, eDrone_msgs::RTL::Response &res)
     else
     {
         cout << " modeChange cmd failed!\n " << endl;
+        return false;
     }
     cur_phase.phase = "RTL";
 
-    res.value = true;
+
     return true;
 }
 
@@ -1539,7 +1540,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
     Target_Position requested_target; // we use local variable, not a global varialble
 
     printf("eDrone_control_node: Goto request received\n");
-    printf("eDrone_control_node: target_seq_no: %d\n", requested_target.target_seq_no);
+
     cout<< "req.goto_point.x_lat: " << req.goto_point.x_lat << ", req.goto_point.y_long: " << req.goto_point.y_long << endl;
 
     /* goto 서비스 처리 절차 */
@@ -1629,20 +1630,6 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
 
             // (2019.04.24)
             cur_phase.phase = "PLANNING_GOTO";
-            //
-
-            /*
-            vector<Target_Position> indirectPath = getIndirectPath(src, dest);
-            printPath(indirectPath);
-
-            for( vector<Target_Position>::iterator it = indirectPath.begin();
-                 it != indirectPath.end(); it++ )
-            {
-                Target_Position waypoint = *it;
-                waypoint.reached = false;
-                path.push_back(waypoint);
-            } // path에 indirectPath 추가
-            */
 
             res.value = true;
         }
@@ -1660,8 +1647,7 @@ bool srv_goto_cb(eDrone_msgs::Goto::Request &req, eDrone_msgs::Goto::Response &r
     else
     {
         cout << " noflyZoneCheck API call failed! " << endl;
-        res.value = false;
-        return true;
+        return false;
     }
 
     return true;
@@ -1719,13 +1705,12 @@ bool srv_gotoPath_cb(eDrone_msgs::GotoPath::Request &req, eDrone_msgs::GotoPath:
             printf("gotoPath_cb(): target_position 'push'! (%lf,%lf,%lf)\n " , target_position.pos_local.x, target_position.pos_local.y, target_position.pos_local.z );
         }
     }
-    res.value = true;
+
     return true;
 }
 
 bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::SurveyArea::Response &res)
 {
-    bool result = false;
 
     printf ("eDrone_control_node: surveyArea service was called");
 
@@ -1736,9 +1721,7 @@ bool srv_surveyArea_cb(eDrone_msgs::SurveyArea::Request &req, eDrone_msgs::Surve
     survey_altitude = req.surveyArea_altitude;
     survey_interval =  req.surveyArea_interval;
 
-
-    result = true;
-    return result;
+    return true;
 }
 
 bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
@@ -1760,9 +1743,6 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
     {
         int c=0;
         Target_Position pos = *it;
-
-        //printf("target%d: (%lf,%lf,%lf) \n", c, pos.pos_local.x, pos.pos_local.y, pos.pos_local.z);
-
         orbit_path.push_back(pos);
         c++;
     }
@@ -1774,8 +1754,6 @@ bool srv_orbit_cb(eDrone_msgs::Orbit::Request &req,
     cur_phase.phase = "ORBIT";
 
     return true;
-
-
 }
 
 int main(int argc, char** argv)
@@ -1882,6 +1860,7 @@ int main(int argc, char** argv)
             // change mode to offboard
             modeChange_cmd.request.base_mode = 0;
             modeChange_cmd.request.custom_mode = "OFFBOARD";
+
             if (modeChange_client.call(modeChange_cmd))
             {
 
@@ -1899,15 +1878,12 @@ int main(int argc, char** argv)
         }
         else if (cur_phase.phase.compare ("READY") ==0)
         {
-            // 이륙 후, 또는 직전 위치 이동 명령 수행 후, 다음 명령을 대기하고 있는 상태
-            // 위치 이동 관련 명령이 호출되면, 경로 재설정 후 READY 상태로 전이 -> 경로 비행
-            // path에 목적지 정보가 있으면 첫 번째 데이터를 읽어 와서 target position 갱신
+            // 이륙 후, 또는 직전 위치 이동 명령 수행 후, 다음 명령을 대기
 
             if (!path.empty() )
             {
                 target_position = path[0];
                 path.erase(path.begin());
-                target_position.target_seq_no++;
                 target_position.reached = false; // (2019.04.10)
                 cur_phase.phase = "GOTO";
                 printf("main(): target_position 'pop'! (%lf,%lf,%lf)\n " , target_position.pos_local.x, target_position.pos_local.y, target_position.pos_local.z );
@@ -1916,7 +1892,6 @@ int main(int argc, char** argv)
             else
             {
                 // 갱신된 target 정보 publish (응용 프로그램에 타겟 정보 전달)
-                cur_target.target_seq_no = target_position.target_seq_no;
                 cur_target.ref_system = target_position.ref_system;
                 cur_target.x_lat = target_position.pos_local.x;
                 cur_target.y_long = target_position.pos_local.y;
@@ -1962,7 +1937,6 @@ int main(int argc, char** argv)
             {
 
                 // 현재 목적지 정보 publish (응용 프로그램에 target 정보 제공)
-                cur_target.target_seq_no = target_position.target_seq_no;
                 cur_target.ref_system = target_position.ref_system;
                 cur_target.is_global = target_position.is_global;
                 cur_target.reached = target_position.reached;
@@ -1992,8 +1966,6 @@ int main(int argc, char** argv)
                     target_pos_local.pose.position.z = target_position.pos_local.z;
                     pos_pub_local.publish (target_pos_local);
                 }
-
-
             }
 
             else// target position에 도착했으면 path 검사
@@ -2003,23 +1975,11 @@ int main(int argc, char** argv)
                 {
                     target_position = path[0];
                     printf("main(): target_position 'pop'! (%lf,%lf,%lf)\n " , target_position.pos_local.x, target_position.pos_local.y, target_position.pos_local.z );
-                    /*
-                    target_position.pos_local.x = path[0].pos_local.x;
-                    target_position.pos_local.y = path[0].pos_local.y;
-                    target_position.pos_local.z = path[0].pos_local.z;
-                    target_position.pos_global.latitude = path[0].pos_global.latitude;
-                    target_position.pos_global.longitude = path[0].pos_global.longitude;
-                    target_position.pos_global.altitude = path[0].pos_global.altitude;
-                    */
                     path.erase(path.begin());
-                    target_position.target_seq_no = cur_target.target_seq_no + 1;
                     target_position.reached = false;
-
-                    cout <<" target_seq_no: " << target_position.target_seq_no << endl;
 
                     // 갱신된 target 정보 publish (응용 프로그램에 타겟 정보 전달)
 
-                    cur_target.target_seq_no = target_position.target_seq_no;
                     cur_target.ref_system = target_position.ref_system;
                     cur_target.is_global = target_position.is_global;
                     cur_target.reached = target_position.reached;
@@ -2037,25 +1997,12 @@ int main(int argc, char** argv)
                         cur_target.z_alt = target_position.pos_global.altitude;
                     }
 
-                    /*
 
-                    if (  target_pos_local.pose.position.x !=0 || // target_position　값　초기화　여부　확인
-                          target_pos_local.pose.position.y !=0 ||
-                          target_pos_local.pose.position.z !=0)
-                    {
-                        // 현재 목적지 위치 publish (실제 위치 이동)
-                        target_pos_local.pose.position.x = target_position.pos_local.x;
-                        target_pos_local.pose.position.y = target_position.pos_local.y;
-                        target_pos_local.pose.position.z = target_position.pos_local.z;
-                        pos_pub_local.publish (target_pos_local);
-                    }
-                    */
                 }
 
                 // path가 비어 있으면 READY phase로 전이
                 else
                 {
-
                     cout << "eDrone_control_node: Goto phase: path is empty" <<endl;
                     cur_phase.phase = "READY";
                 }
@@ -2094,8 +2041,6 @@ int main(int argc, char** argv)
             } // path에 indirectPath 추가
             //　경로　계산　완료
 
-            sleep(3);
-
             // OFFBOARD 모드로　비행　모드　변환
 
             // change mode to offboard
@@ -2114,8 +2059,6 @@ int main(int argc, char** argv)
             }
 
             cur_phase.phase = "GOTO";
-
-
         }
 
         else if (cur_phase.phase.compare ("PLANNING_SURVEY") ==0) // (201９.04.22)
@@ -2199,10 +2142,6 @@ int main(int argc, char** argv)
                 path.push_back(target_position);
             } // path에 coveragePath 추가
 
-
-            // 탐색　경로　계산　완료
-            sleep(3);
-
             // OFFBOARD 모드로　비행　모드　변환
 
             // change mode to offboard
@@ -2233,7 +2172,6 @@ int main(int argc, char** argv)
                 if (target_position.reached != true) // 현재 목적지에 도착 전이면 해당 좌표 출판 (pub)
                 {
                     // 현재 목적지 정보 publish (응용 프로그램에 target 정보 제공)
-                    cur_target.target_seq_no = target_position.target_seq_no;
                     cur_target.ref_system = target_position.ref_system;
                     cur_target.is_global = target_position.is_global;
                     cur_target.reached = target_position.reached;

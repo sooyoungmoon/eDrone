@@ -1,5 +1,4 @@
 
-#include <mavlink/v2.0/common/mavlink.h>
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,6 +10,7 @@
 #include <sensor_msgs/NavSatFix.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Vector3Stamped.h>
+#include <mavlink/v2.0/common/mavlink.h>
 #include <mavros_msgs/HomePosition.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/CommandBool.h>
@@ -32,8 +32,7 @@
 #include <eDrone_msgs/MissionDownload.h> // 미션 다운로드 서비스 헤더 파일 포함
 #include <eDrone_msgs/MissionClear.h> // 미션 제거 서비스 헤더 파일 포함
 #include <eDrone_msgs/CheckHome.h>  // 홈 위치 확인 서비스 헤더 파일 포함
-#include <eDrone_msgs/GeofenceSet.h> // 가상 울타리 설정 
-#include <eDrone_msgs/GeofenceReset.h> // 가상 울타리 해제 
+#include <eDrone_msgs/Geofence.h> // 가상울타리 정보
 #include <eDrone_msgs/GeofenceCheck.h> // 가상 울타리 확인
 #include <eDrone_msgs/NoflyZoneSet.h> // 비행 금지 구역 설정
 #include <eDrone_msgs/NoflyZoneReset.h> // 비행 금지 구역 해제
@@ -54,6 +53,7 @@ mavros_msgs::WaypointPull waypointPull_cmd; // 미션 다운로드 요청 메시
 mavros_msgs::WaypointClear waypointClear_cmd; // 미션 제거 요청 메시지
 mavros_msgs::SetMode modeChange_cmd; //상태 변경 요청 메시지
 eDrone_msgs::CheckHome checkHome_cmd; // home 위치 확인 서비스 요청 메시지
+eDrone_msgs::Geofence geofence;
 
 // subscriber 선언
 ros::Subscriber wpList_sub;
@@ -124,8 +124,6 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     case MAV_CMD_NAV_WAYPOINT:
         waypoint.frame = req.missionAddItem_waypoint.frame;
         waypoint.command = req.missionAddItem_waypoint.command;
-        //waypoint.z_alt = req.missionAddItem_waypoint.z_alt;
-
 
         if (waypoint.frame == waypoint.FRAME_LOCAL_ENU) // 지역 좌표인 경우
         {
@@ -166,6 +164,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
     printf("eDrone_autoflight_node: trying to call GeofenceCheck service");
 
+
     if (geofenceCheck_client.call (geofenceCheck_cmd) == true)
     {
 
@@ -184,6 +183,11 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
             }
         }
 
+    }
+    else // (2019.04.30) 예외　처리
+    {
+        cout << "GeofenceCheck request failed!! " << endl;
+        return false;
     }
 
     if (geofence_violation!=true)
@@ -205,13 +209,15 @@ bool srv_missionUpload_cb(eDrone_msgs::MissionUpload::Request &req, eDrone_msgs:
     waypointPush_cmd.request.start_index = 0;
     waypointPush_cmd.request.waypoints = waypoints;
 
-    //// 서비스 요청 메시지 전달
-
     //// waypointPush
 
     printf("send WaypointPush command ...\n");
 
-    waypointPush_client.call(waypointPush_cmd);
+    if (!waypointPush_client.call(waypointPush_cmd))
+    {
+        printf("WaypointPush request failed!");
+        return false;
+    }
 
     printf("WaypointPush command was sent\n");
 
@@ -229,8 +235,16 @@ bool srv_missionClear_cb(eDrone_msgs::MissionClear::Request &req, eDrone_msgs::M
 {
     printf("MIssionClear request received\n");
     waypoints.clear();
-    waypointClear_client.call(waypointClear_cmd);
+
+    if (!waypointClear_client.call(waypointClear_cmd))
+    {
+        printf("WaypointClear_client request failed!");
+        return false;
+    }
+
     printf("WaypointClear command was sent\n");
+
+    return true;
 }
 
 int main(int argc, char** argv)
