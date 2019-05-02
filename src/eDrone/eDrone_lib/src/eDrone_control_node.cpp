@@ -93,89 +93,90 @@ void checkNoflyZoneCells(Mental_Map* mental_map); // (Mental_Map 상에서) 비�
 
 void printPoint(Point point); // Point 출력 함수 
 
-Target_Position target_position;// (04.30) // 현재 목적지 정보 (published topic)
 
-int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
+static Target_Position target_position;// (04.30) // 현재 목적지 정보 (published topic)
+
+static int num_targets; // 목적지 개수 (goto service마다 1 씩 증가)
 
 // Subscribed ROS topics
-mavros_msgs::State current_state; // 무인기 상태 정보
-geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
-sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
-NoflyZones nfZones;
-Geofence geofence;
+static mavros_msgs::State current_state; // 무인기 상태 정보
+static geometry_msgs::PoseStamped current_pos_local; // 현재 위치 및 자세 정보 (지역 좌표)
+static sensor_msgs::NavSatFix current_pos_global; // 현재 위치 정보 (전역 좌표)
+static NoflyZones nfZones;
+static Geofence geofence;
 
 // Published ROS topics
-geometry_msgs::PoseStamped base_pos_local; // 실질적인　원점 (ENU) -（goto 명령을　내릴　때，　목적지　좌표에　더함）
-geometry_msgs::PoseStamped target_pos_local; // 목적지 위치 정보 (지역 좌표)
-mavros_msgs::GlobalPositionTarget target_pos_global; // 목적지 위치 정보 (전역 좌표)
-eDrone_msgs::Target cur_target; // 현재 목적지 정보 (publisher: eDrone_control_node, subscriber: 응용 프로그램)
-eDrone_msgs::Phase cur_phase; // 현재 무인기　상태 （ex. UNARMED, ARMED, READY, GOTO, ...)
-std::vector<Target_Position> path; // 자율 비행 경로
+static geometry_msgs::PoseStamped base_pos_local; // 실질적인　원점 (ENU) -（goto 명령을　내릴　때，　목적지　좌표에　더함）
+static geometry_msgs::PoseStamped target_pos_local; // 목적지 위치 정보 (지역 좌표)
+static mavros_msgs::GlobalPositionTarget target_pos_global; // 목적지 위치 정보 (전역 좌표)
+static eDrone_msgs::Target cur_target; // 현재 목적지 정보 (publisher: eDrone_control_node, subscriber: 응용 프로그램)
+static eDrone_msgs::Phase cur_phase; // 현재 무인기　상태 （ex. UNARMED, ARMED, READY, GOTO, ...)
+static std::vector<Target_Position> path; // 자율 비행 경로
 
 // Orbit API (hotPoint) 관련 변수
-std::vector<Target_Position> orbit_path; // 특정 위치를 기준으로 하는 선회 비행 경로
-int orbit_req_cnt = 0; // (요청된) 선회 비행 횟수
-int orbit_cnt = 0; // 현재 선회 비행 횟수
-Target orbit_center; // (04/30)
-double orbit_radius; // (04/30)
+static std::vector<Target_Position> orbit_path; // 특정 위치를 기준으로 하는 선회 비행 경로
+static int orbit_req_cnt = 0; // (요청된) 선회 비행 횟수
+static int orbit_cnt = 0; // 현재 선회 비행 횟수
+static Target orbit_center; // (04/30)
+static double orbit_radius; // (04/30)
 
 //　ROS Service 요청 메시지 선언 (mavros)
-mavros_msgs::CommandBool arming_cmd; // 시동 명령에 사용될 서비스 선언 
-mavros_msgs::CommandTOL takeoff_cmd; // 이륙 명령에 사용될 서비스 선언 
-mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선언 
-mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
-mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
-mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지
-mavros_msgs::CommandHome setHome_cmd; // (2019.04.11) setHome　요청　메시지　
-eDrone_msgs::GeofenceCheck geofenceCheck_cmd; // 가상 울타리 확인에 사용될 요청 메시지 
-eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // 비행 금지 구역 확인에 사용될 요청 메시지 
+static mavros_msgs::CommandBool arming_cmd; // 시동 명령에 사용될 서비스 선언 
+static mavros_msgs::CommandTOL takeoff_cmd; // 이륙 명령에 사용될 서비스 선언 
+static mavros_msgs::CommandTOL landing_cmd; // 착륙 명령에 사용될 서비스 선언 
+static mavros_msgs::CommandLong commandLong_cmd;// 무인기 제어에 사용될 서비스 선언
+static mavros_msgs::SetMode modeChange_cmd; // 모드 변경에 사용될 서비스 요청 메시지
+static mavros_msgs::SetMode rtl_cmd; // 복귀 명령에 사용될 서비스 요청 메시지
+static mavros_msgs::CommandHome setHome_cmd; // (2019.04.11) setHome　요청　메시지　
+static eDrone_msgs::GeofenceCheck geofenceCheck_cmd; // 가상 울타리 확인에 사용될 요청 메시지 
+static eDrone_msgs::NoflyZoneCheck noflyZoneCheck_cmd; // 비행 금지 구역 확인에 사용될 요청 메시지 
 
-ros::Publisher pos_pub_local;
-ros::Publisher pos_pub_global;
-ros::Publisher cur_target_pub; // (offboard control에 필요한) 현재 목적지 정보 (도착 여부 포함)
-ros::Publisher cur_phase_pub; // 현재 무인기 임무 수행 단계 정보
+static ros::Publisher pos_pub_local;
+static ros::Publisher pos_pub_global;
+static ros::Publisher cur_target_pub; // (offboard control에 필요한) 현재 목적지 정보 (도착 여부 포함)
+static ros::Publisher cur_phase_pub; // 현재 무인기 임무 수행 단계 정보
 
-ros::Subscriber state_sub;
-ros::Subscriber pos_sub_local;
-ros::Subscriber pos_sub_global;
-ros::Subscriber home_sub; 
-ros::Subscriber noflyZones_sub; 
-ros::Subscriber geofence_sub; 
+static ros::Subscriber state_sub;
+static ros::Subscriber pos_sub_local;
+static ros::Subscriber pos_sub_global;
+static ros::Subscriber home_sub; 
+static ros::Subscriber noflyZones_sub; 
+static ros::Subscriber geofence_sub; 
 
-ros::ServiceServer arming_srv_server;
-ros::ServiceServer takeoff_srv_server;
-ros::ServiceServer landing_srv_server;
-ros::ServiceServer modeChange_srv_server;
-ros::ServiceServer rtl_srv_server;
-ros::ServiceServer goto_srv_server;
-ros::ServiceServer gotoPath_srv_server;
-ros::ServiceServer surveyArea_srv_server;
-ros::ServiceServer orbit_srv_server;
+static ros::ServiceServer arming_srv_server;
+static ros::ServiceServer takeoff_srv_server;
+static ros::ServiceServer landing_srv_server;
+static ros::ServiceServer modeChange_srv_server;
+static ros::ServiceServer rtl_srv_server;
+static ros::ServiceServer goto_srv_server;
+static ros::ServiceServer gotoPath_srv_server;
+static ros::ServiceServer surveyArea_srv_server;
+static ros::ServiceServer orbit_srv_server;
 
-ros::ServiceClient arming_client; // 서비스 클라이언트 선언
-ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
-ros::ServiceClient landing_client; // 서비스 클라이언트 선언
-ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
-ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트 
-ros::ServiceClient geofenceCheck_client;
-ros::ServiceClient noflyZoneCheck_client;
-ros::ServiceClient setHome_client; // (2019.04.10) setHome client
+static ros::ServiceClient arming_client; // 서비스 클라이언트 선언
+static ros::ServiceClient takeoff_client; // 서비스 클라이언트 선언
+static ros::ServiceClient landing_client; // 서비스 클라이언트 선언
+static ros::ServiceClient modeChange_client; // 비행 모드 변경 서비스 클라이언트 선언
+static ros::ServiceClient rtl_client; // 복귀 서비스 클라이언트 
+static ros::ServiceClient geofenceCheck_client;
+static ros::ServiceClient noflyZoneCheck_client;
+static ros::ServiceClient setHome_client; // (2019.04.10) setHome client
 
-double HOME_LAT;
-double HOME_LON;
-double HOME_ALT;
+static double HOME_LAT;
+static double HOME_LON;
+static double HOME_ALT;
 
-double takeoff_altitude = 0; // 이륙　고도
+static double takeoff_altitude = 0; // 이륙　고도
 
 // (0424) goto
-Target src;
-Target dest;
+static Target src;
+static Target dest;
 
 // (0423) survey
-string survey_ref_system = "";
-vector<eDrone_msgs::Target> survey_points;
-double survey_altitude = 0;
-double survey_interval = 0;
+static string survey_ref_system = "";
+static vector<eDrone_msgs::Target> survey_points;
+static double survey_altitude = 0;
+static double survey_interval = 0;
 
 vector<Target_Position> getOrbitPath()// 선회비행경로계산
 {
