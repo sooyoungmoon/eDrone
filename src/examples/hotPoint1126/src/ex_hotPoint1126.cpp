@@ -34,13 +34,8 @@
 using namespace std;
 using namespace eDrone_msgs;
 
-/* 포인터 변수 선언  */
-
-ros::NodeHandle* nh_ptr; // node handle pointer (서버/클라이언트 또는 퍼블리셔/서브스크라이버 선언에 사용)
-
-eDrone_msgs::Target* cur_target_ptr; // cur_target 변수 접근을 위한 포인터 변수 
-
-eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
+eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
+eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
 
 /* 콜백 함수 정의 */
 
@@ -48,22 +43,22 @@ eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
 
 void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 {
-    *cur_target_ptr = *msg;
+    cur_target = *msg;
 
     // 현재 목적지 도달 여부 확인
-    printf("cur_target_cb(): current target: (%lf, %lf, %lf) \n", cur_target_ptr->x_lat, cur_target_ptr->y_long, cur_target_ptr->z_alt);
+    printf("cur_target_cb(): current target: (%lf, %lf, %lf) \n", cur_target.x_lat, cur_target.y_long, cur_target.z_alt);
 
-    if (cur_target_ptr->reached == true)
+    if (cur_target.reached == true)
     {
         ROS_INFO("we reached at the current target\n");
     }
 }
 void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
 {
-    *cur_phase_ptr = *msg;
+    cur_phase = *msg;
 
     // 현재 목적지 도달 여부 확인
-    ROS_INFO("cur_phase_cb(): %s \n", cur_phase_ptr->phase.c_str());
+    ROS_INFO("cur_phase_cb(): %s \n", cur_phase.phase.c_str());
 
 }
 
@@ -79,7 +74,6 @@ int main(int argc, char** argv)
 
     ros::init(argc, argv, "ex_hotPoint");
     ros::NodeHandle nh;
-    nh_ptr = &nh; // node handle 주소 저장
 
     /* 주요 변수 선언 */
 
@@ -98,11 +92,9 @@ int main(int argc, char** argv)
 
 
     // 토픽 메시지 변수 선언
-    eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
-    eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
-    cur_target_ptr = &cur_target; // cur_target 변수 주소 저장
+
     eDrone_msgs::Target next_target; // 다음 목적지
-    cur_phase_ptr = &cur_phase;
+
 
     // 서비스 메시지 변수 선언
     eDrone_msgs::CheckState checkState_cmd;
@@ -246,10 +238,7 @@ int main(int argc, char** argv)
     }
 
     geometry_msgs::Point point;
-
-
     orbit_cmd.request.orbit_ref_system = argv[2];
-
 
     Target orbit_center; // template에 포함
     string orbit_center_str = argv[3];

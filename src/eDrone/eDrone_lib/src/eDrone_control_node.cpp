@@ -1173,6 +1173,18 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
             cur_cell_ptr->includedInPath = true;
         }
     }
+
+
+    // (2019.05.22) memory deallocation (mental_map.grid, waveFrontMap)
+
+    for (int c = 0; c < AREA_WIDTH+1; c++)
+    {
+        delete[] (mental_map.grid[c]);
+    }
+
+    delete[](mental_map.grid);
+    delete[](waveFrontMap);
+
     return path;
 }
 

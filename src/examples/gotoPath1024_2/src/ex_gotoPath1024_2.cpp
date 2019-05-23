@@ -37,10 +37,8 @@ using namespace geographic_msgs;
 using namespace geometry_msgs;
 using namespace eDrone_msgs;
 
-/* 포인터 변수 선언 */
-ros::NodeHandle* nh_ptr; // node handle pointer (서버/클라이언트 또는 퍼블리셔/서브스크라이버 선언에 사용)
-eDrone_msgs::Target* cur_target_ptr; // cur_target 변수 접근을 위한 포인터 변수 
-eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
+eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
+eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
 
 
 /* 콜백 함수 정의 */
@@ -49,17 +47,17 @@ eDrone_msgs::Phase* cur_phase_ptr; // cur_phase		"
 
 void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 {
-    *cur_target_ptr = *msg;
+    cur_target = *msg;
 
     // 현재 목적지 도달 여부 확인
     //ROS_INFO("cur_target_cb(): \n");
-    //ROS_INFO("current target: %d \n", cur_target_ptr->target_seq_no);
+    //ROS_INFO("current target: %d \n", cur_target.target_seq_no);
 
-    if (cur_target_ptr->reached == true)
+    if (cur_target.reached == true)
     {
         ROS_INFO("cur_target_cb(): \n");
-        ROS_INFO("current target: %d \n", cur_target_ptr->target_seq_no);
-        ROS_INFO("%lf %lf \n", cur_target_ptr->x_lat, cur_target_ptr->y_long);
+        ROS_INFO("current target: %d \n", cur_target.target_seq_no);
+        ROS_INFO("%lf %lf \n", cur_target.x_lat, cur_target.y_long);
         ROS_INFO("we reached at the current target\n");
     }
 
@@ -67,12 +65,12 @@ void cur_target_cb(const eDrone_msgs::Target::ConstPtr& msg)
 
 void cur_phase_cb(const eDrone_msgs::Phase::ConstPtr& msg)
 {
-    *cur_phase_ptr = *msg;
+    cur_phase = *msg;
 
     // 현재 목적지 도달 여부 확인
-    ROS_INFO("cur_phase_cb(): %s \n", cur_phase_ptr->phase.c_str());
+    ROS_INFO("cur_phase_cb(): %s \n", cur_phase.phase.c_str());
     //sleep(1);
-    //ROS_INFO("current phase: %s \n", cur_phase_ptr->phase.c_str());
+    //ROS_INFO("current phase: %s \n", cur_phase.phase.c_str());
 }
 
 /* 기타 함수 정의 */
@@ -86,23 +84,13 @@ int main (int argc, char** argv)
     ROS_INFO("==gotoPath1024_2==\n");
     ros::init(argc, argv, "gotoPath1024_2");
     ros::NodeHandle nh;
-    nh_ptr = &nh; // node handle 주소 저장
-
 
     for (int arg_index = 0; arg_index < argc; arg_index++)
     {
         ROS_INFO("main arg[%d]: %s", arg_index, argv[arg_index] );
     }
 
-    // Topic 메시지 변수
-    eDrone_msgs::Target cur_target; // 무인기가 현재 향하고 있는 목적지 (경유지)
-    eDrone_msgs::Phase cur_phase; // 무인기의 현재 동작 단계 (ex. UNARMED, ARMED, TAKEOFF, GOTO, ...)
-    cur_target_ptr = &cur_target; // cur_target 변수 주소 저장
-    cur_phase_ptr = &cur_phase;
-
     // Service 메시지 변수
-
-
     eDrone_msgs::CheckState checkState_cmd;
     eDrone_msgs::CheckPosition checkPosition_cmd;
     eDrone_msgs::Arming arming_cmd;
@@ -110,21 +98,14 @@ int main (int argc, char** argv)
     eDrone_msgs::GotoPath gotoPath_cmd;
     eDrone_msgs::RTL rtl_cmd;
 
-    // 기타 변수
-
-
-    // Topic Subscriber 객체
-
     // rate 설정
     ros::Rate rate(20.0);
 
     // 토픽 subscriber 선언 & 초기화
-
     ros::Subscriber cur_target_sub = nh.subscribe("eDrone_msgs/current_target", 10, cur_target_cb); //
     ros::Subscriber cur_phase_sub = nh.subscribe("eDrone_msgs/current_phase", 10, cur_phase_cb);
 
     // ROS Service Client 객체
-
     ros::ServiceClient checkState_client =nh.serviceClient<eDrone_msgs::CheckState>("srv_checkState");
     ros::ServiceClient checkPosition_client =nh.serviceClient<eDrone_msgs::CheckPosition>("srv_checkPosition");
     ros::ServiceClient arming_client =nh.serviceClient<eDrone_msgs::Arming>("srv_arming");
@@ -135,7 +116,6 @@ int main (int argc, char** argv)
     // ROS Service 호출
 
     // 연결 상태 확인
-
     sleep(10); // (수정)
     ROS_INFO("Send checkState command ... \n");
     ROS_INFO("Checking the connection ... \n");
@@ -239,7 +219,7 @@ int main (int argc, char** argv)
     {
         ros::spinOnce();
         rate.sleep();
-        //cout << "cur_phase: " << cur_phase_ptr->phase << endl;
+        //cout << "cur_phase: " << cur_phase.phase << endl;
     }
 
     string gotoPath_ref_system = GOTOPATH_REF_SYSTEM;
@@ -320,7 +300,7 @@ int main (int argc, char** argv)
     {
         ros::spinOnce();
         rate.sleep();
-        cout << "cur_phase: " << cur_phase_ptr->phase << endl;
+        cout << "cur_phase: " << cur_phase.phase << endl;
     }
 
     cout << "gotoPath completed:" << endl;
@@ -332,7 +312,7 @@ int main (int argc, char** argv)
     {
         ros::spinOnce();
         rate.sleep();
-        //cout << "cur_phase: " << cur_phase_ptr->phase << endl;
+        //cout << "cur_phase: " << cur_phase.phase << endl;
     }
     cout << "rtl service call:" << endl;
 

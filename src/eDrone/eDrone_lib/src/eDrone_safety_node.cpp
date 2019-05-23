@@ -339,6 +339,7 @@ int main(int argc, char** argv )
 
     // 서비스 서버 초기화
     geofenceSet_srv_server = nh.advertiseService ("srv_geofenceSet", srv_geofenceSet_cb ); // (2019.04.23)geofenceSet service server initialization
+    geofenceCheck_srv_server = nh.advertiseService ("srv_geofenceCheck", srv_geofenceCheck_cb );
     noflyZoneSet_srv_server = nh.advertiseService ( "srv_noflyZoneSet", srv_noflyZoneSet_cb );
     noflyZoneReset_srv_server = nh.advertiseService ( "srv_noflyZoneReset", srv_noflyZoneReset_cb );
     noflyZoneCheck_srv_server = nh.advertiseService ( "srv_noflyZoneCheck", srv_noflyZoneCheck_cb );

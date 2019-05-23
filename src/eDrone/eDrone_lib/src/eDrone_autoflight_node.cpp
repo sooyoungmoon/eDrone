@@ -24,8 +24,8 @@
 #include <mavros_msgs/WaypointList.h>
 #include <mavros_msgs/WaypointClear.h>
 #include <mavros_msgs/GlobalPositionTarget.h>
-#include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일 포함                                                 
-#include <eDrone_msgs/Takeoff.h> // 이륙 서비스 
+#include <eDrone_msgs/Arming.h> // 시동 서비스 헤더 파일 포함
+#include <eDrone_msgs/Takeoff.h> // 이륙 서비스
 #include <eDrone_msgs/Landing.h> // 착륙 서비스 	"
 #include <eDrone_msgs/MissionAddItem.h> // 미션 아이템 추가 서비스 헤더 파일 포함
 #include <eDrone_msgs/MissionUpload.h> // 미션 업로드 서비스 헤더 파일 포함
@@ -37,14 +37,13 @@
 #include <eDrone_msgs/NoflyZoneSet.h> // 비행 금지 구역 설정
 #include <eDrone_msgs/NoflyZoneReset.h> // 비행 금지 구역 해제
 #include <eDrone_msgs/NoflyZoneCheck.h> // 비행 금지 구역 확인
-#include <eDrone_lib/GeoUtils.h> // 좌표 변환 라이브러리 헤더 파일 
+#include <eDrone_lib/GeoUtils.h> // 좌표 변환 라이브러리 헤더 파일
 
 using namespace std;
 using namespace mavros_msgs;
 using namespace geographic_msgs;
 using namespace geometry_msgs;
 
-ros::NodeHandle* nh_ptr; // node handle 포인터 변수
 mavros_msgs::HomePosition home_position; // Home 위치 획득에 필요한 메시지 변수
 vector<mavros_msgs::Waypoint> waypoints; // 웨이포인트 정보
 mavros_msgs::WaypointList waypointList; // 웨이포인트 목록
@@ -72,7 +71,7 @@ ros::ServiceClient waypointPull_client;
 ros::ServiceClient waypointClear_client;
 ros::ServiceClient commandLong_client;
 ros::ServiceClient modeChange_client; // 모드 변경 서비스 클라이언트
-ros::ServiceClient checkHome_client; // home 위치 확인 서비스 클라이언트 
+ros::ServiceClient checkHome_client; // home 위치 확인 서비스 클라이언트
 ros::ServiceClient noflyZone_client; // 비행금지구역 확인 서비스 클라이언트
 
 // Home 위치 변수
@@ -98,12 +97,14 @@ void print_waypoints (vector<mavros_msgs::Waypoint> waypoints) // 웨이포인�
 }
 
 void wpList_cb(const mavros_msgs::WaypointList::ConstPtr& msg)
-{    
+{
     waypointList = *msg;
 }
 
 bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msgs::MissionAddItem::Response &res)
 {
+    ros::NodeHandle nh; // (2019.05.23)
+
     printf("eDrone_autoflight_node: MissionAddItem request received\n");
 
     // 웨이포인트 추가
@@ -148,6 +149,9 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
 
     case MAV_CMD_NAV_RETURN_TO_LAUNCH:
         break;
+
+    default: // (2019.05.23) Default statement added
+        break;
     }
 
 
@@ -156,7 +160,7 @@ bool srv_missionAddItem_cb(eDrone_msgs::MissionAddItem::Request &req, eDrone_msg
     bool geofence_violation = false;
 
     eDrone_msgs::GeofenceCheck geofenceCheck_cmd;
-    ros::ServiceClient geofenceCheck_client = nh_ptr-> serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck"); // geofence 확인 서비스 클라이언트
+    ros::ServiceClient geofenceCheck_client = nh.serviceClient<eDrone_msgs::GeofenceCheck> ("srv_geofenceCheck"); // geofence 확인 서비스 클라이언트
 
     geofenceCheck_cmd.request.geofence_ref_system = "WGS84";
     geofenceCheck_cmd.request.geofence_arg1= waypoint.x_lat;
@@ -252,7 +256,6 @@ int main(int argc, char** argv)
 {
     ros::init(argc, argv, "eDrone_msgs");
     ros::NodeHandle nh;
-    nh_ptr = &nh;
     ros::Rate rate (20.0);
 
     // subscriber 초기화

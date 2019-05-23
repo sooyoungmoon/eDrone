@@ -271,6 +271,9 @@ double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
     case 'N':
         dist = dist * 0.8684;
         break;
+
+    default: // (2019.05.22) default statement
+        break;
     }
     return (dist);
 }
