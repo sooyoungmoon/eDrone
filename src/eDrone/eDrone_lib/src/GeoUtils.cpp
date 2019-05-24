@@ -142,8 +142,9 @@ bool isInside(Point point, const vector<Point> polygon_area)
         result = true;
     }
     else
+    {
         result = false;
-    // ...
+    }
 
     return result;
 

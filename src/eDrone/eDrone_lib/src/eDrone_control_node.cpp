@@ -1177,12 +1177,20 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     // (2019.05.22) memory deallocation (mental_map.grid, waveFrontMap)
 
+
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        delete[] (mental_map.grid[c]);
+        delete[](mental_map.grid[c]);
+    }
+
+    for (int c = 0; c < AREA_WIDTH+1; c++)
+    {
+        delete[](waveFrontMap[c]);
     }
 
     delete[](mental_map.grid);
+    mental_map_ptr=NULL;
+
     delete[](waveFrontMap);
 
     return path;
@@ -1200,8 +1208,14 @@ void updateMap(Mental_Map* mental_map_ptr, int curCell_x, int curCell_y)
     const int AREA_HEIGHT = mental_map_ptr->area_height;
     int SENSING_RANGE= 0 ;
 
-    if ( AREA_WIDTH > AREA_HEIGHT) SENSING_RANGE = AREA_WIDTH;
-    else SENSING_RANGE = AREA_HEIGHT;
+    if ( AREA_WIDTH > AREA_HEIGHT)
+    {
+        SENSING_RANGE = AREA_WIDTH;
+    }
+    else
+    {
+        SENSING_RANGE = AREA_HEIGHT;
+    }
 
     // 각 방향에 대해 가장 가까운 장애물 위치를 확인하고 mental_map 확장
     for (int local_index_x = (-1) * SENSING_RANGE;
@@ -1426,7 +1440,10 @@ bool srv_arming_cb(eDrone_msgs::Arming::Request &req, eDrone_msgs::Arming::Respo
         {
             ros::spinOnce();
         }
-        else break;
+        else
+        {
+            break;
+        }
     }
 
     printf("ARMing command was sent\n");
@@ -1465,7 +1482,10 @@ bool srv_takeoff_cb(eDrone_msgs::Takeoff::Request &req, eDrone_msgs::Takeoff::Re
         {
             sleep(1);
         }
-        else break;
+        else
+        {
+            break;
+        }
     }
     cur_phase.phase = "TAKEOFF";
     printf("Takeoff command was sent\n");
@@ -1493,7 +1513,10 @@ bool srv_landing_cb(eDrone_msgs::Landing::Request &req, eDrone_msgs::Landing::Re
         {
             sleep(1);
         }
-        else break;
+        else
+        {
+            break;
+        }
 
     }
     printf("Landing command was sent\n");

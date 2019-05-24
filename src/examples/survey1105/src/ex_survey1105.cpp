@@ -171,7 +171,7 @@ int main (int argc, char** argv)
 
         while (checkPosition_cmd.response.value == false)
         {
-            if (checkPosition_client.call(checkPosition_cmd));
+            if (checkPosition_client.call(checkPosition_cmd))
             {
                 ROS_INFO ("Checking position...");
             }
