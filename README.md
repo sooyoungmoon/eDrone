@@ -61,19 +61,14 @@ please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-man
 
 3) Build the code by following the steps:
 
- (1) Build the 'mission_lib_msg' package
+ (1) Build the 'eDrone_lib' package
 
-     $ catkin build mission_lib_msg
-
-
- (2) Build the 'mission_lib' package
-
-     $ catkin build mission_lib
+     $ catkin build eDrone_lib
 
 
- (3) Build the 'mission_examples' package
+ (2) Build the 'examples' package
 
-     $ catkin build mission_examples
+     $ catkin build examples
 
 
 ##### Test
@@ -87,7 +82,11 @@ please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-man
 
   (2) Use 'make' command to build & execute PX4 firmware in SITL mode
 
-	$ make posix_sitl_default gazebo
+	# if you use jmavsim simulator
+	$ make px4_sitl_default jmavsim
+	
+	# or, you can use the gazebo simulator
+	$ make px4_sitl_default gazebo
  
 2) qGroundControl execution
 
@@ -103,7 +102,7 @@ please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-man
    $ ./qgroundcontrol-start.sh
 
      	
-3) Execution of 'mission_lib' package
+3) Execution of the tol example
 
   (1) Edit launch file 
 
@@ -119,21 +118,16 @@ please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-man
 
 	=> <arg name="fcu_url" default="udp://:14540@<IP Addr OF PX4 SITL:14557" />
 
-  (2) Execution of 'mission_lib'
+  (2) Move to the examples package directory
 
-  $ roslaunch mission_lib mission_lib.launch
+  $ cd ~/catkin_ws/src/examples
 
 
-4) Execute an application example (ex. exSimpleTakeoff, ex_simplecheck)
+4) Execute the tol (takeoff and landin) example
 
   (Takeoff)
 
-  $ rosrun mission_examples ex_simpleTakeoff 
-
-  (UAV State/Position Check)
-
-  $ rosrun mission_examples ex_simpleCheck
-
+  $ ./tol.sh
 
 5) Check the execution result
 
@@ -144,7 +138,7 @@ please refer to gitbook "https://sooyoungmoon1.gitbooks.io/edrone-developers-man
    
 ####### License
 
-This project is licensed under XXX License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
 
 ######## Acknowledgments
 
