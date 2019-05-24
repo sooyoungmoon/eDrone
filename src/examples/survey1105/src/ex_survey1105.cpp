@@ -283,9 +283,9 @@ int main (int argc, char** argv)
 
                     string x_str = strVector[3*i];
                     point.x_lat = atof (x_str.c_str());
-                    string y_str = strVector[3*i+1];
+                    string y_str = strVector[(3*i)+1];
                     point.y_long = atof (y_str.c_str());
-                    string z_str = strVector[3*i+2];
+                    string z_str = strVector[(3*i)+2];
                     point.z_alt = atof (z_str.c_str());
                     surveyArea_pts.push_back(point);
                     cout << "point#" << i << "(" << point.x_lat <<", " << point.y_long << ", " << point.z_alt << ")" << endl;

@@ -196,7 +196,7 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
 
     double inclination = (orbit_center.y_long - cur_position.y ) / (orbit_center.x_lat - cur_position.x);
     double A = inclination;
-    double intercept_y = cur_position.y -  inclination * cur_position.x;
+    double intercept_y = cur_position.y -  (inclination * cur_position.x); //(0524)
     double B = intercept_y;
 
     cout << " y = Ax + B " << endl;
@@ -213,8 +213,8 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
     // 직선의 방정식을 원의 방정식에 대입 -> x에 대한 이차방정식으로 표현
 
     double F = pow (A, 2) + 1;
-    double G = 2* A*B + C + A*D;
-    double H = pow (B, 2) + B*D + E;
+    double G = (2*A*B) + C + (A*D);
+    double H = pow (B, 2) + (B*D) + E;
 
     Point cross_pt1, cross_pt2;
 
@@ -224,10 +224,10 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
         return path;
     }
 
-    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-    cross_pt1.y = 	inclination * 	cross_pt1.x + intercept_y;
-    cross_pt2.y = 	inclination * 	cross_pt2.x + intercept_y;
+    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - (4*F*H) ) ) / (2*F);
+    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - (4*F*H) ) ) / (2*F);
+    cross_pt1.y = 	(inclination * 	cross_pt1.x) + intercept_y;
+    cross_pt2.y = 	(inclination * 	cross_pt2.x) + intercept_y;
 
     cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")" << endl;
     cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")" << endl;
@@ -275,8 +275,8 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
         for (double theta = 0; theta < 2*PI; theta += 0.05)
         {
             Target_Position point;
-            point.pos_local.x = orbit_radius * cos(radian + theta) + center_x;
-            point.pos_local.y = orbit_radius * sin(radian + theta) + center_y;
+            point.pos_local.x = ((orbit_radius * cos(radian + theta)) + center_x);
+            point.pos_local.y = ((orbit_radius * sin(radian + theta)) + center_y);
             point.pos_local.z = takeoff_altitude;
             point.ref_system = "ENU";
             point.reached = false;
@@ -565,8 +565,7 @@ vector<Target_Position> getIndirectPath(Target src, Target dest)//　비행금�
                     continue;
                 }// 기 방문된 cell은 제외
 
-                if ( &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor]
-                     == dst_cell_ptr)
+                if ( (&mental_map_ptr->grid[index_x_neighbor][index_y_neighbor]) == dst_cell_ptr)
                 {
                     // 이웃 cell이 목적지 cell인 경우, break
                     min_label = waveFrontMap[index_x_neighbor][index_y_neighbor];
@@ -638,8 +637,8 @@ void initCell (Cell* cell_ptr,
 {
     cell_ptr->index_x = index_x;
     cell_ptr->index_y = index_y;
-    cell_ptr->x = index_x * CELL_WIDTH + base_x;
-    cell_ptr->y = index_y * CELL_HEIGHT + base_y;
+    cell_ptr->x = (index_x * CELL_WIDTH) + base_x;
+    cell_ptr->y = (index_y * CELL_HEIGHT) + base_y;
     cell_ptr->z = 0;
     cell_ptr->visited = false;
     cell_ptr->noflyZone = false;
@@ -935,13 +934,16 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     */
     mental_map.area_width = AREA_WIDTH;
     mental_map.area_height = AREA_HEIGHT;
-    mental_map.grid = new Cell*[AREA_WIDTH+1];
+    // mental_map.grid = new Cell*[AREA_WIDTH+1];
+
+    mental_map.grid = NULL;
+    mental_map.grid = (Cell**)calloc(AREA_WIDTH+1,sizeof(Cell*)); // (0524)
 
     // CELL 배열 동적 할당
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        mental_map.grid[c] = new Cell[AREA_HEIGHT+1];
+        mental_map.grid[c] = (Cell*)calloc(AREA_WIDTH+1,sizeof(Cell)); // (0524)
     }
 
     // cout << "Dynamic allocation" << endl;
@@ -1180,7 +1182,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        delete[](mental_map.grid[c]);
+        free(mental_map.grid[c]);
     }
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
@@ -1188,8 +1190,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         delete[](waveFrontMap[c]);
     }
 
-    delete[](mental_map.grid);
     mental_map_ptr=NULL;
+    free(mental_map.grid);
 
     delete[](waveFrontMap);
 

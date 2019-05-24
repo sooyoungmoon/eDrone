@@ -1,0 +1,1533 @@
+[0m[ INFO] [1558617294.264818679]: FCU URL: udp://:14540@127.0.0.1:14557[0m
+[0m[ INFO] [1558617294.267377216]: udp0: Bind address: 0.0.0.0:14540[0m
+[0m[ INFO] [1558617294.267481515]: udp0: Remote address: 127.0.0.1:14557[0m
+[0m[ INFO] [1558617294.267749908]: GCS URL: udp://@129.254.189.134:14550[0m
+[0m[ INFO] [1558617294.267858077]: udp1: Bind address: 0.0.0.0:14555[0m
+[0m[ INFO] [1558617294.267930325]: udp1: Remote address: 129.254.189.134:14550[0m
+[0m[ INFO] [1558617294.273864880]: udp0: Remote address: 127.0.0.1:14580[0m
+[0m[ INFO] [1558617294.300500694]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1558617294.303845377]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1558617294.304014209]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1558617294.316500103]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1558617294.319364204]: Plugin adsb loaded[0m
+[0m[ INFO] [1558617294.330143796]: Plugin adsb initialized[0m
+[0m[ INFO] [1558617294.330327735]: Plugin altitude loaded[0m
+[0m[ INFO] [1558617294.331872730]: Plugin altitude initialized[0m
+[0m[ INFO] [1558617294.332033844]: Plugin cam_imu_sync loaded[0m
+[0m[ INFO] [1558617294.332899136]: Plugin cam_imu_sync initialized[0m
+[0m[ INFO] [1558617294.333126742]: Plugin command loaded[0m
+[0m[ INFO] [1558617294.345528268]: Plugin command initialized[0m
+[0m[ INFO] [1558617294.346311228]: Plugin debug_value loaded[0m
+[0m[ INFO] [1558617294.359448932]: Plugin debug_value initialized[0m
+[0m[ INFO] [1558617294.360134028]: Plugin distance_sensor loaded[0m
+[33m[ WARN] [1558617294.363296007]: DS: plugin not configured![0m
+[0m[ INFO] [1558617294.363352182]: Plugin distance_sensor initialized[0m
+[0m[ INFO] [1558617294.363649540]: Plugin fake_gps loaded[0m
+[0m[ INFO] [1558617294.386146174]: Plugin fake_gps initialized[0m
+[0m[ INFO] [1558617294.386396270]: Plugin ftp loaded[0m
+[0m[ INFO] [1558617294.405991404]: Plugin ftp initialized[0m
+[0m[ INFO] [1558617294.406256428]: Plugin global_position loaded[0m
+[0m[ INFO] [1558617294.437203774]: Plugin global_position initialized[0m
+[0m[ INFO] [1558617294.437463045]: Plugin gps_rtk loaded[0m
+[0m[ INFO] [1558617294.448200871]: Plugin gps_rtk initialized[0m
+[0m[ INFO] [1558617294.448457988]: Plugin hil loaded[0m
+[0m[ INFO] [1558617294.481751833]: Plugin hil initialized[0m
+[0m[ INFO] [1558617294.482008312]: Plugin home_position loaded[0m
+[0m[ INFO] [1558617294.489051325]: Plugin home_position initialized[0m
+[0m[ INFO] [1558617294.489301936]: Plugin imu loaded[0m
+[0m[ INFO] [1558617294.507141624]: Plugin imu initialized[0m
+[0m[ INFO] [1558617294.507411223]: Plugin local_position loaded[0m
+[0m[ INFO] [1558617294.533387536]: Plugin local_position initialized[0m
+[0m[ INFO] [1558617294.533626730]: Plugin log_transfer loaded[0m
+[0m[ INFO] [1558617294.539281678]: Plugin log_transfer initialized[0m
+[0m[ INFO] [1558617294.539582507]: Plugin manual_control loaded[0m
+[0m[ INFO] [1558617294.547743731]: Plugin manual_control initialized[0m
+[0m[ INFO] [1558617294.548070415]: Plugin mocap_pose_estimate loaded[0m
+[0m[ INFO] [1558617294.556661147]: Plugin mocap_pose_estimate initialized[0m
+[0m[ INFO] [1558617294.556908820]: Plugin obstacle_distance loaded[0m
+[0m[ INFO] [1558617294.567085025]: Plugin obstacle_distance initialized[0m
+[0m[ INFO] [1558617294.567303980]: Plugin odom loaded[0m
+[0m[ INFO] [1558617294.573053204]: Plugin odom initialized[0m
+[0m[ INFO] [1558617294.573432243]: Plugin param loaded[0m
+[0m[ INFO] [1558617294.581261445]: Plugin param initialized[0m
+[0m[ INFO] [1558617294.581468439]: Plugin px4flow loaded[0m
+[0m[ INFO] [1558617294.592051160]: Plugin px4flow initialized[0m
+[0m[ INFO] [1558617294.592223403]: Plugin rangefinder loaded[0m
+[0m[ INFO] [1558617294.593634424]: Plugin rangefinder initialized[0m
+[0m[ INFO] [1558617294.594006140]: Plugin rc_io loaded[0m
+[0m[ INFO] [1558617294.602835697]: Plugin rc_io initialized[0m
+[0m[ INFO] [1558617294.603035903]: Plugin safety_area loaded[0m
+[0m[ INFO] [1558617294.611353454]: Plugin safety_area initstate_cb(): state not initialized!
+eDrone_monitor_node- state_cb(): flight mode = 
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+					 current_position (ENU): (-0.010598, 0.024587, 0.049321 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+					 current_position (ENU): (-0.014364, 0.026157, 0.049841 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+					 current_position (ENU): (-0.020878, 0.026649, 0.050022 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.225471 ) (UNARMED) 
+					 current_position (ENU): (-0.026997, 0.029540, 0.051329 ) (UNARMED) 
+control_node: home position: (47.398000, 8.546000, 535.224471) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 535.225471 ) (UNARMED) 
+					 current_position (ENU): (-0.030174, 0.031631, 0.051242 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.225471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+					 current_position (ENU): (-0.032138, 0.033720, 0.050388 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.225471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.226471 ) (UNARMED) 
+					 current_position (ENU): (-0.034185, 0.034455, 0.052985 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.228471 ) (UNARMED) 
+					 current_position (ENU): (-0.034579, 0.031109, 0.055127 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.229471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.227471 ) (UNARMED) 
+					 current_position (ENU): (-0.032261, 0.027086, 0.052395 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.225471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.224471 ) (UNARMED) 
+					 current_position (ENU): (-0.027212, 0.026638, 0.050482 ) (UNARMED) 
+control_node: home position: (47.398000, 8.546000, 535.224471) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 535.224471 ) (UNARMED) 
+					 current_position (ENU): (-0.023290, 0.025797, 0.051802 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.226471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.228471 ) (UNARMED) 
+					 current_position (ENU): (-0.020409, 0.025822, 0.055408 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.230471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.229471 ) (UNARMED) 
+					 current_position (ENU): (-0.017388, 0.025002, 0.055930 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.229471 ) (UNARMED) 
+					 current_position (ENU): (-0.015956, 0.021204, 0.055769 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.229471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.227471 ) (UNARMED) 
+					 current_position (ENU): (-0.012727, 0.017663, 0.052586 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.226471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.223471 ) (UNARMED) 
+					 current_position (ENU): (-0.007516, 0.014480, 0.049720 ) (UNARMED) 
+control_node: home position: (47.398000, 8.546000, 535.224471) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 535.221471 ) (UNARMED) 
+					 current_position (ENU): (-0.003218, 0.008951, 0.044180 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.217471 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.213471 ) (UNARMED) 
+					 current_position (ENU): (0.000336, 0.003626, 0.038811 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.212470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.212470 ) (UNARMED) 
+					 current_position (ENU): (0.003083, 0.000795, 0.038924 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.210470 ) (UNARMED) 
+					 current_position (ENU): (0.004725, -0.002390, 0.035335 ) (UNARMED) 
+		 current_position (WGeDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LOITER
+[0m[ INFO] [1558617294.072600330]: ==autoflight1026==
+[0m
+[0m[ INFO] [1558617294.114492079]: main arg[0]: /home/sooyoung/catkin_ws/devel/lib/autoflight1026/ex_autoflight1026[0m
+[0m[ INFO] [1558617294.114542681]: main arg[1]: 10[0m
+[0m[ INFO] [1558617294.114557806]: main arg[2]: 4,16,10,10,10[0m
+[0m[ INFO] [1558617294.114568911]: main arg[3]: 4,16,10,50,10[0m
+[0m[ INFO] [1558617294.114575490]: main arg[4]: 4,16,50,50,10[0m
+[0m[ INFO] [1558617294.114581042]: main arg[5]: 4,16,50,10,10[0m
+[0m[ INFO] [1558617294.114590369]: main arg[6]: 4,16,0,0,10[0m
+[0m[ INFO] [1558617304.180528363]: Send checkState command ... 
+[0m
+[0m[ INFO] [1558617304.180558997]: Checking the connection ... 
+[0m
+[0m[ INFO] [1558617304.231074088]: CheckState service was requested[0m
+[0m[ INFO] [1558617304.231113807]: UAV connection established![0m
+UAV connected: 
+flight mode: AUTO.LOITER
+remaining battery(%): 1
+[0m[ INFO] [1558617304.231208538]: Send checkPosition command ... 
+[0m
+[0m[ INFO] [1558617304.231228434]: Checking the position ... 
+[0m
+[0m[ INFO] [1558617304.281174539]: CheckPosition service was requested[0m
+global frame (WGS84): (47.398, 8.546, 535.22) 
+
+local frame (ENU): (0.0101858, -0.018256, 0.0462068) 
+S84): (47.398000, 8.546000, 535.208470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.208470 ) (UNARMED) 
+					 current_position (ENU): (0.006356, -0.004949, 0.034722 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.208470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.208470 ) (UNARMED) 
+					 current_position (ENU): (0.008159, -0.008211, 0.033926 ) (UNARMED) 
+control_node: home position: (47.398000, 8.546000, 535.224471) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 535.208470 ) (UNARMED) 
+					 current_position (ENU): (0.007102, -0.011103, 0.037087 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.211470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.214470 ) (UNARMED) 
+					 current_position (ENU): (0.004385, -0.015019, 0.041224 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.215470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.216470 ) (UNARMED) 
+					 current_position (ENU): (0.005162, -0.018605, 0.042212 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.217470 ) (UNARMED) 
+					 current_position (ENU): (0.006830, -0.019292, 0.044337 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.218470 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.219470 ) (UNARMED) 
+					 current_position (ENU): (0.009193, -0.017390, 0.046268 ) (UNARMED) 
+		 current_position (WGS84): (47.398000, 8.546000, 535.220470 ) (UNARMED) 
+arming_cb(): ARMing request received
+eDrone_control_node: send Arming command ...
+ARMing command was sent
+		 current_position (WGS84): (47.398000, 8.546000, 535.220470 ) (ARMED) 
+takeoff_cb(): takeoff request received
+ HOME_ALT: 535.224471, req.takeoff_altitude: 10.000000send Takeoff command ...
+Takeoff command was sent
+					 current_position (ENU): (0.010756, -0.019151, 0.046454 ) (TAKEOFF) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 535.223470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+					 current_position (ENU): (0.013095, -0.023008, 0.058065 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+srv_chkState_cb() was called
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+		 current_position (WGS84): (47.398000, 8.546000, 535.245470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 535.380470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (0.010738, -0.021430, 0.311413 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 535.652470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 535.937470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (0.005113, -0.015317, 0.786869 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 536.222470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (0.006033, -0.010309, 1.279848 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 536.527470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 536.837470 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (0.001750, -0.000018, 1.789117 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 537.151471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 537.465471 ) (TAKEOFF) 
+					 current_position (ENU): (-0.007417, 0.012582, 2.316300 ) (TAKEOFF) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 537.779471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.015354, 0.026225, 2.845099 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 538.094471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 538.408471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.023676, 0.039648, 3.359975 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398000, 8.546000, 538.722471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.546000, 539.036471 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.032637, 0.061018, 3.887146 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 539.348472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.042695, 0.084936, 4.410702 ) (TAKEOFF) 
+		 current_position (WGS84): (47.398001, 8.545999, 539.659472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 539.969472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.050671, 0.101488, 4.935767 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 540.373472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 540.964472 ) (TAKEOFF) 
+					 current_position (ENU): (-0.056147, 0.107738, 5.837625 ) (TAKEOFF) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 541.551472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.065746, 0.112759, 6.828416 ) (TAKEOFF) 
+		 current_position (WGS84): (47.398001, 8.545999, 542.146472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 542.734472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.072945, 0.113794, 7.772884 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 543.216472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 543.647472 ) (TAKEOFF) 
+					 current_position (ENU): (-0.077831, 0.110766, 8.488141 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 543.970472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+ialized[0m
+[0m[ INFO] [1558617294.611681821]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1558617294.619275217]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1558617294.619610881]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1558617294.642921598]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1558617294.643125341]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1558617294.678565144]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1558617294.678916353]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1558617294.703196112]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1558617294.703373577]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1558617294.735696085]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1558617294.735990453]: Plugin sys_status loaded[0m
+[0m[ INFO] [1558617294.757524363]: Plugin sys_status initialized[0m
+[0m[ INFO] [1558617294.757730167]: Plugin sys_time loaded[0m
+[0m[ INFO] [1558617294.767707299]: TM: Timesync mode: MAVLINK[0m
+[0m[ INFO] [1558617294.769317914]: Plugin sys_time initialized[0m
+[0m[ INFO] [1558617294.769563117]: Plugin trajectory loaded[0m
+[0m[ INFO] [1558617294.784369983]: Plugin trajectory initialized[0m
+[0m[ INFO] [1558617294.784548001]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1558617294.785523793]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1558617294.785746301]: Plugin vibration loaded[0m
+[0m[ INFO] [1558617294.787127521]: Plugin vibration initialized[0m
+[0m[ INFO] [1558617294.787335767]: Plugin vision_pose_estimate loaded[0m
+[0m[ INFO] [1558617294.803277879]: Plugin vision_pose_estimate initialized[0m
+[0m[ INFO] [1558617294.803503238]: Plugin vision_speed_estimate loaded[0m
+[0m[ INFO] [1558617294.809926958]: Plugin vision_speed_estimate initialized[0m
+[0m[ INFO] [1558617294.810236513]: Plugin waypoint loaded[0m
+[0m[ INFO] [1558617294.822336838]: Plugin waypoint initialized[0m
+[0m[ INFO] [1558617294.822642643]: Plugin wind_estimation loaded[0m
+[0m[ INFO] [1558617294.824697162]: Plugin wind_estimation initialized[0m
+[0m[ INFO] [1558617294.824806752]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1558617294.825029806]: Built-in SIMD instructions: SSE, SSE2[0m
+[0m[ INFO] [1558617294.825066277]: Built-in MAVLink package version: 2018.7.18[0m
+[0m[ INFO] [1558617294.825100150]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad icarous matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1558617294.825132225]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[0m[ INFO] [1558617294.830710660]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1558617294.850084741]: IMU: Attitude quaternion IMU detected![0m
+[0m[ INFO] [1558617295.189311171]: udp1: Remote address: 127.0.0.1:14550[0m
+[0m[ INFO] [1558617295.366123194]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1558617295.367651022]: IMU: High resolution IMU detected![0m
+[0m[ INFO] [1558617295.379771460]: IMU: Attitude quaternion IMU detected![0m
+[0m[ INFO] [1558617296.368697760]: VER: 1.1: Capabilities         0x000000000000e4ef[0m
+[0m[ INFO] [1558617296.368745573]: VER: 1.1: Flight software:     01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1558617296.368787937]: VER: 1.1: Middleware software: 01090040 (000000001100EB6D)[0m
+[0m[ INFO] [1558617296.368831591]: VER: 1.1: OS software:         040f00ff (0000000000000000)[0m
+[0m[ INFO] [1558617296.368867996]: VER: 1.1: Board hardware:      00000001[0m
+[0m[ INFO] [1558617296.368899527]: VER: 1.1: VID/PID:             0000:0000[0m
+[0m[ INFO] [1558617296.368937399]: VER: 1.1: UID:                 4954414c44494e4f[0m
+[33m[ WARN] [1558617296.369747585]: CMD: Unexpected command 520, result 0[0m
+[0m[ INFO] [1558617304.314347850]: FCU: ARMED by arm/disarm component command[0m
+[0m[ INFO] [1558617304.373806317]: FCU: Using minimum takeoff altitude: 2.50 m[0m
+[0m[ INFO] [1558617304.494131313]: FCU: Takeoff detected[0m
+[33m[ WARN] [1558617306.430772327]: CMD: Unexpected command 176, result 0[0m
+[0m[ INFO] [1558617310.367444109]: WP: item #0* F:3 					 current_position (ENU): (-0.079913, 0.111918, 9.005677 ) (TAKEOFF) 
+		 current_position (WGS84): (47.398001, 8.545999, 544.238472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 544.449472 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+					 current_position (ENU): (-0.083615, 0.112572, 9.351789 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+		 current_position (WGS84): (47.398001, 8.545999, 544.612473 ) (TAKEOFF) 
+(takeoff phase) offboard enabled
+(takeoff phase) offboard enabled
+eDrone_control_node: TAKEOFF completed!
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+[0m[ INFO] [1558617304.281268852]: UAV position was checked![0m
+[0m[ INFO] [1558617304.281286021]: Send arming command ... 
+[0m
+[0m[ INFO] [1558617304.315815328]: takeoff_altitude: 10.000000[0m
+[0m[ INFO] [1558617304.315844967]: Send takeoff command ... 
+[0m
+[0m[ INFO] [1558617314.366224307]: Send missionDownload command ... 
+[0m
+[0m[ INFO] [1558617314.397041179]: missionDownload command was sent
+[0m
+[0m[ INFO] [1558617314.397080254]: Send missionClear command ... 
+[0m
+[0m[ INFO] [1558617314.449572831]: missionClear command was sent to FC
+[0m
+token: 4
+missionAddItem_waypoint_str: 16,10,10,10
+token: 16
+missionAddItem_waypoint_str: 10,10,10
+token: 10
+missionAddItem_waypoint_str: 10,10
+token: 10
+missionAddItem_waypoint_str: 10
+token: 10
+ safety_node - geofenceCheck_cb():
+[0m[ INFO] [1558617314.524381240]: missionAddItem command was sent[0m
+token: 4
+missionAddItem_waypoint_str: 16,10,50,10
+token: 16
+missionAddItem_waypoint_str: 10,50,10
+token: 10
+missionAddItem_waypoint_str: 50,10
+token: 50
+missionAddItem_waypoint_str: 10
+token: 10
+ geofence radius:1000 safety_node - geofenceCheck_cb():
+[0m[ INFO] [1558617314.572816614]: missionAddItem command was sent[0m
+token: 4
+missionAddItem_waypoint_str: 16,50,50,10
+token: 16
+missionAddItem_waypoint_str: 50,50,10
+token: 50
+missionAddItem_waypoint_str: 50,10
+token: 50
+missionAddItem_waypoint_str: 10
+token: 10
+ geofence radius:1000 safety_node - geofenceCheck_cb():
+[0m[ INFO] [1558617314.622847426]: missionAddItem command was sent[0m
+token: 4
+missionAddItem_waypoint_str: 16,50,10,10
+token: 16
+missionAddItem_waypoint_str: 50,10,10
+token: 50
+missionAddItem_waypoint_str: 10,10
+token: 10
+missionAddItem_waypoint_str: 10
+token: 10
+ geofence radius:1000 safety_node - geofenceCheck_cb():
+[0m[ INFO] [1558617314.672753245]: missionAddItem command was sent[0m
+token: 4
+missionAddItem_waypoint_str: 16,0,0,10
+token: 16
+missionAddItem_waypoint_str: 0,0,10
+token: 0
+missionAddItem_waypoint_str: 0,10
+token: 0
+missionAddItem_waypoint_str: 10
+token: 10
+eDrone_monitor_node- state_cb(): flight mode = OFFBOARD
+ geofence radius:1000 safety_node - geofenceCheck_cb():
+MissionDownload request received
+MIssionClear request received
+WaypointClear command was sent
+eDrone_autoflight_node: MissionAddItem request received
+missionAddItem_cb(): (lat: 47.398089, lon: 8.546133, alt: 10.000000) HOME_ALT:535.220459 
+eDrone_autoflight_node: trying to call GeofenceCheck serviceeDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.
+eDrone_autoflight_node: MissionAddItem request received
+missionAddItem_cb(): (lat: 47.398448, lon: 8.546133, alt: 10.000000) HOME_ALT:535.220459 
+eDrone_autoflight_node: trying to call GeofenceCheck serviceeDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.
+eDrone_autoflight_node: MissionAddItem request received
+missionAddItem_cb(): (lat: 47.398448, lon: 8.546665, alt: 10.000000) HOME_ALT:535.220459 
+eDrone_autoflight_node: trying to call GeofenceCheck serviceeDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.
+eDrone_autoflight_node: MissionAddItem request received
+missionAddItem_cb(): (lat: 47.398089, lon: 8.546665, alt: 10.000000) HOME_ALT:535.220459 
+eDrone_autoflight_node: trying to call GeofenceCheck serviceeDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.
+eDrone_autoflight_node: MissionAddItem request received
+missionAddItem_cb(): (lat: 47.397999, lon: 8.546000, alt: 10.000000) HOME_ALT:535.220459 
+eDrone_autoflight_node: trying to call GeofenceCheck serviceeDrone_autoflight_node: missionAddItem service accepted: new WP was added to the wp list.
+MissionUpload request received
+send WaypointPush command ...
+WaypointPush command was sent
+waypoint[0]: 
+frame: 3
+command: 16
+is_current: 1
+autocontinue: 1
+param1: 0.000000
+param2: 0.000000
+param3: 0.000000
+param4: 0.000000
+x_lat: 47.398089
+y_long: 8.546133
+z_alt: 10.000000
+
+waypoint[1]: 
+frame: 3
+command: 16
+is_current: 0
+autocontinue: 1
+param1: 0.000000
+param2: 0.000000
+param3: 0.000000
+param4: 0.000000
+x_lat: 47.398448
+y_long: 8.546133
+z_alt: 10.000000
+
+waypoint[2]: 
+frame: 3
+command: 16
+is_current: 0
+autocontinue: 1
+param1: 0.000000
+param2: 0.000000
+param3: 0.000000
+param4: 0.000000
+x_lat: 47.398448
+y_long: 8.546665
+z_alt: 10.000000
+
+waypoint[3]: 
+frame: 3
+command: 16
+is_current: 0
+autocontinue: 1
+param1: 0.000000
+param2: 0.000000
+param3: 0.000000
+param4: 0.000000
+x_lat: 47.398089
+y_long: 8.546665
+z_alt: 10.000000
+
+waypoint[4]: 
+frame: 3
+command: 16
+is_current: 0
+autocontinue: 1
+param1: 0.000000
+param2: 0.000000
+param3: 0.000000
+param4: 0.000000
+x_lat: 47.397999
+y_long: 8.546000
+z_alt: 10.000000
+
+[0m[ INFO] [1558617314.724414710]: missionAddItem command was sent[0m
+[0m[ INFO] [1558617314.724461371]: Send missionUpload command ... 
+[0m
+[0m[ INFO] [1558617314.751833961]: missionUpload command was sent to FC
+[0m
+[0m[ INFO] [1558617314.751889701]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.751909938]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.751937792]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.751954546]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.751976919]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.751992607]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752016026]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752034563]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752061226]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752078870]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752101310]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752114928]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752138660]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752155869]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752174965]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752191856]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752215391]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752227493]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752240060]: cur_phase_cb(): 
+[0m
+[0m[ INFO] [1558617314.752255964]: current phase: READY 
+[0m
+[0m[ INFO] [1558617314.752269558]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752276690]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752285708]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752291953]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752300554]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752306272]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752316024]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752325148]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752333999]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752340143]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752348498]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752354592]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752362955]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752368821]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752377364]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752383286]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752391802]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752397479]: current target: 0 
+[0m
+[0m[ INFO] [1558617314.752413692]: cur_target_cb(): 
+[0m
+[0m[ INFO] [1558617314.752419955]: current target: 0 
+[0m
+cur_phase: READY
+		 current_position (WGS84): (47.398001, 8.545999, 544.738473 ) (READY) 
+					 current_position (ENU): (-0.084625, 0.109347, 9.572911 ) (READY) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+		 current_position (WGS84): (47.398001, 8.545999, 544.834473 ) (READY) 
+					 current_position (ENU): (-0.080867, 0.102868, 9.718775 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.545999, 544.908472 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.545999, 544.963472 ) (READY) 
+					 current_position (ENU): (-0.065728, 0.077739, 9.808147 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.545999, 545.003472 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.545999, 545.032472 ) (READY) 
+					 current_position (ENU): (-0.048751, 0.047698, 9.860865 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.545999, 545.054471 ) (READY) 
+					 current_position (ENU): (-0.033358, 0.024804, 9.893674 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.071471 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.085471 ) (READY) 
+					 current_position (ENU): (-0.018476, 0.008586, 9.915915 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.095471 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.103471 ) (READY) 
+					 current_position (ENU): (-0.007286, -0.007121, 9.930354 ) (READY) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 545.109470 ) (READY) 
+					 current_position (ENU): (0.000317, -0.020561, 9.940434 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.116470 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.122470 ) (READY) 
+					 current_position (ENU): (0.001779, -0.030719, 9.951590 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.130470 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.138470 ) (READY) 
+					 current_position (ENU): (0.000747, -0.036498, 9.964974 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.144470 ) (READY) 
+					 current_position (ENU): (-0.001637, -0.039042, 9.974992 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.150470 ) (READY) 
+srv_modeChange_cb(): change the mode to AUTO.MISSION
+ modeChange cmd was sent!
+ 
+[0m[ INFO] [1558617314.752449864]: Send ModeChange command ... 
+[0m
+[0m[ INFO] [1558617314.806734319]: ModeChange command failed!!
+[0m
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+		 current_position (WGS84): (47.398000, 8.546000, 545.154470 ) (READY) 
+					 current_position (ENU): (-0.008009, -0.036852, 9.981902 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.156470 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546000, 545.152471 ) (READY) 
+					 current_position (ENU): (-0.010081, -0.029976, 9.977937 ) (READY) 
+control_node: home position: (47.398000, 8.546000, 535.220470) 
+
+		 current_position (WGS84): (47.398000, 8.546000, 545.155470 ) (READY) 
+					 current_position (ENU): (0.084048, 0.047549, 9.984871 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546001, 545.159469 ) (READY) 
+		 current_position (WGS84): (47.398002, 8.546004, 545.159466 ) (READY) 
+					 current_position (ENU): (0.427232, 0.372307, 9.985090 ) (READY) 
+		 current_position (WGS84): (47.398005, 8.546008, 545.158461 ) (READY) 
+		 current_position (WGS84): (47.398009, 8.546013, 545.157456 ) (READY) 
+					 current_position (ENU): (1.025404, 0.986142, 9.983465 ) (READY) 
+		 current_position (WGS84): (47.398013, 8.546019, 545.153450 ) (READY) 
+					 current_position (ENU): (1.843350, 1.831497, 9.976421 ) (READY) 
+		 current_position (WGS84): (47.398018, 8.546026, 545.150442 ) (READY) 
+		 current_position (WGS84): (47.398023, 8.546033, 545.153434 ) (READY) 
+					 current_position (ENU): (2.756695, 2.781739, 9.982388 ) (READY) 
+		 current_position (WGS84): (47.398028, 8.546041, 545.159427 ) (READY) 
+		 current_position (WGS84): (47.398032, 8.546047, 545.160420 ) (READY) 
+					 current_position (ENU): (3.581278, 3.631551, 9.985975 ) (READY) 
+		 current_position (WGS84): (47.398037, 8.546053, 545.159414 ) (READY) 
+					 current_position (ENU): (4.322776, 4.394097, 9.987892 ) (READY) 
+		 current_position (WGS84): (47.398040, 8.546059, 545.163408 ) (READY) 
+		 current_position (WGS84): (47.398044, 8.546064, 545.168402 ) (READY) 
+					 current_position (ENU): (4.971092, 5.060085, 9.996206 ) (READY) 
+		 current_position (WGS84): (47.398047, 8.546069, 545.172397 ) (READY) 
+		 current_position (WGS84): (47.398051, 8.546074, 545.177392 ) (READY) 
+					 current_position (ENU): (5.559008, 5.662475, 10.004255 ) (READY) 
+		 current_position (WGS84): (47.398054, 8.546078, 545.184387 ) (READY) 
+					 current_position (ENU): (6.066413, 6.180707, 10.013393 ) (READY) 
+		 current_position (WGS84): (47.398056, 8.546081, 545.187383 ) (READY) 
+		 current_position (WGS84): (47.398058, 8.546085, 545.188380 ) (READY) 
+					 current_position (ENU): (6.492522, 6.606322, 10.016465 ) (READY) 
+		 current_position (WGS84): (47.398060, 8.546088, 545.193376 ) (READY) 
+		 current_position (WGS84): (47.398062, 8.546091, 545.197373 ) (READY) 
+					 current_position (ENU): (6.847778, 6.951637, 10.023811 ) (READY) 
+		 current_position (WGS84): (47.398064, 8.546093, 545.197370 ) (READY) 
+					 current_position (ENU): (7.160047, 7.247886, 10.023310 ) (READY) 
+		 current_position (WGS84): (47.398066, 8.546096, 545.197368 ) (READY) 
+		 current_position (WGS84): (47.398067, 8.546098, 545.199366 ) (READY) 
+					 current_position (ENU): (7.420536, 7.490938, 10.025581 ) (READY) 
+		 current_position (WGS84): (47.398068, 8.546100, 545.200363 ) (READY) 
+		 current_position (WGS84): (47.398069, 8.546101, 545.204361 ) (READY) 
+					 current_position (ENU): (7.647789, 7.702019, 10.030538 ) (READY) 
+		 current_position (WGS84): (47.398070, 8.546103, 545.204360 ) (READY) 
+					 current_position (ENU): (7.844257, 7.881480, 10.028708 ) (READY) 
+		 current_position (WGS84): (47.398071, 8.546105, 545.201358 ) (READY) 
+		 current_position (WGS84): (47.398072, 8.546106, 545.200356 ) (READY) 
+					 current_position (ENU): (8.029079, 8.047264, 10.026096 ) (READY) 
+		 current_position (WGS84): (47.398073, 8.546107, 545.200355 ) (READY) 
+		 current_position (WGS84): (47.398074, 8.546109, 545.201353 ) (READY) 
+					 current_position (ENU): (8.198249, 8.197205, 10.027813 ) (READY) 
+		 current_position (WGS84): (47.398074, 8.546110, 545.204352 ) (READY) 
+					 current_position (ENU): (8.348821, 8.330881, 10.032093 ) (READY) 
+		 current_position (WGS84): (47.398075, 8.eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+546111, 545.206351 ) (READY) 
+		 current_position (WGS84): (47.398076, 8.546112, 545.206349 ) (READY) 
+					 current_position (ENU): (8.494911, 8.461235, 10.032319 ) (READY) 
+		 current_position (WGS84): (47.398076, 8.546113, 545.204348 ) (READY) 
+		 current_position (WGS84): (47.398077, 8.546114, 545.203347 ) (READY) 
+					 current_position (ENU): (8.628802, 8.583189, 10.029016 ) (READY) 
+		 current_position (WGS84): (47.398078, 8.546116, 545.204346 ) (READY) 
+					 current_position (ENU): (8.754088, 8.702452, 10.033369 ) (READY) 
+		 current_position (WGS84): (47.398078, 8.546117, 545.208345 ) (READY) 
+		 current_position (WGS84): (47.398079, 8.546117, 545.213344 ) (READY) 
+					 current_position (ENU): (8.881954, 8.887144, 10.040920 ) (READY) 
+		 current_position (WGS84): (47.398081, 8.546119, 545.216343 ) (READY) 
+		 current_position (WGS84): (47.398083, 8.546120, 545.218343 ) (READY) 
+					 current_position (ENU): (9.019136, 9.304628, 10.044747 ) (READY) 
+		 current_position (WGS84): (47.398087, 8.546121, 545.221343 ) (READY) 
+					 current_position (ENU): (9.162136, 10.032850, 10.048564 ) (READY) 
+		 current_position (WGS84): (47.398091, 8.546122, 545.222343 ) (READY) 
+		 current_position (WGS84): (47.398097, 8.546123, 545.223344 ) (READY) 
+					 current_position (ENU): (9.296017, 11.008742, 10.049783 ) (READY) 
+		 current_position (WGS84): (47.398103, 8.546124, 545.224346 ) (READY) 
+		 current_position (WGS84): (47.398110, 8.546125, 545.225348 ) (READY) 
+					 current_position (ENU): (9.416906, 12.266775, 10.051147 ) (READY) 
+		 current_position (WGS84): (47.398117, 8.546126, 545.225350 ) (READY) 
+					 current_position (ENU): (9.518281, 13.797532, 10.049876 ) (READY) 
+		 current_position (WGS84): (47.398126, 8.546127, 545.223353 ) (READY) 
+		 current_position (WGS84): (47.398135, 8.546127, 545.221357 ) (READY) 
+					 current_position (ENU): (9.594033, 15.459279, 10.046614 ) (READY) 
+		 current_position (WGS84): (47.398145, 8.546128, 545.219360 ) (READY) 
+		 current_position (WGS84): (47.398154, 8.546128, 545.217364 ) (READY) 
+					 current_position (ENU): (9.654253, 17.174500, 10.042911 ) (READY) 
+		 current_position (WGS84): (47.398163, 8.546129, 545.216368 ) (READY) 
+					 current_position (ENU): (9.704405, 18.894281, 10.044042 ) (READY) 
+		 current_position (WGS84): (47.398172, 8.546129, 545.218372 ) (READY) 
+		 current_position (WGS84): (47.398181, 8.546129, 545.219376 ) (READY) 
+					 current_position (ENU): (9.747177, 20.642109, 10.044949 ) (READY) 
+		 current_position (WGS84): (47.398191, 8.546130, 545.217380 ) (READY) 
+		 current_position (WGS84): (47.398200, 8.546130, 545.216384 ) (READY) 
+					 current_position (ENU): (9.785460, 22.362858, 10.042787 ) (READY) 
+		 current_position (WGS84): (47.398209, 8.546130, 545.219388 ) (READY) 
+					 current_position (ENU): (9.821035, 24.045740, 10.046653 ) (READY) 
+		 current_position (WGS84): (47.398218, 8.546131, 545.220392 ) (READY) 
+		 current_position (WGS84): (47.398228, 8.546131, 545.222396 ) (READY) 
+					 current_position (ENU): (9.860291, 25.765646, 10.049000 ) (READY) 
+		 current_position (WGS84): (47.398237, 8.546131, 545.223399 ) (READY) 
+		 current_position (WGS84): (47.398246, 8.546131, 545.224404 ) (READY) 
+					 current_position (ENU): (9.894716, 27.451229, 10.050712 ) (READY) 
+		 current_position (WGS84): (47.398255, 8.546132, 545.222408 ) (READY) 
+					 current_position (ENU): (9.926776, 29.218777, 10.045681 ) (READY) 
+		 current_position (WGS84): (47.398265, 8.546132, 545.219411 ) (READY) 
+		 current_position (WGS84): (47.398274, 8.546132, 545.215416 ) (READY) 
+					 current_position (ENU): (9.951839, 30.858814, 10.040942 ) (READY) 
+		 current_position (WGS84): (47.398283, 8.546132, 545.214419 ) (READY) 
+		 current_position (WGS84): (47.398292, 8.546133, 545.210424 ) (READY) 
+					 current_position (ENU): (9.974793, 32.479538, 10.036742 ) (READY) 
+		 current_position (WGS84): (47.398301, 8.546133, 545.210428 ) (READY) 
+					 current_position (ENU): (9.997617, 34.188030, 10.035038 ) (READY) 
+		 current_position (WGS84): (47.398309, 8.546133, 545.2eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+08431 ) (READY) 
+		 current_position (WGS84): (47.398318, 8.546133, 545.210436 ) (READY) 
+					 current_position (ENU): (10.015502, 35.796673, 10.036544 ) (READY) 
+		 current_position (WGS84): (47.398327, 8.546133, 545.210439 ) (READY) 
+		 current_position (WGS84): (47.398335, 8.546133, 545.207443 ) (READY) 
+					 current_position (ENU): (10.031473, 37.310486, 10.033233 ) (READY) 
+		 current_position (WGS84): (47.398342, 8.546133, 545.206447 ) (READY) 
+					 current_position (ENU): (10.038858, 38.672626, 10.032013 ) (READY) 
+		 current_position (WGS84): (47.398349, 8.546133, 545.205450 ) (READY) 
+		 current_position (WGS84): (47.398356, 8.546133, 545.204453 ) (READY) 
+					 current_position (ENU): (10.041614, 39.859966, 10.030943 ) (READY) 
+		 current_position (WGS84): (47.398362, 8.546133, 545.204456 ) (READY) 
+		 current_position (WGS84): (47.398367, 8.546133, 545.207458 ) (READY) 
+					 current_position (ENU): (10.045780, 40.932781, 10.034056 ) (READY) 
+		 current_position (WGS84): (47.398373, 8.546133, 545.210461 ) (READY) 
+					 current_position (ENU): (10.049326, 41.837555, 10.036192 ) (READY) 
+		 current_position (WGS84): (47.398377, 8.546133, 545.210463 ) (READY) 
+		 current_position (WGS84): (47.398382, 8.546133, 545.210465 ) (READY) 
+					 current_position (ENU): (10.045844, 42.647697, 10.036366 ) (READY) 
+		 current_position (WGS84): (47.398386, 8.546133, 545.208467 ) (READY) 
+		 current_position (WGS84): (47.398390, 8.546133, 545.207469 ) (READY) 
+					 current_position (ENU): (10.038987, 43.343906, 10.033564 ) (READY) 
+		 current_position (WGS84): (47.398393, 8.546133, 545.209471 ) (READY) 
+					 current_position (ENU): (10.032370, 43.968410, 10.037997 ) (READY) 
+		 current_position (WGS84): (47.398396, 8.546133, 545.212472 ) (READY) 
+		 current_position (WGS84): (47.398399, 8.546133, 545.215474 ) (READY) 
+					 current_position (ENU): (10.028088, 44.511169, 10.043706 ) (READY) 
+		 current_position (WGS84): (47.398402, 8.546133, 545.220475 ) (READY) 
+		 current_position (WGS84): (47.398404, 8.546133, 545.223476 ) (READY) 
+					 current_position (ENU): (10.025748, 44.984047, 10.049590 ) (READY) 
+		 current_position (WGS84): (47.398407, 8.546133, 545.225478 ) (READY) 
+					 current_position (ENU): (10.023081, 45.422379, 10.053131 ) (READY) 
+		 current_position (WGS84): (47.398409, 8.546133, 545.226479 ) (READY) 
+		 current_position (WGS84): (47.398411, 8.546133, 545.224480 ) (READY) 
+					 current_position (ENU): (10.019370, 45.807354, 10.050366 ) (READY) 
+		 current_position (WGS84): (47.398413, 8.546133, 545.223481 ) (READY) 
+					 current_position (ENU): (10.016328, 46.160820, 10.047800 ) (READY) 
+		 current_position (WGS84): (47.398415, 8.546133, 545.221482 ) (READY) 
+		 current_position (WGS84): (47.398417, 8.546133, 545.220483 ) (READY) 
+					 current_position (ENU): (10.014114, 46.481735, 10.047026 ) (READY) 
+		 current_position (WGS84): (47.398419, 8.546133, 545.221483 ) (READY) 
+		 current_position (WGS84): (47.398420, 8.546133, 545.223484 ) (READY) 
+					 current_position (ENU): (10.010498, 46.780716, 10.050692 ) (READY) 
+		 current_position (WGS84): (47.398422, 8.546133, 545.226485 ) (READY) 
+					 current_position (ENU): (10.009319, 47.048153, 10.052766 ) (READY) 
+		 current_position (WGS84): (47.398423, 8.546133, 545.226486 ) (READY) 
+		 current_position (WGS84): (47.398424, 8.546133, 545.226486 ) (READY) 
+					 current_position (ENU): (10.009030, 47.304394, 10.052131 ) (READY) 
+		 current_position (WGS84): (47.398426, 8.546133, 545.226487 ) (READY) 
+		 current_position (WGS84): (47.398427, 8.546133, 545.226488 ) (READY) 
+					 current_position (ENU): (10.007469, 47.538727, 10.052374 ) (READY) 
+		 current_position (WGS84): (47.398428, 8.546133, 545.225488 ) (READY) 
+					 current_position (ENU): (10.007360, 47.764313, 10.046021 ) (READY) 
+		 current_position (WGS84): (47.398429, 8.546133, 545.219489 ) (READY) 
+		 current_position (WGS84): (47.398431, 8.546133, 545.219489 ) (READY) 
+					 current_position (ENU): (10.009651, 47.967209, 10.047145 ) (READY) 
+		 current_position (WGS84): (47.398432, 8.eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+546133, 545.221490 ) (READY) 
+		 current_position (WGS84): (47.398433, 8.546133, 545.223490 ) (READY) 
+					 current_position (ENU): (10.016820, 48.156712, 10.050303 ) (READY) 
+		 current_position (WGS84): (47.398434, 8.546133, 545.227490 ) (READY) 
+					 current_position (ENU): (10.123512, 48.342930, 10.056230 ) (READY) 
+		 current_position (WGS84): (47.398435, 8.546135, 545.230489 ) (READY) 
+		 current_position (WGS84): (47.398436, 8.546137, 545.228486 ) (READY) 
+					 current_position (ENU): (10.510571, 48.557816, 10.051417 ) (READY) 
+		 current_position (WGS84): (47.398437, 8.546141, 545.224481 ) (READY) 
+		 current_position (WGS84): (47.398438, 8.546146, 545.223474 ) (READY) 
+					 current_position (ENU): (11.175198, 48.768032, 10.048884 ) (READY) 
+		 current_position (WGS84): (47.398439, 8.546153, 545.223465 ) (READY) 
+					 current_position (ENU): (12.130186, 48.969704, 10.046917 ) (READY) 
+		 current_position (WGS84): (47.398440, 8.546161, 545.220454 ) (READY) 
+		 current_position (WGS84): (47.398441, 8.546171, 545.220441 ) (READY) 
+					 current_position (ENU): (13.372542, 49.152729, 10.047778 ) (READY) 
+		 current_position (WGS84): (47.398442, 8.546181, 545.222427 ) (READY) 
+		 current_position (WGS84): (47.398443, 8.546193, 545.219411 ) (READY) 
+					 current_position (ENU): (14.860949, 49.300911, 10.044194 ) (READY) 
+		 current_position (WGS84): (47.398444, 8.546206, 545.214393 ) (READY) 
+					 current_position (ENU): (16.546034, 49.412613, 10.036847 ) (READY) 
+		 current_position (WGS84): (47.398444, 8.546220, 545.210374 ) (READY) 
+		 current_position (WGS84): (47.398445, 8.546233, 545.211356 ) (READY) 
+					 current_position (ENU): (18.267530, 49.496964, 10.037697 ) (READY) 
+		 current_position (WGS84): (47.398445, 8.546248, 545.211336 ) (READY) 
+		 current_position (WGS84): (47.398446, 8.546261, 545.210317 ) (READY) 
+					 current_position (ENU): (19.986012, 49.559334, 10.036002 ) (READY) 
+		 current_position (WGS84): (47.398446, 8.546275, 545.208298 ) (READY) 
+					 current_position (ENU): (21.771561, 49.610821, 10.033419 ) (READY) 
+		 current_position (WGS84): (47.398446, 8.546289, 545.207278 ) (READY) 
+		 current_position (WGS84): (47.398446, 8.546304, 545.205258 ) (READY) 
+					 current_position (ENU): (23.523901, 49.651134, 10.030797 ) (READY) 
+		 current_position (WGS84): (47.398446, 8.546317, 545.204239 ) (READY) 
+		 current_position (WGS84): (47.398447, 8.546331, 545.204221 ) (READY) 
+					 current_position (ENU): (25.214420, 49.683956, 10.030905 ) (READY) 
+		 current_position (WGS84): (47.398447, 8.546344, 545.204202 ) (READY) 
+					 current_position (ENU): (26.951258, 49.715179, 10.027492 ) (READY) 
+		 current_position (WGS84): (47.398447, 8.546359, 545.201182 ) (READY) 
+		 current_position (WGS84): (47.398447, 8.546372, 545.199163 ) (READY) 
+					 current_position (ENU): (28.683958, 49.744549, 10.025909 ) (READY) 
+		 current_position (WGS84): (47.398447, 8.546386, 545.200144 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546399, 545.203126 ) (READY) 
+					 current_position (ENU): (30.333574, 49.771927, 10.030628 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546412, 545.207108 ) (READY) 
+					 current_position (ENU): (31.997787, 49.797176, 10.038418 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546426, 545.212089 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546439, 545.218070 ) (READY) 
+					 current_position (ENU): (33.660622, 49.821114, 10.047425 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546451, 545.222053 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546465, 545.224034 ) (READY) 
+					 current_position (ENU): (35.278534, 49.839123, 10.050213 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546478, 545.223016 ) (READY) 
+					 current_position (ENU): (36.844566, 49.852528, 10.044962 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546489, 545.219000 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546501, 545.215984 ) (READY) 
+					 current_position (ENU): (38.264095, 49.864902, 10.042272 ) (READY) 
+		 current_position (WGS84): (eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+47.398448, 8.546512, 545.216969 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546522, 545.217955 ) (READY) 
+					 current_position (ENU): (39.511677, 49.875095, 10.045121 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546531, 545.218941 ) (READY) 
+					 current_position (ENU): (40.643806, 49.889553, 10.043564 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546540, 545.216929 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546548, 545.215918 ) (READY) 
+					 current_position (ENU): (41.613701, 49.905338, 10.042164 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546555, 545.214908 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546562, 545.210899 ) (READY) 
+					 current_position (ENU): (42.440121, 49.917622, 10.037094 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546568, 545.208890 ) (READY) 
+					 current_position (ENU): (43.171852, 49.927513, 10.035975 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546574, 545.209882 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546579, 545.210875 ) (READY) 
+					 current_position (ENU): (43.826981, 49.935638, 10.038674 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546584, 545.213868 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546588, 545.215862 ) (READY) 
+					 current_position (ENU): (44.392136, 49.940926, 10.043719 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546592, 545.219856 ) (READY) 
+					 current_position (ENU): (44.892868, 49.944592, 10.048298 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546596, 545.221851 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546600, 545.220846 ) (READY) 
+					 current_position (ENU): (45.331837, 49.946228, 10.047297 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546603, 545.220841 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546607, 545.218836 ) (READY) 
+					 current_position (ENU): (45.738697, 49.945072, 10.044332 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546610, 545.215832 ) (READY) 
+					 current_position (ENU): (46.095146, 49.947548, 10.041727 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546613, 545.214828 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546615, 545.213824 ) (READY) 
+					 current_position (ENU): (46.435635, 49.951122, 10.037628 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546618, 545.209821 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546620, 545.206818 ) (READY) 
+					 current_position (ENU): (46.737537, 49.951473, 10.032861 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546622, 545.203814 ) (READY) 
+					 current_position (ENU): (47.016991, 49.946819, 10.027300 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546625, 545.200811 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546627, 545.196808 ) (READY) 
+					 current_position (ENU): (47.281742, 49.943718, 10.023002 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546629, 545.196805 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546631, 545.196803 ) (READY) 
+					 current_position (ENU): (47.517860, 49.942204, 10.023923 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546632, 545.198800 ) (READY) 
+					 current_position (ENU): (47.738983, 49.940136, 10.026560 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546634, 545.199798 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546636, 545.201795 ) (READY) 
+					 current_position (ENU): (47.945271, 49.933346, 10.029504 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546637, 545.202793 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546639, 545.201791 ) (READY) 
+					 current_position (ENU): (48.136620, 49.926430, 10.027366 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546641, 545.198789 ) (READY) 
+					 current_position (ENU): (48.316128, 49.911770, 10.025055 ) (READY) 
+		 current_position (WGS84): (47.398449, 8.546642, 545.198787 ) (READY) 
+		 current_position (WGS84): (47.398448, 8.546643, 545.202785 ) (READY) 
+					 current_position (ENU): (48.506031, 49.764385, 10.031838 ) (READY) 
+		 current_positieDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+on (WGS84): (47.398447, 8.546645, 545.205782 ) (READY) 
+		 current_position (WGS84): (47.398445, 8.546647, 545.207778 ) (READY) 
+					 current_position (ENU): (48.707325, 49.340912, 10.034328 ) (READY) 
+		 current_position (WGS84): (47.398441, 8.546648, 545.207775 ) (READY) 
+					 current_position (ENU): (48.904263, 48.643215, 10.035764 ) (READY) 
+		 current_position (WGS84): (47.398437, 8.546650, 545.208770 ) (READY) 
+		 current_position (WGS84): (47.398432, 8.546651, 545.212766 ) (READY) 
+					 current_position (ENU): (49.093925, 47.667343, 10.042377 ) (READY) 
+		 current_position (WGS84): (47.398427, 8.546653, 545.216761 ) (READY) 
+		 current_position (WGS84): (47.398420, 8.546654, 545.219756 ) (READY) 
+					 current_position (ENU): (49.270374, 46.373451, 10.045725 ) (READY) 
+		 current_position (WGS84): (47.398412, 8.546655, 545.218751 ) (READY) 
+					 current_position (ENU): (49.409706, 44.905094, 10.042839 ) (READY) 
+		 current_position (WGS84): (47.398403, 8.546656, 545.215745 ) (READY) 
+		 current_position (WGS84): (47.398394, 8.546657, 545.213740 ) (READY) 
+					 current_position (ENU): (49.512936, 43.206093, 10.040378 ) (READY) 
+		 current_position (WGS84): (47.398385, 8.546658, 545.212734 ) (READY) 
+		 current_position (WGS84): (47.398376, 8.546659, 545.211729 ) (READY) 
+					 current_position (ENU): (49.591248, 41.448166, 10.038329 ) (READY) 
+		 current_position (WGS84): (47.398366, 8.546659, 545.210723 ) (READY) 
+					 current_position (ENU): (49.655022, 39.702652, 10.036430 ) (READY) 
+		 current_position (WGS84): (47.398357, 8.546660, 545.209718 ) (READY) 
+		 current_position (WGS84): (47.398347, 8.546660, 545.208713 ) (READY) 
+					 current_position (ENU): (49.705170, 37.938148, 10.033923 ) (READY) 
+		 current_position (WGS84): (47.398338, 8.546660, 545.206708 ) (READY) 
+		 current_position (WGS84): (47.398328, 8.546661, 545.206703 ) (READY) 
+					 current_position (ENU): (49.742928, 36.197292, 10.033405 ) (READY) 
+		 current_position (WGS84): (47.398319, 8.546661, 545.205699 ) (READY) 
+					 current_position (ENU): (49.773735, 34.499340, 10.034033 ) (READY) 
+		 current_position (WGS84): (47.398310, 8.546661, 545.207694 ) (READY) 
+		 current_position (WGS84): (47.398300, 8.546662, 545.210689 ) (READY) 
+					 current_position (ENU): (49.800762, 32.769009, 10.040281 ) (READY) 
+		 current_position (WGS84): (47.398291, 8.546662, 545.215684 ) (READY) 
+		 current_position (WGS84): (47.398282, 8.546662, 545.217680 ) (READY) 
+					 current_position (ENU): (49.818401, 31.123800, 10.044956 ) (READY) 
+		 current_position (WGS84): (47.398274, 8.546662, 545.218676 ) (READY) 
+					 current_position (ENU): (49.832718, 29.446924, 10.046818 ) (READY) 
+		 current_position (WGS84): (47.398265, 8.546662, 545.219671 ) (READY) 
+		 current_position (WGS84): (47.398256, 8.546662, 545.221667 ) (READY) 
+					 current_position (ENU): (49.849442, 27.765167, 10.048658 ) (READY) 
+		 current_position (WGS84): (47.398246, 8.546662, 545.221662 ) (READY) 
+		 current_position (WGS84): (47.398238, 8.546662, 545.221658 ) (READY) 
+					 current_position (ENU): (49.867996, 26.131346, 10.049309 ) (READY) 
+		 current_position (WGS84): (47.398229, 8.546663, 545.223654 ) (READY) 
+					 current_position (ENU): (49.887650, 24.501265, 10.051726 ) (READY) 
+		 current_position (WGS84): (47.398220, 8.546663, 545.224649 ) (READY) 
+		 current_position (WGS84): (47.398212, 8.546663, 545.225645 ) (READY) 
+					 current_position (ENU): (49.902447, 22.957832, 10.053075 ) (READY) 
+		 current_position (WGS84): (47.398204, 8.546663, 545.226641 ) (READY) 
+		 current_position (WGS84): (47.398196, 8.546663, 545.229638 ) (READY) 
+					 current_position (ENU): (49.917393, 21.555887, 10.057375 ) (READY) 
+		 current_position (WGS84): (47.398189, 8.546663, 545.230634 ) (READY) 
+					 current_position (ENU): (49.932365, 20.336632, 10.058498 ) (READY) 
+		 current_position (WGS84): (47.398183, 8.546663, 545.231631 ) (READY) 
+		 current_position (WGS84): (47.398177, 8.546663, 545.230628 ) (READY) 
+					 current_position (ENU): (49.947514, 19.255087, 10.056351 ) (READY) 
+		 ceDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+urrent_position (WGS84): (47.398171, 8.546664, 545.229625 ) (READY) 
+		 current_position (WGS84): (47.398166, 8.546664, 545.227623 ) (READY) 
+					 current_position (ENU): (49.961487, 18.317818, 10.054174 ) (READY) 
+		 current_position (WGS84): (47.398162, 8.546664, 545.225620 ) (READY) 
+					 current_position (ENU): (49.971703, 17.518930, 10.051125 ) (READY) 
+		 current_position (WGS84): (47.398157, 8.546664, 545.224618 ) (READY) 
+		 current_position (WGS84): (47.398154, 8.546664, 545.224616 ) (READY) 
+					 current_position (ENU): (49.979996, 16.806334, 10.053373 ) (READY) 
+		 current_position (WGS84): (47.398150, 8.546664, 545.226614 ) (READY) 
+		 current_position (WGS84): (47.398147, 8.546664, 545.224613 ) (READY) 
+					 current_position (ENU): (49.989891, 16.200138, 10.050669 ) (READY) 
+		 current_position (WGS84): (47.398144, 8.546664, 545.221611 ) (READY) 
+					 current_position (ENU): (49.999966, 15.643349, 10.044576 ) (READY) 
+		 current_position (WGS84): (47.398141, 8.546664, 545.217610 ) (READY) 
+		 current_position (WGS84): (47.398138, 8.546664, 545.216608 ) (READY) 
+					 current_position (ENU): (50.009041, 15.151304, 10.043574 ) (READY) 
+		 current_position (WGS84): (47.398135, 8.546664, 545.216607 ) (READY) 
+		 current_position (WGS84): (47.398133, 8.546665, 545.214606 ) (READY) 
+					 current_position (ENU): (50.021809, 14.686250, 10.039958 ) (READY) 
+		 current_position (WGS84): (47.398131, 8.546665, 545.210604 ) (READY) 
+					 current_position (ENU): (50.033653, 14.291312, 10.035954 ) (READY) 
+		 current_position (WGS84): (47.398128, 8.546665, 545.209603 ) (READY) 
+		 current_position (WGS84): (47.398126, 8.546665, 545.210602 ) (READY) 
+					 current_position (ENU): (50.040951, 13.931066, 10.037639 ) (READY) 
+		 current_position (WGS84): (47.398125, 8.546665, 545.210601 ) (READY) 
+		 current_position (WGS84): (47.398123, 8.546665, 545.211600 ) (READY) 
+					 current_position (ENU): (50.044495, 13.587667, 10.038876 ) (READY) 
+		 current_position (WGS84): (47.398121, 8.546665, 545.211600 ) (READY) 
+					 current_position (ENU): (50.047298, 13.275082, 10.036814 ) (READY) 
+		 current_position (WGS84): (47.398119, 8.546665, 545.209599 ) (READY) 
+		 current_position (WGS84): (47.398118, 8.546665, 545.208598 ) (READY) 
+					 current_position (ENU): (50.049786, 12.999055, 10.034068 ) (READY) 
+		 current_position (WGS84): (47.398116, 8.546665, 545.206597 ) (READY) 
+		 current_position (WGS84): (47.398115, 8.546665, 545.206596 ) (READY) 
+					 current_position (ENU): (50.054321, 12.734536, 10.033092 ) (READY) 
+		 current_position (WGS84): (47.398114, 8.546665, 545.205596 ) (READY) 
+					 current_position (ENU): (50.060497, 12.486188, 10.033601 ) (READY) 
+		 current_position (WGS84): (47.398112, 8.546665, 545.206595 ) (READY) 
+		 current_position (WGS84): (47.398111, 8.546665, 545.209594 ) (READY) 
+					 current_position (ENU): (50.070217, 12.261834, 10.038619 ) (READY) 
+		 current_position (WGS84): (47.398110, 8.546665, 545.211594 ) (READY) 
+		 current_position (WGS84): (47.398109, 8.546665, 545.212593 ) (READY) 
+					 current_position (ENU): (50.079948, 12.052417, 10.040241 ) (READY) 
+		 current_position (WGS84): (47.398108, 8.546665, 545.213592 ) (READY) 
+					 current_position (ENU): (50.086102, 11.860770, 10.040019 ) (READY) 
+		 current_position (WGS84): (47.398107, 8.546665, 545.213592 ) (READY) 
+		 current_position (WGS84): (47.398105, 8.546665, 545.215592 ) (READY) 
+					 current_position (ENU): (50.025166, 11.648450, 10.045217 ) (READY) 
+		 current_position (WGS84): (47.398104, 8.546664, 545.219593 ) (READY) 
+		 current_position (WGS84): (47.398103, 8.546662, 545.220596 ) (READY) 
+					 current_position (ENU): (49.713142, 11.362785, 10.047821 ) (READY) 
+		 current_position (WGS84): (47.398101, 8.546658, 545.221600 ) (READY) 
+					 current_position (ENU): (49.129452, 11.033027, 10.047934 ) (READY) 
+		 current_position (WGS84): (47.398099, 8.546652, 545.220607 ) (READY) 
+		 current_position (WGS84): (47.398097, 8.546646, 545.218614 ) (READY) 
+					 current_position (ENU): (48.273746, 10.645880, 10.045067 ) eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+(READY) 
+		 current_position (WGS84): (47.398095, 8.546638, 545.218625 ) (READY) 
+		 current_position (WGS84): (47.398092, 8.546629, 545.220636 ) (READY) 
+					 current_position (ENU): (47.119507, 10.195427, 10.049109 ) (READY) 
+		 current_position (WGS84): (47.398090, 8.546619, 545.224649 ) (READY) 
+					 current_position (ENU): (45.727749, 9.740065, 10.051239 ) (READY) 
+		 current_position (WGS84): (47.398088, 8.546608, 545.224664 ) (READY) 
+		 current_position (WGS84): (47.398085, 8.546595, 545.221680 ) (READY) 
+					 current_position (ENU): (44.178051, 9.313221, 10.047345 ) (READY) 
+		 current_position (WGS84): (47.398083, 8.546582, 545.220697 ) (READY) 
+		 current_position (WGS84): (47.398081, 8.546569, 545.221714 ) (READY) 
+					 current_position (ENU): (42.473034, 8.884176, 10.048350 ) (READY) 
+		 current_position (WGS84): (47.398078, 8.546556, 545.220732 ) (READY) 
+					 current_position (ENU): (40.804436, 8.484453, 10.044989 ) (READY) 
+		 current_position (WGS84): (47.398076, 8.546542, 545.218750 ) (READY) 
+		 current_position (WGS84): (47.398074, 8.546529, 545.212768 ) (READY) 
+					 current_position (ENU): (39.145580, 8.100645, 10.035604 ) (READY) 
+		 current_position (WGS84): (47.398072, 8.546515, 545.207786 ) (READY) 
+		 current_position (WGS84): (47.398070, 8.546502, 545.205803 ) (READY) 
+					 current_position (ENU): (37.417736, 7.711493, 10.032387 ) (READY) 
+		 current_position (WGS84): (47.398068, 8.546489, 545.204821 ) (READY) 
+					 current_position (ENU): (35.760117, 7.340069, 10.031448 ) (READY) 
+		 current_position (WGS84): (47.398066, 8.546475, 545.204838 ) (READY) 
+		 current_position (WGS84): (47.398064, 8.546461, 545.203857 ) (READY) 
+					 current_position (ENU): (34.104275, 6.972066, 10.029949 ) (READY) 
+		 current_position (WGS84): (47.398062, 8.546448, 545.202874 ) (READY) 
+		 current_position (WGS84): (47.398060, 8.546435, 545.201891 ) (READY) 
+					 current_position (ENU): (32.450336, 6.605851, 10.028199 ) (READY) 
+		 current_position (WGS84): (47.398058, 8.546422, 545.201908 ) (READY) 
+					 current_position (ENU): (30.800646, 6.241933, 10.029154 ) (READY) 
+		 current_position (WGS84): (47.398056, 8.546409, 545.202926 ) (READY) 
+		 current_position (WGS84): (47.398054, 8.546396, 545.201943 ) (READY) 
+					 current_position (ENU): (29.177916, 5.887201, 10.028557 ) (READY) 
+		 current_position (WGS84): (47.398052, 8.546382, 545.202961 ) (READY) 
+		 current_position (WGS84): (47.398050, 8.546370, 545.204978 ) (READY) 
+					 current_position (ENU): (27.529669, 5.531733, 10.031903 ) (READY) 
+		 current_position (WGS84): (47.398048, 8.546357, 545.205995 ) (READY) 
+					 current_position (ENU): (25.919659, 5.189820, 10.034861 ) (READY) 
+		 current_position (WGS84): (47.398047, 8.546344, 545.208012 ) (READY) 
+		 current_position (WGS84): (47.398045, 8.546332, 545.212029 ) (READY) 
+					 current_position (ENU): (24.350880, 4.861033, 10.039412 ) (READY) 
+		 current_position (WGS84): (47.398043, 8.546319, 545.214046 ) (READY) 
+		 current_position (WGS84): (47.398041, 8.546306, 545.218063 ) (READY) 
+					 current_position (ENU): (22.731535, 4.525374, 10.044892 ) (READY) 
+		 current_position (WGS84): (47.398039, 8.546293, 545.221080 ) (READY) 
+					 current_position (ENU): (21.117208, 4.193309, 10.050019 ) (READY) 
+		 current_position (WGS84): (47.398038, 8.546280, 545.224097 ) (READY) 
+		 current_position (WGS84): (47.398036, 8.546268, 545.224113 ) (READY) 
+					 current_position (ENU): (19.523664, 3.869008, 10.050287 ) (READY) 
+		 current_position (WGS84): (47.398034, 8.546255, 545.223130 ) (READY) 
+		 current_position (WGS84): (47.398032, 8.546243, 545.221147 ) (READY) 
+					 current_position (ENU): (17.953640, 3.551024, 10.046652 ) (READY) 
+		 current_position (WGS84): (47.398031, 8.546230, 545.218164 ) (READY) 
+					 current_position (ENU): (16.320122, 3.219400, 10.040181 ) (READY) 
+		 current_position (WGS84): (47.398029, 8.546217, 545.214181 ) (READY) 
+		 current_position (WGS84): (47.398027, 8.546204, 545.211199 ) (READY) 
+					 current_position (ENU): (14.719307, 2.896140, 10.036708 ) (READY)eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+ 
+		 current_position (WGS84): (47.398025, 8.546191, 545.209216 ) (READY) 
+		 current_position (WGS84): (47.398024, 8.546179, 545.209232 ) (READY) 
+					 current_position (ENU): (13.171841, 2.583669, 10.035547 ) (READY) 
+		 current_position (WGS84): (47.398022, 8.546167, 545.210247 ) (READY) 
+					 current_position (ENU): (11.764795, 2.296911, 10.040830 ) (READY) 
+		 current_position (WGS84): (47.398021, 8.546156, 545.214262 ) (READY) 
+		 current_position (WGS84): (47.398019, 8.546146, 545.217276 ) (READY) 
+					 current_position (ENU): (10.526444, 2.045083, 10.044484 ) (READY) 
+		 current_position (WGS84): (47.398018, 8.546136, 545.218288 ) (READY) 
+		 current_position (WGS84): (47.398017, 8.546128, 545.218300 ) (READY) 
+					 current_position (ENU): (9.413401, 1.820194, 10.044806 ) (READY) 
+		 current_position (WGS84): (47.398016, 8.546120, 545.218311 ) (READY) 
+					 current_position (ENU): (8.468233, 1.629090, 10.043989 ) (READY) 
+		 current_position (WGS84): (47.398015, 8.546112, 545.218321 ) (READY) 
+		 current_position (WGS84): (47.398014, 8.546105, 545.215330 ) (READY) 
+					 current_position (ENU): (7.615244, 1.457675, 10.040279 ) (READY) 
+		 current_position (WGS84): (47.398013, 8.546099, 545.213338 ) (READY) 
+		 current_position (WGS84): (47.398012, 8.546093, 545.214346 ) (READY) 
+					 current_position (ENU): (6.864147, 1.304228, 10.040878 ) (READY) 
+		 current_position (WGS84): (47.398011, 8.546088, 545.213354 ) (READY) 
+					 current_position (ENU): (6.223800, 1.172306, 10.035881 ) (READY) 
+		 current_position (WGS84): (47.398010, 8.546082, 545.209360 ) (READY) 
+		 current_position (WGS84): (47.398010, 8.546078, 545.208366 ) (READY) 
+					 current_position (ENU): (5.648185, 1.054840, 10.035418 ) (READY) 
+		 current_position (WGS84): (47.398009, 8.546074, 545.209372 ) (READY) 
+		 current_position (WGS84): (47.398009, 8.546069, 545.209378 ) (READY) 
+					 current_position (ENU): (5.143052, 0.951344, 10.036131 ) (READY) 
+		 current_position (WGS84): (47.398008, 8.546066, 545.212383 ) (READY) 
+					 current_position (ENU): (4.671203, 0.852874, 10.039284 ) (READY) 
+		 current_position (WGS84): (47.398008, 8.546062, 545.213388 ) (READY) 
+		 current_position (WGS84): (47.398007, 8.546058, 545.212392 ) (READY) 
+					 current_position (ENU): (4.252848, 0.763808, 10.037196 ) (READY) 
+		 current_position (WGS84): (47.398007, 8.546055, 545.210396 ) (READY) 
+		 current_position (WGS84): (47.398006, 8.546053, 545.208400 ) (READY) 
+					 current_position (ENU): (3.884675, 0.685070, 10.035228 ) (READY) 
+		 current_position (WGS84): (47.398006, 8.546050, 545.210404 ) (READY) 
+					 current_position (ENU): (3.537774, 0.611859, 10.039339 ) (READY) 
+		 current_position (WGS84): (47.398005, 8.546047, 545.213407 ) (READY) 
+		 current_position (WGS84): (47.398005, 8.546044, 545.216411 ) (READY) 
+					 current_position (ENU): (3.218859, 0.546841, 10.045012 ) (READY) 
+		 current_position (WGS84): (47.398005, 8.546042, 545.220414 ) (READY) 
+		 current_position (WGS84): (47.398004, 8.546040, 545.223417 ) (READY) 
+					 current_position (ENU): (2.940550, 0.486397, 10.049916 ) (READY) 
+		 current_position (WGS84): (47.398004, 8.546038, 545.225420 ) (READY) 
+					 current_position (ENU): (2.679088, 0.428186, 10.049620 ) (READY) 
+		 current_position (WGS84): (47.398004, 8.546036, 545.223423 ) (READY) 
+		 current_position (WGS84): (47.398004, 8.546034, 545.226425 ) (READY) 
+					 current_position (ENU): (2.435027, 0.375642, 10.054030 ) (READY) 
+		 current_position (WGS84): (47.398003, 8.546032, 545.229428 ) (READY) 
+		 current_position (WGS84): (47.398003, 8.546030, 545.233430 ) (READY) 
+					 current_position (ENU): (2.208985, 0.326051, 10.060650 ) (READY) 
+		 current_position (WGS84): (47.398003, 8.546028, 545.236432 ) (READY) 
+					 current_position (ENU): (2.009496, 0.279603, 10.062392 ) (READY) 
+		 current_position (WGS84): (47.398002, 8.546027, 545.236434 ) (READY) 
+		 current_position (WGS84): (47.398002, 8.546025, 545.234436 ) (READY) 
+					 current_position (ENU): (1.822329, 0.235278, 10.057428 ) (READY) 
+		 current_position (WGSeDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+84): (47.398002, 8.546024, 545.230438 ) (READY) 
+		 current_position (WGS84): (47.398002, 8.546022, 545.226440 ) (READY) 
+					 current_position (ENU): (1.647118, 0.194964, 10.051217 ) (READY) 
+		 current_position (WGS84): (47.398002, 8.546021, 545.222442 ) (READY) 
+					 current_position (ENU): (1.489087, 0.155898, 10.045594 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546020, 545.219444 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546019, 545.217445 ) (READY) 
+					 current_position (ENU): (1.347257, 0.120493, 10.041759 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546017, 545.215446 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546017, 545.213448 ) (READY) 
+					 current_position (ENU): (1.218524, 0.085531, 10.038711 ) (READY) 
+		 current_position (WGS84): (47.398001, 8.546015, 545.211449 ) (READY) 
+					 current_position (ENU): (1.101432, 0.053248, 10.035651 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546015, 545.209450 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546014, 545.210451 ) (READY) 
+					 current_position (ENU): (0.992702, 0.025810, 10.036905 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546013, 545.211452 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546012, 545.213454 ) (READY) 
+					 current_position (ENU): (0.896013, 0.003937, 10.038681 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546011, 545.212454 ) (READY) 
+					 current_position (ENU): (0.808224, -0.015531, 10.038419 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546011, 545.212455 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546010, 545.211456 ) (READY) 
+					 current_position (ENU): (0.724566, -0.035204, 10.036877 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546009, 545.210457 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546009, 545.212458 ) (READY) 
+					 current_position (ENU): (0.649173, -0.050575, 10.038846 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546008, 545.214459 ) (READY) 
+					 current_position (ENU): (0.581692, -0.064207, 10.041056 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546008, 545.215459 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546007, 545.216460 ) (READY) 
+					 current_position (ENU): (0.525693, -0.077612, 10.044434 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546007, 545.218461 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546006, 545.222461 ) (READY) 
+					 current_position (ENU): (0.473950, -0.092706, 10.048944 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546006, 545.223462 ) (READY) 
+					 current_position (ENU): (0.428633, -0.103447, 10.052653 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546006, 545.226462 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 545.227463 ) (READY) 
+					 current_position (ENU): (0.385104, -0.111829, 10.052593 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 545.226463 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 545.224463 ) (READY) 
+					 current_position (ENU): (0.344253, -0.117823, 10.049985 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 545.222464 ) (READY) 
+					 current_position (ENU): (0.308431, -0.124000, 10.044513 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 545.218464 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 545.215465 ) (READY) 
+					 current_position (ENU): (0.275764, -0.133686, 10.041048 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.214465 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.213465 ) (READY) 
+					 current_position (ENU): (0.247985, -0.141698, 10.038731 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.212465 ) (READY) 
+					 current_position (ENU): (0.225969, -0.147220, 10.039770 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.213466 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.214466 ) (READY) 
+					 current_position (ENU): (0.207794, -0.151458, 10.040541 ) (READY) 
+		 current_position (WGS84): (47.397999eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.MISSION
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+, 8.546003, 545.214466 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 545.213466 ) (READY) 
+					 current_position (ENU): (0.192680, -0.154226, 10.040072 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546002, 545.213466 ) (READY) 
+					 current_position (ENU): (0.180773, -0.155160, 10.038686 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546002, 545.212467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.213466 ) (READY) 
+					 current_position (ENU): (0.170160, -0.157570, 10.039618 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.213467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.215467 ) (READY) 
+					 current_position (ENU): (0.157594, -0.160958, 10.041639 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.216467 ) (READY) 
+					 current_position (ENU): (0.143455, -0.163166, 10.045151 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.219467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.218467 ) (READY) 
+					 current_position (ENU): (0.132677, -0.166486, 10.043641 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.212467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.145467 ) (READY) 
+					 current_position (ENU): (0.126942, -0.170643, 9.932941 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 545.011467 ) (READY) 
+					 current_position (ENU): (0.127167, -0.174687, 9.699896 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.868467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.721467 ) (READY) 
+					 current_position (ENU): (0.127594, -0.177881, 9.452630 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.572467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.424467 ) (READY) 
+					 current_position (ENU): (0.127173, -0.181050, 9.203337 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.278467 ) (READY) 
+					 current_position (ENU): (0.127239, -0.182297, 8.958708 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 544.132467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.986467 ) (READY) 
+					 current_position (ENU): (0.129549, -0.184936, 8.718369 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.839467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.693467 ) (READY) 
+					 current_position (ENU): (0.132748, -0.185319, 8.473969 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.552467 ) (READY) 
+					 current_position (ENU): (0.138051, -0.184924, 8.244055 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.412467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.273467 ) (READY) 
+					 current_position (ENU): (0.147046, -0.184589, 8.011064 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 543.134467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.996467 ) (READY) 
+					 current_position (ENU): (0.155247, -0.180590, 7.778505 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.857467 ) (READY) 
+					 current_position (ENU): (0.164517, -0.178695, 7.548099 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.716467 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.577467 ) (READY) 
+					 current_position (ENU): (0.176765, -0.177384, 7.315361 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.439466 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546002, 542.298466 ) (READY) 
+					 current_position (ENU): (0.188116, -0.175084, 7.078736 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546003, 542.157466 ) (READY) 
+					 current_position (ENU): (0.199706, -0.170074, 6.850081 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546003, 542.018466 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546003, 541.878466 ) (READY) 
+					 current_position (ENU): (0.213420, -0.164895, 6.615016 ) (READY) 
+		 current_position (WGS84): (47.397998, 8.546003, 541.738466 eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+eDrone_monitor_node- state_cb(): flight mode = AUTO.LAND
+) (READY) 
+		 current_position (WGS84): (47.397998, 8.546003, 541.596466 ) (READY) 
+					 current_position (ENU): (0.229231, -0.159225, 6.376696 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 541.454465 ) (READY) 
+					 current_position (ENU): (0.247854, -0.146027, 6.139585 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 541.313465 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 541.173465 ) (READY) 
+					 current_position (ENU): (0.261852, -0.133061, 5.910235 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546003, 541.033465 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.891465 ) (READY) 
+					 current_position (ENU): (0.273739, -0.120631, 5.673153 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.752465 ) (READY) 
+					 current_position (ENU): (0.285856, -0.108904, 5.447042 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.615465 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.479464 ) (READY) 
+					 current_position (ENU): (0.300565, -0.097024, 5.218543 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.343464 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.206464 ) (READY) 
+					 current_position (ENU): (0.316654, -0.083784, 4.988029 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 540.067464 ) (READY) 
+					 current_position (ENU): (0.332658, -0.069199, 4.753100 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546004, 539.927464 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 539.785464 ) (READY) 
+					 current_position (ENU): (0.348918, -0.055593, 4.520469 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 539.644464 ) (READY) 
+		 current_position (WGS84): (47.397999, 8.546005, 539.507464 ) (READY) 
+					 current_position (ENU): (0.358668, -0.043340, 4.289753 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 539.368464 ) (READY) 
+					 current_position (ENU): (0.365822, -0.035324, 4.054084 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 539.228464 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 539.089463 ) (READY) 
+					 current_position (ENU): (0.370678, -0.029334, 3.828016 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.951463 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.809463 ) (READY) 
+					 current_position (ENU): (0.373724, -0.024363, 3.590521 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.668463 ) (READY) 
+					 current_position (ENU): (0.375751, -0.019620, 3.355769 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.524463 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.379463 ) (READY) 
+					 current_position (ENU): (0.376643, -0.016600, 3.114200 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.237463 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 538.096463 ) (READY) 
+					 current_position (ENU): (0.375630, -0.014168, 2.876901 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.956463 ) (READY) 
+					 current_position (ENU): (0.371361, -0.010803, 2.650575 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.819464 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.679464 ) (READY) 
+					 current_position (ENU): (0.366192, -0.006840, 2.417808 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.542464 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.403464 ) (READY) 
+					 current_position (ENU): (0.354983, -0.001904, 2.183916 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.261464 ) (READY) 
+					 current_position (ENU): (0.342127, 0.003141, 1.948365 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546005, 537.122464 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546004, 536.989464 ) (READY) 
+					 current_position (ENU): (0.330992, 0.007719, 1.725540 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546004, 536.849464 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546004, 536.709464 ) (READY) 
+					 current_position (ENU): (0.322014, 0.013009, 1.491437 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546004, 536.570465 ) (READY) 
+					 current_position (ENU): (0.310561, 0.019109, 1.262289 ) (READY) 
+		 current_position (WGS84): (47.398000, 8.546004, 536.430465 ) (READY) 
+ geofence radius:1000C: 16 p: 0.000000 0.000000 0.000000 0.000000 x: 47.398174 y: 8.546251 z: 10.000000[0m
+[0m[ INFO] [1558617310.367802184]: WP: item #1  F:3 C: 16 p: 0.000000 0.000000 0.000000 0.000000 x: 47.398533 y: 8.546251 z: 10.000000[0m
+[0m[ INFO] [1558617310.368037703]: WP: item #2  F:3 C: 16 p: 0.000000 0.000000 0.000000 0.000000 x: 47.398533 y: 8.546783 z: 10.000000[0m
+[0m[ INFO] [1558617310.368270606]: WP: item #3  F:3 C: 16 p: 0.000000 0.000000 0.000000 0.000000 x: 47.398174 y: 8.546783 z: 10.000000[0m
+[0m[ INFO] [1558617310.368483419]: WP: item #4  F:3 C: 16 p: 0.000000 0.000000 0.000000 0.000000 x: 47.398083 y: 8.546119 z: 10.000000[0m
+[0m[ INFO] [1558617310.368560845]: WP: mission received[0m
+[0m[ INFO] [1558617314.449265093]: WP: mission cleared[0m
+[0m[ INFO] [1558617314.751467616]: WP: mission sended[0m
+[0m[ INFO] [1558617322.705087931]: WP: reached #0[0m
+[0m[ INFO] [1558617322.734727998]: WP: reached #0[0m
+[0m[ INFO] [1558617322.850512676]: WP: reached #0[0m
+[0m[ INFO] [1558617322.955521883]: WP: reached #0[0m
+[0m[ INFO] [1558617323.068675920]: WP: reached #0[0m
+[0m[ INFO] [1558617323.174770852]: WP: reached #0[0m
+[0m[ INFO] [1558617323.292754865]: WP: reached #0[0m
+[0m[ INFO] [1558617323.393056236]: WP: reached #0[0m
+[0m[ INFO] [1558617323.494280908]: WP: reached #0[0m
+[0m[ INFO] [1558617323.592926012]: WP: reached #0[0m
+[0m[ INFO] [1558617323.692617493]: WP: reached #0[0m
+[0m[ INFO] [1558617336.634639399]: WP: reached #1[0m
+[0m[ INFO] [1558617336.655226466]: WP: reached #1[0m
+[0m[ INFO] [1558617336.755302270]: WP: reached #1[0m
+[0m[ INFO] [1558617336.871207719]: WP: reached #1[0m
+[0m[ INFO] [1558617336.975045524]: WP: reached #1[0m
+[0m[ INFO] [1558617337.095224219]: WP: reached #1[0m
+[0m[ INFO] [1558617337.203090090]: WP: reached #1[0m
+[0m[ INFO] [1558617337.314299983]: WP: reached #1[0m
+[0m[ INFO] [1558617337.414513765]: WP: reached #1[0m
+[0m[ INFO] [1558617337.514247692]: WP: reached #1[0m
+[0m[ INFO] [1558617337.614789539]: WP: reached #1[0m
+[0m[ INFO] [1558617350.414417153]: WP: reached #2[0m
+[0m[ INFO] [1558617350.495171860]: WP: reached #2[0m
+[0m[ INFO] [1558617350.599021243]: WP: reached #2[0m
+[0m[ INFO] [1558617350.699154064]: WP: reached #2[0m
+[0m[ INFO] [1558617350.798989434]: WP: reached #2[0m
+[0m[ INFO] [1558617350.901858240]: WP: reached #2[0m
+[0m[ INFO] [1558617351.015181438]: WP: reached #2[0m
+[0m[ INFO] [1558617351.125341078]: WP: reached #2[0m
+[0m[ INFO] [1558617351.234913633]: WP: reached #2[0m
+[0m[ INFO] [1558617351.351008821]: WP: reached #2[0m
+[0m[ INFO] [1558617351.450278836]: WP: reached #2[0m
+[0m[ INFO] [1558617364.215008369]: WP: reached #3[0m
+[0m[ INFO] [1558617364.275563618]: WP: reached #3[0m
+[0m[ INFO] [1558617364.386636430]: WP: reached #3[0m
+[0m[ INFO] [1558617364.486564136]: WP: reached #3[0m
+[0m[ INFO] [1558617364.586441953]: WP: reached #3[0m
+[0m[ INFO] [1558617364.701937259]: WP: reached #3[0m
+[0m[ INFO] [1558617364.808253344]: WP: reached #3[0m
+[0m[ INFO] [1558617364.914737416]: WP: reached #3[0m
+[0m[ INFO] [1558617365.018086364]: WP: reached #3[0m
+[0m[ INFO] [1558617365.135100479]: WP: reached #3[0m
+[0m[ INFO] [1558617365.257350286]: WP: reached #3[0m
+[0m[ INFO] [1558617380.085648397]: FCU: Mission finished, loitering.[0m
+[0m[ INFO] [1558617380.095576519]: WP: reached #4[0m
+[0m[ INFO] [1558617380.179284100]: WP: reached #4[0m
+[0m[ INFO] [1558617380.303201646]: WP: reached #4[0m
+[0m[ INFO] [1558617380.425289824]: WP: reached #4[0m
+[0m[ INFO] [1558617380.535603015]: WP: reached #4[0m
+[0m[ INFO] [1558617380.655176050]: WP: reached #4[0m
+[0m[ INFO] [1558617380.755679148]: WP: reached #4[0m
+[0m[ INFO] [1558617380.864435806]: WP: reached #4[0m
+[0m[ INFO] [1558617380.973276133]: WP: reached #4[0m
+[0m[ INFO] [1558617381.081191275]: WP: reached #4[0m
+[0m[ INFO] [1558617381.190542048]: WP: reached #4[0m
+[33m[ WARN] [1558617389.617911578]: CMD: Unexpected command 176, result 0[0m
+... logging to /home/sooyoung/.ros/log/c059af26-7d5c-11e9-8c13-98838910ac59/roslaunch-sooyoung-Laptop2015-26913.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/sooyoung/catkin_ws/src/examples/autoflight1026/launch/autoflight1026.launch
+[1mstarted roslaunch server http://sooyoung-Laptop2015:38731/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /mavros/conn_heartbeat: 5.0
+ * /mavros/conn_timeout: 5.0
+ * /mavros/fcu_url: udp://:14540@127....
+ * /mavros/gcs_url: udp://@129.254.18...
+ * /mavros/mocap/use_pose: False
+ * /mavros/mocap/use_tf: True
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.13
+
+NODES
+  /
+    eDrone_autoflight_node (eDrone_lib/eDrone_autoflight_node)
+    eDrone_control_node (eDrone_lib/eDrone_control_node)
+    eDrone_monitor_node (eDrone_lib/eDrone_monitor_node)
+    eDrone_safety_node (eDrone_lib/eDrone_safety_node)
+    ex_autoflight1026 (autoflight1026/ex_autoflight1026)
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [26924][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/sooyoung/catkin_ws/src/examples/autoflight1026/launch/autoflight1026.launch http://localhost:11311
+[1msetting /run_id to c059af26-7d5c-11e9-8c13-98838910ac59[0m
+[1mprocess[rosout-1]: started with pid [26937][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [26954][0m
+[1mprocess[eDrone_monitor_node-3]: started with pid [26955][0m
+[1mprocess[eDrone_control_node-4]: started with pid [26962][0m
+[1mprocess[eDrone_autoflight_node-5]: started with pid [26978][0m
+[1mprocess[eDrone_safety_node-6]: started with pid [26998][0m
+[1mprocess[ex_autoflight1026-7]: started with pid [27003][0m
+[1m[ex_autoflight1026-7] process has finished cleanly
+log file: /home/sooyoung/.ros/log/c059af26-7d5c-11e9-8c13-98838910ac59/ex_autoflight1026-7*.log[0m
+[eDrone_safety_node-6] killing on exit
+[eDrone_autoflight_node-5] killing on exit
+[eDrone_monitor_node-3] killing on exit
+[mavros-2] killing on exit
+[eDrone_control_node-4] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
