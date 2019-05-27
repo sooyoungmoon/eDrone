@@ -218,14 +218,14 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
 
     Point cross_pt1, cross_pt2;
 
-    if ( (pow (G,2) - 4 * F * H) < 0)
+    if ( (pow (G,2) - ((4 * F) * H)) < 0)
     {
         cout <<" 교점을 구할 수 없음" << endl;
         return path;
     }
 
-    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - (4*F*H) ) ) / (2*F);
-    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - (4*F*H) ) ) / (2*F);
+    cross_pt1.x = ( (-1) * G + (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
+    cross_pt2.x = ( (-1) * G - (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
     cross_pt1.y = 	(inclination * 	cross_pt1.x) + intercept_y;
     cross_pt2.y = 	(inclination * 	cross_pt2.x) + intercept_y;
 
@@ -861,7 +861,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     printf ("eDrone_control_node: getCoveragePath() was called");
 
     // Mental Map 범위 계산
-    cout << "set mental map range" << endl;
+    cout << "\nset mental map range" << endl;
 
     double x_min = -1, y_min=-1;
     double x_max = -1, y_max= -1;
@@ -909,8 +909,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     } // 경계점들을 포함하는 사각형 영역 계산, entry/exit point 계산
 
-    //cout << "entry point: (" << entry_point.x_lat << ", " << entry_point.y_long << ")" << endl;
-    //cout << "exit point: (" << exit_point.x_lat << ", " << exit_point.y_long <<  ")" << endl;
+    cout << "entry point: (" << entry_point.x_lat << ", " << entry_point.y_long << ")" << endl;
+    cout << "exit point: (" << exit_point.x_lat << ", " << exit_point.y_long <<  ")" << endl;
 
     // Mental Map & Grid 생성
 
@@ -926,8 +926,6 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     int AREA_WIDTH = ceil ((x_max - x_min) / CELL_WIDTH)  ;
     int AREA_HEIGHT = ceil ((y_max - y_min) / CELL_HEIGHT)  ;
 
-    int arr[AREA_WIDTH][AREA_WIDTH]; // test
-
     /*
     cout << "x: " << x_min << " ~ " << x_max << endl;
     cout << "y: " << y_min << " ~ " << y_max << endl;
@@ -936,16 +934,17 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     */
     mental_map.area_width = AREA_WIDTH;
     mental_map.area_height = AREA_HEIGHT;
-    // mental_map.grid = new Cell*[AREA_WIDTH+1];
+    mental_map.grid = new Cell*[AREA_WIDTH+1]; // (0527)
 
-    mental_map.grid = NULL;
-    mental_map.grid = (Cell**)calloc(AREA_WIDTH+1,sizeof(Cell*)); // (0524)
+    // mental_map.grid = (Cell**)calloc(AREA_WIDTH+1,sizeof(Cell*)); // (0524)
+
 
     // CELL 배열 동적 할당
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        mental_map.grid[c] = (Cell*)calloc(AREA_WIDTH+1,sizeof(Cell)); // (0524)
+        mental_map.grid[c] = new Cell[AREA_WIDTH+1]; // (0527)
+        //mental_map.grid[c] = (Cell*)calloc(AREA_WIDTH+1,sizeof(Cell)); // (0524)
     }
 
     // cout << "Dynamic allocation" << endl;
@@ -1091,7 +1090,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
         for (int c = 0; c < AREA_WIDTH+1; c++)
         {
-            free(mental_map.grid[c]);
+            delete[](mental_map.grid[c]);
         }
 
         for (int c = 0; c < AREA_WIDTH+1; c++)
@@ -1100,7 +1099,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         }
 
         mental_map_ptr=NULL;
-        free(mental_map.grid);
+        delete[](mental_map.grid);
 
         delete[](waveFrontMap);
 
@@ -1201,7 +1200,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        free(mental_map.grid[c]);
+        delete[](mental_map.grid[c]);
     }
 
     for (int c = 0; c < AREA_WIDTH+1; c++)
@@ -1210,7 +1209,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     }
 
     mental_map_ptr=NULL;
-    free(mental_map.grid);
+    delete[](mental_map.grid);
 
     delete[](waveFrontMap);
 

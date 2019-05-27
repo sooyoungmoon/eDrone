@@ -115,7 +115,7 @@ void pos_cb_local(const geometry_msgs::PoseStamped::ConstPtr& msg){
 
     double distance_home = 0;
 
-    distance_home = (current_pos_local.pose.position.x) * (current_pos_local.pose.position.x) + (current_pos_local.pose.position.y) * (current_pos_local.pose.position.y);
+    distance_home = ((current_pos_local.pose.position.x) * (current_pos_local.pose.position.x)) + ((current_pos_local.pose.position.y) * (current_pos_local.pose.position.y));
 
     distance_home = sqrt(distance_home);
 

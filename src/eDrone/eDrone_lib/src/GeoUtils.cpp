@@ -127,7 +127,9 @@ bool isInside(Point point, const vector<Point> polygon_area)
         {
             // atX는 점 point를 지나는 반직선과 선분 (p[i], p[j]) 사이의 교점의 x 좌표
 
-            double atX = (polygon_area[i].y-point.y)*(polygon_area[j].x - polygon_area[i].x)/(polygon_area[j].y-polygon_area[i].y) + polygon_area[i].x;
+            // double atX = (polygon_area[i].y-point.y)*(polygon_area[j].x - polygon_area[i].x)/(polygon_area[j].y-polygon_area[i].y) + polygon_area[i].x;
+
+            double atX = ((polygon_area[i].y-point.y)*((polygon_area[j].x - polygon_area[i].x)/(polygon_area[j].y-polygon_area[i].y))) + polygon_area[i].x;
 
             if (point.x < atX)
             {
@@ -199,8 +201,11 @@ GeoPoint convertENUToGeo(double x, double y, double z, double home_lat, double h
     double lon_rad;
 
     if (fabs(c) > epsilon) {
-        lat_rad = asin( (cos_c * ref_sin_lat) + (y_rad * sin_c * ref_cos_lat) / c);
+
+        lat_rad = asin( (cos_c * ref_sin_lat) + (y_rad * sin_c * ref_cos_lat) / c); // (0527)
         lon_rad = (ref_lon_rad + atan2(x_rad * sin_c, (c * ref_cos_lat * cos_c) - (y_rad * ref_sin_lat * sin_c)));
+        //lat_rad = asin( (cos_c * ref_sin_lat) + (( (y_rad * sin_c) * ref_cos_lat) / c));
+        //lon_rad = (ref_lon_rad + atan2(x_rad * sin_c, (c * ref_cos_lat * cos_c) - (y_rad * ref_sin_lat * sin_c)));
 
     } else {
         lat_rad = ref_lat_rad;
