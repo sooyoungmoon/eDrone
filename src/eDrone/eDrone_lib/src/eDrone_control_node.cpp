@@ -63,9 +63,16 @@ void printMentalMap (Mental_Map* mental_map_ptr,
 
 void printPath (std::vector<Target_Position> altPath);
 
+/*
 void printWavefrontMap(int** mental_map,
                        int AREA_WIDTH,
                        int AREA_HEIGHT);
+*/
+
+// (2019.05.27)
+void printWavefrontMap(int (*waveFrontMap)[100],
+int AREA_WIDTH,
+int AREA_HEIGHT);
 
 // 경로 계산 함수
 
@@ -224,11 +231,17 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
         return path;
     }
 
+    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
+    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
+    cross_pt1.y = 	inclination * 	cross_pt1.x + intercept_y;
+    cross_pt2.y = 	inclination * 	cross_pt2.x + intercept_y;
+
+    /*
     cross_pt1.x = ( (-1) * G + (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
     cross_pt2.x = ( (-1) * G - (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
     cross_pt1.y = 	(inclination * 	cross_pt1.x) + intercept_y;
     cross_pt2.y = 	(inclination * 	cross_pt2.x) + intercept_y;
-
+*/
     cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")" << endl;
     cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")" << endl;
 
@@ -810,7 +823,23 @@ void printMentalMap (Mental_Map* mental_map_ptr,
     }
 }
 
+/*
 void printWavefrontMap (int** m, int area_width, int area_height)
+{
+    cout << " printWavefrontMap(): " << endl;
+
+    for (int index_y=area_height; index_y >= 0; index_y--)
+    {
+        for (int index_x = 0; index_x < area_width+1; index_x++)
+        {
+            cout << " " << m[index_x][index_y] << " ";
+        }
+        cout << endl;
+    }
+    sleep(10);
+}
+*/
+void printWavefrontMap (int (*m)[100], int area_width, int area_height)
 {
     cout << " printWavefrontMap(): " << endl;
 
@@ -926,6 +955,8 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     int AREA_WIDTH = ceil ((x_max - x_min) / CELL_WIDTH)  ;
     int AREA_HEIGHT = ceil ((y_max - y_min) / CELL_HEIGHT)  ;
 
+    Cell mental_map_grid_tmp[AREA_WIDTH+1][AREA_HEIGHT+1]; // (2019.05.27)
+    int waveFrontMap_tmp[AREA_WIDTH+1][AREA_HEIGHT+1]; // (2019.05.27)
     /*
     cout << "x: " << x_min << " ~ " << x_max << endl;
     cout << "y: " << y_min << " ~ " << y_max << endl;
@@ -934,19 +965,19 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     */
     mental_map.area_width = AREA_WIDTH;
     mental_map.area_height = AREA_HEIGHT;
-    mental_map.grid = new Cell*[AREA_WIDTH+1]; // (0527)
+    //mental_map.grid = new Cell*[AREA_WIDTH+1]; // (0527)
 
     // mental_map.grid = (Cell**)calloc(AREA_WIDTH+1,sizeof(Cell*)); // (0524)
 
 
     // CELL 배열 동적 할당
-
+    /*
     for (int c = 0; c < AREA_WIDTH+1; c++)
     {
-        mental_map.grid[c] = new Cell[AREA_WIDTH+1]; // (0527)
+        mental_map.grid[c] = new Cell[AREA_HEIGHT+1]; // (0527)
         //mental_map.grid[c] = (Cell*)calloc(AREA_WIDTH+1,sizeof(Cell)); // (0524)
     }
-
+    */
     // cout << "Dynamic allocation" << endl;
 
     // Cell 정보 초기화
@@ -955,7 +986,9 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         for(int j = 0; j < AREA_HEIGHT+1;j++)
         {
             //	cout << " i, j = " << i << ", " << j << endl;
-            Cell* cell_ptr = &(mental_map.grid[i][j]);
+            // Cell* cell_ptr = &(mental_map.grid[i][j]);
+            Cell* cell_ptr = &(mental_map_grid_tmp[i][j]); // (2019.05.27)
+
             initCell(cell_ptr, i, j, CELL_WIDTH, CELL_HEIGHT, x_min, y_min);
         }
     }
@@ -967,31 +1000,25 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
     int src_cell_index_x = (entry_point.x_lat - x_min) / CELL_WIDTH;
     int src_cell_index_y = (entry_point.y_long - y_min) / CELL_HEIGHT;
-    src_cell_ptr = &(mental_map.grid[src_cell_index_x][src_cell_index_y]);
+    // src_cell_ptr = &(mental_map.grid[src_cell_index_x][src_cell_index_y]);
+    src_cell_ptr = &(mental_map_grid_tmp[src_cell_index_x][src_cell_index_y]);
 
-    // cout << " (src cell) index_x:" << src_cell_ptr-> index_x << ", index_y: " << src_cell_ptr-> index_y << "x: " << src_cell_ptr->x << "y: " << src_cell_ptr->y << endl;
+    cout << " (src cell) index_x:" << src_cell_ptr-> index_x << ", index_y: " << src_cell_ptr-> index_y << "x: " << src_cell_ptr->x << "y: " << src_cell_ptr->y << endl;
 
     int dst_cell_index_x = (exit_point.x_lat - x_min) / CELL_WIDTH;
     int dst_cell_index_y = (exit_point.y_long - y_min) / CELL_HEIGHT;
-    dst_cell_ptr = &(mental_map.grid[dst_cell_index_x][dst_cell_index_y]);
-    // cout << " (dst cell) index_x:" << dst_cell_ptr-> index_x << ", index_y: " << dst_cell_ptr-> index_y << "x: " << dst_cell_ptr->x << "y: " << dst_cell_ptr->y << endl;
+    dst_cell_ptr = &(mental_map_grid_tmp[dst_cell_index_x][dst_cell_index_y]);
+    cout << " (dst cell) index_x:" << dst_cell_ptr-> index_x << ", index_y: " << dst_cell_ptr-> index_y << "x: " << dst_cell_ptr->x << "y: " << dst_cell_ptr->y << endl;
 
     /* Wavefront Map 생성 */
     // label - 1: 장애물, 2: 비행금지구역, 3: 방문된 cell, 4: Goal cell
     //int waveFrontMap[AREA_WIDTH+1][AREA_HEIGHT+1]={0};
 
-    int ** waveFrontMap = new int*[AREA_WIDTH+1];
-
-    for (int c = 0; c < AREA_WIDTH+1; c++)
-    {
-        waveFrontMap[c] = new int[AREA_HEIGHT+1];
-    }
-
     for (int x_index = 0; x_index < AREA_WIDTH+1; x_index++)
     {
         for(int y_index = 0; y_index < AREA_HEIGHT+1; y_index++)
         {
-            waveFrontMap[x_index][y_index] = 0;
+            waveFrontMap_tmp[x_index][y_index] = 0;
         }
     }
 
@@ -1000,7 +1027,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
     queue.push_back (dst_cell_ptr);
     int index_x = dst_cell_ptr->index_x;
     int index_y = dst_cell_ptr->index_y;
-    waveFrontMap[index_x][index_y] = 4;
+    waveFrontMap_tmp[index_x][index_y] = 4;
 
     bool pathExist = false; // whether a path from src to dst exists
 
@@ -1032,9 +1059,9 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
                 int index_x_neighbor = index_x + local_index_x;
                 int index_y_neighbor = index_y + local_index_y;
-                Cell* neighbor = &(mental_map_ptr-> grid[index_x_neighbor][index_y_neighbor]); // 현재 탐색 중인 Cell의 인접 cell
+                Cell* neighbor = &(mental_map_grid_tmp[index_x_neighbor][index_y_neighbor]); // 현재 탐색 중인 Cell의 인접 cell
 
-                if ( waveFrontMap[index_x_neighbor][index_y_neighbor] > 0 ) // 이미 label이 설정된 cell은 중복하여 설정하지 않음
+                if ( waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] > 0 ) // 이미 label이 설정된 cell은 중복하여 설정하지 않음
                 {
                     continue;
                 }
@@ -1042,7 +1069,7 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
                 // Case#1 이미 방문된 Cell인 경우
                 if ( neighbor->visited == true )  {
 
-                    waveFrontMap[index_x_neighbor][index_y_neighbor] = 3;
+                    waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] = 3;
                     queue.push_back(neighbor);
 
                     if (neighbor == src_cell_ptr) {// queue에 추가된 노드가 starting node이면
@@ -1055,19 +1082,19 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
                 else if ( isOccupiedCell(neighbor) == true)
                 {
-                    waveFrontMap[index_x_neighbor][index_y_neighbor] = 1;
+                    waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] = 1;
                 }
 
                 // Case#3 비행금지구역에 속한 Cell인 경우
                 else if ( isNoflyZoneCell(neighbor) == true)
                 {
-                    waveFrontMap[index_x_neighbor][index_y_neighbor] = 2;
+                    waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] = 2;
                 }
 
                 // Case#4 그 밖의 경우
                 else
                 {
-                    waveFrontMap[index_x_neighbor][index_y_neighbor] = waveFrontMap[index_x][index_y] +1; //(2018.10.02)
+                    waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] = waveFrontMap_tmp[index_x][index_y] +1; //(2018.10.02)
                     queue.push_back ( neighbor );
                     if (neighbor == src_cell_ptr) {// queue에 추가된 노드가 starting node이면
                         pathExist = true; // s->g까지 경로 존재 여부를 true로 설정
@@ -1079,30 +1106,33 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
         }
     } //  wavefront map 생성
 
-    printWavefrontMap(waveFrontMap, AREA_WIDTH, AREA_HEIGHT);
+    //int ** waveFrontMap_ptr = &waveFrontMap_tmp; // (0527)
+
+    //int (*pWaveFrontMap)[AREA_HEIGHT+1] = waveFrontMap_tmp;
+
+    //printWavefrontMap(pWaveFrontMap, AREA_WIDTH, AREA_HEIGHT); // (0527)
+
+    // (0527) print wavefront map
+
+    cout << " printWavefrontMap(): " << endl;
+
+    for (int index_y=AREA_HEIGHT; index_y >= 0; index_y--)
+    {
+        for (int index_x = 0; index_x < AREA_WIDTH+1; index_x++)
+        {
+            cout << " " << waveFrontMap_tmp[index_x][index_y] << " ";
+        }
+        cout << endl;
+    }
+    sleep(10);
+
+    // print wavefront map (finish)
 
     /* Coverage Path 계산 */
     // path 존재 여부 확인
 
     if (pathExist != true) // src-dst path가 존재하지 않으면 빈 path 반환
     {
-        // (2019.05.27) memory deallocation (mental_map.grid, waveFrontMap)
-
-        for (int c = 0; c < AREA_WIDTH+1; c++)
-        {
-            delete[](mental_map.grid[c]);
-        }
-
-        for (int c = 0; c < AREA_WIDTH+1; c++)
-        {
-            delete[](waveFrontMap[c]);
-        }
-
-        mental_map_ptr=NULL;
-        delete[](mental_map.grid);
-
-        delete[](waveFrontMap);
-
         return path;
     }
     // src cell에서 시작
@@ -1142,27 +1172,25 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
 
                 if (local_index_x ==0 && local_index_y ==0) { continue; } // 자기 자신은 탐색 대상에서 제외
 
-                neighbor_cell_ptr = &(mental_map_ptr->grid[index_x_neighbor][index_y_neighbor]);
+                neighbor_cell_ptr = &(mental_map_grid_tmp[index_x_neighbor][index_y_neighbor]);
 
                 if (neighbor_cell_ptr->includedInPath == true) { continue;} // 이미 경로에 추가된 cell은 제외
-                if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 1) { continue; } // 장애물이 있는 cell은 제외
-                else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 2) { continue; } // 비행금지구역에 속한 cell은 제외
-                else if (waveFrontMap[index_x_neighbor][index_y_neighbor] == 3) { continue; }// 기 방문된 cell은 제외
+                if (waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] == 1) { continue; } // 장애물이 있는 cell은 제외
+                else if (waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] == 2) { continue; } // 비행금지구역에 속한 cell은 제외
+                else if (waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] == 3) { continue; }// 기 방문된 cell은 제외
 
-                if ( &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor] == dst_cell_ptr) { // 이웃 cell이 목적지 cell인 경우
-                    max_label = waveFrontMap[index_x_neighbor][index_y_neighbor];
-                    neighbor_max_label =  &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor];
+                if ( &mental_map_grid_tmp[index_x_neighbor][index_y_neighbor] == dst_cell_ptr) { // 이웃 cell이 목적지 cell인 경우
+                    max_label = waveFrontMap_tmp[index_x_neighbor][index_y_neighbor];
+                    neighbor_max_label =  &mental_map_grid_tmp[index_x_neighbor][index_y_neighbor];
                     pathComputed = true;
                     break;
                 }
 
-                if ( max_label < 0 || ( waveFrontMap[index_x_neighbor][index_y_neighbor] > max_label) )// 이웃 cell 들 중 label 값이 가장 큰 cell 탐색
+                if ( max_label < 0 || ( waveFrontMap_tmp[index_x_neighbor][index_y_neighbor] > max_label) )// 이웃 cell 들 중 label 값이 가장 큰 cell 탐색
                 {
-                    max_label = waveFrontMap[index_x_neighbor][index_y_neighbor];
-                    neighbor_max_label = &mental_map_ptr->grid[index_x_neighbor][index_y_neighbor];
+                    max_label = waveFrontMap_tmp[index_x_neighbor][index_y_neighbor];
+                    neighbor_max_label = &mental_map_grid_tmp[index_x_neighbor][index_y_neighbor];
                 }
-
-
             }
 
             if (pathComputed == true) { break; }
@@ -1193,25 +1221,6 @@ std::vector<Target_Position> getCoveragePath(vector<eDrone_msgs::Target> points,
             cur_cell_ptr->includedInPath = true;
         }
     }
-
-
-    // (2019.05.22) memory deallocation (mental_map.grid, waveFrontMap)
-
-
-    for (int c = 0; c < AREA_WIDTH+1; c++)
-    {
-        delete[](mental_map.grid[c]);
-    }
-
-    for (int c = 0; c < AREA_WIDTH+1; c++)
-    {
-        delete[](waveFrontMap[c]);
-    }
-
-    mental_map_ptr=NULL;
-    delete[](mental_map.grid);
-
-    delete[](waveFrontMap);
 
     return path;
 }
