@@ -231,20 +231,12 @@ vector<Target_Position> getOrbitPath()// 선회비행경로계산
         return path;
     }
 
-    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - 4*F*H ) ) / (2*F);
-    cross_pt1.y = 	inclination * 	cross_pt1.x + intercept_y;
-    cross_pt2.y = 	inclination * 	cross_pt2.x + intercept_y;
-
-    /*
-    cross_pt1.x = ( (-1) * G + (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
-    cross_pt2.x = ( (-1) * G - (sqrt ( pow(G,2) - ((4*F)*H) ) ) / (2*F));
-    cross_pt1.y = 	(inclination * 	cross_pt1.x) + intercept_y;
-    cross_pt2.y = 	(inclination * 	cross_pt2.x) + intercept_y;
-*/
+    cross_pt1.x = ( (-1) * G + sqrt ( pow(G,2) - (4*F)*H ) ) / (2*F);
+    cross_pt2.x = ( (-1) * G - sqrt ( pow(G,2) - (4*F)*H ) ) / (2*F);
+    cross_pt1.y = (inclination * cross_pt1.x) + intercept_y;
+    cross_pt2.y = (inclination * cross_pt2.x) + intercept_y;
     cout << "crossing pt1: << (" << cross_pt1.x << ", " << cross_pt1.y << ")" << endl;
     cout << "crossing pt2: << (" << cross_pt2.x << ", " << cross_pt2.y << ")" << endl;
-
 
     // #2 첫 번째 목적지 계산, path 에 추가
     double dist1 =0;

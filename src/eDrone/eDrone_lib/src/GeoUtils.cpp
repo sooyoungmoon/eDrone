@@ -202,10 +202,8 @@ GeoPoint convertENUToGeo(double x, double y, double z, double home_lat, double h
 
     if (fabs(c) > epsilon) {
 
-        lat_rad = asin( (cos_c * ref_sin_lat) + (y_rad * sin_c * ref_cos_lat) / c); // (0527)
-        lon_rad = (ref_lon_rad + atan2(x_rad * sin_c, (c * ref_cos_lat * cos_c) - (y_rad * ref_sin_lat * sin_c)));
-        //lat_rad = asin( (cos_c * ref_sin_lat) + (( (y_rad * sin_c) * ref_cos_lat) / c));
-        //lon_rad = (ref_lon_rad + atan2(x_rad * sin_c, (c * ref_cos_lat * cos_c) - (y_rad * ref_sin_lat * sin_c)));
+        lat_rad = asin( (cos_c * ref_sin_lat) + ( (y_rad * sin_c) * ref_cos_lat) / c); // (0527)
+        lon_rad = (ref_lon_rad + atan2(x_rad * sin_c, ( (c * ref_cos_lat) * cos_c) - ( (y_rad * ref_sin_lat) * sin_c)));
 
     } else {
         lat_rad = ref_lat_rad;
